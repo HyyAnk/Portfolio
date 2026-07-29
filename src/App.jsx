@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'motion/react';
 import * as THREE from 'three';
 import {
   ArrowDownRight, ArrowLeft, ArrowUpRight, CaretDown, Check,
-  Copy, EnvelopeSimple, GithubLogo, TelegramLogo, XLogo,
+  Copy, EnvelopeSimple, GithubLogo, Moon, Sun, TelegramLogo, XLogo,
 } from '@phosphor-icons/react';
 
 import uiImage from './assets/generated/work-ui.webp';
@@ -69,10 +69,28 @@ function usePageMeta(title, description) {
   }, [title, description]);
 }
 
+function useTheme() {
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'light';
+    const stored = window.localStorage.getItem('theme');
+    if (stored === 'light' || stored === 'dark') return stored;
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.setAttribute('content', theme === 'dark' ? '#111311' : '#f2f0ed');
+    window.localStorage.setItem('theme', theme);
+  }, [theme]);
+  return [theme, setTheme];
+}
+
 function Nav() {
   const [skillsOpen, setSkillsOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useTheme();
   const location = useLocation();
   const navRef = useRef(null);
   useEffect(() => {
@@ -94,7 +112,7 @@ function Nav() {
   }, []);
   return <header className={`site-nav ${scrolled ? 'is-scrolled' : ''}`} ref={navRef}>
     <div className="nav-inner">
-      <Link className="wordmark" to="/" onClick={() => { setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-monogram">HA</span><span>{person}</span></Link>
+      <Link className="wordmark" to="/" onClick={() => { setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-mark" aria-hidden="true"><img className="brand-logo-light" src="/deer-logo.svg" alt="" /><img className="brand-logo-dark" src="/deer-logo-white.svg" alt="" /></span><span>{person}</span></Link>
       <div className="nav-actions">
         <a className="nav-link nav-link-simple" href="/#selected-works">Work</a>
         <a className="nav-link nav-link-simple" href="/#about">About</a>
@@ -102,6 +120,9 @@ function Nav() {
           <button className="nav-link" type="button" aria-expanded={skillsOpen} onClick={() => { setSkillsOpen((value) => !value); setContactOpen(false); }}>Skills <CaretDown size={15} weight="bold" /></button>
           {skillsOpen && <nav className="dropdown skills-dropdown" aria-label="Skills navigation">{skills.map((skill) => <Link key={skill.slug} to={`/skills/${skill.slug}`} onClick={() => setSkillsOpen(false)}>{skill.title}</Link>)}</nav>}
         </div>
+        <button className={`theme-toggle ${theme === 'dark' ? 'is-dark' : ''}`} type="button" role="switch" aria-checked={theme === 'dark'} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} onClick={() => setTheme((value) => value === 'dark' ? 'light' : 'dark')}>
+          <span className="theme-toggle-track" aria-hidden="true"><Sun size={12} weight="fill" /><Moon size={12} weight="fill" /><span className="theme-toggle-thumb">{theme === 'dark' ? <Moon size={11} weight="fill" /> : <Sun size={11} weight="fill" />}</span></span>
+        </button>
         <div className="nav-menu-wrap">
           <button className="contact-trigger" type="button" aria-label="Open contact links" aria-expanded={contactOpen} onClick={() => { setContactOpen((value) => !value); setSkillsOpen(false); }}>
             <span className="contact-trigger-icons" aria-hidden="true">{contactLinks.map(({ key, icon: Icon }) => Icon ? <Icon key={key} size={14} weight="bold" /> : <span key={key} className="zalo-mark">Z</span>)}</span>
@@ -311,26 +332,33 @@ function ThreeSkillFlow() {
     );
     flow.add(tube);
 
+    let isDark = document.documentElement.dataset.theme === 'dark';
+    const labelSprites = [];
     const createLabel = (text, subtext) => {
       const canvas = document.createElement('canvas');
       canvas.width = 560;
       canvas.height = 190;
       const context = canvas.getContext('2d');
       if (!context) return null;
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.font = '700 64px Manrope, Arial, sans-serif';
-      context.fillStyle = '#171816';
-      context.fillText(text, 24, 76);
-      context.font = '500 25px Manrope, Arial, sans-serif';
-      context.fillStyle = '#77736b';
-      context.fillText(subtext, 26, 121);
-      context.fillStyle = '#c9573e';
-      context.fillRect(26, 148, 72, 4);
       const texture = new THREE.CanvasTexture(canvas);
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.minFilter = THREE.LinearFilter;
       const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false }));
       sprite.scale.set(2.2, .75, 1);
+      sprite.userData.redraw = () => {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.font = '700 64px Manrope, Arial, sans-serif';
+        context.fillStyle = isDark ? '#f4f1e9' : '#171816';
+        context.fillText(text, 24, 76);
+        context.font = '500 25px Manrope, Arial, sans-serif';
+        context.fillStyle = isDark ? '#aaa9a1' : '#77736b';
+        context.fillText(subtext, 26, 121);
+        context.fillStyle = '#c9573e';
+        context.fillRect(26, 148, 72, 4);
+        texture.needsUpdate = true;
+      };
+      sprite.userData.redraw();
+      labelSprites.push(sprite);
       return sprite;
     };
 
@@ -383,6 +411,14 @@ function ThreeSkillFlow() {
       flow.add(particle);
       return particle;
     });
+
+    const themeObserver = new MutationObserver(() => {
+      const nextTheme = document.documentElement.dataset.theme === 'dark';
+      if (nextTheme === isDark) return;
+      isDark = nextTheme;
+      labelSprites.forEach((sprite) => sprite.userData.redraw());
+    });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
     const ambient = new THREE.AmbientLight(0xffffff, 1.8);
     const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
@@ -469,7 +505,14 @@ function ThreeSkillFlow() {
       container.dataset.activeNode = hoveredIndex >= 0 ? String(hoveredIndex) : selectedIndex >= 0 ? String(selectedIndex) : '';
       container.style.cursor = hoveredIndex >= 0 ? 'pointer' : 'default';
     };
-    const handleClick = () => {
+    const handleClick = (event) => {
+      const bounds = container.getBoundingClientRect();
+      const clickX = ((event.clientX - bounds.left) / bounds.width - .5) * 2;
+      const clickY = ((event.clientY - bounds.top) / bounds.height - .5) * -2;
+      pointer.set(clickX, clickY);
+      raycaster.setFromCamera(pointer, camera);
+      const hit = raycaster.intersectObjects(hitTargets, false)[0];
+      hoveredIndex = hit ? hit.object.userData.nodeIndex : -1;
       if (hoveredIndex >= 0) selectedIndex = selectedIndex === hoveredIndex ? -1 : hoveredIndex;
       nodes.forEach((node, index) => { node.userData.active = index === hoveredIndex || index === selectedIndex; });
       container.dataset.activeNode = selectedIndex >= 0 ? String(selectedIndex) : '';
@@ -508,6 +551,7 @@ function ThreeSkillFlow() {
     return () => {
       if (frameId) window.cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
+      themeObserver.disconnect();
       container.removeEventListener('pointermove', handlePointer);
       container.removeEventListener('click', handleClick);
       container.removeEventListener('pointerleave', resetPointer);
