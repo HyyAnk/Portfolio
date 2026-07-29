@@ -87,6 +87,7 @@ function useTheme() {
 }
 
 function Nav() {
+  const [brandOpen, setBrandOpen] = useState(false);
   const [skillsOpen, setSkillsOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -103,7 +104,7 @@ function Nav() {
   useEffect(() => {
     const close = (event) => {
       if (event.key === 'Escape' || (event.type === 'pointerdown' && !navRef.current?.contains(event.target))) {
-        setSkillsOpen(false); setContactOpen(false);
+        setBrandOpen(false); setSkillsOpen(false); setContactOpen(false);
       }
     };
     document.addEventListener('keydown', close);
@@ -112,7 +113,10 @@ function Nav() {
   }, []);
   return <header className={`site-nav ${scrolled ? 'is-scrolled' : ''}`} ref={navRef}>
     <div className="nav-inner">
-      <Link className="wordmark" to="/" onClick={() => { setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-mark" aria-hidden="true"><img className="brand-logo-light" src="/deer-logo.svg" alt="" /><img className="brand-logo-dark" src="/deer-logo-white.svg" alt="" /></span><span>{person}</span></Link>
+      <div className="wordmark-menu-wrap" onPointerEnter={() => setBrandOpen(true)} onPointerLeave={() => setBrandOpen(false)} onMouseEnter={() => setBrandOpen(true)} onMouseLeave={() => setBrandOpen(false)} onFocusCapture={() => setBrandOpen(true)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setBrandOpen(false); }}>
+        <Link className="wordmark" to="/" aria-label={person} aria-expanded={brandOpen} aria-haspopup="dialog" onClick={() => { setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-mark" aria-hidden="true"><img className="brand-logo-light" src="/deer-logo.svg" alt="" /><img className="brand-logo-dark" src="/deer-logo-white.svg" alt="" /></span><span>{person}</span></Link>
+        <BrandDropdown />
+      </div>
       <div className="nav-actions">
         <a className="nav-link nav-link-simple" href="/#selected-works">Work</a>
         <a className="nav-link nav-link-simple" href="/#about">About</a>
@@ -132,6 +136,24 @@ function Nav() {
       </div>
     </div>
   </header>;
+}
+
+function BrandDropdown() {
+  return <div className="dropdown brand-dropdown" role="dialog" aria-label="About HyyAnk">
+    <div className="brand-logo-panel" aria-hidden="true">
+      <span className="brand-logo-orbit brand-logo-orbit-one" />
+      <span className="brand-logo-orbit brand-logo-orbit-two" />
+      <img className="brand-logo-light brand-dropdown-logo" src="/deer-logo.svg" alt="" />
+      <img className="brand-logo-dark brand-dropdown-logo" src="/deer-logo-white.svg" alt="" />
+    </div>
+    <div className="brand-intro">
+      <span className="brand-intro-kicker">HyyAnk</span>
+      <div className="brand-typing" aria-label={`My name is ${fullName}`}>
+        <span className="brand-typing-line brand-typing-greeting">My name is</span>
+        <strong className="brand-typing-line brand-typing-name">{fullName}</strong>
+      </div>
+    </div>
+  </div>;
 }
 
 function ContactDropdown() {
