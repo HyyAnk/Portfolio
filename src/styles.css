@@ -98,6 +98,8 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .contact-link-copy { min-width: 0; display: grid; gap: 2px; }
 .contact-link-copy strong { color: var(--ink); font-size: .75rem; font-weight: 700; line-height: 1.1; }
 .contact-link-copy span { overflow: hidden; color: var(--muted); font-size: .76rem; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
+.contact-dropdown button.is-copied .contact-link-copy span { color: #2f8b58; font-weight: 700; }
+.contact-dropdown button.is-copied .contact-link-icon { background: rgba(47,139,88,.1); color: #2f8b58; }
 
 /* Taste Skill inspired editorial split hero. There is intentionally no background image or texture here. */
 .hero { position: relative; min-height: 100dvh; padding: 96px 0 42px; display: grid; align-items: center; overflow: hidden; background: var(--paper); }

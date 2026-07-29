@@ -21,7 +21,8 @@ import foldedMatterImage from './assets/generated/case-folded-matter-v2.webp';
 import stillMovingImage from './assets/generated/case-still-moving-v2.webp';
 import openLoopImage from './assets/generated/case-open-loop-v2.webp';
 
-const person = 'Dư Ngọc Minh Hoàng';
+const person = 'HyyAnk';
+const fullName = 'Dư Ngọc Minh Hoàng';
 const email = 'dungocminhhoang@gmail.com';
 
 const contactLinks = [
@@ -93,7 +94,7 @@ function Nav() {
   }, []);
   return <header className={`site-nav ${scrolled ? 'is-scrolled' : ''}`} ref={navRef}>
     <div className="nav-inner">
-      <Link className="wordmark" to="/" onClick={() => { setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-monogram">DH</span><span>{person}</span></Link>
+      <Link className="wordmark" to="/" onClick={() => { setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-monogram">HA</span><span>{person}</span></Link>
       <div className="nav-actions">
         <a className="nav-link nav-link-simple" href="/#selected-works">Work</a>
         <a className="nav-link nav-link-simple" href="/#about">About</a>
@@ -129,7 +130,7 @@ function ContactDropdown() {
     <span className="dropdown-label">Contact</span>
     {contactLinks.map(({ key, label, value, href, icon: Icon }) => {
       const content = <><span className={`contact-link-icon contact-link-icon-${key}`} aria-hidden="true">{Icon ? <Icon size={17} weight="bold" /> : <span className="zalo-mark">Z</span>}</span><span className="contact-link-copy"><strong>{label}</strong><span>{key === 'gmail' && copied ? 'Copied to clipboard' : value}</span></span></>;
-      if (key === 'gmail') return <button key={key} className="contact-dropdown-link" type="button" onClick={copyEmail} aria-live="polite">{content}</button>;
+      if (key === 'gmail') return <button key={key} className={`contact-dropdown-link ${copied ? 'is-copied' : ''}`} type="button" onClick={copyEmail} aria-live="polite">{content}</button>;
       return <a key={key} href={href} target="_blank" rel="noreferrer">{content}</a>;
     })}
   </div>;
@@ -252,7 +253,6 @@ function Hero() {
     <div className="hero-sentinel" data-nav-sentinel="true" />
     <div className="page-shell hero-grid">
       <div className="hero-copy">
-        <span className="hero-status">Available for selected projects</span>
         <h1>{person}</h1>
         <p className="hero-serif">Designer and developer for thoughtful digital work.</p>
         <p className="hero-accent">Clarity first. Character always.</p>
@@ -271,7 +271,7 @@ function WorkCarousel() {
 }
 
 function About() {
-  return <section id="about" className="section-pad about-section"><div className="page-shell about-grid"><Reveal className="about-title"><h2>About</h2></Reveal><Reveal className="about-image" delay={.06}><img src={portraitImage} alt={`Portrait of ${person}`} loading="lazy" /></Reveal><Reveal className="about-copy" delay={.12}><p className="large-copy">I am a designer and developer. I bridge strategy, design and code to make digital work feel alive.</p><p>I care about the details that shape clarity, usability and emotion. Good work should make the next step feel obvious.</p><ArrowLink to="#skills">See capabilities</ArrowLink></Reveal><div className="about-notes"><span><Check size={16} /> Available for freelance</span></div></div></section>;
+  return <section id="about" className="section-pad about-section"><div className="page-shell about-grid"><Reveal className="about-title"><h2>About</h2></Reveal><Reveal className="about-image" delay={.06}><img src={portraitImage} alt={`Portrait of ${person}`} loading="lazy" /></Reveal><Reveal className="about-copy" delay={.12}><p className="large-copy">I am a designer and developer. I bridge strategy, design and code to make digital work feel alive.</p><p>I care about the details that shape clarity, usability and emotion. Good work should make the next step feel obvious.</p><ArrowLink to="#skills">See capabilities</ArrowLink></Reveal></div></section>;
 }
 
 function ThreeSkillFlow() {
@@ -434,13 +434,16 @@ function ThreeSkillFlow() {
         node.scale.setScalar(pulse);
         node.position.y = node.userData.baseY + Math.sin(elapsed * 1.15 + node.userData.phase) * .08;
         node.rotation.y = elapsed * (.24 + index * .05) * (index % 2 ? -1 : 1);
-        node.userData.halo.rotation.z += delta * .18;
+        node.userData.halo.rotation.z += delta * (active ? .8 : .18);
+        node.userData.orbit.rotation.z += delta * (active ? 1.1 : .26);
+        node.userData.orbit.rotation.x += delta * (active ? .24 : .06);
         node.userData.halo.scale.setScalar(active ? 1.18 : 1);
         node.userData.orbit.material.opacity = active ? .95 : .65;
         node.userData.halo.material.opacity = active ? .95 : .62;
         node.userData.core.material.emissiveIntensity = active ? .75 : .2;
-        node.userData.core.material.color.set(active ? '#df684c' : index === 1 ? '#171816' : '#c9573e');
-        node.userData.core.material.emissive.set(active ? '#df684c' : index === 1 ? '#171816' : '#c9573e');
+        const coreColor = index === 1 ? '#171816' : active ? '#df684c' : '#c9573e';
+        node.userData.core.material.color.set(coreColor);
+        node.userData.core.material.emissive.set(coreColor);
         if (node.userData.label) {
           node.userData.label.material.opacity = active ? 1 : .78;
           node.userData.label.material.color.set(active ? '#c9573e' : '#ffffff');
@@ -471,6 +474,13 @@ function ThreeSkillFlow() {
       nodes.forEach((node, index) => { node.userData.active = index === hoveredIndex || index === selectedIndex; });
       container.dataset.activeNode = selectedIndex >= 0 ? String(selectedIndex) : '';
     };
+    const clearSelection = () => {
+      selectedIndex = -1;
+      hoveredIndex = -1;
+      nodes.forEach((node) => { node.userData.active = false; });
+      container.dataset.activeNode = '';
+      container.style.cursor = 'default';
+    };
     const resetPointer = () => {
       pointerX = 0;
       pointerY = 0;
@@ -479,11 +489,15 @@ function ThreeSkillFlow() {
       container.dataset.activeNode = selectedIndex >= 0 ? String(selectedIndex) : '';
       container.style.cursor = 'default';
     };
+    const handleDocumentPointerDown = (event) => {
+      if (!container.contains(event.target)) clearSelection();
+    };
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
     container.addEventListener('pointermove', handlePointer);
     container.addEventListener('click', handleClick);
     container.addEventListener('pointerleave', resetPointer);
+    document.addEventListener('pointerdown', handleDocumentPointerDown);
     resize();
     if (reduce) {
       renderer.render(scene, camera);
@@ -497,6 +511,7 @@ function ThreeSkillFlow() {
       container.removeEventListener('pointermove', handlePointer);
       container.removeEventListener('click', handleClick);
       container.removeEventListener('pointerleave', resetPointer);
+      document.removeEventListener('pointerdown', handleDocumentPointerDown);
       scene.traverse((object) => {
         if (object.geometry) object.geometry.dispose();
         if (object.material) {
@@ -524,7 +539,7 @@ function Playground() {
 function Contact() {
   const [copied, setCopied] = useState(false);
   const copyEmail = async () => { await navigator.clipboard?.writeText(email); setCopied(true); window.setTimeout(() => setCopied(false), 1800); };
-  return <section id="contact" className="contact-section section-pad"><div className="page-shell contact-grid"><Reveal><span className="eyebrow">Available for selected collaborations</span><h2>Bring me the complicated part.</h2><p className="large-copy">Tell me what needs to become clearer. I usually reply within two working days.</p></Reveal><Reveal className="contact-side" delay={.08}><a className="email-button" href={`mailto:${email}?subject=Project enquiry`}>Write to {email} <ArrowUpRight size={18} /></a><button className="copy-button" type="button" onClick={copyEmail} aria-live="polite">{copied ? <Check size={18} /> : <Copy size={18} />} {copied ? 'Email copied' : 'Copy email'}</button></Reveal></div></section>;
+  return <section id="contact" className="contact-section section-pad"><div className="page-shell contact-grid"><Reveal><h2>Bring me the complicated part.</h2><p className="large-copy">Tell me what needs to become clearer. I usually reply within two working days.</p></Reveal><Reveal className="contact-side" delay={.08}><a className="email-button" href={`mailto:${email}?subject=Project enquiry`}>Write to {email} <ArrowUpRight size={18} /></a><button className="copy-button" type="button" onClick={copyEmail} aria-live="polite">{copied ? <Check size={18} /> : <Copy size={18} />} {copied ? 'Email copied' : 'Copy email'}</button></Reveal></div></section>;
 }
 
 function Footer() {
@@ -532,7 +547,7 @@ function Footer() {
 }
 
 function Home() {
-  usePageMeta(`${person} - Designer and Developer`, 'Dư Ngọc Minh Hoàng is a multidisciplinary designer and developer.');
+  usePageMeta(`${person} - Designer and Developer`, `${person} (${fullName}) is a multidisciplinary designer and developer.`);
   return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content"><div id="top"><Hero /></div><WorkCarousel /><About /><SkillBlocks /><Playground /><Contact /></main><Footer /></>;
 }
 
