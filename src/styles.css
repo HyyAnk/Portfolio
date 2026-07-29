@@ -157,6 +157,17 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .about-notes svg { color: var(--accent); }
 
 .skill-blocks { border-top: 1px solid var(--line); }
+.skill-flow-layout { display: grid; grid-template-columns: minmax(250px, .68fr) minmax(0, 1.32fr); gap: clamp(34px, 6vw, 92px); align-items: center; margin-bottom: 72px; }
+.skill-flow-copy { min-width: 0; }
+.skill-flow-eyebrow { display: block; margin-bottom: 20px; color: var(--accent); font-size: .66rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.skill-blocks .section-heading { margin-bottom: 0; }
+.skill-blocks .section-heading h2 { max-width: none; font-size: clamp(3.25rem, 6.1vw, 6.7rem); text-wrap: balance; }
+.skill-blocks .section-heading h2 span { display: block; white-space: nowrap; }
+.skill-flow-visual { position: relative; height: min(33vw, 410px); min-height: 330px; margin: 0; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: radial-gradient(circle at 50% 50%, rgba(201,87,62,.08), transparent 56%); }
+.skill-flow-visual::before { position: absolute; inset: 0; content: ''; pointer-events: none; opacity: .38; background-image: linear-gradient(rgba(23,24,22,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(23,24,22,.06) 1px, transparent 1px); background-size: 72px 72px; mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent); }
+.skill-flow-canvas { position: relative; z-index: 1; width: 100%; height: 100%; min-height: 330px; cursor: default; }
+.skill-flow-canvas canvas { display: block; width: 100%; height: 100%; cursor: pointer; }
+.skill-flow-fallback { position: absolute; inset: 0; display: grid; place-items: center; color: var(--ink); font-size: 1.05rem; font-weight: 700; letter-spacing: .08em; opacity: 0; pointer-events: none; }
 .skills-index { border-top: 1px solid var(--line); }
 .skill-index-row { min-height: 112px; display: grid; grid-template-columns: minmax(240px, .8fr) minmax(300px, 1.2fr) auto; gap: 32px; align-items: center; padding: 18px 4px; border-bottom: 1px solid var(--line); transition: padding .25s ease, color .25s ease; }
 .skill-index-row:hover { padding-left: 15px; color: var(--accent); }
@@ -253,6 +264,9 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .hero-carousel-desktop { display: none; }
   .hero-carousel-mobile { display: block; width: 100vw; margin-left: calc((100% - 100vw) / 2); overflow: hidden; }
   .skill-index-row { grid-template-columns: minmax(210px, .8fr) 1.2fr auto; }
+  .skill-flow-layout { grid-template-columns: 1fr; gap: 34px; margin-bottom: 60px; }
+  .skill-flow-visual { height: 360px; min-height: 0; }
+  .skill-flow-canvas { min-height: 0; }
 }
 
 @media (max-width: 900px) {
@@ -311,6 +325,10 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .about-copy, .about-notes { grid-column: auto; }
   .about-image { height: 420px; }
   .skill-index-row { min-height: 126px; grid-template-columns: 1fr auto; gap: 8px 20px; }
+  .skill-blocks .section-heading h2 { max-width: none; font-size: clamp(3.15rem, 15vw, 5rem); }
+  .skill-flow-layout { gap: 26px; margin-bottom: 52px; }
+  .skill-flow-visual { height: 286px; min-height: 0; margin: 0 -8px; }
+  .skill-flow-canvas { min-height: 0; }
   .skill-index-copy { grid-column: 1; }
   .skill-index-row svg { grid-column: 2; grid-row: 1 / span 2; }
   .playground-grid { grid-template-columns: 1fr; grid-template-rows: 300px 250px 250px; }

@@ -313,24 +313,24 @@ function ThreeSkillFlow() {
 
     const createLabel = (text, subtext) => {
       const canvas = document.createElement('canvas');
-      canvas.width = 900;
-      canvas.height = 240;
+      canvas.width = 560;
+      canvas.height = 190;
       const context = canvas.getContext('2d');
       if (!context) return null;
       context.clearRect(0, 0, canvas.width, canvas.height);
-      context.font = '700 76px Manrope, Arial, sans-serif';
+      context.font = '700 64px Manrope, Arial, sans-serif';
       context.fillStyle = '#171816';
-      context.fillText(text, 42, 93);
-      context.font = '500 30px Manrope, Arial, sans-serif';
+      context.fillText(text, 24, 76);
+      context.font = '500 25px Manrope, Arial, sans-serif';
       context.fillStyle = '#77736b';
-      context.fillText(subtext, 46, 148);
+      context.fillText(subtext, 26, 121);
       context.fillStyle = '#c9573e';
-      context.fillRect(46, 177, 90, 5);
+      context.fillRect(26, 148, 72, 4);
       const texture = new THREE.CanvasTexture(canvas);
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.minFilter = THREE.LinearFilter;
       const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false }));
-      sprite.scale.set(2.35, .63, 1);
+      sprite.scale.set(2.2, .75, 1);
       return sprite;
     };
 
@@ -343,7 +343,7 @@ function ThreeSkillFlow() {
       const point = path.getPointAt(t);
       node.position.copy(point);
       node.position.y += offset;
-      node.userData = { baseY: node.position.y, phase: index * 1.75 };
+      node.userData = { baseY: node.position.y, phase: index * 1.75, index, active: false };
 
       const core = new THREE.Mesh(
         new THREE.IcosahedronGeometry(.39, 2),
@@ -365,6 +365,11 @@ function ThreeSkillFlow() {
         node.add(label);
       }
       node.add(core, halo, orbit);
+      core.userData.nodeIndex = index;
+      node.userData.core = core;
+      node.userData.halo = halo;
+      node.userData.orbit = orbit;
+      node.userData.label = label;
       flow.add(node);
       return node;
     });
@@ -385,41 +390,62 @@ function ThreeSkillFlow() {
     scene.add(ambient, keyLight);
 
     let frameId;
-    let lastTime = 0;
     let pointerX = 0;
     let pointerY = 0;
-    const clock = new THREE.Clock();
+    let previousTime;
+    let elapsed = 0;
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    const hitTargets = nodes.map((node) => node.userData.core);
+    let hoveredIndex = -1;
+    let selectedIndex = -1;
 
     const resize = () => {
       const { width, height } = container.getBoundingClientRect();
       const safeWidth = Math.max(width, 1);
       const safeHeight = Math.max(height, 1);
+      const narrow = safeWidth < 600;
       camera.aspect = safeWidth / safeHeight;
+      camera.position.z = narrow ? 14.3 : 13.5;
+      flow.scale.x = narrow ? .78 : 1;
       camera.updateProjectionMatrix();
       renderer.setSize(safeWidth, safeHeight, false);
     };
 
     const render = (time) => {
-      const elapsed = clock.getElapsedTime();
-      const delta = Math.min((time - lastTime) / 1000 || .016, .05);
-      lastTime = time;
-      flow.rotation.y += delta * .018;
+      const delta = previousTime === undefined ? .016 : Math.min(Math.max((time - previousTime) / 1000, 0), .05);
+      previousTime = time;
+      elapsed += delta;
+      flow.rotation.y = Math.sin(elapsed * .18) * .08;
       flow.rotation.x = THREE.MathUtils.lerp(flow.rotation.x, pointerY * .045, .04);
       flow.rotation.z = THREE.MathUtils.lerp(flow.rotation.z, pointerX * .025, .04);
       particles.forEach((particle) => {
-        const nextT = (particle.userData.t + elapsed * .035) % 1;
-        const point = path.getPointAt(nextT);
+        const particleT = Number.isFinite(particle.userData?.t) ? particle.userData.t : 0;
+        const nextT = (particleT + elapsed * .035) % 1;
+        const point = path.getPointAt(Math.min(.999999, Math.max(0, nextT)));
         particle.position.copy(point);
         particle.position.z += Math.sin(elapsed * 1.6 + particle.userData.offset) * .16;
         const pulse = .82 + Math.sin(elapsed * 3 + particle.userData.offset) * .18;
         particle.scale.setScalar(pulse);
       });
       nodes.forEach((node, index) => {
-        const pulse = 1 + Math.sin(elapsed * 1.65 + node.userData.phase) * .055;
+        const active = node.userData.active;
+        const pulse = (1 + Math.sin(elapsed * 1.65 + node.userData.phase) * .055) * (active ? 1.34 : 1);
         node.scale.setScalar(pulse);
         node.position.y = node.userData.baseY + Math.sin(elapsed * 1.15 + node.userData.phase) * .08;
         node.rotation.y = elapsed * (.24 + index * .05) * (index % 2 ? -1 : 1);
-        node.children[2].rotation.z += delta * .18;
+        node.userData.halo.rotation.z += delta * .18;
+        node.userData.halo.scale.setScalar(active ? 1.18 : 1);
+        node.userData.orbit.material.opacity = active ? .95 : .65;
+        node.userData.halo.material.opacity = active ? .95 : .62;
+        node.userData.core.material.emissiveIntensity = active ? .75 : .2;
+        node.userData.core.material.color.set(active ? '#df684c' : index === 1 ? '#171816' : '#c9573e');
+        node.userData.core.material.emissive.set(active ? '#df684c' : index === 1 ? '#171816' : '#c9573e');
+        if (node.userData.label) {
+          node.userData.label.material.opacity = active ? 1 : .78;
+          node.userData.label.material.color.set(active ? '#c9573e' : '#ffffff');
+          node.userData.label.scale.set(active ? 2.55 : 2.2, active ? .87 : .75, 1);
+        }
       });
       camera.position.x = THREE.MathUtils.lerp(camera.position.x, pointerX * .25, .035);
       camera.position.y = THREE.MathUtils.lerp(camera.position.y, .15 + pointerY * .16, .035);
@@ -432,11 +458,31 @@ function ThreeSkillFlow() {
       const bounds = container.getBoundingClientRect();
       pointerX = ((event.clientX - bounds.left) / bounds.width - .5) * 2;
       pointerY = ((event.clientY - bounds.top) / bounds.height - .5) * -2;
+      pointer.set(pointerX, pointerY);
+      raycaster.setFromCamera(pointer, camera);
+      const hit = raycaster.intersectObjects(hitTargets, false)[0];
+      hoveredIndex = hit ? hit.object.userData.nodeIndex : -1;
+      nodes.forEach((node, index) => { node.userData.active = index === hoveredIndex || index === selectedIndex; });
+      container.dataset.activeNode = hoveredIndex >= 0 ? String(hoveredIndex) : selectedIndex >= 0 ? String(selectedIndex) : '';
+      container.style.cursor = hoveredIndex >= 0 ? 'pointer' : 'default';
     };
-    const resetPointer = () => { pointerX = 0; pointerY = 0; };
+    const handleClick = () => {
+      if (hoveredIndex >= 0) selectedIndex = selectedIndex === hoveredIndex ? -1 : hoveredIndex;
+      nodes.forEach((node, index) => { node.userData.active = index === hoveredIndex || index === selectedIndex; });
+      container.dataset.activeNode = selectedIndex >= 0 ? String(selectedIndex) : '';
+    };
+    const resetPointer = () => {
+      pointerX = 0;
+      pointerY = 0;
+      hoveredIndex = -1;
+      nodes.forEach((node, index) => { node.userData.active = index === selectedIndex; });
+      container.dataset.activeNode = selectedIndex >= 0 ? String(selectedIndex) : '';
+      container.style.cursor = 'default';
+    };
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
     container.addEventListener('pointermove', handlePointer);
+    container.addEventListener('click', handleClick);
     container.addEventListener('pointerleave', resetPointer);
     resize();
     if (reduce) {
@@ -449,6 +495,7 @@ function ThreeSkillFlow() {
       if (frameId) window.cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
       container.removeEventListener('pointermove', handlePointer);
+      container.removeEventListener('click', handleClick);
       container.removeEventListener('pointerleave', resetPointer);
       scene.traverse((object) => {
         if (object.geometry) object.geometry.dispose();
@@ -466,7 +513,7 @@ function ThreeSkillFlow() {
 }
 
 function SkillBlocks() {
-  return <section id="skills" className="section-pad skill-blocks"><div className="page-shell"><Reveal><div className="section-heading section-heading-stacked"><span className="skill-flow-eyebrow">The way I work</span><h2>Design - Develop - Deliver</h2><p>One connected flow from a sharp idea to a useful, finished experience.</p></div></Reveal><Reveal className="skill-flow-visual" delay={.08}><ThreeSkillFlow /></Reveal><div className="skills-index">{skills.map((skill, index) => <Reveal key={skill.slug} delay={index * .05}><Link className="skill-index-row" to={`/skills/${skill.slug}`}><span className="skill-index-title">{skill.title}</span><span className="skill-index-copy">{skill.short}</span><ArrowUpRight size={20} /></Link></Reveal>)}</div></div></section>;
+  return <section id="skills" className="section-pad skill-blocks"><div className="page-shell"><div className="skill-flow-layout"><Reveal className="skill-flow-copy"><div className="section-heading section-heading-stacked"><span className="skill-flow-eyebrow">The way I work</span><h2><span>Design</span><span>Develop</span><span>Deliver</span></h2><p>One connected flow from a sharp idea to a useful, finished experience.</p></div></Reveal><Reveal className="skill-flow-visual" delay={.08}><ThreeSkillFlow /></Reveal></div><div className="skills-index">{skills.map((skill, index) => <Reveal key={skill.slug} delay={index * .05}><Link className="skill-index-row" to={`/skills/${skill.slug}`}><span className="skill-index-title">{skill.title}</span><span className="skill-index-copy">{skill.short}</span><ArrowUpRight size={20} /></Link></Reveal>)}</div></div></section>;
 }
 
 function Playground() {
