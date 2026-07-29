@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
+import * as THREE from 'three';
 import {
   ArrowDownRight, ArrowLeft, ArrowUpRight, CaretDown, Check,
-  Copy, EnvelopeSimple,
+  Copy, EnvelopeSimple, GithubLogo, TelegramLogo, XLogo,
 } from '@phosphor-icons/react';
 
 import uiImage from './assets/generated/work-ui.webp';
@@ -21,7 +22,15 @@ import stillMovingImage from './assets/generated/case-still-moving-v2.webp';
 import openLoopImage from './assets/generated/case-open-loop-v2.webp';
 
 const person = 'Dư Ngọc Minh Hoàng';
-const email = 'hello@duhoang.design';
+const email = 'dungocminhhoang@gmail.com';
+
+const contactLinks = [
+  { key: 'telegram', label: 'Telegram', value: '@dungocminhhoang', href: 'https://t.me/dungocminhhoang', icon: TelegramLogo },
+  { key: 'x', label: 'X', value: 'x.com/0x_HyyAnk', href: 'https://x.com/0x_HyyAnk', icon: XLogo },
+  { key: 'gmail', label: 'Gmail', value: email, href: `mailto:${email}`, icon: EnvelopeSimple },
+  { key: 'zalo', label: 'Zalo', value: 'zalo.me/0904002301', href: 'https://zalo.me/0904002301', icon: null },
+  { key: 'github', label: 'Github', value: 'github.com/HyyAnk', href: 'https://github.com/HyyAnk', icon: GithubLogo },
+];
 
 const skills = [
   { slug: 'graphic-design', title: 'Graphic Design', short: 'Identity systems with a point of view', body: 'I build visual systems that make an idea legible before anyone reads the details', image: graphicImage, variant: 'graphic', tools: ['Art direction', 'Identity', 'Editorial'], details: ['Visual identity systems', 'Editorial layout direction', 'Typography and colour systems', 'Campaign art direction'] },
@@ -93,7 +102,9 @@ function Nav() {
           {skillsOpen && <nav className="dropdown skills-dropdown" aria-label="Skills navigation">{skills.map((skill) => <Link key={skill.slug} to={`/skills/${skill.slug}`} onClick={() => setSkillsOpen(false)}>{skill.title}</Link>)}</nav>}
         </div>
         <div className="nav-menu-wrap">
-          <button className="contact-trigger" type="button" aria-label="Open contact links" aria-expanded={contactOpen} onClick={() => { setContactOpen((value) => !value); setSkillsOpen(false); }}><EnvelopeSimple size={19} /></button>
+          <button className="contact-trigger" type="button" aria-label="Open contact links" aria-expanded={contactOpen} onClick={() => { setContactOpen((value) => !value); setSkillsOpen(false); }}>
+            <span className="contact-trigger-icons" aria-hidden="true">{contactLinks.map(({ key, icon: Icon }) => Icon ? <Icon key={key} size={14} weight="bold" /> : <span key={key} className="zalo-mark">Z</span>)}</span>
+          </button>
           {contactOpen && <ContactDropdown />}
         </div>
       </div>
@@ -102,7 +113,26 @@ function Nav() {
 }
 
 function ContactDropdown() {
-  return <div className="dropdown contact-dropdown"><span className="dropdown-label">Start a project</span><a href={`mailto:${email}`}><EnvelopeSimple size={16} /> {email}</a></div>;
+  const [copied, setCopied] = useState(false);
+  const copyEmail = async () => {
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  return <div className="dropdown contact-dropdown" aria-label="Contact links">
+    <span className="dropdown-label">Contact</span>
+    {contactLinks.map(({ key, label, value, href, icon: Icon }) => {
+      const content = <><span className={`contact-link-icon contact-link-icon-${key}`} aria-hidden="true">{Icon ? <Icon size={17} weight="bold" /> : <span className="zalo-mark">Z</span>}</span><span className="contact-link-copy"><strong>{label}</strong><span>{key === 'gmail' && copied ? 'Copied to clipboard' : value}</span></span></>;
+      if (key === 'gmail') return <button key={key} className="contact-dropdown-link" type="button" onClick={copyEmail} aria-live="polite">{content}</button>;
+      return <a key={key} href={href} target="_blank" rel="noreferrer">{content}</a>;
+    })}
+  </div>;
 }
 
 function Reveal({ children, className = '', delay = 0 }) {
@@ -244,8 +274,199 @@ function About() {
   return <section id="about" className="section-pad about-section"><div className="page-shell about-grid"><Reveal className="about-title"><h2>About</h2></Reveal><Reveal className="about-image" delay={.06}><img src={portraitImage} alt={`Portrait of ${person}`} loading="lazy" /></Reveal><Reveal className="about-copy" delay={.12}><p className="large-copy">I am a designer and developer. I bridge strategy, design and code to make digital work feel alive.</p><p>I care about the details that shape clarity, usability and emotion. Good work should make the next step feel obvious.</p><ArrowLink to="#skills">See capabilities</ArrowLink></Reveal><div className="about-notes"><span><Check size={16} /> Available for freelance</span></div></div></section>;
 }
 
+function ThreeSkillFlow() {
+  const containerRef = useRef(null);
+  const reduce = useReducedMotion();
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return undefined;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(33, 1, .1, 100);
+    camera.position.set(0, .15, 13.5);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
+    renderer.setClearColor(0x000000, 0);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    container.appendChild(renderer.domElement);
+
+    const flow = new THREE.Group();
+    scene.add(flow);
+    const accent = new THREE.Color('#c9573e');
+    const ink = new THREE.Color('#171816');
+    const soft = new THREE.Color('#d9d5cc');
+    const path = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-5.7, -.72, -.35),
+      new THREE.Vector3(-3.25, .95, .3),
+      new THREE.Vector3(-.45, -.15, -.15),
+      new THREE.Vector3(2.6, -1.05, .25),
+      new THREE.Vector3(5.7, .42, -.3),
+    ]);
+
+    const tube = new THREE.Mesh(
+      new THREE.TubeGeometry(path, 180, .028, 8, false),
+      new THREE.MeshBasicMaterial({ color: accent, transparent: true, opacity: .6 })
+    );
+    flow.add(tube);
+
+    const createLabel = (text, subtext) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 900;
+      canvas.height = 240;
+      const context = canvas.getContext('2d');
+      if (!context) return null;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.font = '700 76px Manrope, Arial, sans-serif';
+      context.fillStyle = '#171816';
+      context.fillText(text, 42, 93);
+      context.font = '500 30px Manrope, Arial, sans-serif';
+      context.fillStyle = '#77736b';
+      context.fillText(subtext, 46, 148);
+      context.fillStyle = '#c9573e';
+      context.fillRect(46, 177, 90, 5);
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.minFilter = THREE.LinearFilter;
+      const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false }));
+      sprite.scale.set(2.35, .63, 1);
+      return sprite;
+    };
+
+    const nodes = [
+      { word: 'Design', subtext: 'make it clear', t: .12, offset: -.05 },
+      { word: 'Develop', subtext: 'make it work', t: .5, offset: .06 },
+      { word: 'Deliver', subtext: 'make it matter', t: .88, offset: -.03 },
+    ].map(({ word, subtext, t, offset }, index) => {
+      const node = new THREE.Group();
+      const point = path.getPointAt(t);
+      node.position.copy(point);
+      node.position.y += offset;
+      node.userData = { baseY: node.position.y, phase: index * 1.75 };
+
+      const core = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(.39, 2),
+        new THREE.MeshStandardMaterial({ color: index === 1 ? ink : accent, roughness: .3, metalness: .18, emissive: index === 1 ? ink : accent, emissiveIntensity: .2 })
+      );
+      const halo = new THREE.Mesh(
+        new THREE.TorusGeometry(.65, .018, 8, 64),
+        new THREE.MeshBasicMaterial({ color: accent, transparent: true, opacity: .62 })
+      );
+      halo.rotation.x = Math.PI / 2;
+      const orbit = new THREE.Mesh(
+        new THREE.TorusGeometry(.87, .008, 6, 72),
+        new THREE.MeshBasicMaterial({ color: soft, transparent: true, opacity: .65 })
+      );
+      orbit.rotation.set(.75, .25, index * .6);
+      const label = createLabel(word, subtext);
+      if (label) {
+        label.position.set(0, 1.02, .08);
+        node.add(label);
+      }
+      node.add(core, halo, orbit);
+      flow.add(node);
+      return node;
+    });
+
+    const particles = Array.from({ length: 22 }, (_, index) => {
+      const particle = new THREE.Mesh(
+        new THREE.SphereGeometry(index % 4 === 0 ? .075 : .035, 8, 8),
+        new THREE.MeshBasicMaterial({ color: index % 4 === 0 ? accent : ink, transparent: true, opacity: index % 4 === 0 ? .95 : .36 })
+      );
+      particle.userData = { t: index / 22, offset: index * .37 };
+      flow.add(particle);
+      return particle;
+    });
+
+    const ambient = new THREE.AmbientLight(0xffffff, 1.8);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
+    keyLight.position.set(2, 4, 6);
+    scene.add(ambient, keyLight);
+
+    let frameId;
+    let lastTime = 0;
+    let pointerX = 0;
+    let pointerY = 0;
+    const clock = new THREE.Clock();
+
+    const resize = () => {
+      const { width, height } = container.getBoundingClientRect();
+      const safeWidth = Math.max(width, 1);
+      const safeHeight = Math.max(height, 1);
+      camera.aspect = safeWidth / safeHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(safeWidth, safeHeight, false);
+    };
+
+    const render = (time) => {
+      const elapsed = clock.getElapsedTime();
+      const delta = Math.min((time - lastTime) / 1000 || .016, .05);
+      lastTime = time;
+      flow.rotation.y += delta * .018;
+      flow.rotation.x = THREE.MathUtils.lerp(flow.rotation.x, pointerY * .045, .04);
+      flow.rotation.z = THREE.MathUtils.lerp(flow.rotation.z, pointerX * .025, .04);
+      particles.forEach((particle) => {
+        const nextT = (particle.userData.t + elapsed * .035) % 1;
+        const point = path.getPointAt(nextT);
+        particle.position.copy(point);
+        particle.position.z += Math.sin(elapsed * 1.6 + particle.userData.offset) * .16;
+        const pulse = .82 + Math.sin(elapsed * 3 + particle.userData.offset) * .18;
+        particle.scale.setScalar(pulse);
+      });
+      nodes.forEach((node, index) => {
+        const pulse = 1 + Math.sin(elapsed * 1.65 + node.userData.phase) * .055;
+        node.scale.setScalar(pulse);
+        node.position.y = node.userData.baseY + Math.sin(elapsed * 1.15 + node.userData.phase) * .08;
+        node.rotation.y = elapsed * (.24 + index * .05) * (index % 2 ? -1 : 1);
+        node.children[2].rotation.z += delta * .18;
+      });
+      camera.position.x = THREE.MathUtils.lerp(camera.position.x, pointerX * .25, .035);
+      camera.position.y = THREE.MathUtils.lerp(camera.position.y, .15 + pointerY * .16, .035);
+      camera.lookAt(0, 0, 0);
+      renderer.render(scene, camera);
+      frameId = window.requestAnimationFrame(render);
+    };
+
+    const handlePointer = (event) => {
+      const bounds = container.getBoundingClientRect();
+      pointerX = ((event.clientX - bounds.left) / bounds.width - .5) * 2;
+      pointerY = ((event.clientY - bounds.top) / bounds.height - .5) * -2;
+    };
+    const resetPointer = () => { pointerX = 0; pointerY = 0; };
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(container);
+    container.addEventListener('pointermove', handlePointer);
+    container.addEventListener('pointerleave', resetPointer);
+    resize();
+    if (reduce) {
+      renderer.render(scene, camera);
+    } else {
+      frameId = window.requestAnimationFrame(render);
+    }
+
+    return () => {
+      if (frameId) window.cancelAnimationFrame(frameId);
+      resizeObserver.disconnect();
+      container.removeEventListener('pointermove', handlePointer);
+      container.removeEventListener('pointerleave', resetPointer);
+      scene.traverse((object) => {
+        if (object.geometry) object.geometry.dispose();
+        if (object.material) {
+          const materials = Array.isArray(object.material) ? object.material : [object.material];
+          materials.forEach((material) => { material.map?.dispose(); material.dispose(); });
+        }
+      });
+      renderer.dispose();
+      renderer.domElement.remove();
+    };
+  }, [reduce]);
+
+  return <div className="skill-flow-canvas" ref={containerRef} role="img" aria-label="A 3D flow connecting Design, Develop and Deliver"><span className="skill-flow-fallback">Design → Develop → Deliver</span></div>;
+}
+
 function SkillBlocks() {
-  return <section id="skills" className="section-pad skill-blocks"><div className="page-shell"><Reveal><div className="section-heading section-heading-stacked"><h2>Current capabilities.</h2><p>Design, code and systems selected to fit the problem.</p></div></Reveal><div className="skills-index">{skills.map((skill, index) => <Reveal key={skill.slug} delay={index * .05}><Link className="skill-index-row" to={`/skills/${skill.slug}`}><span className="skill-index-title">{skill.title}</span><span className="skill-index-copy">{skill.short}</span><ArrowUpRight size={20} /></Link></Reveal>)}</div></div></section>;
+  return <section id="skills" className="section-pad skill-blocks"><div className="page-shell"><Reveal><div className="section-heading section-heading-stacked"><span className="skill-flow-eyebrow">The way I work</span><h2>Design - Develop - Deliver</h2><p>One connected flow from a sharp idea to a useful, finished experience.</p></div></Reveal><Reveal className="skill-flow-visual" delay={.08}><ThreeSkillFlow /></Reveal><div className="skills-index">{skills.map((skill, index) => <Reveal key={skill.slug} delay={index * .05}><Link className="skill-index-row" to={`/skills/${skill.slug}`}><span className="skill-index-title">{skill.title}</span><span className="skill-index-copy">{skill.short}</span><ArrowUpRight size={20} /></Link></Reveal>)}</div></div></section>;
 }
 
 function Playground() {

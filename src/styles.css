@@ -76,13 +76,28 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .nav-menu-wrap { position: relative; }
 .nav-link { display: inline-flex; min-height: 37px; align-items: center; gap: 6px; padding: 0 12px; border-radius: 999px; font-size: .8rem; transition: background .2s ease, color .2s ease; }
 .nav-link:hover { background: var(--soft); color: var(--ink); }
-.contact-trigger { display: grid; width: 36px; height: 36px; margin-left: 5px; place-items: center; border-radius: 50%; background: var(--ink); color: #f5f4ef; transition: background .2s ease, transform .2s ease; }
-.contact-trigger:hover { background: var(--accent); transform: rotate(-4deg); }
+.contact-trigger { display: inline-flex; width: auto; min-width: 94px; height: 36px; margin-left: 5px; align-items: center; justify-content: center; padding: 0 10px; border-radius: 999px; background: var(--ink); color: #f5f4ef; transition: background .2s ease, transform .2s ease, min-width .2s ease; }
+.contact-trigger:hover { background: var(--accent); transform: translateY(-1px) scale(1.02); }
+.contact-trigger-icons { display: inline-flex; align-items: center; gap: 5px; }
+.contact-trigger-icons svg { flex: none; }
+.zalo-mark { display: inline-grid; width: 17px; height: 17px; place-items: center; border: 1.5px solid currentColor; border-radius: 5px; font-size: .58rem; font-weight: 800; line-height: 1; }
 .dropdown { position: absolute; top: calc(100% + 12px); right: 0; min-width: 224px; padding: 16px; display: grid; gap: 4px; border: 1px solid rgba(17,18,17,.11); border-radius: 15px; background: rgba(250,249,246,.97); box-shadow: 0 18px 40px rgba(30,27,23,.12); animation: dropdown-in .22s cubic-bezier(.16,1,.3,1) both; }
-.skills-dropdown a, .contact-dropdown a { display: flex; align-items: center; gap: 9px; padding: 8px 5px; font-size: .84rem; }
-.skills-dropdown a:hover, .contact-dropdown a:hover { color: var(--accent); }
+.skills-dropdown a, .contact-dropdown a, .contact-dropdown button { display: flex; align-items: center; gap: 9px; padding: 8px 5px; font-size: .84rem; }
+.skills-dropdown a:hover, .contact-dropdown a:hover, .contact-dropdown button:hover { color: var(--accent); }
 .dropdown-label { padding: 0 5px 8px; font-size: .6rem; }
-.contact-dropdown { min-width: 218px; }
+.contact-dropdown { min-width: 276px; padding: 15px 14px 14px; gap: 2px; }
+.contact-dropdown a, .contact-dropdown button { min-height: 39px; gap: 11px; border-radius: 9px; transition: background .2s ease, color .2s ease, transform .2s ease; }
+.contact-dropdown button { width: 100%; border: 0; background: transparent; color: inherit; font-family: inherit; text-align: left; cursor: pointer; }
+.contact-dropdown a:hover, .contact-dropdown button:hover { background: rgba(17,18,17,.045); transform: translateX(2px); }
+.contact-link-icon { display: grid; width: 27px; height: 27px; flex: none; place-items: center; border-radius: 8px; background: var(--soft); color: var(--ink); }
+.contact-link-icon-telegram { color: #168acd; }
+.contact-link-icon-x { color: var(--ink); }
+.contact-link-icon-gmail { color: #c54b3d; }
+.contact-link-icon-zalo { color: #087ee3; }
+.contact-link-icon-github { color: #5c4c90; }
+.contact-link-copy { min-width: 0; display: grid; gap: 2px; }
+.contact-link-copy strong { color: var(--ink); font-size: .75rem; font-weight: 700; line-height: 1.1; }
+.contact-link-copy span { overflow: hidden; color: var(--muted); font-size: .76rem; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
 
 /* Taste Skill inspired editorial split hero. There is intentionally no background image or texture here. */
 .hero { position: relative; min-height: 100dvh; padding: 96px 0 42px; display: grid; align-items: center; overflow: hidden; background: var(--paper); }
@@ -268,8 +283,12 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .wordmark > span:last-child { display: none; }
   .nav-actions { padding: 5px 6px 5px 8px; }
   .nav-link { min-height: 34px; padding-inline: 8px; font-size: .76rem; }
-  .contact-trigger { width: 31px; height: 31px; }
+  .contact-trigger { min-width: 86px; height: 31px; padding-inline: 8px; }
+  .contact-trigger-icons { gap: 4px; }
+  .contact-trigger-icons svg { width: 12px; height: 12px; }
+  .contact-trigger-icons .zalo-mark { width: 14px; height: 14px; border-radius: 4px; font-size: .49rem; }
   .dropdown { top: calc(100% + 9px); }
+  .contact-dropdown { right: -2px; min-width: min(276px, calc(100vw - 32px)); }
   .section-pad { padding: 104px 0 116px; }
   .hero { padding-top: 106px; padding-bottom: 54px; }
   .hero-status { margin-bottom: 17px; font-size: .64rem; }
