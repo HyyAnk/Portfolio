@@ -1,17 +1,21 @@
-# Hero carousel images
+# Hero carousel assets
 
-Đặt tối đa 7 ảnh vào folder này và đặt tên đúng theo số thứ tự:
+Đặt tối đa 7 asset vào thư mục này và đặt tên theo số thứ tự:
 
 ```text
-1.jpg
-2.png
-3.gif
-4.jpeg
-5.webp
-6.avif
-7.gif
+1.svg
+2.svg
+3.svg
+4.svg
+5.svg
+6.svg
+7.svg
 ```
 
-Website sẽ tự động nhận diện các số từ `1` đến `7`, không cần sửa code. Các định dạng được hỗ trợ: PNG, JPG, JPEG, JPB, GIF, WebP và AVIF.
+Website tự động nhận diện các file từ `1` đến `7`, không cần sửa code.
 
-Nếu một số chưa có file, website sẽ dùng ảnh mặc định tương ứng hiện tại.
+Định dạng được hỗ trợ: SVG, PNG, JPG, JPEG, JPB, GIF, WebP và AVIF.
+
+Chỉ nên giữ một file cho mỗi basename. Ví dụ, nếu đã có `1.svg` thì không giữ thêm `1.png` hoặc `1.gif`.
+
+SVG có thể sử dụng SMIL hoặc CSS animation nội bộ và được hiển thị qua thẻ `<img>`.

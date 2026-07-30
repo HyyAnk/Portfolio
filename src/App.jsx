@@ -24,6 +24,11 @@ import openLoopImage from './assets/generated/case-open-loop-v2.webp';
 const person = 'HyyAnk';
 const fullName = 'Dư Ngọc Minh Hoàng';
 const email = 'dungocminhhoang@gmail.com';
+const skillFlowNodes = [
+  { word: 'Design', caption: 'Make it clear', t: .12, offset: -.05 },
+  { word: 'Develop', caption: 'Make it work', t: .5, offset: .06 },
+  { word: 'Deliver', caption: 'Make it matter', t: .88, offset: -.03 },
+];
 
 function BrandIcon({ name }) {
   if (name === 'gmail') return <svg className="brand-icon brand-icon-gmail" viewBox="0 0 256 193" aria-hidden="true" focusable="false">
@@ -78,15 +83,25 @@ const heroCarouselImages = [
   { image: videoImage, alt: 'Video editing and title design study' },
 ];
 
-const carouselFolderAssets = import.meta.glob('./assets/Carousel/*.{png,jpg,jpeg,jpb,gif,webp,avif}', { eager: true, import: 'default', query: '?url' });
+const carouselFolderAssets = import.meta.glob('./assets/Carousel/*.{png,jpg,jpeg,jpb,gif,webp,avif,svg}', { eager: true, import: 'default', query: '?url' });
 const customCarouselByIndex = Object.entries(carouselFolderAssets).reduce((result, [filePath, imageUrl]) => {
-  const match = filePath.match(/(?:^|[\\/])([1-7])\.(?:png|jpe?g|jpb|gif|webp|avif)$/i);
+  const match = filePath.match(/(?:^|[\\/])([1-7])\.(?:png|jpe?g|jpb|gif|webp|avif|svg)$/i);
   if (match) result[Number(match[1])] = imageUrl;
   return result;
 }, {});
+const customCarouselAlts = [
+  'Animated motion path, shape morphing and layered composition',
+  'Animated browser interaction with hover, settings and theme controls',
+  'Animated terminal installing the HyyAnk design package',
+  'Animated deployment pipeline progressing from source to live',
+  'Animated wallet connection and blockchain transaction confirmation',
+  'Animated cinematic editing timeline with colour grading controls',
+  'Animated sound effects board with pads, waveform and mixer levels',
+];
 const configuredCarouselImages = Array.from({ length: 7 }, (_, index) => ({
   ...(heroCarouselImages[index]),
   image: customCarouselByIndex[index + 1] || heroCarouselImages[index].image,
+  alt: customCarouselByIndex[index + 1] ? customCarouselAlts[index] : heroCarouselImages[index].alt,
 }));
 
 const reveal = { hidden: { opacity: 0, y: 22 }, visible: { opacity: 1, y: 0 } };
@@ -275,7 +290,7 @@ function HeroComposition() {
     const tick = (time) => {
       const elapsed = time - previousTime;
       previousTime = time;
-      if (!pointerRef.current.dragging) pointerRef.current.progress = (pointerRef.current.progress + 45e-6 * elapsed) % 1;
+      if (!pointerRef.current.dragging) pointerRef.current.progress = (pointerRef.current.progress + 31.5e-6 * elapsed) % 1;
       applyProgress(pointerRef.current.progress);
       frameId = window.requestAnimationFrame(tick);
     };
@@ -443,27 +458,24 @@ function ThreeSkillFlow() {
 
     let isDark = document.documentElement.dataset.theme === 'dark';
     const labelSprites = [];
-    const createLabel = (text, subtext) => {
+    const createLabel = (text) => {
       const canvas = document.createElement('canvas');
-      canvas.width = 560;
-      canvas.height = 190;
+      canvas.width = 520;
+      canvas.height = 130;
       const context = canvas.getContext('2d');
       if (!context) return null;
       const texture = new THREE.CanvasTexture(canvas);
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.minFilter = THREE.LinearFilter;
       const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false }));
-      sprite.scale.set(2.2, .75, 1);
+      sprite.scale.set(2.25, .56, 1);
       sprite.userData.redraw = () => {
         context.clearRect(0, 0, canvas.width, canvas.height);
-        context.font = '700 64px Manrope, Arial, sans-serif';
+        context.font = '700 70px Manrope, Arial, sans-serif';
         context.fillStyle = isDark ? '#f4f1e9' : '#171816';
-        context.fillText(text, 24, 76);
-        context.font = '500 25px Manrope, Arial, sans-serif';
-        context.fillStyle = isDark ? '#aaa9a1' : '#77736b';
-        context.fillText(subtext, 26, 121);
+        context.fillText(text, 24, 78);
         context.fillStyle = '#c9573e';
-        context.fillRect(26, 148, 72, 4);
+        context.fillRect(26, 105, 72, 4);
         texture.needsUpdate = true;
       };
       sprite.userData.redraw();
@@ -471,11 +483,7 @@ function ThreeSkillFlow() {
       return sprite;
     };
 
-    const nodes = [
-      { word: 'Design', subtext: 'make it clear', t: .12, offset: -.05 },
-      { word: 'Develop', subtext: 'make it work', t: .5, offset: .06 },
-      { word: 'Deliver', subtext: 'make it matter', t: .88, offset: -.03 },
-    ].map(({ word, subtext, t, offset }, index) => {
+    const nodes = skillFlowNodes.map(({ word, t, offset }, index) => {
       const node = new THREE.Group();
       const point = path.getPointAt(t);
       node.position.copy(point);
@@ -496,7 +504,7 @@ function ThreeSkillFlow() {
         new THREE.MeshBasicMaterial({ color: soft, transparent: true, opacity: .65 })
       );
       orbit.rotation.set(.75, .25, index * .6);
-      const label = createLabel(word, subtext);
+      const label = createLabel(word);
       if (label) {
         label.position.set(0, 1.02, .08);
         node.add(label);
@@ -542,8 +550,35 @@ function ThreeSkillFlow() {
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
     const hitTargets = nodes.map((node) => node.userData.core);
+    const nodeButtons = Array.from(container.querySelectorAll('[data-skill-node]'));
+    const nodeBubbles = Array.from(container.querySelectorAll('[data-skill-bubble]'));
+    const projectedPosition = new THREE.Vector3();
     let hoveredIndex = -1;
     let selectedIndex = -1;
+
+    const syncActiveNode = () => {
+      const activeIndex = hoveredIndex >= 0 ? hoveredIndex : selectedIndex;
+      nodes.forEach((node, index) => { node.userData.active = index === hoveredIndex || index === selectedIndex; });
+      container.dataset.activeNode = activeIndex >= 0 ? String(activeIndex) : '';
+      nodeButtons.forEach((button, index) => button.setAttribute('aria-pressed', String(index === selectedIndex)));
+    };
+
+    const updateOverlayPositions = () => {
+      const { width, height } = container.getBoundingClientRect();
+      scene.updateMatrixWorld(true);
+      camera.updateMatrixWorld(true);
+      nodes.forEach((node, index) => {
+        node.getWorldPosition(projectedPosition);
+        projectedPosition.project(camera);
+        const x = (projectedPosition.x * .5 + .5) * width;
+        const y = (-projectedPosition.y * .5 + .5) * height;
+        [nodeButtons[index], nodeBubbles[index]].forEach((element) => {
+          if (!element) return;
+          element.style.left = `${x}px`;
+          element.style.top = `${y}px`;
+        });
+      });
+    };
 
     const resize = () => {
       const { width, height } = container.getBoundingClientRect();
@@ -555,6 +590,7 @@ function ThreeSkillFlow() {
       flow.scale.x = narrow ? .78 : 1;
       camera.updateProjectionMatrix();
       renderer.setSize(safeWidth, safeHeight, false);
+      updateOverlayPositions();
     };
 
     const render = (time) => {
@@ -592,12 +628,13 @@ function ThreeSkillFlow() {
         if (node.userData.label) {
           node.userData.label.material.opacity = active ? 1 : .78;
           node.userData.label.material.color.set(active ? '#c9573e' : '#ffffff');
-          node.userData.label.scale.set(active ? 2.55 : 2.2, active ? .87 : .75, 1);
+          node.userData.label.scale.set(active ? 2.5 : 2.25, active ? .62 : .56, 1);
         }
       });
       camera.position.x = THREE.MathUtils.lerp(camera.position.x, pointerX * .25, .035);
       camera.position.y = THREE.MathUtils.lerp(camera.position.y, .15 + pointerY * .16, .035);
       camera.lookAt(0, 0, 0);
+      updateOverlayPositions();
       renderer.render(scene, camera);
       frameId = window.requestAnimationFrame(render);
     };
@@ -610,8 +647,7 @@ function ThreeSkillFlow() {
       raycaster.setFromCamera(pointer, camera);
       const hit = raycaster.intersectObjects(hitTargets, false)[0];
       hoveredIndex = hit ? hit.object.userData.nodeIndex : -1;
-      nodes.forEach((node, index) => { node.userData.active = index === hoveredIndex || index === selectedIndex; });
-      container.dataset.activeNode = hoveredIndex >= 0 ? String(hoveredIndex) : selectedIndex >= 0 ? String(selectedIndex) : '';
+      syncActiveNode();
       container.style.cursor = hoveredIndex >= 0 ? 'pointer' : 'default';
     };
     const handleClick = (event) => {
@@ -623,24 +659,43 @@ function ThreeSkillFlow() {
       const hit = raycaster.intersectObjects(hitTargets, false)[0];
       hoveredIndex = hit ? hit.object.userData.nodeIndex : -1;
       if (hoveredIndex >= 0) selectedIndex = selectedIndex === hoveredIndex ? -1 : hoveredIndex;
-      nodes.forEach((node, index) => { node.userData.active = index === hoveredIndex || index === selectedIndex; });
-      container.dataset.activeNode = selectedIndex >= 0 ? String(selectedIndex) : '';
+      syncActiveNode();
     };
     const clearSelection = () => {
       selectedIndex = -1;
       hoveredIndex = -1;
-      nodes.forEach((node) => { node.userData.active = false; });
-      container.dataset.activeNode = '';
+      syncActiveNode();
       container.style.cursor = 'default';
     };
     const resetPointer = () => {
       pointerX = 0;
       pointerY = 0;
       hoveredIndex = -1;
-      nodes.forEach((node, index) => { node.userData.active = index === selectedIndex; });
-      container.dataset.activeNode = selectedIndex >= 0 ? String(selectedIndex) : '';
+      syncActiveNode();
       container.style.cursor = 'default';
     };
+    const nodeButtonCleanups = nodeButtons.map((button, index) => {
+      const activate = () => { hoveredIndex = index; syncActiveNode(); };
+      const deactivate = () => { hoveredIndex = -1; syncActiveNode(); };
+      const toggle = (event) => {
+        event.stopPropagation();
+        selectedIndex = selectedIndex === index ? -1 : index;
+        hoveredIndex = index;
+        syncActiveNode();
+      };
+      button.addEventListener('pointerenter', activate);
+      button.addEventListener('pointerleave', deactivate);
+      button.addEventListener('focus', activate);
+      button.addEventListener('blur', deactivate);
+      button.addEventListener('click', toggle);
+      return () => {
+        button.removeEventListener('pointerenter', activate);
+        button.removeEventListener('pointerleave', deactivate);
+        button.removeEventListener('focus', activate);
+        button.removeEventListener('blur', deactivate);
+        button.removeEventListener('click', toggle);
+      };
+    });
     const handleDocumentPointerDown = (event) => {
       if (!container.contains(event.target)) clearSelection();
     };
@@ -665,6 +720,7 @@ function ThreeSkillFlow() {
       container.removeEventListener('click', handleClick);
       container.removeEventListener('pointerleave', resetPointer);
       document.removeEventListener('pointerdown', handleDocumentPointerDown);
+      nodeButtonCleanups.forEach((cleanup) => cleanup());
       scene.traverse((object) => {
         if (object.geometry) object.geometry.dispose();
         if (object.material) {
@@ -677,7 +733,16 @@ function ThreeSkillFlow() {
     };
   }, [reduce]);
 
-  return <div className="skill-flow-canvas" ref={containerRef} role="img" aria-label="A 3D flow connecting Design, Develop and Deliver"><span className="skill-flow-fallback">Design → Develop → Deliver</span></div>;
+  return <div className="skill-flow-canvas" ref={containerRef} role="group" aria-label="Interactive 3D flow connecting Design, Develop and Deliver">
+    {skillFlowNodes.map(({ word, caption }, index) => <React.Fragment key={word}>
+      <button className="skill-flow-node-hit" data-skill-node={index} type="button" aria-label={`${word}: ${caption}`} aria-describedby={`skill-flow-bubble-${index}`} aria-pressed="false" />
+      <span className="skill-flow-bubble" data-skill-bubble={index} data-node={index} id={`skill-flow-bubble-${index}`}>
+        <span className="skill-flow-bubble-label">{word}</span>
+        <span className="skill-flow-bubble-type">{caption}</span>
+      </span>
+    </React.Fragment>)}
+    <span className="skill-flow-fallback">Design → Develop → Deliver</span>
+  </div>;
 }
 
 function SkillBlocks() {

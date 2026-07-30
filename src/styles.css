@@ -196,7 +196,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .hero-carousel-card { position: absolute; top: 50%; left: 50%; width: 62%; margin: 0; opacity: 0; will-change: transform, opacity; }
 .hero-carousel-card img { width: 100%; height: auto; aspect-ratio: 1200 / 780; border-radius: var(--radius-card); object-fit: cover; box-shadow: 0 22px 48px -30px rgba(17,18,17,.32); }
 .hero-carousel-mobile { display: none; }
-.hero-mobile-flow { display: flex; width: max-content; gap: 16px; will-change: transform; animation: hero-mobile-flow 32s linear infinite; }
+.hero-mobile-flow { display: flex; width: max-content; gap: 16px; will-change: transform; animation: hero-mobile-flow 46s linear infinite; }
 .hero-mobile-card { width: 320px; flex: none; overflow: hidden; margin: 0; border-radius: var(--radius-card); }
 .hero-mobile-card img { width: 100%; height: auto; aspect-ratio: 1200 / 780; object-fit: cover; }
 
@@ -277,6 +277,18 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .skill-flow-visual::before { position: absolute; inset: 0; content: ''; pointer-events: none; opacity: .38; background-image: linear-gradient(rgba(23,24,22,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(23,24,22,.06) 1px, transparent 1px); background-size: 72px 72px; mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent); }
 .skill-flow-canvas { position: relative; z-index: 1; width: 100%; height: 100%; min-height: 330px; cursor: default; }
 .skill-flow-canvas canvas { display: block; width: 100%; height: 100%; cursor: pointer; }
+.skill-flow-node-hit { position: absolute; z-index: 3; width: 58px; height: 58px; padding: 0; border-radius: 50%; opacity: 0; transform: translate(-50%, -50%); }
+.skill-flow-node-hit:focus-visible { opacity: 1; outline: 2px solid var(--accent); outline-offset: 6px; }
+.skill-flow-bubble { --bubble-shift-x: -50%; --bubble-shift-y: 29px; --bubble-tail-x: 50%; position: absolute; z-index: 4; width: min(220px, calc(100% - 24px)); padding: 13px 17px 15px; border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--line)); border-radius: 15px 15px 15px 5px; background: color-mix(in srgb, var(--paper-elevated) 96%, transparent); box-shadow: 0 18px 36px -24px color-mix(in srgb, var(--accent) 58%, transparent); opacity: 0; pointer-events: none; transform: translate(var(--bubble-shift-x), var(--bubble-shift-y)) scale(.88); transform-origin: var(--bubble-tail-x) top; transition: opacity .2s ease, transform .34s cubic-bezier(.16,1,.3,1); backdrop-filter: blur(12px); }
+.skill-flow-bubble::before { position: absolute; top: -6px; left: var(--bubble-tail-x); width: 11px; height: 11px; border-top: 1px solid color-mix(in srgb, var(--accent) 32%, var(--line)); border-left: 1px solid color-mix(in srgb, var(--accent) 32%, var(--line)); background: var(--paper-elevated); content: ''; transform: translateX(-50%) rotate(45deg); }
+.skill-flow-bubble[data-node="0"] { --bubble-shift-x: -18%; --bubble-tail-x: 18%; }
+.skill-flow-bubble[data-node="2"] { --bubble-shift-x: -82%; --bubble-tail-x: 82%; border-radius: 15px 15px 5px 15px; }
+.skill-flow-canvas[data-active-node="0"] .skill-flow-bubble[data-node="0"], .skill-flow-canvas[data-active-node="1"] .skill-flow-bubble[data-node="1"], .skill-flow-canvas[data-active-node="2"] .skill-flow-bubble[data-node="2"] { opacity: 1; transform: translate(var(--bubble-shift-x), var(--bubble-shift-y)) scale(1); }
+.skill-flow-bubble-label { display: block; margin-bottom: 5px; color: var(--accent); font-size: .61rem; font-weight: 800; letter-spacing: .14em; line-height: 1; text-transform: uppercase; }
+.skill-flow-bubble-type { --typing-width: 13ch; display: block; width: 0; overflow: hidden; border-right: 2px solid var(--accent); color: var(--ink); font-size: clamp(1.08rem, 1.55vw, 1.34rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.2; white-space: nowrap; }
+.skill-flow-bubble[data-node="1"] .skill-flow-bubble-type { --typing-width: 12ch; }
+.skill-flow-bubble[data-node="2"] .skill-flow-bubble-type { --typing-width: 14ch; }
+.skill-flow-canvas[data-active-node="0"] .skill-flow-bubble[data-node="0"] .skill-flow-bubble-type, .skill-flow-canvas[data-active-node="1"] .skill-flow-bubble[data-node="1"] .skill-flow-bubble-type, .skill-flow-canvas[data-active-node="2"] .skill-flow-bubble[data-node="2"] .skill-flow-bubble-type { animation: skill-bubble-type .72s steps(14, end) .14s forwards, skill-bubble-caret .7s step-end .14s infinite; }
 .skill-flow-fallback { position: absolute; inset: 0; display: grid; place-items: center; color: var(--ink); font-size: 1.05rem; font-weight: 700; letter-spacing: .08em; opacity: 0; pointer-events: none; }
 .skills-index { border-top: 1px solid var(--line); }
 .skill-index-row { min-height: 112px; display: grid; grid-template-columns: minmax(240px, .8fr) minmax(300px, 1.2fr) auto; gap: 32px; align-items: center; padding: 18px 4px; border-bottom: 1px solid var(--line); transition: padding .25s ease, color .25s ease; }
@@ -284,6 +296,14 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .skill-index-title { color: var(--ink); font-size: clamp(1.4rem, 2.2vw, 2.25rem); font-weight: 600; letter-spacing: -.045em; }
 .skill-index-copy { color: var(--muted); font-size: .92rem; }
 .skill-index-row:hover .skill-index-title { color: var(--accent); }
+
+@keyframes skill-bubble-type {
+  to { width: var(--typing-width); }
+}
+
+@keyframes skill-bubble-caret {
+  50% { border-color: transparent; }
+}
 
 .playground-section { position: relative; isolation: isolate; overflow: hidden; border-top: 1px solid var(--line); background: var(--paper-elevated); transition: background .35s ease; }
 .playground-section::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cpath d='M0 105h420M0 210h420M0 315h420M105 0v420M210 0v420M315 0v420' stroke='%23111211' stroke-opacity='.045' stroke-width='1'/%3E%3Ccircle cx='210' cy='210' r='102' fill='none' stroke='%23c9573e' stroke-opacity='.07' stroke-width='1'/%3E%3C/svg%3E"); background-size: 420px 420px; }
