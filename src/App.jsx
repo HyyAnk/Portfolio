@@ -779,7 +779,7 @@ function Contact() {
   return <section id="contact" className="contact-section section-pad"><div className="page-shell contact-grid"><Reveal className="contact-intro"><span className="contact-kicker">Start a conversation</span><h2>Bring me the complicated part</h2><p className="large-copy"><span>Tell me what needs to become clearer.</span>{' '}<span>I usually reply within two working days.</span></p></Reveal><Reveal className="contact-side" delay={.08}><div className="contact-directory" role="group" aria-label="Contact HyyAnk">{orderedContacts.map((contact) => {
     if (contact.key === 'gmail') return <button className={`contact-channel contact-channel-${contact.key} contact-channel-primary ${copied ? 'is-copied' : ''}`} key={contact.key} type="button" onClick={copyEmail} aria-label={copied ? `Copied ${email} to clipboard` : `Copy ${email}`} aria-live="polite">{contactContent(contact)}</button>;
     return <a className={`contact-channel contact-channel-${contact.key}`} key={contact.key} href={contact.href} target="_blank" rel="noreferrer" aria-label={`Open ${contact.label}: ${contact.value}`}>{contactContent(contact)}</a>;
-  })}</div><p className="contact-note"><span aria-hidden="true" /> Choose the channel that feels easiest</p></Reveal></div></section>;
+  })}</div></Reveal></div></section>;
 }
 
 function Footer() {
