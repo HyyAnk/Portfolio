@@ -72,7 +72,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   line-height: 1.2;
   text-transform: uppercase;
 }
-.page-shell { width: min(1380px, calc(100% - 64px)); margin-inline: auto; }
+.page-shell { width: min(1280px, 100%); margin-inline: auto; padding-inline: 32px; }
 .section-pad { padding: 148px 0 164px; }
 .section-heading { max-width: 760px; margin-bottom: 62px; }
 .section-heading h2 { max-width: 12ch; }
@@ -82,7 +82,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 
 /* Floating navigation: the two quiet pills carry the reference site's structure without a hero background image. */
 .site-nav { position: fixed; inset: 0 0 auto; z-index: 20; padding: 20px 0; pointer-events: none; }
-.nav-inner { width: min(1420px, calc(100% - 48px)); height: 50px; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.nav-inner { width: min(1280px, calc(100% - 64px)); height: 50px; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
 .wordmark-menu-wrap { position: relative; pointer-events: auto; }
 .wordmark-menu-wrap::after { position: absolute; top: 100%; left: 0; width: 100%; height: 12px; content: ''; }
 .wordmark, .nav-actions { pointer-events: auto; border: 1px solid color-mix(in srgb, var(--ink) 13%, transparent); background: var(--nav-surface); box-shadow: 0 9px 28px color-mix(in srgb, var(--ink) 12%, transparent); backdrop-filter: blur(14px); }
@@ -147,7 +147,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 /* Taste Skill inspired editorial split hero. There is intentionally no background image or texture here. */
 .hero { position: relative; min-height: 100dvh; padding: 96px 0 42px; display: grid; align-items: center; overflow: hidden; background: var(--paper); }
 .hero-sentinel { position: absolute; top: 74px; left: 0; width: 1px; height: 1px; }
-.hero-grid { display: grid; grid-template-columns: minmax(0, .93fr) minmax(0, 1.07fr); gap: clamp(48px, 6vw, 100px); align-items: center; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(40px, 4vw, 56px); align-items: center; }
 .hero-copy { position: relative; z-index: 2; max-width: 620px; }
 .hero-status { display: inline-flex; align-items: center; margin-bottom: 21px; padding: 8px 12px; border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--accent) 6%, transparent); color: #42413e; font-size: .69rem; font-weight: 700; }
 .hero-copy h1 { max-width: 690px; margin-bottom: 18px; font-size: clamp(4rem, 6vw, 6.3rem); }
@@ -478,7 +478,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 }
 
 @media (max-width: 900px) {
-  .page-shell { width: min(720px, calc(100% - 40px)); }
+  .page-shell { width: min(720px, calc(100% - 40px)); padding-inline: 0; }
   .nav-inner { width: calc(100% - 40px); }
   .nav-link-simple { display: none; }
   .hero { min-height: auto; padding-top: 128px; }
