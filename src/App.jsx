@@ -58,6 +58,17 @@ const heroCarouselImages = [
   { image: videoImage, alt: 'Video editing and title design study' },
 ];
 
+const carouselFolderAssets = import.meta.glob('./assets/Carousel/*.{png,jpg,jpeg,jpb,gif,webp,avif}', { eager: true, import: 'default', query: '?url' });
+const customCarouselByIndex = Object.entries(carouselFolderAssets).reduce((result, [filePath, imageUrl]) => {
+  const match = filePath.match(/(?:^|[\\/])([1-7])\.(?:png|jpe?g|jpb|gif|webp|avif)$/i);
+  if (match) result[Number(match[1])] = imageUrl;
+  return result;
+}, {});
+const configuredCarouselImages = Array.from({ length: 7 }, (_, index) => ({
+  ...(heroCarouselImages[index]),
+  image: customCarouselByIndex[index + 1] || heroCarouselImages[index].image,
+}));
+
 const reveal = { hidden: { opacity: 0, y: 22 }, visible: { opacity: 1, y: 0 } };
 const revealTransition = { duration: 0.65, ease: [0.16, 1, 0.3, 1] };
 
@@ -276,14 +287,14 @@ function HeroComposition() {
   return <div className="hero-composition" aria-label="A selection of recent portfolio work">
     <div className="hero-carousel-desktop" ref={carouselRef} onPointerDown={startDrag} onPointerMove={drag} onPointerUp={endDrag} onPointerCancel={endDrag}>
       <div className="hero-carousel-track">
-        {heroCarouselImages.map((item, index) => <figure className="hero-carousel-card" key={`${item.alt}-${index}`}>
+        {configuredCarouselImages.map((item, index) => <figure className="hero-carousel-card" key={`${item.alt}-${index}`}>
           <img src={item.image} alt={item.alt} draggable="false" loading={index < 2 ? 'eager' : 'lazy'} />
         </figure>)}
       </div>
     </div>
     <div className="hero-carousel-mobile" aria-hidden="true">
       <div className="hero-mobile-flow">
-        {[...heroCarouselImages, ...heroCarouselImages].map((item, index) => <figure className="hero-mobile-card" key={`mobile-${index}`}>
+        {[...configuredCarouselImages, ...configuredCarouselImages].map((item, index) => <figure className="hero-mobile-card" key={`mobile-${index}`}>
           <img src={item.image} alt="" draggable="false" loading="lazy" />
         </figure>)}
       </div>
