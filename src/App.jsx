@@ -636,9 +636,9 @@ function Contact() {
   const contactContent = ({ key, label, value, icon: Icon }) => <>
     <span className="contact-channel-top">
       <span className={`contact-channel-icon contact-channel-icon-${key}`} aria-hidden="true">{Icon ? <Icon size={20} weight="bold" /> : <span className="zalo-mark">Z</span>}</span>
-      <span className="contact-channel-action">{key === 'gmail' ? (copied ? 'Copied' : 'Copy') : 'Open'} {key === 'gmail' ? (copied ? <Check size={15} weight="bold" /> : <Copy size={15} />) : <ArrowUpRight size={15} />}</span>
+      <span className={`contact-channel-meta ${key === 'gmail' ? 'contact-channel-copy-label' : ''}`}>{key === 'gmail' ? (copied ? 'Copied' : 'Copy') : value}</span>
     </span>
-    <span className="contact-channel-copy"><strong>{label}</strong><span>{key === 'gmail' && copied ? 'Copied to clipboard' : value}</span></span>
+    <span className="contact-channel-copy"><strong>{label}</strong>{key === 'gmail' && <span>{copied ? 'Copied to clipboard' : value}</span>}</span>
   </>;
 
   return <section id="contact" className="contact-section section-pad"><div className="page-shell contact-grid"><Reveal className="contact-intro"><span className="contact-kicker">Start a conversation</span><h2>Bring me the complicated part</h2><p className="large-copy">Tell me what needs to become clearer. I usually reply within two working days.</p></Reveal><Reveal className="contact-side" delay={.08}><div className="contact-directory" role="group" aria-label="Contact HyyAnk">{orderedContacts.map((contact) => {
