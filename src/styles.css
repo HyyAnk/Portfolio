@@ -202,9 +202,42 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .about-copy { padding-top: 2px; }
 .about-copy .large-copy { margin-bottom: 20px; font-family: 'Playfair Display Variable', 'Playfair Display', Georgia, serif; font-size: clamp(1.7rem, 2.6vw, 2.75rem); line-height: 1.22; }
 .about-copy p:not(.large-copy) { max-width: 480px; margin-bottom: 25px; font-size: .96rem; }
+.about-capability-flow { display: grid; max-width: 500px; gap: 14px; margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--line); }
+.about-flow-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; color: var(--ink); font-size: .9rem; font-weight: 700; letter-spacing: -.02em; }
+.about-flow-heading > span { display: grid; gap: 4px; }
+.about-flow-heading small { color: var(--muted); font-size: .6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.about-flow-heading svg { color: var(--accent); transition: transform .35s cubic-bezier(.16,1,.3,1); }
+.about-flow-chain { position: relative; isolation: isolate; display: grid; grid-template-columns: .88fr 1.12fr 1fr; gap: 7px; padding-top: 8px; }
+.about-flow-chain::before { position: absolute; z-index: -1; top: 50%; right: 9%; left: 9%; height: 1px; content: ''; background: var(--line); }
+.about-flow-chain::after { position: absolute; z-index: 2; top: calc(50% - 3px); left: 9%; width: 7px; height: 7px; border-radius: 50%; content: ''; background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 13%, transparent); animation: about-flow-signal 4.8s cubic-bezier(.65,0,.35,1) infinite; }
+.about-flow-step { position: relative; isolation: isolate; min-width: 0; min-height: 108px; display: flex; flex-direction: column; justify-content: space-between; padding: 14px 13px 12px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--ink) 11%, transparent); background: color-mix(in srgb, var(--paper-elevated) 84%, var(--soft)); box-shadow: 0 12px 32px -28px color-mix(in srgb, var(--ink) 48%, transparent); transition: color .32s ease, border-color .32s ease, background .32s ease, transform .42s cubic-bezier(.16,1,.3,1), box-shadow .32s ease; }
+.about-flow-step::before { position: absolute; inset: 0; z-index: -1; content: ''; background: color-mix(in srgb, var(--accent) 12%, var(--paper-elevated)); transform: scaleX(0); transform-origin: left; transition: transform .48s cubic-bezier(.16,1,.3,1); }
+.about-flow-step:first-child { border-radius: 17px 7px 7px 17px; transform: translateY(5px); }
+.about-flow-step:nth-child(2) { min-height: 120px; border-radius: 7px; transform: translateY(-6px); }
+.about-flow-step:last-child { border-radius: 7px 17px 17px 7px; transform: translateY(3px); }
+.about-flow-index { color: var(--accent); font-size: .57rem; font-weight: 800; letter-spacing: .13em; }
+.about-flow-step strong { overflow-wrap: anywhere; color: var(--ink); font-size: clamp(.82rem, 1.25vw, 1.06rem); line-height: 1; letter-spacing: -.045em; }
+.about-flow-caption { overflow: hidden; color: var(--muted); font-size: .57rem; line-height: 1.25; white-space: nowrap; text-overflow: ellipsis; transition: color .32s ease; }
+.about-flow-node { position: absolute; top: 10px; right: 10px; width: 5px; height: 5px; border-radius: 50%; background: var(--line); transition: background .3s ease, transform .4s cubic-bezier(.16,1,.3,1); }
+.about-capability-flow:is(:hover, :focus-visible) .about-flow-heading svg { transform: translate(3px, 4px); }
+.about-capability-flow:is(:hover, :focus-visible) .about-flow-step { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); box-shadow: 0 18px 38px -28px color-mix(in srgb, var(--accent) 50%, transparent); }
+.about-capability-flow:is(:hover, :focus-visible) .about-flow-step::before { transform: scaleX(1); }
+.about-capability-flow:is(:hover, :focus-visible) .about-flow-step:first-child { transform: translateY(1px); }
+.about-capability-flow:is(:hover, :focus-visible) .about-flow-step:nth-child(2) { transform: translateY(-11px); transition-delay: .05s; }
+.about-capability-flow:is(:hover, :focus-visible) .about-flow-step:last-child { transform: translateY(-1px); transition-delay: .1s; }
+.about-capability-flow:is(:hover, :focus-visible) .about-flow-caption { color: var(--ink); }
+.about-capability-flow:is(:hover, :focus-visible) .about-flow-node { background: var(--accent); transform: scale(1.45); }
+.about-capability-flow:active { transform: translateY(1px) scale(.995); }
 .about-notes { grid-column: 3; display: grid; gap: 14px; padding-top: 3px; }
 .about-notes span { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: .8rem; }
 .about-notes svg { color: var(--accent); }
+
+@keyframes about-flow-signal {
+  0%, 8% { left: 9%; opacity: 0; }
+  14% { opacity: 1; }
+  86% { opacity: 1; }
+  92%, 100% { left: calc(91% - 7px); opacity: 0; }
+}
 
 .skill-blocks { position: relative; isolation: isolate; overflow: hidden; border-top: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 93%, var(--accent) 7%); transition: background .35s ease; }
 .skill-blocks::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='460' viewBox='0 0 520 460'%3E%3Cpath d='M-30 92C70 24 130 25 213 87s131 66 242-22' fill='none' stroke='%23111211' stroke-opacity='.06' stroke-width='1'/%3E%3Cpath d='M-30 124C70 56 130 57 213 119s131 66 242-22' fill='none' stroke='%23111211' stroke-opacity='.04' stroke-width='1'/%3E%3Cpath d='M60 440c42-74 46-125 2-185S12 137 75 0' fill='none' stroke='%23c9573e' stroke-opacity='.08' stroke-width='1'/%3E%3C/svg%3E"); background-size: 520px 460px; }
@@ -385,6 +418,9 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .about-grid { grid-template-columns: 1fr; gap: 23px; }
   .about-copy, .about-notes { grid-column: auto; }
   .about-image { height: 420px; }
+  .about-capability-flow { max-width: none; margin-top: 30px; }
+  .about-flow-step { min-height: 104px; padding-inline: 11px; }
+  .about-flow-step:nth-child(2) { min-height: 116px; }
   .skill-index-row { min-height: 126px; grid-template-columns: 1fr auto; gap: 8px 20px; }
   .skill-blocks .section-heading h2 { max-width: none; font-size: clamp(3.15rem, 15vw, 5rem); }
   .skill-flow-layout { gap: 26px; margin-bottom: 52px; }
