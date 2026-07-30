@@ -183,9 +183,9 @@ function ContactDropdown() {
   return <div className="dropdown contact-dropdown" aria-label="Contact links">
     <span className="dropdown-label">Contact</span>
     {contactLinks.map(({ key, label, value, href, icon: Icon }) => {
-      const content = <><span className={`contact-link-icon contact-link-icon-${key}`} aria-hidden="true">{Icon ? <Icon size={17} weight="bold" /> : <span className="zalo-mark">Z</span>}</span><span className="contact-link-copy"><strong>{label}</strong><span>{key === 'gmail' && copied ? 'Copied to clipboard' : value}</span></span></>;
-      if (key === 'gmail') return <button key={key} className={`contact-dropdown-link ${copied ? 'is-copied' : ''}`} type="button" onClick={copyEmail} aria-live="polite">{content}</button>;
-      return <a key={key} href={href} target="_blank" rel="noreferrer">{content}</a>;
+      const content = <><span className={`contact-link-icon contact-link-icon-${key}`} aria-hidden="true">{Icon ? <Icon size={17} weight="bold" /> : <span className="zalo-mark">Z</span>}</span><span className="contact-link-copy"><span>{key === 'gmail' && copied ? 'Copied to clipboard' : value}</span></span></>;
+      if (key === 'gmail') return <button key={key} className={`contact-dropdown-link ${copied ? 'is-copied' : ''}`} type="button" onClick={copyEmail} aria-label={`Copy ${label} ${email}`} aria-live="polite">{content}</button>;
+      return <a key={key} href={href} target="_blank" rel="noreferrer" aria-label={`Open ${label}: ${value}`}>{content}</a>;
     })}
   </div>;
 }

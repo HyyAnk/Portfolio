@@ -129,19 +129,18 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .skills-dropdown a, .contact-dropdown a, .contact-dropdown button { display: flex; align-items: center; gap: 9px; padding: 8px 5px; font-size: .84rem; }
 .skills-dropdown a:hover, .contact-dropdown a:hover, .contact-dropdown button:hover { color: var(--accent); }
 .dropdown-label { padding: 0 5px 8px; font-size: .6rem; }
-.contact-dropdown { min-width: 276px; padding: 15px 14px 14px; gap: 2px; }
-.contact-dropdown a, .contact-dropdown button { min-height: 39px; gap: 11px; border-radius: 9px; transition: background .2s ease, color .2s ease, transform .2s ease; }
+.contact-dropdown { min-width: 258px; padding: 12px; gap: 1px; }
+.contact-dropdown a, .contact-dropdown button { min-height: 34px; gap: 9px; padding: 5px; border-radius: 9px; transition: background .2s ease, color .2s ease, transform .2s ease; }
 .contact-dropdown button { width: 100%; border: 0; background: transparent; color: inherit; font-family: inherit; text-align: left; cursor: pointer; }
 .contact-dropdown a:hover, .contact-dropdown button:hover { background: rgba(17,18,17,.045); transform: translateX(2px); }
-.contact-link-icon { display: grid; width: 27px; height: 27px; flex: none; place-items: center; border-radius: 8px; background: var(--soft); color: var(--ink); }
+.contact-link-icon { display: grid; width: 25px; height: 25px; flex: none; place-items: center; border-radius: 8px; background: var(--soft); color: var(--ink); }
 .contact-link-icon-telegram { color: #168acd; }
 .contact-link-icon-x { color: var(--ink); }
 .contact-link-icon-gmail { color: #c54b3d; }
 .contact-link-icon-zalo { color: #087ee3; }
 .contact-link-icon-github { color: #5c4c90; }
-.contact-link-copy { min-width: 0; display: grid; gap: 2px; }
-.contact-link-copy strong { color: var(--ink); font-size: .75rem; font-weight: 700; line-height: 1.1; }
-.contact-link-copy span { overflow: hidden; color: var(--muted); font-size: .76rem; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
+.contact-link-copy { min-width: 0; display: block; }
+.contact-link-copy span { display: block; overflow: hidden; color: var(--muted); font-size: .78rem; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
 .contact-dropdown button.is-copied .contact-link-copy span { color: #2f8b58; font-weight: 700; }
 .contact-dropdown button.is-copied .contact-link-icon { background: rgba(47,139,88,.1); color: #2f8b58; }
 
@@ -420,7 +419,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .contact-trigger-icons svg { width: 12px; height: 12px; }
   .contact-trigger-icons .zalo-mark { width: 14px; height: 14px; border-radius: 4px; font-size: .49rem; }
   .dropdown { top: calc(100% + 9px); }
-  .contact-dropdown { right: -2px; min-width: min(276px, calc(100vw - 32px)); }
+  .contact-dropdown { right: -2px; min-width: min(258px, calc(100vw - 32px)); }
   .section-pad { padding: 104px 0 116px; }
   .hero { padding-top: 106px; padding-bottom: 54px; }
   .hero-status { margin-bottom: 17px; font-size: .64rem; }
