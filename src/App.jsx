@@ -25,12 +25,32 @@ const person = 'HyyAnk';
 const fullName = 'Dư Ngọc Minh Hoàng';
 const email = 'dungocminhhoang@gmail.com';
 
+function BrandIcon({ name }) {
+  if (name === 'gmail') return <svg className="brand-icon brand-icon-gmail" viewBox="0 0 256 193" aria-hidden="true" focusable="false">
+    <path fill="#4285F4" d="M58.182 192.05V93.521L27.513 65.444 0 49.959v124.619c0 9.667 7.836 17.472 17.455 17.472h40.727Z" />
+    <path fill="#34A853" d="M197.818 192.05h40.727c9.647 0 17.455-7.833 17.455-17.472V49.959l-27.543 15.485-30.639 28.077v98.529Z" />
+    <path fill="#FBBC04" d="M197.818 17.922v75.599l30.639-28.077L256 49.959V26.657c0-21.622-24.677-33.933-41.891-20.996l-16.291 12.261Z" />
+    <path fill="#EA4335" d="M58.182 93.521V17.922L128 70.312l69.818-52.39v75.599L128 145.912 58.182 93.521Z" />
+    <path fill="#C5221F" d="M0 26.657v23.302l27.513 15.485 30.669 28.077V17.922L41.891 5.661C24.647-7.276 0 5.035 0 26.657Z" />
+  </svg>;
+
+  const paths = {
+    telegram: 'M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0Zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635Z',
+    x: 'M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993l-9.508-13.838Zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182l-6.327-9.05Z',
+    zalo: 'M12.49 10.272v-.449h1.347v6.321h-.771a.576.576 0 0 1-.576-.573 3.273 3.273 0 0 1-1.938.633 3.283 3.283 0 1 1 1.938-5.932ZM6.919 7.79v.205c0 .382-.051.694-.3 1.06l-.03.034c-.054.062-.181.206-.242.284L2.024 14.8h4.895v.768a.576.576 0 0 1-.577.576H0v-.362c0-.444.11-.642.25-.848L4.858 9.23H.192V7.79h6.727Zm8.551 8.354a.48.48 0 0 1-.48-.48V7.79h1.441v8.354H15.47ZM20.693 9.6A3.305 3.305 0 1 1 20.69 16.21 3.305 3.305 0 0 1 20.693 9.6Zm-10.141 5.253a1.931 1.931 0 1 0 0-3.861 1.931 1.931 0 0 0 0 3.861Zm10.141-.003a1.945 1.945 0 1 0 0-3.889 1.945 1.945 0 0 0 0 3.889Z',
+    github: 'M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12Z',
+  };
+  const fills = { telegram: '#26A5E4', x: '#000000', zalo: '#0068FF', github: '#181717' };
+
+  return <svg className={`brand-icon brand-icon-${name}`} viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill={fills[name]} d={paths[name]} /></svg>;
+}
+
 const contactLinks = [
   { key: 'telegram', label: 'Telegram', value: '@dungocminhhoang', href: 'https://t.me/dungocminhhoang', icon: TelegramLogo },
   { key: 'x', label: 'X', value: 'x.com/0x_HyyAnk', href: 'https://x.com/0x_HyyAnk', icon: XLogo },
   { key: 'gmail', label: 'Gmail', value: email, href: `mailto:${email}`, icon: EnvelopeSimple },
   { key: 'zalo', label: 'Zalo', value: 'zalo.me/0904002301', href: 'https://zalo.me/0904002301', icon: null },
-  { key: 'github', label: 'Github', value: 'github.com/HyyAnk', href: 'https://github.com/HyyAnk', icon: GithubLogo },
+  { key: 'github', label: 'GitHub', value: 'github.com/HyyAnk', href: 'https://github.com/HyyAnk', icon: GithubLogo },
 ];
 
 const skills = [
@@ -302,6 +322,56 @@ function HeroComposition() {
   </div>;
 }
 
+function ReadyProjectButton() {
+  const [effectState, setEffectState] = useState('idle');
+  const [effectCycle, setEffectCycle] = useState(0);
+  const exitTimerRef = useRef(null);
+  const activeSourcesRef = useRef({ pointer: false, focus: false });
+
+  useEffect(() => () => window.clearTimeout(exitTimerRef.current), []);
+
+  const setEffectSource = (source, active) => {
+    const sources = activeSourcesRef.current;
+    const wasActive = sources.pointer || sources.focus;
+    sources[source] = active;
+    const isActive = sources.pointer || sources.focus;
+    window.clearTimeout(exitTimerRef.current);
+
+    if (isActive) {
+      if (!wasActive) setEffectCycle((cycle) => cycle + 1);
+      setEffectState('active');
+      return;
+    }
+
+    setEffectState('leaving');
+    exitTimerRef.current = window.setTimeout(() => setEffectState('idle'), 760);
+  };
+
+  return <span
+    className={`ready-cta-shell is-${effectState}`}
+    onPointerEnter={() => setEffectSource('pointer', true)}
+    onPointerLeave={() => setEffectSource('pointer', false)}
+    onFocusCapture={() => setEffectSource('focus', true)}
+    onBlurCapture={() => setEffectSource('focus', false)}
+  >
+    <a className="button ready-cta" href="#contact" aria-label="Ready for yahh — go to contact options">
+      <span className="ready-cta-label">Ready for yahh</span>
+      <span className="ready-type" aria-hidden="true"><span>_</span><span>_</span><span>_</span></span>
+    </a>
+    <span className="ready-fx" aria-hidden="true" key={effectCycle}>
+      <span className="ready-particle ready-heart ready-heart-one">♥</span>
+      <span className="ready-particle ready-heart ready-heart-two">♡</span>
+      <span className="ready-particle ready-spark ready-spark-one">✦</span>
+      <span className="ready-particle ready-spark ready-spark-two">✧</span>
+      <span className="ready-particle ready-spark ready-spark-three">✦</span>
+      <span className="ready-particle ready-dust ready-dust-one" />
+      <span className="ready-particle ready-dust ready-dust-two" />
+      <span className="ready-particle ready-dust ready-dust-three" />
+      <span className="ready-particle ready-dust ready-dust-four" />
+    </span>
+  </span>;
+}
+
 function Hero() {
   return <section className="hero section-pad">
     <div className="hero-sentinel" data-nav-sentinel="true" />
@@ -311,7 +381,7 @@ function Hero() {
         <p className="hero-serif">Designer and developer for thoughtful digital work.</p>
         <p className="hero-accent">Clarity first. Character always.</p>
         <p className="hero-lede">I turn complex products, stories and workflows into clear experiences people can understand and use.</p>
-        <div className="hero-actions"><a className="button button-dark" href="#selected-works">View selected work <ArrowDownRight size={18} /></a><a className="button button-light" href={`mailto:${email}?subject=Project enquiry`}>Start a project <ArrowUpRight size={18} /></a></div>
+        <div className="hero-actions"><a className="button button-dark" href="#selected-works">View selected work <ArrowDownRight size={18} /></a><ReadyProjectButton /></div>
       </div>
       <Reveal className="hero-composition-shell">
         <HeroComposition />
@@ -633,17 +703,17 @@ function Contact() {
     }
   };
 
-  const contactContent = ({ key, label, value, icon: Icon }) => <>
+  const contactContent = ({ key, label, value }) => <>
     <span className="contact-channel-top">
-      <span className={`contact-channel-icon contact-channel-icon-${key}`} aria-hidden="true">{Icon ? <Icon size={20} weight="bold" /> : <span className="zalo-mark">Z</span>}</span>
+      <span className={`contact-channel-icon contact-channel-icon-${key}`} aria-hidden="true"><BrandIcon name={key} /></span>
       <span className={`contact-channel-meta ${key === 'gmail' ? 'contact-channel-copy-label' : ''}`}>{key === 'gmail' ? (copied ? 'Copied' : 'Copy') : value}</span>
     </span>
     <span className="contact-channel-copy"><strong>{label}</strong>{key === 'gmail' && <span>{copied ? 'Copied to clipboard' : value}</span>}</span>
   </>;
 
-  return <section id="contact" className="contact-section section-pad"><div className="page-shell contact-grid"><Reveal className="contact-intro"><span className="contact-kicker">Start a conversation</span><h2>Bring me the complicated part</h2><p className="large-copy">Tell me what needs to become clearer. I usually reply within two working days.</p></Reveal><Reveal className="contact-side" delay={.08}><div className="contact-directory" role="group" aria-label="Contact HyyAnk">{orderedContacts.map((contact) => {
-    if (contact.key === 'gmail') return <button className={`contact-channel contact-channel-primary ${copied ? 'is-copied' : ''}`} key={contact.key} type="button" onClick={copyEmail} aria-label={copied ? `Copied ${email} to clipboard` : `Copy ${email}`} aria-live="polite">{contactContent(contact)}</button>;
-    return <a className="contact-channel" key={contact.key} href={contact.href} target="_blank" rel="noreferrer" aria-label={`Open ${contact.label}: ${contact.value}`}>{contactContent(contact)}</a>;
+  return <section id="contact" className="contact-section section-pad"><div className="page-shell contact-grid"><Reveal className="contact-intro"><span className="contact-kicker">Start a conversation</span><h2>Bring me the complicated part</h2><p className="large-copy"><span>Tell me what needs to become clearer.</span>{' '}<span>I usually reply within two working days.</span></p></Reveal><Reveal className="contact-side" delay={.08}><div className="contact-directory" role="group" aria-label="Contact HyyAnk">{orderedContacts.map((contact) => {
+    if (contact.key === 'gmail') return <button className={`contact-channel contact-channel-${contact.key} contact-channel-primary ${copied ? 'is-copied' : ''}`} key={contact.key} type="button" onClick={copyEmail} aria-label={copied ? `Copied ${email} to clipboard` : `Copy ${email}`} aria-live="polite">{contactContent(contact)}</button>;
+    return <a className={`contact-channel contact-channel-${contact.key}`} key={contact.key} href={contact.href} target="_blank" rel="noreferrer" aria-label={`Open ${contact.label}: ${contact.value}`}>{contactContent(contact)}</a>;
   })}</div><p className="contact-note"><span aria-hidden="true" /> Choose the channel that feels easiest</p></Reveal></div></section>;
 }
 
