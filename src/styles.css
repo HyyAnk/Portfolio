@@ -84,6 +84,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .site-nav { position: fixed; inset: 0 0 auto; z-index: 20; padding: 20px 0; pointer-events: none; }
 .nav-inner { width: min(1420px, calc(100% - 48px)); height: 50px; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
 .wordmark-menu-wrap { position: relative; pointer-events: auto; }
+.wordmark-menu-wrap::after { position: absolute; top: 100%; left: 0; width: 100%; height: 12px; content: ''; }
 .wordmark, .nav-actions { pointer-events: auto; border: 1px solid color-mix(in srgb, var(--ink) 13%, transparent); background: var(--nav-surface); box-shadow: 0 9px 28px color-mix(in srgb, var(--ink) 12%, transparent); backdrop-filter: blur(14px); }
 .wordmark { display: inline-flex; align-items: center; gap: 9px; padding: 8px 15px 8px 8px; border-radius: 999px; font-size: .84rem; font-weight: 700; letter-spacing: -.025em; }
 .wordmark-mark { display: grid; width: 32px; height: 32px; place-items: center; overflow: hidden; border-radius: 10px; background: var(--paper-elevated); }
@@ -104,8 +105,12 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .brand-intro-kicker { color: var(--accent); font-size: .68rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 .brand-typing { display: grid; min-width: 0; gap: 5px; }
 .brand-typing-line { display: block; max-width: 100%; overflow: hidden; border-right: 1px solid var(--accent); white-space: nowrap; width: 0; }
-.brand-typing-greeting { color: var(--muted); font-size: .92rem; line-height: 1.2; animation: brand-type-line .78s steps(12, end) .16s forwards, brand-caret-blink .8s step-end 1.1s 3; }
-.brand-typing-name { color: var(--ink); font-size: clamp(1.15rem, 2.2vw, 1.55rem); line-height: 1.1; letter-spacing: -.045em; animation: brand-type-line 1.45s steps(23, end) .86s forwards, brand-caret-blink .8s step-end 2.2s 4; }
+.brand-typing-greeting { color: var(--muted); font-size: .92rem; line-height: 1.2; }
+.brand-typing-name { color: var(--ink); font-size: clamp(1.15rem, 2.2vw, 1.55rem); line-height: 1.1; letter-spacing: -.045em; }
+.wordmark-menu-wrap:hover .brand-typing-greeting,
+.wordmark-menu-wrap:focus-within .brand-typing-greeting { animation: brand-type-line .78s steps(12, end) .16s forwards, brand-caret-blink .8s step-end 1.1s 3; }
+.wordmark-menu-wrap:hover .brand-typing-name,
+.wordmark-menu-wrap:focus-within .brand-typing-name { animation: brand-type-line 1.45s steps(23, end) .86s forwards, brand-caret-blink .8s step-end 2.2s 4; }
 .nav-actions { display: flex; align-items: center; gap: 3px; padding: 6px 7px 6px 14px; border-radius: 999px; }
 .nav-menu-wrap { position: relative; }
 .nav-link { display: inline-flex; min-height: 37px; align-items: center; gap: 6px; padding: 0 12px; border-radius: 999px; font-size: .8rem; transition: background .2s ease, color .2s ease; }
@@ -405,6 +410,31 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .capability-item { min-height: 74px; padding-block: 20px; }
   .skill-gallery { grid-template-columns: 1fr; grid-template-rows: 300px 250px 250px; gap: 24px; }
   .gallery-1 { grid-row: auto; }
+}
+
+@media (max-width: 400px) {
+  .brand-dropdown { grid-template-columns: 96px minmax(0, 1fr); gap: 12px; padding: 12px; }
+  .brand-logo-panel { min-height: 112px; }
+  .brand-logo-panel::before { width: 82px; height: 82px; }
+  .brand-logo-panel::after { inset: 13px; }
+  .brand-dropdown-logo { width: 84px; height: 84px; }
+  .brand-logo-orbit-one { top: 20px; left: 29px; }
+  .brand-logo-orbit-two { right: 18px; bottom: 28px; }
+  .brand-intro { gap: 9px; }
+  .brand-intro-kicker { font-size: .6rem; }
+  .brand-typing { gap: 4px; }
+  .brand-typing-greeting { font-size: .79rem; }
+  .brand-typing-name { font-size: clamp(.9rem, 4.5vw, 1.08rem); letter-spacing: -.05em; }
+}
+
+@media (max-width: 360px) {
+  .nav-inner { gap: 8px; }
+  .nav-actions { padding-inline: 5px; }
+  .nav-link { padding-inline: 6px; }
+  .theme-toggle-track { width: 50px; padding-inline: 6px; }
+  .theme-toggle.is-dark .theme-toggle-thumb { transform: translateX(23px); }
+  .contact-trigger { min-width: 72px; margin-left: 2px; padding-inline: 5px; }
+  .contact-trigger-icons { gap: 3px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
