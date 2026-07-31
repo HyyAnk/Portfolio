@@ -357,11 +357,108 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .experiment-motion-pane-b { animation: experiment-pane-b 4.2s ease-in-out infinite; }
 .experiment-motion-orbit { fill: none; stroke: rgba(116,244,255,.88); stroke-width: .65; stroke-dasharray: 2 3; transform-origin: 50px 31px; animation: experiment-orbit 8s linear infinite; }
 .skills-index { border-top: 1px solid var(--line); }
-.skill-index-row { min-height: 112px; display: grid; grid-template-columns: minmax(240px, .8fr) minmax(300px, 1.2fr) auto; gap: 32px; align-items: center; padding: 18px 4px; border-bottom: 1px solid var(--line); transition: padding .25s ease, color .25s ease; }
-.skill-index-row:hover { padding-left: 15px; color: var(--accent); }
-.skill-index-title { color: var(--ink); font-size: clamp(1.4rem, 2.2vw, 2.25rem); font-weight: 600; letter-spacing: -.045em; }
-.skill-index-copy { color: var(--muted); font-size: .92rem; }
-.skill-index-row:hover .skill-index-title { color: var(--accent); }
+.skill-index-row { min-height: 124px; display: grid; grid-template-columns: minmax(240px, .76fr) minmax(340px, 1.24fr) auto; gap: 32px; align-items: center; padding: 20px 4px; border-bottom: 1px solid var(--line); outline: 0; transition: padding .35s cubic-bezier(.16,1,.3,1), background .3s ease, color .25s ease; }
+.skill-index-row:is(:hover, :focus-visible) { padding-left: 15px; background: color-mix(in srgb, var(--paper-elevated) 54%, transparent); color: var(--accent); }
+.skill-index-row:active { transform: translateY(1px) scale(.998); }
+.skill-index-title { color: var(--ink); font-size: clamp(1.4rem, 2.2vw, 2.25rem); font-weight: 600; letter-spacing: -.045em; transition: color .25s ease; }
+.skill-index-row:is(:hover, :focus-visible) .skill-index-title { color: var(--accent); }
+.skill-index-arrow { transition: transform .35s cubic-bezier(.16,1,.3,1); }
+.skill-index-row:is(:hover, :focus-visible) .skill-index-arrow { transform: translate(3px, -3px); }
+
+.skill-tool-motion { --lift: -6px; position: relative; width: min(100%, 500px); height: 82px; display: block; overflow: hidden; contain: layout paint; pointer-events: none; }
+.skill-index-row:is(:hover, :focus-visible) .skill-tool-motion { --lift: -12px; }
+.skill-tool-track { position: absolute; inset: 0; display: block; }
+.skill-tool-icon { --tool-color: var(--ink); --tool-index: 0; position: absolute; z-index: 2; width: 50px; height: 50px; display: grid; place-items: center; border: 1px solid color-mix(in srgb, var(--tool-color) 28%, var(--line)); border-radius: 12px; background: color-mix(in srgb, var(--tool-color) 10%, var(--paper-elevated)); box-shadow: 0 10px 20px -17px color-mix(in srgb, var(--tool-color) 76%, transparent); color: var(--tool-color); transform-origin: 50% 82%; will-change: transform; }
+.skill-tool-icon svg { width: 23px; height: 23px; display: block; fill: currentColor; }
+.skill-tool-mark { font-size: .88rem; font-weight: 800; letter-spacing: -.05em; line-height: 1; }
+
+.skill-tool-motion-graphic .skill-tool-icon { top: 16px; animation: skill-graphic-shuffle 3.8s cubic-bezier(.45,0,.55,1) infinite; animation-delay: calc(var(--tool-index) * -.48s); }
+.skill-tool-motion-graphic .skill-tool-icon:nth-child(1) { left: calc(50% - 111px); --rest-rotate: -8deg; --play-rotate: -13deg; }
+.skill-tool-motion-graphic .skill-tool-icon:nth-child(2) { left: calc(50% - 59px); --rest-rotate: 4deg; --play-rotate: 8deg; }
+.skill-tool-motion-graphic .skill-tool-icon:nth-child(3) { left: calc(50% - 7px); --rest-rotate: -3deg; --play-rotate: -7deg; }
+.skill-tool-motion-graphic .skill-tool-icon:nth-child(4) { left: calc(50% + 45px); --rest-rotate: 7deg; --play-rotate: 12deg; }
+
+.skill-tool-motion-video::before { position: absolute; top: 50%; right: 4%; left: 4%; height: 1px; background: color-mix(in srgb, var(--ink) 14%, transparent); content: ''; }
+.skill-tool-motion-video .skill-tool-track::after { position: absolute; z-index: 3; top: 7px; bottom: 7px; left: 4%; width: 92%; border-right: 2px solid var(--accent); background: linear-gradient(90deg, transparent 0 98.8%, color-mix(in srgb, var(--accent) 22%, transparent) 98.8%); content: ''; opacity: .72; transform: scaleX(.02); transform-origin: left; animation: skill-video-playhead 4.8s cubic-bezier(.45,0,.55,1) infinite; }
+.skill-tool-motion-video .skill-tool-icon { left: var(--video-x); top: 16px; transform: translateX(-50%); animation: skill-video-keyframe 2.8s cubic-bezier(.45,0,.55,1) infinite; animation-delay: calc(var(--tool-index) * -.37s); }
+.skill-tool-motion-video .skill-tool-icon:nth-child(1) { --video-x: 8%; --video-rest: 5px; }
+.skill-tool-motion-video .skill-tool-icon:nth-child(2) { --video-x: 29%; --video-rest: -6px; }
+.skill-tool-motion-video .skill-tool-icon:nth-child(3) { --video-x: 50%; --video-rest: 7px; }
+.skill-tool-motion-video .skill-tool-icon:nth-child(4) { --video-x: 71%; --video-rest: -5px; }
+.skill-tool-motion-video .skill-tool-icon:nth-child(5) { --video-x: 92%; --video-rest: 4px; }
+
+.skill-tool-motion-ui::before { position: absolute; top: 50%; right: 8%; left: 8%; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 46%, var(--line)), transparent); content: ''; transform: scaleX(.35); animation: skill-ui-connector 4.4s cubic-bezier(.16,1,.3,1) infinite; }
+.skill-tool-motion-ui .skill-tool-icon { left: var(--ui-x); top: 16px; transform: translateX(-50%); animation: skill-ui-prototype 4.4s cubic-bezier(.16,1,.3,1) infinite; animation-delay: calc(var(--tool-index) * -.44s); }
+.skill-tool-motion-ui .skill-tool-icon:nth-child(1) { --ui-x: 8%; --ui-rest: -8px; --ui-active: 6px; }
+.skill-tool-motion-ui .skill-tool-icon:nth-child(2) { --ui-x: 29%; --ui-rest: 6px; --ui-active: -8px; }
+.skill-tool-motion-ui .skill-tool-icon:nth-child(3) { --ui-x: 50%; --ui-rest: -5px; --ui-active: 7px; }
+.skill-tool-motion-ui .skill-tool-icon:nth-child(4) { --ui-x: 71%; --ui-rest: 7px; --ui-active: -6px; }
+.skill-tool-motion-ui .skill-tool-icon:nth-child(5) { --ui-x: 92%; --ui-rest: -7px; --ui-active: 5px; }
+
+.skill-tool-motion-automation::before { position: absolute; top: 50%; right: 5%; left: 5%; height: 1px; background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 19%, transparent) 0 8px, transparent 8px 15px); content: ''; }
+.skill-tool-motion-automation .skill-tool-track::after { position: absolute; top: calc(50% - 1px); left: 5%; width: 90%; height: 3px; background: var(--accent); content: ''; opacity: .55; transform: scaleX(.03); transform-origin: left; animation: skill-automation-signal 4s cubic-bezier(.16,1,.3,1) infinite; }
+.skill-tool-motion-automation .skill-tool-icon { left: var(--automation-x); top: 16px; transform: translateX(-50%); animation: skill-automation-handoff 4s cubic-bezier(.16,1,.3,1) infinite; animation-delay: calc(var(--tool-index) * .22s); }
+.skill-tool-motion-automation .skill-tool-icon:nth-child(1) { --automation-x: 8%; }
+.skill-tool-motion-automation .skill-tool-icon:nth-child(2) { --automation-x: 29%; }
+.skill-tool-motion-automation .skill-tool-icon:nth-child(3) { --automation-x: 50%; }
+.skill-tool-motion-automation .skill-tool-icon:nth-child(4) { --automation-x: 71%; }
+.skill-tool-motion-automation .skill-tool-icon:nth-child(5) { --automation-x: 92%; }
+
+.skill-tool-motion-blockchain::before, .skill-tool-motion-blockchain::after { position: absolute; top: 50%; left: 50%; width: 78%; height: 52px; border: 1px solid color-mix(in srgb, var(--ink) 11%, transparent); border-radius: 50%; content: ''; transform: translate(-50%, -50%) rotate(4deg); }
+.skill-tool-motion-blockchain::after { width: 60%; height: 68px; border-color: color-mix(in srgb, var(--accent) 20%, transparent); transform: translate(-50%, -50%) rotate(-7deg); animation: skill-blockchain-ring 8s linear infinite; }
+.skill-tool-motion-blockchain .skill-tool-icon { left: var(--chain-x); top: 16px; transform: translateX(-50%); animation: skill-blockchain-node 3.6s cubic-bezier(.45,0,.55,1) infinite; animation-delay: calc(var(--tool-index) * -.52s); }
+.skill-tool-motion-blockchain .skill-tool-icon:nth-child(1) { --chain-x: 8%; --chain-rest: 4px; }
+.skill-tool-motion-blockchain .skill-tool-icon:nth-child(2) { --chain-x: 29%; --chain-rest: -8px; }
+.skill-tool-motion-blockchain .skill-tool-icon:nth-child(3) { --chain-x: 50%; --chain-rest: 8px; }
+.skill-tool-motion-blockchain .skill-tool-icon:nth-child(4) { --chain-x: 71%; --chain-rest: -7px; }
+.skill-tool-motion-blockchain .skill-tool-icon:nth-child(5) { --chain-x: 92%; --chain-rest: 3px; }
+
+@keyframes skill-graphic-shuffle {
+  0%, 100% { transform: translateY(3px) rotate(var(--rest-rotate)); }
+  50% { transform: translateY(var(--lift)) rotate(var(--play-rotate)); }
+}
+
+@keyframes skill-video-playhead {
+  0%, 8% { opacity: 0; transform: scaleX(.02); }
+  18%, 82% { opacity: .72; }
+  92%, 100% { opacity: 0; transform: scaleX(1); }
+}
+
+@keyframes skill-video-keyframe {
+  0%, 100% { transform: translateX(-50%) translateY(var(--video-rest)) scale(.96); }
+  50% { transform: translateX(-50%) translateY(var(--lift)) scale(1.04); }
+}
+
+@keyframes skill-ui-connector {
+  0%, 12% { opacity: .15; transform: scaleX(.28); }
+  45%, 78% { opacity: .85; transform: scaleX(1); }
+  100% { opacity: .15; transform: scaleX(.28); }
+}
+
+@keyframes skill-ui-prototype {
+  0%, 100% { transform: translateX(-50%) translateY(var(--ui-rest)) rotate(-2deg) scale(.96); }
+  48% { transform: translateX(-50%) translateY(var(--ui-active)) rotate(2deg) scale(1.04); }
+}
+
+@keyframes skill-automation-signal {
+  0%, 10% { opacity: 0; transform: scaleX(.03); }
+  25%, 78% { opacity: .58; }
+  92%, 100% { opacity: 0; transform: scaleX(1); }
+}
+
+@keyframes skill-automation-handoff {
+  0%, 58%, 100% { transform: translateX(-50%) translateY(0) scale(.96); }
+  14%, 30% { transform: translateX(calc(-50% + 5px)) translateY(var(--lift)) scale(1.06); }
+}
+
+@keyframes skill-blockchain-ring {
+  to { transform: translate(-50%, -50%) rotate(353deg); }
+}
+
+@keyframes skill-blockchain-node {
+  0%, 100% { transform: translateX(-50%) translateY(var(--chain-rest)) scale(.94); }
+  50% { transform: translateX(-50%) translateY(var(--lift)) scale(1.06); }
+}
 
 @keyframes skill-bubble-type {
   to { width: var(--typing-width); }
@@ -574,7 +671,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .hero-composition { height: 220px; min-height: 0; }
   .hero-carousel-desktop { display: none; }
   .hero-carousel-mobile { display: block; width: 100vw; margin-left: calc((100% - 100vw) / 2); overflow: hidden; }
-  .skill-index-row { grid-template-columns: minmax(210px, .8fr) 1.2fr auto; }
+  .skill-index-row { grid-template-columns: minmax(210px, .72fr) minmax(320px, 1.28fr) auto; }
   .skill-flow-layout { grid-template-columns: 1fr; gap: 34px; margin-bottom: 60px; }
   .skill-flow-visual { height: 360px; min-height: 0; }
   .skill-flow-canvas { min-height: 0; }
@@ -591,7 +688,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .work-card-image { aspect-ratio: 16 / 9; }
   .about-grid { grid-template-columns: .42fr 1fr; }
   .about-copy, .about-notes { grid-column: 2; }
-  .skill-index-row { grid-template-columns: minmax(210px, .8fr) 1.2fr auto; }
+  .skill-index-row { grid-template-columns: minmax(190px, .72fr) minmax(300px, 1.28fr) auto; gap: 22px; }
   .contact-grid { grid-template-columns: 1fr; gap: 45px; }
   .experiments-stage { grid-template-columns: 1fr; gap: 48px; }
   .experiments-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
@@ -649,7 +746,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .about-capability-flow { max-width: none; margin-top: 30px; }
   .about-flow-step { min-height: 104px; padding-inline: 11px; }
   .about-flow-step:nth-child(2) { min-height: 116px; }
-  .skill-index-row { min-height: 126px; grid-template-columns: 1fr auto; gap: 8px 20px; }
+  .skill-index-row { min-height: 150px; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 18px; padding-block: 15px; }
   .skill-blocks .section-heading h2 { max-width: none; font-size: clamp(2.7rem, 12.5vw, 4rem); }
   .skill-flow-layout { gap: 26px; margin-bottom: 52px; }
   .skill-flow-visual { height: 286px; min-height: 0; margin: 0 -8px; }
@@ -672,8 +769,11 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .experiment-preview-frame.is-position-2 { top: 59%; left: -1%; width: min(52%, 185px); }
   .experiment-preview-frame.is-position-3 { top: 66%; left: 53%; width: min(46%, 165px); }
   .experiments-preview-caption { width: min(86%, 310px); margin: -2px 0 0 7%; }
-  .skill-index-copy { grid-column: 1; }
-  .skill-index-row svg { grid-column: 2; grid-row: 1 / span 2; }
+  .skill-tool-motion { grid-column: 1 / -1; grid-row: 2; width: 100%; height: 72px; }
+  .skill-tool-icon { width: 44px; height: 44px; border-radius: 11px; }
+  .skill-tool-icon svg { width: 20px; height: 20px; }
+  .skill-tool-motion-graphic .skill-tool-icon, .skill-tool-motion-video .skill-tool-icon, .skill-tool-motion-ui .skill-tool-icon, .skill-tool-motion-automation .skill-tool-icon, .skill-tool-motion-blockchain .skill-tool-icon { top: 14px; }
+  .skill-index-arrow { grid-column: 2; grid-row: 1; }
   .contact-grid h2 { font-size: clamp(2.7rem, 13vw, 4.25rem); }
   .contact-side { max-width: none; justify-self: stretch; }
   .contact-directory { gap: 8px; }

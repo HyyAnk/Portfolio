@@ -6,6 +6,11 @@ import {
   ArrowDownRight, ArrowLeft, ArrowUpRight, CaretDown, Check,
   Copy, EnvelopeSimple, GithubLogo, Moon, Sun, TelegramLogo, XLogo,
 } from '@phosphor-icons/react';
+import {
+  siBlender, siCss, siEthereum, siFigma, siGithubactions, siHtml5,
+  siJavascript, siN8n, siPython, siReact, siSelenium, siSolana,
+  siSolidity, siUnrealengine, siWalletconnect,
+} from 'simple-icons';
 
 import uiImage from './assets/generated/work-ui.webp';
 import graphicImage from './assets/generated/work-graphic.webp';
@@ -122,6 +127,85 @@ const skills = [
   { slug: 'automation', title: 'Automation', short: 'The quiet work behind the work', body: 'I connect the small steps that slow a team down and turn them into a dependable flow', image: automationImage, variant: 'automation', tools: ['Workflows', 'APIs', 'Operations'], details: ['Workflow architecture', 'API and webhook orchestration', 'Content and task automation', 'Operational clarity'] },
   { slug: 'blockchain', title: 'Blockchain Integration', short: 'Trust made tangible', body: 'I help teams use decentralised technology where it creates real ownership, not extra noise', image: blockchainImage, variant: 'blockchain', tools: ['Wallets', 'Onchain UX', 'Contracts'], details: ['Wallet and onboarding UX', 'Smart contract integration', 'Onchain transaction states', 'Trust and ownership design'] },
 ];
+
+const skillToolsets = {
+  'graphic-design': {
+    motion: 'graphic',
+    label: 'Photoshop, Illustrator, InDesign and Figma',
+    tools: [
+      { name: 'Adobe Photoshop', mark: 'Ps', color: '#31A8FF' },
+      { name: 'Adobe Illustrator', mark: 'Ai', color: '#FF9A00' },
+      { name: 'Adobe InDesign', mark: 'Id', color: '#FF3366' },
+      { name: 'Figma', icon: siFigma, color: '#F24E1E' },
+    ],
+  },
+  'video-editor': {
+    motion: 'video',
+    label: 'After Effects, Premiere Pro, CapCut, Blender and Unreal Engine',
+    tools: [
+      { name: 'Adobe After Effects', mark: 'Ae', color: '#9999FF' },
+      { name: 'Adobe Premiere Pro', mark: 'Pr', color: '#9999FF' },
+      { name: 'CapCut', mark: 'Cc', color: '#191919', mono: true },
+      { name: 'Blender', icon: siBlender },
+      { name: 'Unreal Engine', icon: siUnrealengine, mono: true },
+    ],
+  },
+  'uiux-webdev': {
+    motion: 'ui',
+    label: 'Figma, React, JavaScript, HTML and CSS',
+    tools: [
+      { name: 'Figma', icon: siFigma, color: '#F24E1E' },
+      { name: 'React', icon: siReact },
+      { name: 'JavaScript', icon: siJavascript },
+      { name: 'HTML5', icon: siHtml5 },
+      { name: 'CSS', icon: siCss },
+    ],
+  },
+  automation: {
+    motion: 'automation',
+    label: 'Python, n8n, Playwright, Selenium and GitHub Actions',
+    tools: [
+      { name: 'Python', icon: siPython },
+      { name: 'n8n', icon: siN8n },
+      { name: 'Playwright', mark: 'Pw', color: '#2EAD33' },
+      { name: 'Selenium', icon: siSelenium },
+      { name: 'GitHub Actions', icon: siGithubactions },
+    ],
+  },
+  blockchain: {
+    motion: 'blockchain',
+    label: 'Ethereum, Solana, Solidity, MetaMask and WalletConnect',
+    tools: [
+      { name: 'Ethereum', icon: siEthereum, mono: true },
+      { name: 'Solana', icon: siSolana, color: '#14F195' },
+      { name: 'Solidity', icon: siSolidity, mono: true },
+      { name: 'MetaMask', mark: 'Mm', color: '#F6851B' },
+      { name: 'WalletConnect', icon: siWalletconnect },
+    ],
+  },
+};
+
+function SkillToolIcon({ tool, index }) {
+  const color = tool.mono ? 'var(--ink)' : (tool.color || (tool.icon ? `#${tool.icon.hex}` : 'currentColor'));
+  return <span
+    className={`skill-tool-icon ${tool.mono ? 'is-monochrome' : ''}`}
+    style={{ '--tool-color': color, '--tool-index': index }}
+    title={tool.name}
+  >
+    {tool.icon
+      ? <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d={tool.icon.path} /></svg>
+      : <span className="skill-tool-mark" aria-hidden="true">{tool.mark}</span>}
+  </span>;
+}
+
+function SkillToolMotion({ skill }) {
+  const toolset = skillToolsets[skill.slug];
+  return <span className={`skill-tool-motion skill-tool-motion-${toolset.motion}`} role="img" aria-label={toolset.label}>
+    <span className="skill-tool-track" aria-hidden="true">
+      {toolset.tools.map((tool, index) => <SkillToolIcon key={tool.name} tool={tool} index={index} />)}
+    </span>
+  </span>;
+}
 
 const works = [
   { slug: 'mat', title: 'MÁT', type: 'Web product · PWA', year: '2026', role: 'Product strategy · UX/UI · React', description: 'A heat-aware route planner that helps people choose a kinder path through hot, dense cities.', challenge: 'Most route planners optimize only time and distance, leaving heat exposure and recovery needs invisible.', outcome: 'A responsive routing concept that makes shade, heat, air quality and route trade-offs understandable.', tags: ['Product design', 'Web development'], image: matCover, deep: true },
@@ -888,7 +972,7 @@ function ThreeSkillFlow() {
 }
 
 function SkillBlocks() {
-  return <section id="skills" className="section-pad skill-blocks"><div className="page-shell"><div className="skill-flow-layout"><Reveal className="skill-flow-copy"><div className="section-heading section-heading-stacked"><span className="skill-flow-eyebrow">The way I work</span><h2><span>Design</span><span>Develop</span><span>Deliver</span></h2><p>One connected flow from a sharp idea to a useful, finished experience.</p></div></Reveal><Reveal className="skill-flow-visual" delay={.08}><ThreeSkillFlow /></Reveal></div><div className="skills-index">{skills.map((skill, index) => <Reveal key={skill.slug} delay={index * .05}><Link className="skill-index-row" to={`/skills/${skill.slug}`}><span className="skill-index-title">{skill.title}</span><span className="skill-index-copy">{skill.short}</span><ArrowUpRight size={20} /></Link></Reveal>)}</div></div></section>;
+  return <section id="skills" className="section-pad skill-blocks"><div className="page-shell"><div className="skill-flow-layout"><Reveal className="skill-flow-copy"><div className="section-heading section-heading-stacked"><span className="skill-flow-eyebrow">The way I work</span><h2><span>Design</span><span>Develop</span><span>Deliver</span></h2><p>One connected flow from a sharp idea to a useful, finished experience.</p></div></Reveal><Reveal className="skill-flow-visual" delay={.08}><ThreeSkillFlow /></Reveal></div><div className="skills-index">{skills.map((skill, index) => <Reveal key={skill.slug} delay={index * .05}><Link className="skill-index-row" to={`/skills/${skill.slug}`}><span className="skill-index-title">{skill.title}</span><SkillToolMotion skill={skill} /><ArrowUpRight className="skill-index-arrow" size={20} /></Link></Reveal>)}</div></div></section>;
 }
 
 function Experiments() {
