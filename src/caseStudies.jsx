@@ -5,36 +5,38 @@ import { ArrowLeft, ArrowUpRight, CaretRight, Check } from '@phosphor-icons/reac
 import kitepayStateFlow from './assets/case-studies/kitepay-state-flow.svg';
 
 const matRoadEdges = {
-  riverStart: 'M72 306C105 300 135 288 165 278C205 266 232 238 270 224',
-  riverEnd: 'C310 209 350 216 390 205C432 194 455 169 500 155C545 141 570 137 610 125C642 115 663 82 688 58',
-  canopyStart: 'M72 306C58 298 48 291 45 280C38 245 39 213 45 185C68 170 100 161 130 155C165 143 195 148 230 140C265 132 280 110 315 100',
-  canopyEnd: 'C355 88 390 112 430 105C470 98 505 82 550 70C605 55 650 70 688 58',
-  orchardLink: 'C275 180 295 135 315 100',
+  riverStart: 'M72 306C105 300 135 288 165 278C205 266 232 238 270 224C310 209 350 216 390 205',
+  riverEnd: 'C432 194 455 169 500 155C545 141 570 137 610 125C642 115 663 82 688 58',
+  canopyStart: 'M72 306C58 298 48 291 45 280C38 245 39 213 45 185C68 170 100 161 130 155C165 143 195 148 230 140C265 132 280 110 315 100C355 88 390 112 430 105',
+  canopyEnd: 'C470 98 505 82 550 70C605 55 650 70 688 58',
+  centralLink: 'C398 165 410 130 430 105',
 };
 
 const matPrimaryPaths = {
   fast: `${matRoadEdges.riverStart}${matRoadEdges.riverEnd}`,
   cool: `${matRoadEdges.canopyStart}${matRoadEdges.canopyEnd}`,
-  balanced: `${matRoadEdges.riverStart}${matRoadEdges.orchardLink}${matRoadEdges.canopyEnd}`,
-  connector: `M270 224${matRoadEdges.orchardLink}`,
+  balanced: `${matRoadEdges.riverStart}${matRoadEdges.centralLink}${matRoadEdges.canopyEnd}`,
+  connector: `M390 205${matRoadEdges.centralLink}`,
 };
 
 const matFullRoads = {
-  riverWalk: `M-40 333C8 329 42 316 72 306${matPrimaryPaths.fast.replace('M72 306', '')}C720 45 752 28 800 12`,
-  canopyWay: `M-35 343C10 332 44 316 72 306${matPrimaryPaths.cool.replace('M72 306', '')}C724 48 756 39 800 33`,
-  orchardLink: `M235 390C248 330 257 266 270 224${matRoadEdges.orchardLink}C328 62 347 12 360 -35`,
+  riverWalk: `M-80 343C-12 336 38 317 72 306${matPrimaryPaths.fast.replace('M72 306', '')}C724 43 780 15 840 -18`,
+  canopyWay: `M-80 365C-10 347 38 318 72 306${matPrimaryPaths.cool.replace('M72 306', '')}C728 47 782 31 840 18`,
+  centralAvenue: `M350 460C367 355 378 265 390 205${matRoadEdges.centralLink}C452 70 483 5 520 -100`,
 };
 
-const matSecondaryRoads = 'M-35 260C55 250 92 244 130 238C220 224 295 224 390 205C485 185 580 151 800 92 M135 390C154 333 160 303 165 278C175 230 185 185 195 148C200 99 205 42 218 -35 M365 390C380 322 382 251 390 205C398 165 410 130 430 105C452 70 471 25 493 -35 M585 390C594 307 585 234 590 175C596 150 603 135 610 125C630 88 653 38 684 -35 M735 390C714 320 706 246 720 184C735 118 758 54 786 -25 M-40 350C75 333 190 346 292 315C390 286 472 286 555 260C652 232 724 203 800 165';
+const matSecondaryRoads = 'M-80 264C35 254 88 245 130 238C220 224 295 224 390 205C485 185 612 137 840 78 M128 460C145 370 158 311 165 278C175 230 185 185 195 148C200 99 210 20 228 -100 M575 460C590 345 584 235 590 175C596 150 603 135 610 125C640 72 674 -8 716 -100 M748 460C715 348 704 252 720 184C741 92 780 4 824 -80 M-80 379C65 348 187 361 292 315C390 286 472 286 555 260C652 232 748 193 840 145 M-80 38C76 48 155 34 228 12C333 -18 425 -16 520 8C635 38 738 42 840 20';
 
 const matMapPaths = {
   ...matPrimaryPaths,
-  network: `${matFullRoads.riverWalk} ${matFullRoads.canopyWay} ${matFullRoads.orchardLink} ${matSecondaryRoads}`,
+  primaryNetwork: `${matFullRoads.riverWalk} ${matFullRoads.canopyWay}`,
+  secondaryNetwork: `${matFullRoads.centralAvenue} ${matSecondaryRoads}`,
+  network: `${matFullRoads.riverWalk} ${matFullRoads.canopyWay} ${matFullRoads.centralAvenue} ${matSecondaryRoads}`,
 };
 
 const matModes = {
   cool: { label: 'Coolest', time: '32 min', shade: '71%', heat: '2.8 / 5', distance: '2.4 km', note: 'More shade, two refill points', path: matMapPaths.cool, directions: ['Follow the riverside shade north', 'Pass two refill points on Canopy Way', 'Continue east to Hill Garden'] },
-  balanced: { label: 'Balanced', time: '26 min', shade: '54%', heat: '3.3 / 5', distance: '2.1 km', note: 'A practical everyday trade-off', path: matMapPaths.balanced, directions: ['Join River Walk for 600 m', 'Turn north at Orchard Link', 'Continue along Canopy Way'] },
+  balanced: { label: 'Balanced', time: '26 min', shade: '54%', heat: '3.3 / 5', distance: '2.1 km', note: 'A practical everyday trade-off', path: matMapPaths.balanced, directions: ['Follow River Walk to Central Junction', 'Turn north onto Central Avenue', 'Join Canopy Way at Garden Junction'] },
   fast: { label: 'Fastest', time: '20 min', shade: '29%', heat: '4.2 / 5', distance: '1.8 km', note: 'Shorter, but exposed at midday', path: matMapPaths.fast, directions: ['Follow River Walk east', 'Keep right through Cedar Junction', 'Exit at Hill Garden east gate'] },
 };
 
@@ -92,34 +94,49 @@ function InsightList({ items }) {
 }
 
 function MatMapBase({ buildingMaskId, motion = false }) {
+  const tileClipId = `${buildingMaskId}-tile`;
   return <>
-    <defs><mask id={buildingMaskId} maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="360"><rect width="760" height="360" fill="#fff"/><path d={matMapPaths.network} fill="none" stroke="#000" strokeWidth="42" strokeLinecap="round" strokeLinejoin="round"/></mask></defs>
-    <rect width="760" height="360" fill="#e6ebf1"/>
-    <path className="mat-product-river" d="M0 0H43C58 55 26 104 48 159C66 206 28 248 43 302C49 326 45 345 35 360H0Z"/>
-    <path className="mat-product-park" d="M43 0H105C91 48 102 91 79 134C58 174 83 215 62 259C48 289 60 330 48 360H35C45 345 49 326 43 302C28 248 66 206 48 159C26 104 58 55 43 0Z"/>
-    <g className="mat-product-streets">
-      <path className="mat-product-street-edge" d={matMapPaths.network}/><path className="mat-product-street-surface" d={matMapPaths.network}/><path className="mat-product-street-center" d={matMapPaths.network}/>
+    <defs>
+      <clipPath id={tileClipId} clipPathUnits="userSpaceOnUse"><rect x="0" y="-60" width="760" height="480"/></clipPath>
+      <mask id={buildingMaskId} maskUnits="userSpaceOnUse" x="0" y="-60" width="760" height="480">
+        <rect x="0" y="-60" width="760" height="480" fill="#fff"/>
+        <path d={matMapPaths.network} fill="none" stroke="#000" strokeWidth="42" strokeLinecap="butt" strokeLinejoin="round"/>
+      </mask>
+    </defs>
+    <rect x="0" y="-60" width="760" height="480" fill="#e6ebf1"/>
+    <g clipPath={`url(#${tileClipId})`}>
+      <path className="mat-product-river" d="M0 -60H38C48 -42 52 -20 43 0C58 55 26 104 48 159C66 206 28 248 43 302C49 326 45 345 35 360C30 382 24 402 18 420H0Z"/>
+      <path className="mat-product-park" d="M38 -60H111C98 -36 102 -16 105 0C91 48 102 91 79 134C58 174 83 215 62 259C48 289 60 330 48 360C45 382 45 401 54 420H18C24 402 30 382 35 360C45 345 49 326 43 302C28 248 66 206 48 159C26 104 58 55 43 0C52 -20 48 -42 38 -60Z"/>
+      <g className="mat-product-streets mat-product-streets-secondary">
+        <path className="mat-product-street-edge-secondary" d={matMapPaths.secondaryNetwork}/><path className="mat-product-street-surface-secondary" d={matMapPaths.secondaryNetwork}/><path className="mat-product-street-center-secondary" d={matMapPaths.secondaryNetwork}/>
+      </g>
+      <g className="mat-product-streets mat-product-streets-primary">
+        <path className="mat-product-street-edge" d={matMapPaths.primaryNetwork}/><path className="mat-product-street-surface" d={matMapPaths.primaryNetwork}/><path className="mat-product-street-center" d={matMapPaths.primaryNetwork}/>
+      </g>
+      <g className="mat-product-buildings" mask={`url(#${buildingMaskId})`}>
+        <path d="M75 -48L151 -43L158 -12L91 -8Z"/><path d="M262 -51L333 -46L327 -13L270 -10Z"/><path d="M385 -46L460 -49L469 -16L393 -10Z"/><path d="M552 -48L628 -42L619 -9L550 -13Z"/><path d="M688 -46L749 -51L746 -12L700 -9Z"/>
+        <path d="M79 55L139 42L157 82L108 107L78 94Z"/><path d="M237 44L298 35L305 68L255 85L230 69Z"/><path d="M366 35L433 31L425 65L372 68Z"/><path d="M518 29L583 29L565 45L522 50Z"/><path d="M644 28L706 24L688 42L649 45Z"/>
+        <path d="M160 175L211 170L228 197L181 212L157 197Z"/><path d="M255 151L291 140L293 168L274 188L254 179Z"/><path d="M343 138L383 139L373 168L339 168Z"/><path d="M457 120L488 111L478 135L450 145Z"/><path d="M564 94L597 87L592 105L559 114Z"/>
+        <path d="M105 323L142 310L144 339L105 344Z"/><path d="M202 301L260 282L270 319L212 334Z"/><path d="M317 258L359 248L359 307L316 318Z"/><path d="M429 233L477 214L486 281L439 299Z"/><path d="M538 193L569 180L571 239L539 253Z"/><path d="M651 158L706 136L712 199L666 226Z"/>
+        <path d="M82 383L145 373L151 412L91 417Z"/><path d="M216 374L297 361L308 407L231 416Z"/><path d="M401 367L494 354L503 405L415 416Z"/><path d="M613 363L696 348L710 400L628 415Z"/>
+      </g>
+      <g className="mat-product-canopy"><circle cx="52" cy="267" r="14"/><circle cx="44" cy="225" r="15"/><circle cx="50" cy="184" r="13"/><circle cx="91" cy="164" r="14"/><circle cx="130" cy="155" r="13"/><circle cx="178" cy="145" r="14"/><circle cx="230" cy="140" r="13"/><circle cx="275" cy="120" r="12"/><circle cx="315" cy="100" r="14"/><circle cx="373" cy="100" r="13"/><circle cx="430" cy="105" r="14"/><circle cx="490" cy="87" r="13"/><circle cx="550" cy="70" r="14"/><circle cx="612" cy="63" r="12"/></g>
+      <path className={motion ? 'mat-motion-heat-corridor' : 'mat-product-heat-corridor'} d={matMapPaths.fast}/>
+      <g className="mat-product-junctions"><circle cx="165" cy="278" r="3.5"/><circle cx="270" cy="224" r="3.5"/><circle cx="315" cy="100" r="3.5"/><circle cx="390" cy="205" r="3.5"/><circle cx="430" cy="105" r="3.5"/><circle cx="500" cy="155" r="3.5"/><circle cx="550" cy="70" r="3.5"/><circle cx="610" cy="125" r="3.5"/></g>
+      <g className="mat-product-labels"><text x="310" y="87" transform="rotate(-8 310 87)">CANOPY WAY</text><text x="356" y="224" transform="rotate(-13 356 224)">RIVER WALK</text><text x="405" y="158" transform="rotate(-72 405 158)">CENTRAL AVE</text><text x="585" y="55" transform="rotate(-12 585 55)">GARDEN LOOP</text></g>
     </g>
-    <g className="mat-product-buildings" mask={`url(#${buildingMaskId})`}>
-      <path d="M79 55L139 42L157 82L108 107L78 94Z"/><path d="M237 44L298 35L305 68L255 85L230 69Z"/><path d="M366 35L433 31L425 65L372 68Z"/><path d="M518 29L583 29L565 45L522 50Z"/><path d="M644 28L706 24L688 42L649 45Z"/>
-      <path d="M160 175L211 170L228 197L181 212L157 197Z"/><path d="M255 151L291 140L293 168L274 188L254 179Z"/><path d="M343 138L383 139L373 168L339 168Z"/><path d="M457 120L488 111L478 135L450 145Z"/><path d="M564 94L597 87L592 105L559 114Z"/>
-      <path d="M105 323L142 310L144 339L105 344Z"/><path d="M202 301L260 282L270 319L212 334Z"/><path d="M317 258L359 248L359 307L316 318Z"/><path d="M429 233L477 214L486 281L439 299Z"/><path d="M538 193L569 180L571 239L539 253Z"/><path d="M651 158L706 136L712 199L666 226Z"/>
-    </g>
-    <g className="mat-product-canopy"><circle cx="52" cy="267" r="14"/><circle cx="44" cy="225" r="15"/><circle cx="50" cy="184" r="13"/><circle cx="91" cy="164" r="14"/><circle cx="130" cy="155" r="13"/><circle cx="178" cy="145" r="14"/><circle cx="230" cy="140" r="13"/><circle cx="275" cy="120" r="12"/><circle cx="315" cy="100" r="14"/><circle cx="373" cy="100" r="13"/><circle cx="430" cy="105" r="14"/><circle cx="490" cy="87" r="13"/><circle cx="550" cy="70" r="14"/><circle cx="612" cy="63" r="12"/></g>
-    <path className={motion ? 'mat-motion-heat-corridor' : 'mat-product-heat-corridor'} d={matMapPaths.fast}/>
-    <g className="mat-product-junctions"><circle cx="165" cy="278" r="3.5"/><circle cx="270" cy="224" r="3.5"/><circle cx="315" cy="100" r="3.5"/><circle cx="390" cy="205" r="3.5"/><circle cx="430" cy="105" r="3.5"/><circle cx="500" cy="155" r="3.5"/><circle cx="550" cy="70" r="3.5"/><circle cx="610" cy="125" r="3.5"/></g>
-    <g className="mat-product-labels"><text x="310" y="87" transform="rotate(-8 310 87)">CANOPY WAY</text><text x="356" y="224" transform="rotate(-13 356 224)">RIVER WALK</text><text x="286" y="170" transform="rotate(-72 286 170)">ORCHARD LINK</text><text x="585" y="55" transform="rotate(-12 585 55)">GARDEN LOOP</text></g>
   </>;
 }
 
 function MatStreetMap({ mode = 'cool', fit = 'slice' }) {
   const route = matModes[mode];
   const buildingMaskId = useId().replace(/:/g, '');
-  return <svg className="mat-product-map" viewBox="0 0 760 360" preserveAspectRatio={`xMidYMid ${fit}`}>
+  return <svg className="mat-product-map" viewBox="0 -60 760 480" preserveAspectRatio={`xMidYMid ${fit}`}>
     <MatMapBase buildingMaskId={buildingMaskId}/>
     <path key={mode} className={`mat-demo-route mat-product-route route-${mode}`} d={route.path}/>
     {mode === 'cool' && <g className="mat-product-refills"><circle cx="230" cy="140" r="5"/><circle cx="550" cy="70" r="5"/></g>}
     {mode === 'balanced' && <g className="mat-product-refills"><circle cx="550" cy="70" r="5"/></g>}
+    {mode === 'balanced' && <g className="mat-route-junctions" aria-hidden="true"><circle cx="390" cy="205" r="5"/><circle cx="430" cy="105" r="5"/></g>}
     <circle cx="72" cy="306" r="9" className="mat-route-point"/><circle cx="688" cy="58" r="9" className="mat-route-point"/>
   </svg>;
 }
@@ -137,7 +154,7 @@ function MatRouteDemo() {
     </div>
     <div className="mat-demo-grid">
       <div className="mat-map" aria-hidden="true">
-        <MatStreetMap mode={mode} fit="meet"/>
+        <MatStreetMap mode={mode} fit="slice"/>
         <span className="mat-map-legend"><i /> shaded streets</span>
       </div>
       <aside className="mat-route-panel" aria-live="polite">
@@ -175,7 +192,7 @@ function MatMotionStudy() {
     <div id="motion-map-board" className="mat-motion-board" role="img" aria-label="Animated MÁT route comparison showing route candidates, environmental evidence and the cooler recommendation">
       <div className="mat-motion-stage" aria-hidden="true">
         <span className="mat-motion-phase"><b>01</b> Compare routes</span>
-        <svg viewBox="0 0 760 360" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 -60 760 480" preserveAspectRatio="xMidYMid slice">
           <MatMapBase buildingMaskId={buildingMaskId} motion/>
           <path className="mat-motion-route mat-motion-route-fast" d={matMapPaths.fast}/>
           <path className="mat-motion-route mat-motion-route-cool" d={matMapPaths.cool}/>
@@ -201,6 +218,91 @@ function MatMotionStudy() {
   </figure>;
 }
 
+function MatScenarioStudy() {
+  const buildingMaskId = useId().replace(/:/g, '');
+  return <div className="mat-scenario-study">
+    <figure className="mat-scenario-visual">
+      <header><span><i/>12:40 PM · Riverside Market</span><strong>33°C</strong></header>
+      <div className="mat-scenario-map" aria-label="Fastest and cooler route comparison on the same street network">
+        <svg viewBox="0 -60 760 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <MatMapBase buildingMaskId={buildingMaskId}/>
+          <path className="mat-scenario-route mat-scenario-route-fast" d={matMapPaths.fast}/>
+          <path className="mat-scenario-route mat-scenario-route-cool" d={matMapPaths.cool}/>
+          <circle className="mat-scenario-point" cx="72" cy="306" r="9"/><circle className="mat-scenario-point" cx="688" cy="58" r="9"/>
+        </svg>
+        <span className="mat-scenario-heat">High solar exposure</span>
+      </div>
+      <figcaption className="mat-scenario-compare">
+        <div><span><i/>Fastest</span><strong>20 min</strong><small>29% shade</small></div>
+        <div className="is-recommended"><span><i/>MÁT recommends</span><strong>32 min</strong><small>71% shade</small></div>
+      </figcaption>
+    </figure>
+    <aside className="mat-scenario-notes">
+      <CaseEyebrow>Decision in context</CaseEyebrow>
+      <h3>12 minutes buys 42% more shade.</h3>
+      <p>The product makes that trade-off visible before the walk begins—not after the user is already exposed.</p>
+      <div className="mat-scenario-evidence">
+        <article><i className="evidence-sun"/><div><strong>Midday changes the answer</strong><span>Sun angle increases exposure on River Walk.</span></div></article>
+        <article><i className="evidence-tree"/><div><strong>Comfort becomes measurable</strong><span>Canopy coverage and refill access explain the detour.</span></div></article>
+        <article><i className="evidence-signal"/><div><strong>Conditions remain visible</strong><span>Freshness and confidence travel with every score.</span></div></article>
+      </div>
+    </aside>
+  </div>;
+}
+
+function MatScoreStudio() {
+  const factors = [
+    { label: 'Shade coverage', value: '35%', className: 'factor-shade' },
+    { label: 'Heat exposure', value: '30%', className: 'factor-heat' },
+    { label: 'Air quality', value: '20%', className: 'factor-air' },
+    { label: 'Surface temperature', value: '15%', className: 'factor-surface' },
+  ];
+  return <div className="mat-score-studio">
+    <div className="mat-score-dial-panel">
+      <header><span>Walking · hot midday</span><strong>Balanced mode</strong></header>
+      <div className="mat-score-dial">
+        <svg viewBox="0 0 220 220" aria-hidden="true">
+          <circle className="mat-score-ring-track" cx="110" cy="110" r="84"/>
+          <circle className="mat-score-ring-value" cx="110" cy="110" r="84"/>
+          <circle className="mat-score-ring-marker" cx="110" cy="26" r="7"/>
+        </svg>
+        <div><small>Comfort score</small><strong>82</strong><span>/ 100</span></div>
+      </div>
+      <div className="mat-score-verdict"><span>Recommended</span><strong>Cooler by design</strong><small>High confidence · updated 2 min ago</small></div>
+    </div>
+    <div className="mat-score-factors">
+      <header><span>Score composition</span><strong>Every factor stays inspectable</strong></header>
+      <div className="mat-factor-list">
+        {factors.map((factor) => <div className={`mat-factor-row ${factor.className}`} key={factor.label}>
+          <span>{factor.label}</span><strong>{factor.value}</strong><i><b/></i>
+        </div>)}
+      </div>
+      <p><strong>Prototype weighting.</strong> Values respond to route mode, departure time and data confidence; they are not presented as validated production weights.</p>
+    </div>
+  </div>;
+}
+
+function MatResilienceStudy() {
+  return <>
+    <div className="mat-resilience-study">
+      <div className="mat-resilience-product">
+        <header><span>MÁT · Active route</span><strong>14:24</strong></header>
+        <div className="mat-resilience-map"><MatStreetMap mode="cool"/><span><i/>Connection lost</span></div>
+        <div className="mat-resilience-guidance"><small>NEXT TURN · 80 M</small><strong>Continue along Canopy Way</strong><p>Route geometry and the next three instructions are available offline.</p></div>
+      </div>
+      <div className="mat-resilience-states">
+        <header><CaseEyebrow>Live system state</CaseEyebrow><h3>Degrade clearly, never silently.</h3></header>
+        <article className="state-warning"><i/><div><strong>Environment feed</strong><p>Keep the last reading and show its age.</p></div><span>7 min old</span></article>
+        <article className="state-ready"><i/><div><strong>Route geometry</strong><p>Cache the active path and safety details.</p></div><span>Available</span></article>
+        <article className="state-ready"><i/><div><strong>Turn guidance</strong><p>Preserve the immediate decision offline.</p></div><span>Available</span></article>
+        <article className="state-contrast"><i/><div><strong>Accessible meaning</strong><p>Pair every color with labels and patterns.</p></div><span>AA target</span></article>
+        <footer><span>Proposed production path</span><strong>React · MapLibre · scoring service · service-worker cache</strong></footer>
+      </div>
+    </div>
+    <p className="mat-validation-note"><strong>Next validation:</strong> moderated route comparisons, outdoor legibility checks and data-source reliability testing before any production claim.</p>
+  </>;
+}
+
 function MatCaseStudy({ work }) {
   const facts = [
     { label: 'Project frame', value: '6-week concept sprint' },
@@ -212,21 +314,13 @@ function MatCaseStudy({ work }) {
     <CaseHero work={work} theme="mat" label="Web product · PWA · 2026" summary="A route planner that treats heat exposure as part of the journey, not a cost discovered after choosing the shortest path." facts={facts} demoLabel="Try the route prototype" />
 
     <section id="mat-premise" className="case-section case-mat-premise"><div className="page-shell">
-      <CaseLead index="01" eyebrow="The premise" title="The fastest route is not always the kindest one." copy="Most route planners optimize time and distance. MÁT adds shade, surface temperature, air quality and recovery points, then explains the trade-off in plain language." />
-      <InsightList items={[
-        { title: 'Comfort is contextual', copy: 'A ten-minute shortcut can feel worse when it removes tree cover at midday.' },
-        { title: 'Scores need a reason', copy: 'People should see why a route is recommended, not trust an unexplained green badge.' },
-        { title: 'Conditions keep moving', copy: 'Sun angle and air quality change during the trip, so route guidance must stay useful after departure.' },
-      ]}/>
+      <CaseLead index="01" eyebrow="Route in context" title="A cooler route earns its extra twelve minutes." copy="The decision is shown on the street network, with the environmental cost attached to each option." />
+      <MatScenarioStudy />
     </div></section>
 
     <section id="route-model" className="case-section mat-score-section"><div className="page-shell">
-      <CaseLead index="02" eyebrow="Product logic" title="A route score people can inspect." copy="The prototype keeps the model legible. Each recommendation exposes the factors behind it and lets people choose their own balance." />
-      <div className="mat-score-context"><span>Illustrative prototype weighting</span><strong>Walking · hot midday</strong><small>Values change by time, route mode and data confidence.</small></div>
-      <div className="mat-score-model">
-        {[['35','Shade'],['30','Heat'],['20','Air'],['15','Surface']].map(([value,label]) => <div key={label}><strong>{value}<sup>%</sup></strong><span>{label}</span></div>)}
-        <p>These values demonstrate the scoring model; they are not presented as validated production weights.</p>
-      </div>
+      <CaseLead index="02" eyebrow="Scoring engine" title="The recommendation shows its work." copy="A single score summarizes the route; its contributing signals remain visible and comparable." />
+      <MatScoreStudio />
     </div></section>
 
     <section id="live-demo" className="case-section case-live-section"><div className="page-shell">
@@ -245,14 +339,8 @@ function MatCaseStudy({ work }) {
     </div></section>
 
     <section id="delivery-thinking" className="case-section case-system-section"><div className="page-shell">
-      <CaseLead index="06" eyebrow="Delivery thinking" title="Designed beyond the happy path." copy="The concept includes the operational states a production team would need before the interface can be trusted outdoors." />
-      <div className="case-decision-grid">
-        <article><span>01</span><h3>Data confidence</h3><p>Every condition carries a freshness timestamp and a fallback when a source becomes unavailable.</p></article>
-        <article><span>02</span><h3>Offline continuity</h3><p>The active route, next turns and safety details remain available when the network drops.</p></article>
-        <article><span>03</span><h3>Accessible contrast</h3><p>Heat is never communicated by color alone; patterns and labels preserve meaning.</p></article>
-        <article><span>04</span><h3>Production path</h3><p>React, MapLibre, a route-scoring service and service-worker caching form the proposed architecture.</p></article>
-      </div>
-      <div className="case-outcome"><CaseEyebrow>Prototype definition</CaseEyebrow><div>{[['3','route strategies'],['6','environment inputs'],['4','resilient states'],['0','hidden criteria']].map(([value,label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div><p>Next validation: moderated route-comparison sessions, outdoor legibility checks and data-source reliability testing before any production claim.</p></div>
+      <CaseLead index="06" eyebrow="Resilient states" title="The route stays useful when live data does not." copy="The interface exposes stale inputs, preserves the active journey and keeps immediate guidance available offline." />
+      <MatResilienceStudy />
     </div></section>
   </article>;
 }

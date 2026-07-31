@@ -13,9 +13,6 @@ import videoImage from './assets/generated/work-video.webp';
 import automationImage from './assets/generated/work-automation.webp';
 import blockchainImage from './assets/generated/work-blockchain.webp';
 import portraitImage from './assets/generated/portrait.webp';
-import playgroundLoop from './assets/generated/playground-loop.webp';
-import playgroundType from './assets/generated/playground-type.webp';
-import playgroundFins from './assets/generated/playground-fins.webp';
 import mergeboardPreview from './assets/experiments/mergeboard.png';
 import photoIdPreview from './assets/experiments/photo-id-studio.png';
 import pdfCardPreview from './assets/experiments/pdf-business-card.png';
@@ -25,7 +22,7 @@ import kitepayCover from './assets/case-studies/kitepay-cover.webp';
 import muonCover from './assets/case-studies/muon-cover.webp';
 import hopLuuCover from './assets/case-studies/hop-luu-cover.webp';
 import { DeepCaseStudy } from './caseStudies.jsx';
-import { ShowcaseCaseStudy } from './showcaseCases.jsx';
+import { ShowcaseCaseStudy } from './showcaseCases.jsx?rev=hop-luu-v3';
 
 const person = 'HyyAnk';
 const fullName = 'Dư Ngọc Minh Hoàng';
@@ -83,8 +80,8 @@ const experiments = [
   {
     slug: 'mergeboard',
     title: 'MergeBoard',
-    label: 'Local-first visual composer',
-    description: 'Connect text, images and generation nodes into reusable project graphs. Files stay in a folder you choose; Vercel only serves the interface.',
+    label: 'Visual workspace',
+    description: 'Build reusable flows with text, media and generation nodes.',
     tech: ['React Flow', 'File System Access API', 'Local-first'],
     image: mergeboardPreview,
     alt: 'MergeBoard node canvas with connected text, image and mixer nodes',
@@ -95,8 +92,8 @@ const experiments = [
   {
     slug: 'photo-id',
     title: 'Photo ID Studio',
-    label: 'AI image pipeline',
-    description: 'Queues reference photos by session, prepares 3x4 or 4x6 output at 600 DPI, and returns download-ready PNG or JPG results.',
+    label: 'Photo utility',
+    description: 'Prepare print-ready ID photos from queued references.',
     tech: ['React', 'Express', 'Sharp'],
     image: photoIdPreview,
     alt: 'Photo ID Studio dashboard with session queue, upload dock and result panel',
@@ -106,8 +103,8 @@ const experiments = [
   {
     slug: 'pdf-card',
     title: 'PDF Business Card',
-    label: 'In-browser document utility',
-    description: 'Places a configurable business card and QR layer on a PDF, previews every page, compresses toward a target size and exports locally.',
+    label: 'PDF utility',
+    description: 'Stamp business cards and QR details onto PDF files.',
     tech: ['TypeScript', 'pdf-lib', 'QR tooling'],
     image: pdfCardPreview,
     alt: 'PDF Business Card interface with PDF upload canvas and card controls',
@@ -117,8 +114,8 @@ const experiments = [
   {
     slug: 'ai-studio',
     title: 'AI Media Studio',
-    label: 'Generative media workbench',
-    description: 'An image and video workspace with reference inputs, edit masking, batch history, local folder export and Veo experiments.',
+    label: 'Generative media',
+    description: 'Generate and edit media with reference-driven AI tools.',
     tech: ['React', 'TypeScript', 'Google GenAI'],
     image: aiStudioPreview,
     alt: 'Google AI Studio repository banner for a generative media workspace',
@@ -819,20 +816,30 @@ function SkillBlocks() {
 }
 
 function Experiments() {
-  return <section id="experiments" className="section-pad experiments-section"><div className="page-shell">
-    <Reveal><header className="experiments-heading"><div><h2>Experiments</h2><p>Small tools built to remove one practical friction at a time. Each one started with a working problem, not a portfolio category.</p></div><a className="experiments-github" href="https://github.com/HyyAnk" target="_blank" rel="noreferrer">Browse GitHub <GithubLogo size={18} weight="fill" /></a></header></Reveal>
-    <div className="experiments-grid">{experiments.map((project, index) => <Reveal className={`experiment-card ${project.featured ? 'experiment-featured' : ''} ${project.wide ? 'experiment-wide' : ''}`} key={project.slug} delay={index * .06}>
-      <article>
-        <figure className="experiment-visual"><img src={project.image} alt={project.alt} loading="lazy" decoding="async" /></figure>
-        <div className="experiment-copy"><span className="experiment-label">{project.label}</span><h3>{project.title}</h3><p>{project.description}</p><div className="experiment-footer"><ul aria-label={`${project.title} technologies`}>{project.tech.map((item) => <li key={item}>{item}</li>)}</ul><nav aria-label={`${project.title} links`}>{project.live && <a href={project.live} target="_blank" rel="noreferrer">Live demo <ArrowUpRight size={15} /></a>}<a href={project.repo} target="_blank" rel="noreferrer"><GithubLogo size={16} weight="fill" /> Source</a></nav></div></div>
-      </article>
-    </Reveal>)}</div>
-  </div></section>;
-}
+  const [activeExperiment, setActiveExperiment] = useState(0);
+  const activeProject = experiments[activeExperiment];
 
-function Playground() {
-  const items = [{ image: playgroundLoop, title: 'Balance study', label: 'Form' }, { image: playgroundType, title: 'Letter as structure', label: 'Type' }, { image: playgroundFins, title: 'A quiet wave', label: 'Motion' }];
-  return <section id="playground" className="section-pad playground-section"><div className="page-shell"><Reveal><div className="section-heading section-heading-stacked"><h2>Visual notes</h2><p>Small studies in form, type and motion.</p></div></Reveal><div className="playground-grid">{items.map((item, index) => <Reveal className={`playground-item playground-${index + 1}`} key={item.title} delay={index * .08}><figure><div className="playground-image"><img src={item.image} alt={item.title} loading="lazy" /></div><figcaption><strong>{item.title}</strong><span>{item.label}</span></figcaption></figure></Reveal>)}</div></div></section>;
+  return <section id="experiments" className="section-pad experiments-section"><div className="page-shell">
+    <Reveal><header className="experiments-heading"><div><h2>Experiments</h2><p>Small tools, tested in real workflows.</p></div><a className="experiments-github" href="https://github.com/HyyAnk" target="_blank" rel="noreferrer">View GitHub</a></header></Reveal>
+    <div className="experiments-stage">
+      <div className="experiments-grid" role="list" aria-label="Experiment projects">{experiments.map((project, index) => <Reveal className="experiment-card" key={project.slug} delay={index * .045}>
+        <button className={`experiment-selector ${activeExperiment === index ? 'is-active' : ''}`} type="button" aria-pressed={activeExperiment === index} onClick={() => setActiveExperiment(index)} onMouseEnter={() => setActiveExperiment(index)} onFocus={() => setActiveExperiment(index)}>
+          <span className="experiment-card-label">{project.label}</span>
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+        </button>
+      </Reveal>)}</div>
+      <Reveal className="experiments-preview-wrap" delay={.1}>
+        <a className="experiments-preview" href={activeProject.live || activeProject.repo} target="_blank" rel="noreferrer" aria-label={`Open ${activeProject.title} ${activeProject.live ? 'live demo' : 'source code'}`}>
+          <div className="experiments-stack" aria-hidden="true">{experiments.map((project, index) => {
+            const position = (index - activeExperiment + experiments.length) % experiments.length;
+            return <figure className={`experiment-preview-frame is-position-${position}`} key={project.slug}><img src={project.image} alt="" loading="lazy" decoding="async" /></figure>;
+          })}</div>
+          <span className="experiments-preview-caption"><span><strong>{activeProject.title}</strong><small>{activeProject.live ? 'Open live project' : 'View source code'}</small></span><ArrowUpRight size={18} /></span>
+        </a>
+      </Reveal>
+    </div>
+  </div></section>;
 }
 
 function Contact() {
@@ -869,7 +876,7 @@ function Footer() {
 
 function Home() {
   usePageMeta(`${person} - Designer and Developer`, `${person} (${fullName}) is a multidisciplinary designer and developer.`);
-  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content"><div id="top"><Hero /></div><WorkCarousel /><About /><SkillBlocks /><Experiments /><Playground /><Contact /></main><Footer /></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content"><div id="top"><Hero /></div><WorkCarousel /><About /><SkillBlocks /><Experiments /><Contact /></main><Footer /></>;
 }
 
 function ProjectPage({ work }) {
