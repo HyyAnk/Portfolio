@@ -8,8 +8,8 @@ import {
 } from '@phosphor-icons/react';
 import {
   siBlender, siCss, siEthereum, siFigma, siGithubactions, siHtml5,
-  siJavascript, siN8n, siPython, siReact, siSelenium, siSolana,
-  siSolidity, siUnrealengine, siWalletconnect,
+  siJavascript, siOkx, siPython, siReact, siSelenium, siSolana,
+  siSolidity, siUnrealengine, siVite, siWalletconnect,
 } from 'simple-icons';
 
 import uiImage from './assets/generated/work-ui.webp';
@@ -224,14 +224,18 @@ const skills = [
   { slug: 'blockchain', title: 'Blockchain Integration', short: 'Trust made tangible', body: 'I help teams use decentralised technology where it creates real ownership, not extra noise', image: blockchainImage, variant: 'blockchain', tools: ['Wallets', 'Onchain UX', 'Contracts'], details: ['Wallet and onboarding UX', 'Smart contract integration', 'Onchain transaction states', 'Trust and ownership design'] },
 ];
 
+const capCutIcon = {
+  path: 'M24.189 6.442V2.671l-4.535 2.383V4.91c.002-1.505-1.078-2.411-2.638-2.411H2.64C.993 2.5 0 3.407 0 4.91V8.72L6.354 12 0 15.316v3.8C0 20.595 1 21.5 2.64 21.5h14.373c1.56 0 2.639-.907 2.639-2.382v-.197l4.536 2.409v-3.828L13.64 12 24.19 6.443zM9.982 13.873l7.797 4.083H2.157l7.825-4.083zm7.741-7.828l-7.742 4.057-7.825-4.057h15.567z',
+};
+
 const skillToolsets = {
   'graphic-design': {
     motion: 'graphic',
     label: 'Photoshop, Illustrator, InDesign and Figma',
     tools: [
-      { name: 'Adobe Photoshop', mark: 'Ps', color: '#31A8FF' },
-      { name: 'Adobe Illustrator', mark: 'Ai', color: '#FF9A00' },
-      { name: 'Adobe InDesign', mark: 'Id', color: '#FF3366' },
+      { name: 'Adobe Photoshop', label: 'Photoshop', mark: 'Ps', color: '#31A8FF' },
+      { name: 'Adobe Illustrator', label: 'Illustrator', mark: 'Ai', color: '#FF9A00' },
+      { name: 'Adobe InDesign', label: 'InDesign', mark: 'Id', color: '#FF3366' },
       { name: 'Figma', icon: siFigma, color: '#F24E1E' },
     ],
   },
@@ -239,18 +243,18 @@ const skillToolsets = {
     motion: 'video',
     label: 'After Effects, Premiere Pro, CapCut, Blender and Unreal Engine',
     tools: [
-      { name: 'Adobe After Effects', mark: 'Ae', color: '#9999FF' },
-      { name: 'Adobe Premiere Pro', mark: 'Pr', color: '#9999FF' },
-      { name: 'CapCut', mark: 'Cc', color: '#191919', mono: true },
+      { name: 'Adobe After Effects', label: 'After Effects', mark: 'Ae', color: '#9999FF' },
+      { name: 'Adobe Premiere Pro', label: 'Premiere Pro', mark: 'Pr', color: '#9999FF' },
+      { name: 'CapCut', icon: capCutIcon, mono: true },
       { name: 'Blender', icon: siBlender, color: '#F5792A' },
       { name: 'Unreal Engine', icon: siUnrealengine, mono: true },
     ],
   },
   'uiux-webdev': {
     motion: 'ui',
-    label: 'Figma, React, JavaScript, HTML and CSS',
+    label: 'Vite, React, JavaScript, HTML and CSS',
     tools: [
-      { name: 'Figma', icon: siFigma, color: '#F24E1E' },
+      { name: 'Vite', icon: siVite, color: '#9135FF' },
       { name: 'React', icon: siReact, color: '#61DAFB' },
       { name: 'JavaScript', icon: siJavascript, color: '#F7DF1E' },
       { name: 'HTML5', icon: siHtml5, color: '#E34F26' },
@@ -259,10 +263,10 @@ const skillToolsets = {
   },
   automation: {
     motion: 'automation',
-    label: 'Python, n8n, Playwright, Selenium and GitHub Actions',
+    label: 'Python, EXE, Playwright, Selenium and GitHub Actions',
     tools: [
       { name: 'Python', icon: siPython, color: '#3776AB' },
-      { name: 'n8n', icon: siN8n, color: '#EA4B71' },
+      { name: 'EXE', mark: 'EXE', mono: true },
       { name: 'Playwright', mark: 'Pw', color: '#2EAD33' },
       { name: 'Selenium', icon: siSelenium, color: '#43B02A' },
       { name: 'GitHub Actions', icon: siGithubactions, color: '#2088FF' },
@@ -270,12 +274,12 @@ const skillToolsets = {
   },
   blockchain: {
     motion: 'blockchain',
-    label: 'Ethereum, Solana, Solidity, MetaMask and WalletConnect',
+    label: 'Ethereum, Solana, Solidity, OKX and WalletConnect',
     tools: [
       { name: 'Ethereum', icon: siEthereum, mono: true },
       { name: 'Solana', icon: siSolana, color: '#14F195' },
       { name: 'Solidity', icon: siSolidity, mono: true },
-      { name: 'MetaMask', mark: 'Mm', color: '#F6851B' },
+      { name: 'OKX', icon: siOkx, mono: true },
       { name: 'WalletConnect', icon: siWalletconnect, color: '#3B99FC' },
     ],
   },
@@ -283,14 +287,23 @@ const skillToolsets = {
 
 function SkillToolIcon({ tool, index }) {
   const color = tool.mono ? 'var(--ink)' : (tool.color || 'currentColor');
-  return <span
-    className={`skill-tool-icon ${tool.mono ? 'is-monochrome' : ''}`}
-    style={{ '--tool-color': color, '--tool-index': index }}
-    title={tool.name}
-  >
-    {tool.icon
-      ? <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d={tool.icon.path} /></svg>
-      : <span className="skill-tool-mark" aria-hidden="true">{tool.mark}</span>}
+  const label = tool.label || tool.name;
+  const expandedWidth = Math.min(164, Math.max(108, Math.ceil(36 + label.length * 7.8)));
+  return <span className="skill-tool-slot" style={{
+    '--tool-color': color,
+    '--tool-index': index,
+    '--tool-chars': label.length,
+    '--tool-expanded-width': `${expandedWidth}px`,
+    '--tool-text-width': `${label.length + .5}ch`,
+  }}>
+    <span className={`skill-tool-icon ${tool.mono ? 'is-monochrome' : ''}`}>
+      <span className="skill-tool-symbol" aria-hidden="true">
+        {tool.icon
+          ? <svg viewBox="0 0 24 24" focusable="false"><path d={tool.icon.path} /></svg>
+          : <span className="skill-tool-mark">{tool.mark}</span>}
+      </span>
+      <span className="skill-tool-name" aria-hidden="true">{label}</span>
+    </span>
   </span>;
 }
 
@@ -683,23 +696,137 @@ function ReadyProjectButton() {
   </span>;
 }
 
+const identityTerminalCopy = {
+  original: ['Artist mode installed', 'but Dư Ngọc Minh Hoàng is my true form....'],
+  install: ['Npx HyyAnk package install', ''],
+};
+
+function TerminalHighlight({ text, target, highlight, className }) {
+  const highlightStart = target.indexOf(highlight);
+  const highlightEnd = highlightStart + highlight.length;
+
+  if (highlightStart < 0 || text.length <= highlightStart) return text;
+
+  return <>
+    {text.slice(0, highlightStart)}
+    <strong className={className}>{text.slice(highlightStart, Math.min(text.length, highlightEnd))}</strong>
+    {text.length > highlightEnd ? text.slice(highlightEnd) : null}
+  </>;
+}
+
 function IdentityTerminal() {
-  const [animationKey, setAnimationKey] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const [replayKey, setReplayKey] = useState(0);
+  const [variant, setVariant] = useState('original');
+  const [lineOne, setLineOne] = useState('');
+  const [lineTwo, setLineTwo] = useState('');
+  const [activeLine, setActiveLine] = useState(1);
+
+  useEffect(() => {
+    let cancelled = false;
+    const timers = new Set();
+    const pause = (duration) => new Promise((resolve) => {
+      const timer = window.setTimeout(() => {
+        timers.delete(timer);
+        resolve();
+      }, duration);
+      timers.add(timer);
+    });
+    const typeLine = async (copy, update, line, speed = 42) => {
+      setActiveLine(line);
+      for (let index = 1; index <= copy.length; index += 1) {
+        if (cancelled) return false;
+        update(copy.slice(0, index));
+        await pause(speed);
+      }
+      return !cancelled;
+    };
+    const eraseLine = async (copy, update, line) => {
+      setActiveLine(line);
+      for (let index = copy.length - 1; index >= 0; index -= 1) {
+        if (cancelled) return false;
+        update(copy.slice(0, index));
+        await pause(22);
+      }
+      return !cancelled;
+    };
+    const progressCopy = (progress) => {
+      const barSize = 14;
+      const filled = Math.round((progress / 100) * barSize);
+      return `[${'█'.repeat(filled)}${'░'.repeat(barSize - filled)}] ${String(progress).padStart(3, ' ')}%`;
+    };
+
+    const runLoop = async () => {
+      setVariant('original');
+      setLineOne('');
+      setLineTwo('');
+
+      if (!await typeLine(identityTerminalCopy.original[0], setLineOne, 1)) return;
+      if (!await typeLine(identityTerminalCopy.original[1], setLineTwo, 2)) return;
+
+      while (!cancelled) {
+        setActiveLine(0);
+        await pause(4000);
+        if (cancelled || !await eraseLine(identityTerminalCopy.original[1], setLineTwo, 2)) return;
+        if (!await eraseLine(identityTerminalCopy.original[0], setLineOne, 1)) return;
+
+        setVariant('install');
+        if (!await typeLine(identityTerminalCopy.install[0], setLineOne, 1)) return;
+        setActiveLine(2);
+        for (let progress = 0; progress <= 100; progress += 1) {
+          if (cancelled) return;
+          setLineTwo(progressCopy(progress));
+          await pause(30);
+        }
+
+        setActiveLine(0);
+        await pause(4000);
+        if (cancelled || !await eraseLine(progressCopy(100), setLineTwo, 2)) return;
+        if (!await eraseLine(identityTerminalCopy.install[0], setLineOne, 1)) return;
+
+        setVariant('original');
+        if (!await typeLine(identityTerminalCopy.original[0], setLineOne, 1)) return;
+        if (!await typeLine(identityTerminalCopy.original[1], setLineTwo, 2)) return;
+      }
+    };
+
+    if (reduceMotion) {
+      setVariant('original');
+      setLineOne(identityTerminalCopy.original[0]);
+      setLineTwo(identityTerminalCopy.original[1]);
+      setActiveLine(0);
+    } else {
+      runLoop();
+    }
+
+    return () => {
+      cancelled = true;
+      timers.forEach((timer) => window.clearTimeout(timer));
+    };
+  }, [reduceMotion, replayKey]);
 
   return <button
-    className="identity-terminal"
+    className={`identity-terminal is-${variant}`}
     type="button"
-    onClick={() => setAnimationKey((key) => key + 1)}
-    aria-label="Artist mode installed, but Dư Ngọc Minh Hoàng is my true form. Click to replay the typing animation."
+    onClick={() => setReplayKey((key) => key + 1)}
+    aria-label="Animated identity terminal alternating between artist mode and the HyyAnk package installation. Click to restart the animation."
   >
     <span className="identity-terminal-bar" aria-hidden="true">
       <span className="identity-terminal-dots"><i /><i /><i /></span>
       <span>~/identity</span>
-      <span className="identity-terminal-replay">replay ↵</span>
+      <span className="identity-terminal-replay">restart ↵</span>
     </span>
-    <span className="identity-terminal-screen" aria-hidden="true" key={animationKey}>
-      <span className="identity-terminal-line identity-terminal-line-one">Artist mode installed</span>
-      <span className="identity-terminal-line identity-terminal-line-two">but <strong>Dư Ngọc Minh Hoàng</strong> is my true form....</span>
+    <span className="identity-terminal-screen" aria-hidden="true">
+      <span className={`identity-terminal-line identity-terminal-line-one ${activeLine === 1 ? 'is-active' : ''}`}>
+        {variant === 'install'
+          ? <TerminalHighlight text={lineOne} target={identityTerminalCopy.install[0]} highlight="HyyAnk" className="identity-terminal-package" />
+          : lineOne}
+      </span>
+      <span className={`identity-terminal-line identity-terminal-line-two ${activeLine === 2 ? 'is-active' : ''} ${variant === 'install' ? 'is-progress' : ''}`}>
+        {variant === 'original'
+          ? <TerminalHighlight text={lineTwo} target={identityTerminalCopy.original[1]} highlight="Dư Ngọc Minh Hoàng" className="identity-terminal-name" />
+          : lineTwo}
+      </span>
     </span>
   </button>;
 }
@@ -1137,7 +1264,7 @@ function Contact() {
 }
 
 function Footer() {
-  return <footer className="site-footer"><div className="page-shell footer-inner"><span>{person}</span><span>Designing with care.</span><a href="#top" onClick={(event) => { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Back to top <ArrowUpRight size={15} /></a></div></footer>;
+  return <footer className="site-footer"><div className="page-shell footer-inner"><span>{person} - {fullName}</span><span>Designing with care.</span><a href="#top" onClick={(event) => { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Back to top <ArrowUpRight size={15} /></a></div></footer>;
 }
 
 function Home() {
