@@ -1,6 +1,7 @@
 import React, { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, CaretRight, Check } from '@phosphor-icons/react';
+import './case-studies.css';
 
 import kitepayStateFlow from './assets/case-studies/kitepay-state-flow.svg';
 import { withoutTrailingPeriod } from './text.js';

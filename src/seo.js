@@ -40,4 +40,5 @@ export const notFoundSeo = {
   title: 'Page not found - HyyAnk',
   description: 'The page you requested could not be found. Return to HyyAnk’s selected work and capabilities.',
   kind: 'website',
+  noindex: true,
 };

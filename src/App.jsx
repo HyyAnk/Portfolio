@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
-import * as THREE from 'three';
 import {
   ArrowDownRight, ArrowLeft, ArrowUpRight, CaretDown, Check,
   Copy, EnvelopeSimple, GithubLogo, Moon, Sun, TelegramLogo, XLogo,
@@ -22,13 +21,16 @@ import matCover from './assets/case-studies/mat-cover.webp';
 import kitepayCover from './assets/case-studies/kitepay-cover.webp';
 import muonCover from './assets/case-studies/muon-cover.webp';
 import hopLuuCover from './assets/case-studies/hop-luu-cover.webp';
-import { DeepCaseStudy } from './caseStudies.jsx';
-import { ShowcaseCaseStudy } from './showcaseCases.jsx?rev=hop-luu-v3';
+import { notFoundSeo, seoByPath, siteIdentity } from './seo.js';
 import { withoutTrailingPeriod } from './text.js';
 
-const person = 'HyyAnk';
-const fullName = 'Dư Ngọc Minh Hoàng';
-const email = 'dungocminhhoang@gmail.com';
+const DeepCaseStudy = lazy(() => import('./caseStudies.jsx').then((module) => ({ default: module.DeepCaseStudy })));
+const ShowcaseCaseStudy = lazy(() => import('./showcaseCases.jsx?rev=hop-luu-v3').then((module) => ({ default: module.ShowcaseCaseStudy })));
+const SkillPageContent = lazy(() => import('./SkillPageContent.jsx'));
+
+const person = siteIdentity.name;
+const fullName = siteIdentity.fullName;
+const email = siteIdentity.email;
 const skillFlowNodes = [
   { word: 'Design', caption: 'Make it clear', t: .12, offset: -.05 },
   { word: 'Develop', caption: 'Make it work', t: .5, offset: .06 },
@@ -402,12 +404,40 @@ const configuredCarouselImages = Array.from({ length: 7 }, (_, index) => ({
 const reveal = { hidden: { opacity: 0, y: 22 }, visible: { opacity: 1, y: 0 } };
 const revealTransition = { duration: 0.65, ease: [0.16, 1, 0.3, 1] };
 
-function usePageMeta(title, description) {
+function usePageMeta(metadata) {
   useEffect(() => {
-    document.title = title;
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta && description) meta.setAttribute('content', description);
-  }, [title, description]);
+    if (!metadata) return;
+    const origin = window.location.origin;
+    const canonicalUrl = `${origin}${metadata.path === '/' ? '/' : metadata.path}`;
+    document.title = metadata.title;
+
+    const upsertMeta = (selector, attributes) => {
+      let element = document.head.querySelector(selector);
+      if (!element) {
+        element = document.createElement('meta');
+        document.head.appendChild(element);
+      }
+      Object.entries(attributes).forEach(([name, value]) => element.setAttribute(name, value));
+    };
+    const upsertLink = (selector, attributes) => {
+      let element = document.head.querySelector(selector);
+      if (!element) {
+        element = document.createElement('link');
+        document.head.appendChild(element);
+      }
+      Object.entries(attributes).forEach(([name, value]) => element.setAttribute(name, value));
+    };
+
+    upsertMeta('meta[name="description"]', { name: 'description', content: metadata.description });
+    upsertMeta('meta[property="og:title"]', { property: 'og:title', content: metadata.title });
+    upsertMeta('meta[property="og:description"]', { property: 'og:description', content: metadata.description });
+    upsertMeta('meta[property="og:type"]', { property: 'og:type', content: metadata.kind === 'article' ? 'article' : metadata.kind === 'profile' ? 'profile' : 'website' });
+    upsertMeta('meta[property="og:url"]', { property: 'og:url', content: canonicalUrl });
+    upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: metadata.title });
+    upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: metadata.description });
+    upsertMeta('meta[name="robots"]', { name: 'robots', content: metadata.noindex ? 'noindex, follow' : 'index, follow' });
+    upsertLink('link[rel="canonical"]', { rel: 'canonical', href: canonicalUrl });
+  }, [metadata]);
 }
 
 function RouteScrollManager() {
@@ -548,10 +578,6 @@ function ContactDropdown() {
 function Reveal({ children, className = '', delay = 0 }) {
   const reduce = useReducedMotion();
   return <motion.div className={className} initial={reduce ? false : 'hidden'} whileInView="visible" viewport={{ once: true, amount: 0.16 }} variants={reveal} transition={{ ...revealTransition, delay }}>{children}</motion.div>;
-}
-
-function ArrowLink({ children, to = '#contact' }) {
-  return <a className="arrow-link" href={to}>{children}<ArrowUpRight size={17} /></a>;
 }
 
 function HeroComposition() {
@@ -883,6 +909,13 @@ function ThreeSkillFlow() {
     const container = containerRef.current;
     if (!container) return undefined;
 
+    let cancelled = false;
+    let disposeThree = () => {};
+    const startThree = async () => {
+      container.dataset.threeState = 'loading';
+      const THREE = await import('three');
+      if (cancelled) return;
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(33, 1, .1, 100);
     camera.position.set(0, .15, 13.5);
@@ -892,6 +925,7 @@ function ThreeSkillFlow() {
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
+    container.dataset.threeState = 'ready';
 
     const flow = new THREE.Group();
     scene.add(flow);
@@ -1168,7 +1202,7 @@ function ThreeSkillFlow() {
       frameId = window.requestAnimationFrame(render);
     }
 
-    return () => {
+    disposeThree = () => {
       if (frameId) window.cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
       themeObserver.disconnect();
@@ -1187,9 +1221,33 @@ function ThreeSkillFlow() {
       renderer.dispose();
       renderer.domElement.remove();
     };
+    };
+
+    const startWhenNear = () => {
+      startThree().catch(() => {
+        if (!cancelled) container.dataset.threeState = 'fallback';
+      });
+    };
+    let observer;
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        startWhenNear();
+      }, { rootMargin: '480px 0px' });
+      observer.observe(container);
+    } else {
+      startWhenNear();
+    }
+
+    return () => {
+      cancelled = true;
+      observer?.disconnect();
+      disposeThree();
+    };
   }, [reduce]);
 
-  return <div className="skill-flow-canvas" ref={containerRef} role="group" aria-label="Interactive 3D flow connecting Design, Develop and Deliver">
+  return <div className="skill-flow-canvas" ref={containerRef} role="group" aria-label="Interactive 3D flow connecting Design, Develop and Deliver" data-three-state="idle">
     {skillFlowNodes.map(({ word, caption }, index) => <React.Fragment key={word}>
       <button className="skill-flow-node-hit" data-skill-node={index} type="button" aria-label={`${word}: ${caption}`} aria-describedby={`skill-flow-bubble-${index}`} aria-pressed="false" />
       <span className="skill-flow-bubble" data-skill-bubble={index} data-node={index} id={`skill-flow-bubble-${index}`}>
@@ -1278,16 +1336,20 @@ function Footer() {
   return <footer className="site-footer"><div className="page-shell footer-inner"><span>{person} - {fullName}</span><span>Designing with care.</span><a href="#top" onClick={(event) => { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Back to top <ArrowUpRight size={15} /></a></div></footer>;
 }
 
+function RouteLoading({ label = 'Loading page' }) {
+  return <section className="route-loading section-pad" role="status" aria-live="polite"><div className="page-shell route-loading-inner"><span className="eyebrow">{label}</span><span className="route-loading-line" /><span className="route-loading-line route-loading-line-short" /></div></section>;
+}
+
 function Home() {
-  usePageMeta(`${person} - Designer and Developer`, `${person} (${fullName}) is a multidisciplinary designer and developer.`);
+  usePageMeta(seoByPath['/']);
   return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content"><div id="top"><Hero /></div><WorkCarousel /><About /><SkillBlocks /><Experiments /><Contact /></main><Footer /></>;
 }
 
 function ProjectPage({ work }) {
-  usePageMeta(`${work.title} - ${person}`, work.description);
+  usePageMeta(seoByPath[`/work/${work.slug}`]);
   if (work.deep) {
     const isShowcaseCase = work.slug === 'folded-matter' || work.slug === 'still-moving';
-    return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className={`project-page-deep project-page-${work.slug}`}>{isShowcaseCase ? <ShowcaseCaseStudy work={work}/> : <DeepCaseStudy work={work} />}<Contact /></main><Footer /></>;
+    return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className={`project-page-deep project-page-${work.slug}`}><Suspense fallback={<RouteLoading label={`Loading ${work.title}`} />}>{isShowcaseCase ? <ShowcaseCaseStudy work={work}/> : <DeepCaseStudy work={work} />}</Suspense><Contact /></main><Footer /></>;
   }
   return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="project-page">
     <section className="project-hero section-pad">
@@ -1299,30 +1361,20 @@ function ProjectPage({ work }) {
 }
 
 function SkillPage({ skill }) {
-  usePageMeta(`${skill.title} - ${person}`, skill.body);
+  usePageMeta(seoByPath[`/skills/${skill.slug}`]);
   const related = works.filter((work) => work.tags.some((tag) => skill.tools.some((tool) => tag.toLowerCase().includes(tool.split(' ')[0].toLowerCase()))));
   const gallery = [skill.image, ...(related.length ? related.map((item) => item.image) : [uiImage, graphicImage])].slice(0, 3);
-  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="skill-page">
-    <section className="skill-page-hero section-pad">
-      <div className="page-shell skill-page-hero-grid">
-        <Reveal><h1>{withoutTrailingPeriod(skill.title)}</h1><p className="large-copy">{skill.short}</p><p>{skill.body}</p><ArrowLink to="#capabilities">Explore capabilities</ArrowLink></Reveal>
-        <Reveal className="skill-page-hero-image" delay={.1}><img src={skill.image} alt={`${skill.title} practice visual`} /></Reveal>
-      </div>
-    </section>
-    <section id="capabilities" className="section-pad capability-section">
-      <div className="page-shell capability-layout"><Reveal><h2>What I bring</h2></Reveal><div className="capability-grid">{skill.details.map((detail, index) => <Reveal className="capability-item" key={detail} delay={index * .06}><span>{detail}</span></Reveal>)}</div></div>
-    </section>
-    <section id="skill-work" className="section-pad skill-work-section">
-      <div className="page-shell"><Reveal><div className="section-heading"><h2>A closer look</h2><p>A few ways this practice becomes useful in the real world.</p></div></Reveal><div className="skill-gallery">{gallery.map((image, index) => <Reveal className={`gallery-item gallery-${index + 1}`} key={`${skill.slug}-${index}`} delay={index * .08}><figure><div className="skill-gallery-image"><img src={image} alt={`${skill.title} work sample ${index + 1}`} loading="lazy" /></div><figcaption>{['Primary direction', 'Process detail', 'Final expression'][index]}</figcaption></figure></Reveal>)}</div></div>
-    </section>
-    <section className="section-pad approach-section"><div className="page-shell approach-grid"><Reveal><h2>How I work</h2></Reveal><Reveal className="approach-copy" delay={.08}><p className="large-copy">Start with the question. Make the system visible. Then remove what does not help.</p><div className="approach-list"><span>Listen closely</span><span>Find the shape</span><span>Make it usable</span></div></Reveal></div></section>
-    <section className="skill-tools-strip section-pad"><div className="page-shell"><Reveal><span className="tool-list-title">Tools in this practice</span><div className="tool-names large-tools">{skill.tools.map((tool) => <span key={tool}>{tool}</span>)}</div></Reveal></div></section>
-    <Contact />
-  </main><Footer /></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="skill-page"><Suspense fallback={<RouteLoading label={`Loading ${skill.title}`} />}><SkillPageContent skill={skill} gallery={gallery} Reveal={Reveal} /></Suspense><Contact /></main><Footer /></>;
+}
+
+function NotFound() {
+  const location = useLocation();
+  usePageMeta({ ...notFoundSeo, path: location.pathname });
+  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="not-found-page"><section className="not-found section-pad"><div className="page-shell not-found-grid"><div><span className="eyebrow">Error / 404</span><h1>Lost path.</h1></div><div className="not-found-copy"><p className="large-copy">This page is not part of the current portfolio. The selected work is still close by.</p><Link className="button button-dark" to="/#selected-works">Return to selected work <ArrowUpRight size={18} /></Link></div></div></section></main><Footer /></>;
 }
 
 function App() {
-  return <><RouteScrollManager /><Routes><Route path="/" element={<Home />} />{works.map((work) => <Route key={work.slug} path={`/work/${work.slug}`} element={<ProjectPage work={work} />} />)}{skills.map((skill) => <Route key={skill.slug} path={`/skills/${skill.slug}`} element={<SkillPage skill={skill} />} />)}<Route path="*" element={<Home />} /></Routes></>;
+  return <><RouteScrollManager /><Routes><Route path="/" element={<Home />} />{works.map((work) => <Route key={work.slug} path={`/work/${work.slug}`} element={<ProjectPage work={work} />} />)}{skills.map((skill) => <Route key={skill.slug} path={`/skills/${skill.slug}`} element={<SkillPage skill={skill} />} />)}<Route path="*" element={<NotFound />} /></Routes></>;
 }
 
 export default App;

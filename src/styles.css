@@ -310,6 +310,11 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .skill-flow-bubble[data-node="2"] .skill-flow-bubble-type { --typing-width: 14ch; }
 .skill-flow-canvas[data-active-node="0"] .skill-flow-bubble[data-node="0"] .skill-flow-bubble-type, .skill-flow-canvas[data-active-node="1"] .skill-flow-bubble[data-node="1"] .skill-flow-bubble-type, .skill-flow-canvas[data-active-node="2"] .skill-flow-bubble[data-node="2"] .skill-flow-bubble-type { animation: skill-bubble-type .72s steps(14, end) .14s forwards, skill-bubble-caret .7s step-end .14s infinite; }
 .skill-flow-fallback { position: absolute; inset: 0; display: grid; place-items: center; color: var(--ink); font-size: 1.05rem; font-weight: 700; letter-spacing: .08em; opacity: 0; pointer-events: none; }
+.skill-flow-canvas[data-three-state="idle"] .skill-flow-fallback,
+.skill-flow-canvas[data-three-state="loading"] .skill-flow-fallback,
+.skill-flow-canvas[data-three-state="fallback"] .skill-flow-fallback { opacity: .48; transition: opacity .25s ease; }
+.skill-flow-canvas[data-three-state="loading"] .skill-flow-fallback { animation: skill-flow-loading 1.5s ease-in-out infinite; }
+.skill-flow-canvas[data-three-state="ready"] .skill-flow-fallback { opacity: 0; }
 
 .experiments-section { position: relative; padding-block: 104px 118px; overflow: hidden; border-top: 1px solid var(--line); background: color-mix(in srgb, var(--paper-elevated) 88%, var(--soft)); }
 .experiments-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 36px; margin-bottom: 48px; }
@@ -730,6 +735,18 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .footer-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .footer-inner a { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); }
 
+.route-loading { min-height: 68dvh; display: grid; align-items: center; }
+.route-loading-inner { display: grid; gap: 18px; }
+.route-loading-line { display: block; width: min(620px, 78vw); height: 12px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 12%, transparent); animation: route-loading-pulse 1.35s ease-in-out infinite; }
+.route-loading-line-short { width: min(390px, 54vw); animation-delay: .12s; }
+.not-found-page { min-height: calc(100dvh - 76px); }
+.not-found { min-height: 100dvh; display: grid; align-items: center; padding-top: 128px; }
+.not-found-grid { display: grid; grid-template-columns: minmax(0, .7fr) minmax(320px, 1fr); gap: clamp(48px, 8vw, 132px); align-items: end; }
+.not-found h1 { max-width: 7ch; margin-top: 18px; font-size: clamp(5rem, 12vw, 10rem); }
+.not-found-copy { display: grid; justify-items: start; gap: 34px; padding-bottom: 10px; }
+.not-found-copy .large-copy { max-width: 18ch; }
+.not-found-copy .button { min-width: 196px; }
+
 /* Project routes stay in the same light editorial system. */
 .project-page, .skill-page { background: var(--paper); }
 .project-hero { padding-top: 152px; padding-bottom: 96px; }
@@ -829,6 +846,8 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 @keyframes brand-orbit-dot-two { to { transform: rotate(-360deg) translateX(42px) rotate(360deg); } }
 @keyframes brand-type-line { from { width: 0; } to { width: var(--brand-type-width); } }
 @keyframes brand-caret-blink { 50% { border-color: transparent; } }
+@keyframes skill-flow-loading { 0%, 100% { opacity: .24; } 50% { opacity: .58; } }
+@keyframes route-loading-pulse { 0%, 100% { opacity: .42; transform: scaleX(.98); transform-origin: left; } 50% { opacity: .8; transform: scaleX(1); transform-origin: left; } }
 
 @media (max-width: 1020px) {
   .hero { min-height: auto; padding-top: 128px; }
@@ -949,6 +968,11 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .contact-channel-primary { min-height: 106px; }
   .footer-inner { min-height: 102px; flex-wrap: wrap; padding: 20px 0; }
   .footer-inner span:nth-child(2) { order: 3; width: 100%; }
+  .not-found { align-items: start; padding-top: 146px; }
+  .not-found-grid { grid-template-columns: 1fr; gap: 52px; }
+  .not-found h1 { font-size: clamp(4.7rem, 24vw, 7rem); }
+  .not-found-copy { gap: 28px; }
+  .not-found-copy .button { width: auto; }
   .project-hero { padding-top: 122px; padding-bottom: 70px; }
   .project-back { margin-bottom: 42px; }
   .project-heading { margin-bottom: 36px; }

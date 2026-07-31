@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, CaretRight, Check, Pause, Play } from '@phosphor-icons/react';
+import './showcase-cases.css';
 
 import muonCover from './assets/case-studies/muon-cover.webp';
 import muonSpace from './assets/case-studies/muon-space.webp';
