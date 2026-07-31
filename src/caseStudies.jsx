@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, CaretRight, Check } from '@phosphor-icons/react';
 
-import matRouteFlow from './assets/case-studies/mat-route-flow.svg';
 import kitepayStateFlow from './assets/case-studies/kitepay-state-flow.svg';
 
 const matModes = {
-  cool: { label: 'Coolest', time: '32 min', shade: '71%', heat: '2.8 / 5', distance: '2.4 km', note: 'More shade, two refill points', path: 'M62 292C136 290 146 222 218 218s90-82 164-68 96-64 166-72 94-48 158-78' },
-  balanced: { label: 'Balanced', time: '26 min', shade: '54%', heat: '3.3 / 5', distance: '2.1 km', note: 'A practical everyday trade-off', path: 'M62 292c91-12 118-53 186-58s93-37 153-47 98-15 151-58 103-50 154-70' },
-  fast: { label: 'Fastest', time: '20 min', shade: '29%', heat: '4.2 / 5', distance: '1.8 km', note: 'Shorter, but exposed at midday', path: 'M62 292c96-40 152-24 211-66s108-32 175-73 151-54 258-94' },
+  cool: { label: 'Coolest', time: '32 min', shade: '71%', heat: '2.8 / 5', distance: '2.4 km', note: 'More shade, two refill points', path: 'M90 315V220H230V135H380V55H690', directions: ['North from Market St', 'Turn onto shaded Oak Walk', 'Continue via Pine St to Hill Garden'] },
+  balanced: { label: 'Balanced', time: '26 min', shade: '54%', heat: '3.3 / 5', distance: '2.1 km', note: 'A practical everyday trade-off', path: 'M90 315H230V254.3L540 119.7V55H690', directions: ['East along Market St', 'Join Sunline Ave for 740 m', 'Exit north toward Hill Garden'] },
+  fast: { label: 'Fastest', time: '20 min', shade: '29%', heat: '4.2 / 5', distance: '1.8 km', note: 'Shorter, but exposed at midday', path: 'M90 315L690 55', directions: ['Join Sunline Ave', 'Continue directly for 1.6 km', 'Arrive at Hill Garden east gate'] },
 };
 
 const kiteSteps = [
@@ -64,34 +63,48 @@ function InsightList({ items }) {
   </article>)}</div>;
 }
 
+function MatStreetMap({ mode = 'cool' }) {
+  const route = matModes[mode];
+  const diagonalCutId = useId().replace(/:/g, '');
+  return <svg className="mat-product-map" viewBox="0 0 760 360" preserveAspectRatio="xMidYMid slice">
+    <defs><mask id={diagonalCutId} maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="360"><rect width="760" height="360" fill="#fff"/><path d="M90 315L690 55" fill="none" stroke="#000" strokeWidth="38" strokeLinecap="round"/></mask></defs>
+    <rect width="760" height="360" fill="#dbe5f3"/>
+    <path className="mat-product-river" d="M0 0h52c-8 58 10 92-8 142s-20 103 0 145c9 20 9 44-3 73H0Z"/>
+    <path className="mat-product-park" d="M48 0h72v360H38c24-55 5-93 22-137s1-80 13-122S52 43 48 0Z"/>
+    <g><path className="mat-product-street-edge" d="M0 55H760M0 135H760M0 220H760M0 315H760M90 0V360M230 0V360M380 0V360M540 0V360M690 0V360"/><path className="mat-product-street-surface" d="M0 55H760M0 135H760M0 220H760M0 315H760M90 0V360M230 0V360M380 0V360M540 0V360M690 0V360"/><path className="mat-product-street-center" d="M0 55H760M0 135H760M0 220H760M0 315H760M90 0V360M230 0V360M380 0V360M540 0V360M690 0V360"/></g>
+    <g mask={`url(#${diagonalCutId})`}><g className="mat-product-lots"><rect x="108" y="72" width="104" height="46" rx="7"/><rect x="248" y="72" width="114" height="46" rx="7"/><rect x="398" y="72" width="124" height="46" rx="7"/><rect x="558" y="72" width="114" height="46" rx="7"/><rect x="108" y="152" width="104" height="51" rx="7"/><rect x="248" y="152" width="114" height="51" rx="7"/><rect x="398" y="152" width="124" height="51" rx="7"/><rect x="558" y="152" width="114" height="51" rx="7"/><rect x="108" y="237" width="104" height="61" rx="7"/><rect x="248" y="237" width="114" height="61" rx="7"/><rect x="398" y="237" width="124" height="61" rx="7"/><rect x="558" y="237" width="114" height="61" rx="7"/></g>
+    <g className="mat-product-buildings"><path d="M120 81h42v17h37v12h-79Z"/><rect x="260" y="81" width="38" height="28" rx="4"/><path d="M307 81h43v15h-18v13h-25Z"/><rect x="410" y="81" width="98" height="28" rx="4"/><rect x="570" y="81" width="88" height="28" rx="4"/><rect x="120" y="162" width="78" height="31" rx="4"/><path d="M260 162h46v12h44v19h-90Z"/><rect x="410" y="162" width="42" height="31" rx="4"/><rect x="462" y="162" width="46" height="20" rx="4"/><path d="M570 162h88v31h-34v-14h-54Z"/><rect x="120" y="248" width="35" height="40" rx="4"/><rect x="164" y="248" width="35" height="24" rx="4"/><path d="M260 248h90v40h-41v-17h-49Z"/><rect x="410" y="248" width="42" height="40" rx="4"/><rect x="462" y="248" width="46" height="24" rx="4"/><rect x="570" y="248" width="88" height="40" rx="4"/></g></g>
+    <g><path className="mat-product-diagonal-edge" d="M90 315L690 55"/><path className="mat-product-diagonal-surface" d="M90 315L690 55"/><path className="mat-product-diagonal-center" d="M90 315L690 55"/></g>
+    <g className="mat-product-canopy"><circle cx="90" cy="266" r="15"/><circle cx="150" cy="220" r="14"/><circle cx="205" cy="220" r="13"/><circle cx="230" cy="176" r="14"/><circle cx="286" cy="135" r="13"/><circle cx="344" cy="135" r="15"/><circle cx="380" cy="92" r="13"/><circle cx="444" cy="55" r="14"/><circle cx="506" cy="55" r="13"/></g>
+    <path className="mat-product-heat-corridor" d="M90 315L690 55"/>
+    <path key={mode} className={`mat-demo-route mat-product-route route-${mode}`} d={route.path}/>
+    <g className="mat-product-labels"><text x="310" y="49">HILL ST</text><text x="310" y="129">PINE ST</text><text x="310" y="214">OAK WALK</text><text x="310" y="309">MARKET ST</text><text x="388" y="196" transform="rotate(-23 388 196)">SUNLINE AVE</text></g>
+    <circle cx="90" cy="315" r="9" className="mat-route-point"/><circle cx="690" cy="55" r="9" className="mat-route-point"/>
+  </svg>;
+}
+
 function MatRouteDemo() {
   const [mode, setMode] = useState('cool');
   const [directionsOpen, setDirectionsOpen] = useState(false);
   const route = matModes[mode];
   return <div className="mat-live-demo" aria-label="Interactive MÁT route comparison prototype">
     <div className="mat-demo-toolbar">
-      <div><span className="mat-mark">MÁT</span><span className="demo-caption">Nguyen Hue → Thao Cam Vien</span></div>
+      <div><span className="mat-mark">MÁT</span><span className="demo-caption">Riverside Market → Hill Garden</span></div>
       <div className="mat-mode-switch" role="group" aria-label="Route strategy">
         {Object.entries(matModes).map(([key, value]) => <button key={key} type="button" aria-pressed={mode === key} onClick={() => setMode(key)}>{value.label}</button>)}
       </div>
     </div>
     <div className="mat-demo-grid">
       <div className="mat-map" aria-hidden="true">
-        <svg viewBox="0 0 760 360">
-          <g className="mat-map-roads"><path d="M0 72h760M0 154h760M0 245h760M105 0v360M238 0v360M376 0v360M526 0v360M664 0v360"/><path d="M-20 328C118 252 156 282 270 221S485 62 790 112"/></g>
-          <g className="mat-map-blocks"><rect x="28" y="24" width="58" height="32" rx="7"/><rect x="132" y="91" width="78" height="40" rx="7"/><rect x="270" y="28" width="74" height="96" rx="7"/><rect x="407" y="96" width="90" height="39" rx="7"/><rect x="558" y="26" width="74" height="92" rx="7"/><rect x="46" y="178" width="88" height="43" rx="7"/><rect x="276" y="178" width="67" height="45" rx="7"/><rect x="435" y="178" width="60" height="57" rx="7"/><rect x="578" y="173" width="90" height="48" rx="7"/><rect x="140" y="267" width="69" height="57" rx="7"/><rect x="310" y="270" width="96" height="49" rx="7"/><rect x="534" y="267" width="82" height="54" rx="7"/></g>
-          <circle className="mat-heat-zone zone-one" cx="306" cy="144" r="82"/><circle className="mat-heat-zone zone-two" cx="595" cy="236" r="72"/>
-          <path key={mode} className={`mat-demo-route route-${mode}`} d={route.path}/>
-          <circle cx="62" cy="292" r="10" className="mat-route-point"/><circle cx="706" cy="59" r="10" className="mat-route-point"/>
-        </svg>
-        <span className="mat-map-legend"><i /> lower heat exposure</span>
+        <MatStreetMap mode={mode}/>
+        <span className="mat-map-legend"><i /> shaded streets</span>
       </div>
       <aside className="mat-route-panel" aria-live="polite">
         <CaseEyebrow>Recommended route</CaseEyebrow>
         <h3>{route.label}</h3>
         <p>{route.note}</p>
         <div className="mat-route-stats"><div><span>Time</span><strong>{route.time}</strong></div><div><span>Distance</span><strong>{route.distance}</strong></div><div><span>Shade</span><strong>{route.shade}</strong></div><div><span>Heat score</span><strong>{route.heat}</strong></div></div>
-        {directionsOpen && <ol className="mat-directions-preview"><li><span>01</span>Walk toward Ton Duc Thang</li><li><span>02</span>Stay under the riverside canopy</li><li><span>03</span>Refill point in 1.1 km</li></ol>}
+        {directionsOpen && <ol className="mat-directions-preview">{route.directions.map((direction, index) => <li key={direction}><span>{String(index + 1).padStart(2, '0')}</span>{direction}</li>)}</ol>}
         <button className="mat-route-action" type="button" aria-expanded={directionsOpen} onClick={() => setDirectionsOpen((value) => !value)}>{directionsOpen ? 'Hide directions' : 'Preview directions'} <CaretRight size={16} /></button>
       </aside>
     </div>
@@ -104,15 +117,59 @@ function MatDeviceStudy() {
       <div className="mockup-browser-bar"><span/><span/><span/><small>mat.city/route</small></div>
       <div className="mat-browser-content">
         <aside><strong>MÁT</strong><span>Plan a route</span><span>Saved places</span><span>Live conditions</span><div className="mat-weather-chip">32° · AQI 74</div></aside>
-        <div className="mat-browser-map"><span className="mat-map-label label-one">71% shade</span><span className="mat-map-label label-two">refill</span><i className="mat-browser-path"/></div>
+        <div className="mat-browser-map"><MatStreetMap mode="cool"/><span className="mat-map-label label-one">71% shade</span><span className="mat-map-label label-two">refill</span></div>
       </div>
     </div>
     <div className="mat-phone-mockup">
       <div className="phone-status"><span>9:41</span><span>•••</span></div>
-      <div className="phone-map"><i/><span>12 min cooler</span></div>
+      <div className="phone-map"><MatStreetMap mode="cool"/><span>12 min cooler</span></div>
       <div className="phone-sheet"><small>ON ROUTE</small><strong>Turn right in 80 m</strong><p>Shade continues for 420 m</p><span className="phone-route-cta">Route details</span></div>
     </div>
   </div>;
+}
+
+function MatMotionStudy() {
+  return <figure className="case-motion-frame mat-motion-frame">
+    <div id="motion-map-board" className="mat-motion-board" role="img" aria-label="Animated MÁT route comparison showing route candidates, environmental evidence and the cooler recommendation">
+      <div className="mat-motion-stage" aria-hidden="true">
+        <span className="mat-motion-phase"><b>01</b> Compare routes</span>
+        <svg viewBox="0 0 720 500" preserveAspectRatio="xMidYMid meet">
+          <defs><mask id="mat-motion-diagonal-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="720" height="500"><rect width="720" height="500" fill="#fff"/><path d="M102 452L598 86" fill="none" stroke="#000" strokeWidth="50" strokeLinecap="round"/></mask></defs>
+          <path className="mat-motion-river" d="M0 0H63C49 76 71 130 46 196S28 318 53 372 47 455 22 500H0Z"/>
+          <path className="mat-motion-park" d="M55 0h68v500H40c34-68 6-121 27-181s3-112 17-172S57 62 55 0Z"/>
+          <g className="mat-motion-streets">
+            <path className="mat-motion-street-edge" d="M0 86H720M0 210H720M0 336H720M0 452H720M102 0V500M260 0V500M432 0V500M598 0V500"/>
+            <path className="mat-motion-street-surface" d="M0 86H720M0 210H720M0 336H720M0 452H720M102 0V500M260 0V500M432 0V500M598 0V500"/>
+            <path className="mat-motion-street-center" d="M0 86H720M0 210H720M0 336H720M0 452H720M102 0V500M260 0V500M432 0V500M598 0V500"/>
+          </g>
+          <g mask="url(#mat-motion-diagonal-cut)"><g className="mat-motion-lots"><rect x="122" y="106" width="118" height="84" rx="9"/><rect x="280" y="106" width="132" height="84" rx="9"/><rect x="452" y="106" width="126" height="84" rx="9"/><rect x="618" y="106" width="102" height="84" rx="9"/><rect x="122" y="230" width="118" height="86" rx="9"/><rect x="280" y="230" width="132" height="86" rx="9"/><rect x="452" y="230" width="126" height="86" rx="9"/><rect x="618" y="230" width="102" height="86" rx="9"/><rect x="122" y="356" width="118" height="76" rx="9"/><rect x="280" y="356" width="132" height="76" rx="9"/><rect x="452" y="356" width="126" height="76" rx="9"/><rect x="618" y="356" width="102" height="76" rx="9"/></g>
+          <g className="mat-motion-buildings"><path d="M136 118h46v31h44v29h-90Z"/><rect x="294" y="119" width="48" height="59" rx="5"/><path d="M354 119h44v26h-18v33h-26Z"/><rect x="465" y="118" width="98" height="60" rx="5"/><rect x="631" y="118" width="74" height="60" rx="5"/><rect x="136" y="242" width="88" height="62" rx="5"/><path d="M294 242h54v22h48v40H294Z"/><rect x="466" y="242" width="42" height="62" rx="5"/><rect x="520" y="242" width="44" height="38" rx="5"/><path d="M632 242h72v62h-28v-25h-44Z"/><rect x="137" y="368" width="42" height="52" rx="5"/><rect x="188" y="368" width="38" height="31" rx="5"/><path d="M294 368h104v52h-47v-21h-57Z"/><rect x="466" y="368" width="44" height="52" rx="5"/><rect x="521" y="368" width="43" height="31" rx="5"/><rect x="632" y="368" width="72" height="52" rx="5"/></g></g>
+          <g className="mat-motion-diagonal-street"><path className="mat-motion-diagonal-edge" d="M102 452L598 86"/><path className="mat-motion-diagonal-surface" d="M102 452L598 86"/><path className="mat-motion-diagonal-center" d="M102 452L598 86"/></g>
+          <g className="mat-motion-canopy"><circle cx="102" cy="394" r="18"/><circle cx="164" cy="336" r="17"/><circle cx="224" cy="336" r="15"/><circle cx="260" cy="274" r="17"/><circle cx="318" cy="210" r="15"/><circle cx="382" cy="210" r="18"/><circle cx="432" cy="146" r="16"/><circle cx="492" cy="86" r="17"/><circle cx="548" cy="86" r="15"/></g>
+          <path className="mat-motion-heat-corridor" d="M102 452L598 86"/>
+          <path className="mat-motion-route mat-motion-route-fast" d="M102 452L598 86"/>
+          <path className="mat-motion-route mat-motion-route-cool" d="M102 452V336H260V210H432V86H598"/>
+          <circle className="mat-motion-traveler" r="8"><animateMotion dur="7s" begin="1.15s" repeatCount="indefinite" path="M102 452V336H260V210H432V86H598"/></circle>
+          <g className="mat-motion-intersections"><circle cx="102" cy="336" r="4"/><circle cx="260" cy="336" r="4"/><circle cx="260" cy="210" r="4"/><circle cx="432" cy="210" r="4"/><circle cx="432" cy="86" r="4"/></g>
+          <g className="mat-motion-labels"><text x="300" y="79">HILL ST</text><text x="300" y="203">PINE ST</text><text x="300" y="329">OAK WALK</text><text x="300" y="445">MARKET ST</text><text x="425" y="178" transform="rotate(-90 425 178)">2ND AVE</text><text x="69" y="270" transform="rotate(-90 69 270)">RIVER PARK</text><text x="346" y="270" transform="rotate(-36 346 270)">SUNLINE AVE</text></g>
+          <circle className="mat-motion-point" cx="102" cy="452" r="11"/><circle className="mat-motion-point" cx="598" cy="86" r="11"/>
+        </svg>
+        <span className="mat-motion-map-key"><i/> shaded streets</span>
+        <span className="mat-motion-route-legend"><b><i/> Cooler</b><b><i/> Faster</b></span>
+      </div>
+      <aside className="mat-motion-analysis">
+        <span className="mat-motion-phase mat-motion-phase-light"><b>02</b> Explain evidence</span>
+        <div className="mat-motion-analysis-head"><small>Route comparison</small><strong>Why this route?</strong><p>Live conditions are translated into visible trade-offs.</p></div>
+        <div className="mat-motion-score-list">
+          <div className="mat-motion-score mat-motion-score-shade"><span>Shade coverage</span><i/><strong>71%</strong></div>
+          <div className="mat-motion-score mat-motion-score-heat"><span>Heat exposure</span><i/><strong>2.8 / 5</strong></div>
+          <div className="mat-motion-score mat-motion-score-air"><span>Air quality</span><i/><strong>Moderate</strong></div>
+        </div>
+        <div className="mat-motion-result"><small>03 · Recommendation</small><strong>Cooler route</strong><p>12 minutes longer · two refill points</p><span><Check size={17} weight="bold"/> Route ready</span></div>
+      </aside>
+    </div>
+    <figcaption><span>Motion prototype · route → evidence → recommendation</span><span>7 second sequence · loops</span></figcaption>
+  </figure>;
 }
 
 function MatCaseStudy({ work }) {
@@ -123,9 +180,9 @@ function MatCaseStudy({ work }) {
     { label: 'Prototype scope', value: 'Routing · conditions · offline states' },
   ];
   return <article className="deep-case case-mat">
-    <CaseHero work={work} theme="mat" label="Web product · PWA · 2026" summary="A route planner that treats heat exposure as part of the journey—not an invisible cost paid after the shortest path is chosen." facts={facts} demoLabel="Try the route prototype" />
+    <CaseHero work={work} theme="mat" label="Web product · PWA · 2026" summary="A route planner that treats heat exposure as part of the journey, not a cost discovered after choosing the shortest path." facts={facts} demoLabel="Try the route prototype" />
 
-    <section className="case-section case-mat-premise"><div className="page-shell">
+    <section id="mat-premise" className="case-section case-mat-premise"><div className="page-shell">
       <CaseLead index="01" eyebrow="The premise" title="The fastest route is not always the kindest one." copy="Most route planners optimize time and distance. MÁT adds shade, surface temperature, air quality and recovery points, then explains the trade-off in plain language." />
       <InsightList items={[
         { title: 'Comfort is contextual', copy: 'A ten-minute shortcut can feel worse when it removes tree cover at midday.' },
@@ -134,11 +191,12 @@ function MatCaseStudy({ work }) {
       ]}/>
     </div></section>
 
-    <section className="case-section mat-score-section"><div className="page-shell">
+    <section id="route-model" className="case-section mat-score-section"><div className="page-shell">
       <CaseLead index="02" eyebrow="Product logic" title="A route score people can inspect." copy="The prototype keeps the model legible. Each recommendation exposes the factors behind it and lets people choose their own balance." />
+      <div className="mat-score-context"><span>Illustrative prototype weighting</span><strong>Walking · hot midday</strong><small>Values change by time, route mode and data confidence.</small></div>
       <div className="mat-score-model">
         {[['35','Shade'],['30','Heat'],['20','Air'],['15','Surface']].map(([value,label]) => <div key={label}><strong>{value}<sup>%</sup></strong><span>{label}</span></div>)}
-        <p>Weights shift by time of day and route mode. No factor is hidden behind a single opaque score.</p>
+        <p>These values demonstrate the scoring model; they are not presented as validated production weights.</p>
       </div>
     </div></section>
 
@@ -147,17 +205,17 @@ function MatCaseStudy({ work }) {
       <MatRouteDemo />
     </div></section>
 
-    <section className="case-section case-device-section"><div className="page-shell">
+    <section id="responsive-system" className="case-section case-device-section"><div className="page-shell">
       <CaseLead index="04" eyebrow="Responsive system" title="Planning on desktop. Guidance in your hand." copy="Desktop favors comparison and context; the mobile state removes everything that does not help the next decision." />
       <MatDeviceStudy />
     </div></section>
 
-    <section className="case-section case-motion-section"><div className="page-shell">
+    <section id="motion-study" className="case-section case-motion-section"><div className="page-shell">
       <CaseLead index="05" eyebrow="Motion study" title="Let the recommendation reveal its reasoning." copy="The route draws first, then environmental evidence and the recommendation settle into place. Reduced-motion users receive the complete final state without animation." />
-      <figure className="case-motion-frame mat-motion-frame"><img src={matRouteFlow} alt="Animated MÁT route comparison showing heat, shade and route selection" loading="lazy"/><figcaption>SVG prototype · route scoring and recommendation sequence</figcaption></figure>
+      <MatMotionStudy />
     </div></section>
 
-    <section className="case-section case-system-section"><div className="page-shell">
+    <section id="delivery-thinking" className="case-section case-system-section"><div className="page-shell">
       <CaseLead index="06" eyebrow="Delivery thinking" title="Designed beyond the happy path." copy="The concept includes the operational states a production team would need before the interface can be trusted outdoors." />
       <div className="case-decision-grid">
         <article><span>01</span><h3>Data confidence</h3><p>Every condition carries a freshness timestamp and a fallback when a source becomes unavailable.</p></article>
