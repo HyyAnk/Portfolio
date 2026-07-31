@@ -977,6 +977,9 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .identity-terminal-line { width: auto; border-right: 0; animation: none !important; }
   .ready-type span { opacity: 1; animation: none !important; transform: none; }
   .ready-fx { display: none; }
+  .experiments-preview-progress, .experiments-preview-percent { display: none; }
+  .experiments-preview-caption strong { width: auto; max-width: none; border-right: 0; animation: none !important; }
+  .experiments-preview-caption small { opacity: 1; animation: none !important; }
 }
 
 :root[data-theme="dark"] .hero-serif { color: #e7e3da; }
