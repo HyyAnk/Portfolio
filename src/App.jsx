@@ -86,9 +86,9 @@ function ExperimentMark({ slug }) {
 
 function ShowcaseChrome({ slug, title, children, active }) {
   return <svg className={`experiment-showcase experiment-showcase-${slug} ${active ? 'is-animated' : ''}`} viewBox="0 0 160 100" role="presentation" focusable="false">
-    <rect className="showcase-backdrop" width="160" height="100" rx="7" />
-    <rect className="showcase-window" x="4" y="4" width="152" height="92" rx="6" />
-    <rect className="showcase-bar" x="4" y="4" width="152" height="14" rx="6" />
+    <rect className="showcase-backdrop" width="160" height="100" rx="3" />
+    <rect className="showcase-window" x="4" y="4" width="152" height="92" rx="2.5" />
+    <rect className="showcase-bar" x="4" y="4" width="152" height="14" rx="2.5" />
     <circle className="showcase-dot showcase-dot-accent" cx="12" cy="11" r="2" />
     <circle className="showcase-dot" cx="19" cy="11" r="2" />
     <circle className="showcase-dot" cx="26" cy="11" r="2" />
@@ -1097,7 +1097,11 @@ function Experiments() {
             const position = (index - activeExperiment + experiments.length) % experiments.length;
             return <figure className={`experiment-preview-frame is-position-${position}`} key={project.slug}><ExperimentShowcase slug={project.slug} active={position === 0} /></figure>;
           })}</div>
-          <span className="experiments-preview-caption"><span className="experiments-preview-identity"><ExperimentMark slug={activeProject.slug} /><span className="experiments-preview-copy"><strong>{activeProject.title}</strong><small>{activeProject.live ? 'Open live project' : 'View source code'}</small></span></span></span>
+          <span className={`experiments-preview-caption is-${activeProject.slug}`} key={activeProject.slug}>
+            <span className="experiments-preview-progress" aria-hidden="true" />
+            <span className="experiments-preview-identity"><ExperimentMark slug={activeProject.slug} /><span className="experiments-preview-copy"><strong>{activeProject.title}</strong><small>{activeProject.live ? 'Open live project' : 'View source code'}</small></span></span>
+            <span className="experiments-preview-percent" aria-hidden="true" />
+          </span>
         </a>
       </Reveal>
     </div>
