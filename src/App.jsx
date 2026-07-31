@@ -13,10 +13,10 @@ import videoImage from './assets/generated/work-video.webp';
 import automationImage from './assets/generated/work-automation.webp';
 import blockchainImage from './assets/generated/work-blockchain.webp';
 import portraitImage from './assets/generated/portrait.webp';
-import mergeboardPreview from './assets/experiments/mergeboard-art.webp';
-import photoIdPreview from './assets/experiments/photo-id-art.webp';
-import pdfCardPreview from './assets/experiments/pdf-card-art.webp';
-import aiStudioPreview from './assets/experiments/ai-media-art.webp';
+import mergeboardPreview from './assets/experiments/mergeboard-art-v2.webp';
+import photoIdPreview from './assets/experiments/photo-id-art-v2.webp';
+import pdfCardPreview from './assets/experiments/pdf-card-art-v2.webp';
+import aiStudioPreview from './assets/experiments/ai-media-art-v2.webp';
 import matCover from './assets/case-studies/mat-cover.webp';
 import kitepayCover from './assets/case-studies/kitepay-cover.webp';
 import muonCover from './assets/case-studies/muon-cover.webp';
@@ -80,6 +80,30 @@ function ExperimentMark({ slug }) {
     <rect x="3" y="4" width="18" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="2" />
     <rect x="11" y="10" width="18" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="2" />
     <rect x="13" y="12" width="7" height="7" rx="1.5" fill="currentColor" />
+  </svg>;
+}
+
+function ExperimentMotion({ slug }) {
+  if (slug === 'mergeboard') return <svg className="experiment-motion experiment-motion-merge" viewBox="0 0 100 62" preserveAspectRatio="none" aria-hidden="true">
+    <path className="experiment-motion-path" d="M13 40 C31 40 31 20 48 20 S68 42 88 25" />
+    <circle className="experiment-motion-node experiment-motion-node-a" cx="13" cy="40" r="1.8" />
+    <circle className="experiment-motion-node experiment-motion-node-b" cx="88" cy="25" r="1.8" />
+  </svg>;
+
+  if (slug === 'photo-id') return <svg className="experiment-motion experiment-motion-photo" viewBox="0 0 100 62" preserveAspectRatio="none" aria-hidden="true">
+    <rect className="experiment-motion-focus" x="29" y="8" width="42" height="46" rx="1" />
+    <line className="experiment-motion-scan" x1="22" y1="17" x2="78" y2="17" />
+  </svg>;
+
+  if (slug === 'pdf-card') return <svg className="experiment-motion experiment-motion-pdf" viewBox="0 0 100 62" preserveAspectRatio="none" aria-hidden="true">
+    <path className="experiment-motion-crop" d="M18 18v-7h7 M75 11h7v7 M82 44v7h-7 M25 51h-7v-7" />
+    <rect className="experiment-motion-sheet" x="31" y="18" width="38" height="26" rx="1" />
+  </svg>;
+
+  return <svg className="experiment-motion experiment-motion-media" viewBox="0 0 100 62" preserveAspectRatio="none" aria-hidden="true">
+    <rect className="experiment-motion-pane experiment-motion-pane-a" x="14" y="12" width="38" height="30" rx="3" />
+    <rect className="experiment-motion-pane experiment-motion-pane-b" x="48" y="21" width="38" height="29" rx="3" />
+    <circle className="experiment-motion-orbit" cx="50" cy="31" r="13" />
   </svg>;
 }
 
@@ -483,12 +507,34 @@ function ReadyProjectButton() {
   </span>;
 }
 
+function IdentityTerminal() {
+  const [animationKey, setAnimationKey] = useState(0);
+
+  return <button
+    className="identity-terminal"
+    type="button"
+    onClick={() => setAnimationKey((key) => key + 1)}
+    aria-label="Artist mode installed, but Dư Ngọc Minh Hoàng is my true form. Click to replay the typing animation."
+  >
+    <span className="identity-terminal-bar" aria-hidden="true">
+      <span className="identity-terminal-dots"><i /><i /><i /></span>
+      <span>~/identity</span>
+      <span className="identity-terminal-replay">replay ↵</span>
+    </span>
+    <span className="identity-terminal-screen" aria-hidden="true" key={animationKey}>
+      <span className="identity-terminal-line identity-terminal-line-one">Artist mode installed</span>
+      <span className="identity-terminal-line identity-terminal-line-two">but <strong>Dư Ngọc Minh Hoàng</strong> is my true form....</span>
+    </span>
+  </button>;
+}
+
 function Hero() {
   return <section className="hero section-pad">
     <div className="hero-sentinel" data-nav-sentinel="true" />
     <div className="page-shell hero-grid">
       <div className="hero-copy">
         <h1>{person}</h1>
+        <IdentityTerminal />
         <p className="hero-serif">Designer and developer for thoughtful digital work.</p>
         <p className="hero-accent">Clarity first. Character always.</p>
         <p className="hero-lede">I turn complex products, stories and workflows into clear experiences people can understand and use.</p>
@@ -863,9 +909,9 @@ function Experiments() {
         <a className="experiments-preview" href={activeProject.live || activeProject.repo} target="_blank" rel="noreferrer" aria-label={`Open ${activeProject.title} ${activeProject.live ? 'live demo' : 'source code'}`}>
           <div className="experiments-stack" aria-hidden="true">{experiments.map((project, index) => {
             const position = (index - activeExperiment + experiments.length) % experiments.length;
-            return <figure className={`experiment-preview-frame is-position-${position}`} key={project.slug}><img src={project.image} alt="" loading="lazy" decoding="async" /></figure>;
+            return <figure className={`experiment-preview-frame is-position-${position}`} key={project.slug}><img src={project.image} alt="" loading="lazy" decoding="async" />{position === 0 && <ExperimentMotion slug={project.slug} />}</figure>;
           })}</div>
-          <span className="experiments-preview-caption"><span className="experiments-preview-identity"><ExperimentMark slug={activeProject.slug} /><span className="experiments-preview-copy"><strong>{activeProject.title}</strong><small>{activeProject.live ? 'Open live project' : 'View source code'}</small></span></span><ArrowUpRight size={18} /></span>
+          <span className="experiments-preview-caption"><span className="experiments-preview-identity"><ExperimentMark slug={activeProject.slug} /><span className="experiments-preview-copy"><strong>{activeProject.title}</strong><small>{activeProject.live ? 'Open live project' : 'View source code'}</small></span></span></span>
         </a>
       </Reveal>
     </div>
