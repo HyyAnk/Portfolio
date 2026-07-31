@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, CaretRight, Check } from '@phosphor-icons/react';
 
 import kitepayStateFlow from './assets/case-studies/kitepay-state-flow.svg';
+import { withoutTrailingPeriod } from './text.js';
 
 const matRoadEdges = {
   riverStart: 'M72 306C105 300 135 288 165 278C205 266 232 238 270 224C310 209 350 216 390 205',
@@ -55,7 +56,7 @@ function CaseEyebrow({ children }) {
 function CaseLead({ index, eyebrow, title, copy }) {
   return <header className="case-section-lead">
     <span className="case-section-index">{index}</span>
-    <div><CaseEyebrow>{eyebrow}</CaseEyebrow><h2>{title}</h2>{copy && <p>{copy}</p>}</div>
+    <div><CaseEyebrow>{eyebrow}</CaseEyebrow><h2>{withoutTrailingPeriod(title)}</h2>{copy && <p>{copy}</p>}</div>
   </header>;
 }
 
@@ -66,7 +67,7 @@ function CaseHero({ work, theme, label, summary, facts, demoLabel }) {
       <div className="deep-case-heading">
         <div>
           <CaseEyebrow>{label}</CaseEyebrow>
-          <h1>{work.title}</h1>
+          <h1>{withoutTrailingPeriod(work.title)}</h1>
         </div>
         <div className="deep-case-summary">
           <p>{summary}</p>
@@ -88,7 +89,7 @@ function CaseHero({ work, theme, label, summary, facts, demoLabel }) {
 function InsightList({ items }) {
   return <div className="case-insight-list">{items.map((item, index) => <article key={item.title}>
     <span>{String(index + 1).padStart(2, '0')}</span>
-    <h3>{item.title}</h3>
+    <h3>{withoutTrailingPeriod(item.title)}</h3>
     <p>{item.copy}</p>
   </article>)}</div>;
 }
@@ -159,7 +160,7 @@ function MatRouteDemo() {
       </div>
       <aside className="mat-route-panel" aria-live="polite">
         <CaseEyebrow>Recommended route</CaseEyebrow>
-        <h3>{route.label}</h3>
+        <h3>{withoutTrailingPeriod(route.label)}</h3>
         <p>{route.note}</p>
         <div className="mat-route-stats"><div><span>Time</span><strong>{route.time}</strong></div><div><span>Distance</span><strong>{route.distance}</strong></div><div><span>Shade</span><strong>{route.shade}</strong></div><div><span>Heat score</span><strong>{route.heat}</strong></div></div>
         {directionsOpen && <ol className="mat-directions-preview">{route.directions.map((direction, index) => <li key={direction}><span>{String(index + 1).padStart(2, '0')}</span>{direction}</li>)}</ol>}
@@ -239,7 +240,7 @@ function MatScenarioStudy() {
     </figure>
     <aside className="mat-scenario-notes">
       <CaseEyebrow>Decision in context</CaseEyebrow>
-      <h3>12 minutes buys 42% more shade.</h3>
+      <h3>12 minutes buys 42% more shade</h3>
       <p>The product makes that trade-off visible before the walk begins—not after the user is already exposed.</p>
       <div className="mat-scenario-evidence">
         <article><i className="evidence-sun"/><div><strong>Midday changes the answer</strong><span>Sun angle increases exposure on River Walk.</span></div></article>
@@ -291,7 +292,7 @@ function MatResilienceStudy() {
         <div className="mat-resilience-guidance"><small>NEXT TURN · 80 M</small><strong>Continue along Canopy Way</strong><p>Route geometry and the next three instructions are available offline.</p></div>
       </div>
       <div className="mat-resilience-states">
-        <header><CaseEyebrow>Live system state</CaseEyebrow><h3>Degrade clearly, never silently.</h3></header>
+        <header><CaseEyebrow>Live system state</CaseEyebrow><h3>Degrade clearly, never silently</h3></header>
         <article className="state-warning"><i/><div><strong>Environment feed</strong><p>Keep the last reading and show its age.</p></div><span>7 min old</span></article>
         <article className="state-ready"><i/><div><strong>Route geometry</strong><p>Cache the active path and safety details.</p></div><span>Available</span></article>
         <article className="state-ready"><i/><div><strong>Turn guidance</strong><p>Preserve the immediate decision offline.</p></div><span>Available</span></article>
@@ -355,7 +356,7 @@ function KitePayDemo() {
     <div className="kite-demo-layout">
       <aside className="kite-demo-sidebar"><span>Overview</span><span className="is-active">Milestones</span><span>Activity</span><span>Contract</span><small>Prototype only<br/>No wallet connection</small></aside>
       <div className="kite-demo-main">
-        <header><div><CaseEyebrow>Website delivery · milestone 02</CaseEyebrow><h3>{current.name}</h3><p aria-live="polite">{current.copy}</p></div><strong>250.00 <small>USDT</small></strong></header>
+        <header><div><CaseEyebrow>Website delivery · milestone 02</CaseEyebrow><h3>{withoutTrailingPeriod(current.name)}</h3><p aria-live="polite">{current.copy}</p></div><strong>250.00 <small>USDT</small></strong></header>
         <ol className="kite-state-track">{kiteSteps.map((step,index) => <li key={step.name} className={index < active ? 'is-done' : index === active ? 'is-current' : ''}><i>{index < active ? <Check size={13} weight="bold"/> : index + 1}</i><span>{step.name}</span></li>)}</ol>
         <div className="kite-demo-cards">
           <article><span>Recipient</span><strong>hyank.studio</strong><code>0x71A9…A92f</code></article>

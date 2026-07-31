@@ -24,6 +24,7 @@ import muonCover from './assets/case-studies/muon-cover.webp';
 import hopLuuCover from './assets/case-studies/hop-luu-cover.webp';
 import { DeepCaseStudy } from './caseStudies.jsx';
 import { ShowcaseCaseStudy } from './showcaseCases.jsx?rev=hop-luu-v3';
+import { withoutTrailingPeriod } from './text.js';
 
 const person = 'HyyAnk';
 const fullName = 'Dư Ngọc Minh Hoàng';
@@ -448,6 +449,7 @@ function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useTheme();
   const location = useLocation();
+  const isHome = location.pathname === '/';
   const navRef = useRef(null);
   useEffect(() => {
     const sentinel = document.querySelector('[data-nav-sentinel]');
@@ -466,11 +468,20 @@ function Nav() {
     document.addEventListener('pointerdown', close);
     return () => { document.removeEventListener('keydown', close); document.removeEventListener('pointerdown', close); };
   }, []);
+  useEffect(() => setBrandOpen(false), [location.pathname]);
   return <header className={`site-nav ${scrolled ? 'is-scrolled' : ''}`} ref={navRef}>
     <div className="nav-inner">
-      <div className="wordmark-menu-wrap" onPointerEnter={() => setBrandOpen(true)} onPointerLeave={() => setBrandOpen(false)} onMouseEnter={() => setBrandOpen(true)} onMouseLeave={() => setBrandOpen(false)} onFocusCapture={() => setBrandOpen(true)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setBrandOpen(false); }}>
-        <Link className="wordmark" to="/" aria-label={person} aria-expanded={brandOpen} aria-haspopup="dialog" onClick={() => { setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-mark" aria-hidden="true"><img className="brand-logo-light" src="/deer-logo.svg" alt="" /><img className="brand-logo-dark" src="/deer-logo-white.svg" alt="" /></span><span>{person}</span></Link>
-        <BrandDropdown />
+      <div
+        className={`wordmark-menu-wrap ${isHome ? 'has-brand-preview' : 'is-home-link'}`}
+        {...(isHome ? {
+          onPointerEnter: () => setBrandOpen(true),
+          onPointerLeave: () => setBrandOpen(false),
+          onFocusCapture: () => setBrandOpen(true),
+          onBlur: (event) => { if (!event.currentTarget.contains(event.relatedTarget)) setBrandOpen(false); },
+        } : {})}
+      >
+        <Link className="wordmark" to="/" aria-label={isHome ? person : 'Back to home'} aria-expanded={isHome ? brandOpen : undefined} aria-haspopup={isHome ? 'dialog' : undefined} onClick={() => { setBrandOpen(false); setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-mark" aria-hidden="true"><img className="brand-logo-light" src="/deer-logo.svg" alt="" /><img className="brand-logo-dark" src="/deer-logo-white.svg" alt="" /></span><span>{person}</span></Link>
+        {isHome && <BrandDropdown />}
       </div>
       <div className="nav-actions">
         <a className="nav-link nav-link-simple" href="/#selected-works">Work</a>
@@ -780,7 +791,7 @@ function IdentityTerminal() {
         }
 
         setActiveLine(0);
-        await pause(4000);
+        await pause(500);
         if (cancelled || !await eraseLine(progressCopy(100), setLineTwo, 2)) return;
         if (!await eraseLine(identityTerminalCopy.install[0], setLineOne, 1)) return;
 
@@ -836,7 +847,7 @@ function Hero() {
     <div className="hero-sentinel" data-nav-sentinel="true" />
     <div className="page-shell hero-grid">
       <div className="hero-copy">
-        <h1>{person}</h1>
+        <h1>{withoutTrailingPeriod(person)}</h1>
         <IdentityTerminal />
         <p className="hero-serif">Designer and developer for thoughtful digital work.</p>
         <p className="hero-accent">Clarity first. Character always.</p>
@@ -851,7 +862,7 @@ function Hero() {
 }
 
 function WorkCarousel() {
-  return <section id="selected-works" className="section-pad works-section"><div className="page-shell"><Reveal><div className="section-heading section-heading-stacked"><h2>Selected work</h2><p>Four self-initiated case studies across product, identity, editorial and systems.</p></div></Reveal><div className="work-gallery">{works.map((work, index) => <Reveal className={`work-card work-card-${index + 1}`} key={work.slug} delay={index * .05}><Link to={`/work/${work.slug}`} className="work-card-link" aria-label={`View ${work.title} project`}><figure className="work-card-image"><img src={work.image} alt={`${work.title} project visual`} loading={index > 1 ? 'lazy' : 'eager'} decoding="async" /><figcaption>View project <ArrowUpRight size={16} /></figcaption></figure><div className="work-card-kicker"><span>{String(index + 1).padStart(2, '0')} / 04</span><span>{work.deep ? 'Full case study' : 'Project study'}</span></div><div className="work-card-copy"><div><h3>{work.title}</h3><p>{work.description}</p></div><div className="work-card-meta"><span>{work.type}</span><span>{work.year}</span><ArrowUpRight size={20} /></div></div></Link></Reveal>)}</div></div></section>;
+  return <section id="selected-works" className="section-pad works-section"><div className="page-shell"><Reveal><div className="section-heading section-heading-stacked"><h2>Selected work</h2><p>Four self-initiated case studies across product, identity, editorial and systems.</p></div></Reveal><div className="work-gallery">{works.map((work, index) => <Reveal className={`work-card work-card-${index + 1}`} key={work.slug} delay={index * .05}><Link to={`/work/${work.slug}`} className="work-card-link" aria-label={`View ${work.title} project`}><figure className="work-card-image"><img src={work.image} alt={`${work.title} project visual`} loading={index > 1 ? 'lazy' : 'eager'} decoding="async" /><figcaption>View project <ArrowUpRight size={16} /></figcaption></figure><div className="work-card-kicker"><span>{String(index + 1).padStart(2, '0')} / 04</span><span>{work.deep ? 'Full case study' : 'Project study'}</span></div><div className="work-card-copy"><div><h3>{withoutTrailingPeriod(work.title)}</h3><p>{work.description}</p></div><div className="work-card-meta"><span>{work.type}</span><span>{work.year}</span><ArrowUpRight size={20} /></div></div></Link></Reveal>)}</div></div></section>;
 }
 
 function About() {
@@ -1214,7 +1225,7 @@ function Experiments() {
       <div className="experiments-grid" role="list" aria-label="Experiment projects">{experiments.map((project, index) => <Reveal className="experiment-card" key={project.slug} delay={index * .045}>
         <button className={`experiment-selector ${activeExperiment === index ? 'is-active' : ''}`} type="button" aria-pressed={activeExperiment === index} onClick={() => setActiveExperiment(index)} onMouseEnter={() => setAutoPaused(true)} onMouseLeave={() => setAutoPaused(false)} onFocus={() => { setActiveExperiment(index); setAutoPaused(true); }} onBlur={() => setAutoPaused(false)}>
           <span className="experiment-card-head"><ExperimentMark slug={project.slug} /><span className="experiment-card-label">{project.label}</span></span>
-          <h3>{project.title}</h3>
+          <h3>{withoutTrailingPeriod(project.title)}</h3>
           <p>{project.description}</p>
         </button>
       </Reveal>)}</div>
@@ -1280,9 +1291,9 @@ function ProjectPage({ work }) {
   }
   return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="project-page">
     <section className="project-hero section-pad">
-      <div className="page-shell"><Reveal><Link className="project-back" to="/#selected-works"><ArrowLeft size={16} /> Selected works</Link><div className="project-heading"><div><span className="eyebrow">{work.type} · {work.year}</span><h1>{work.title}</h1></div><p>{work.description}</p></div></Reveal><Reveal className="project-cover" delay={.08}><img src={work.image} alt={`${work.title} case study cover`} /></Reveal></div>
+      <div className="page-shell"><Reveal><Link className="project-back" to="/#selected-works"><ArrowLeft size={16} /> Selected works</Link><div className="project-heading"><div><span className="eyebrow">{work.type} · {work.year}</span><h1>{withoutTrailingPeriod(work.title)}</h1></div><p>{work.description}</p></div></Reveal><Reveal className="project-cover" delay={.08}><img src={work.image} alt={`${work.title} case study cover`} /></Reveal></div>
     </section>
-    <section className="project-story section-pad"><div className="page-shell project-story-grid"><Reveal><span className="eyebrow">Role</span><p className="project-role">{work.role}</p><div className="tag-row">{work.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></Reveal><Reveal className="project-narrative" delay={.08}><article><span className="eyebrow">The challenge</span><h2>{work.challenge.replace(/\.$/, '')}</h2></article><article><span className="eyebrow">The direction</span><p className="large-copy">{work.outcome}</p></article><p className="project-disclosure">This is a self-initiated portfolio study. The imagery was art-directed for this website to communicate the intended system and craft.</p></Reveal></div></section>
+    <section className="project-story section-pad"><div className="page-shell project-story-grid"><Reveal><span className="eyebrow">Role</span><p className="project-role">{work.role}</p><div className="tag-row">{work.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></Reveal><Reveal className="project-narrative" delay={.08}><article><span className="eyebrow">The challenge</span><h2>{withoutTrailingPeriod(work.challenge)}</h2></article><article><span className="eyebrow">The direction</span><p className="large-copy">{work.outcome}</p></article><p className="project-disclosure">This is a self-initiated portfolio study. The imagery was art-directed for this website to communicate the intended system and craft.</p></Reveal></div></section>
     <Contact />
   </main><Footer /></>;
 }
@@ -1294,7 +1305,7 @@ function SkillPage({ skill }) {
   return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="skill-page">
     <section className="skill-page-hero section-pad">
       <div className="page-shell skill-page-hero-grid">
-        <Reveal><h1>{skill.title}</h1><p className="large-copy">{skill.short}</p><p>{skill.body}</p><ArrowLink to="#capabilities">Explore capabilities</ArrowLink></Reveal>
+        <Reveal><h1>{withoutTrailingPeriod(skill.title)}</h1><p className="large-copy">{skill.short}</p><p>{skill.body}</p><ArrowLink to="#capabilities">Explore capabilities</ArrowLink></Reveal>
         <Reveal className="skill-page-hero-image" delay={.1}><img src={skill.image} alt={`${skill.title} practice visual`} /></Reveal>
       </div>
     </section>

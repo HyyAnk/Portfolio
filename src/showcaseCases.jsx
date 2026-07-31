@@ -17,6 +17,7 @@ import hopLuuDigitalReader from './assets/case-studies/hop-luu-digital-reader.we
 import hopLuuCapabilitySpread from './assets/case-studies/hop-luu-capability-spread-v2.webp';
 import hopLuuFieldHandover from './assets/case-studies/hop-luu-field-handover-v2.webp';
 import hopLuuProductionDetail from './assets/case-studies/hop-luu-production-detail-v2.webp';
+import { withoutTrailingPeriod } from './text.js';
 
 function ShowcaseEyebrow({ children }) {
   return <span className="showcase-eyebrow">{children}</span>;
@@ -27,7 +28,7 @@ function ShowcaseHero({ work, theme, label, summary, facts, image, imageAlt, dem
     <div className="page-shell">
       <Link className="showcase-back" to="/#selected-works"><ArrowLeft size={16}/> Selected work</Link>
       <div className="showcase-heading">
-        <div><ShowcaseEyebrow>{label}</ShowcaseEyebrow><h1>{work.title}</h1></div>
+        <div><ShowcaseEyebrow>{label}</ShowcaseEyebrow><h1>{withoutTrailingPeriod(work.title)}</h1></div>
         <div className="showcase-summary"><p>{summary}</p><a href="#live-demo">{demoLabel}<ArrowUpRight size={17}/></a></div>
       </div>
       <figure className="showcase-cover"><img src={image} alt={imageAlt}/></figure>
@@ -38,7 +39,7 @@ function ShowcaseHero({ work, theme, label, summary, facts, image, imageAlt, dem
 }
 
 function ShowcaseLead({ label, title, copy }) {
-  return <header className="showcase-lead">{label && <ShowcaseEyebrow>{label}</ShowcaseEyebrow>}<h2>{title}</h2>{copy && <p>{copy}</p>}</header>;
+  return <header className="showcase-lead">{label && <ShowcaseEyebrow>{label}</ShowcaseEyebrow>}<h2>{withoutTrailingPeriod(title)}</h2>{copy && <p>{copy}</p>}</header>;
 }
 
 const muonModes = {
@@ -61,7 +62,7 @@ function MuonComposer() {
     <div className="muon-output" aria-live="polite">
       <div className="muon-output-mark" aria-hidden="true"><i>[</i><i>]</i></div>
       <span className="muon-output-brand">MƯỢN</span>
-      <div className="muon-output-copy"><small>{item.code}</small><h3>{item.item}</h3><p>{item.time}</p></div>
+      <div className="muon-output-copy"><small>{item.code}</small><h3>{withoutTrailingPeriod(item.item)}</h3><p>{item.time}</p></div>
       <div className="muon-output-action"><span>Borrow nearby</span><CaretRight size={18}/></div>
       <strong className="muon-output-symbol" aria-hidden="true">{item.symbol}</strong>
     </div>
@@ -207,7 +208,7 @@ function HopLuuReader() {
     <div className="hop-reader-layout">
       <nav aria-label="Reader purpose">{Object.entries(readerPaths).map(([key,value]) => <button type="button" key={key} aria-current={path === key ? 'page' : undefined} onClick={() => setPath(key)}><span>{value.label}</span><CaretRight/></button>)}</nav>
       <section className="hop-reader-page" aria-live="polite">
-        <div className="hop-page-heading"><small>{language === 'vi' ? 'HỒ SƠ NĂNG LỰC' : 'CAPABILITY PROFILE'}</small><h3>{content[language].title}</h3><p>{content[language].summary}</p></div>
+        <div className="hop-page-heading"><small>{language === 'vi' ? 'HỒ SƠ NĂNG LỰC' : 'CAPABILITY PROFILE'}</small><h3>{withoutTrailingPeriod(content[language].title)}</h3><p>{content[language].summary}</p></div>
         <dl className="hop-reader-facts">{content[language].facts.map(([label,value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
         <div className="hop-layer-switch" role="group" aria-label="Process diagram layer">{['system','delivery','evidence'].map((value) => <button type="button" key={value} aria-pressed={layer === value} onClick={() => setLayer(value)}>{value[0].toUpperCase()+value.slice(1)}</button>)}</div>
         <div className={`hop-process hop-process-${layer}`} role="img" aria-label={`Process diagram showing ${layer} layer`}>
@@ -240,7 +241,7 @@ function HopLuuCaseStudy({ work }) {
     <section className="showcase-section hop-capabilities"><div className="page-shell">
       <h2 className="hop-section-title">Technical capability</h2>
       <figure className="hop-visual-figure"><img src={hopLuuCapabilitySpread} alt="Open HỢP LƯU profile showing the technical capability matrix and engineering scope spread" width="1536" height="1024" loading="lazy"/></figure>
-      <div className="hop-capability-strip">{capabilityRows.map((item) => <article key={item.code}><b>{item.code}</b><h3>{item.title}</h3><p>{item.output}</p></article>)}</div>
+      <div className="hop-capability-strip">{capabilityRows.map((item) => <article key={item.code}><b>{item.code}</b><h3>{withoutTrailingPeriod(item.title)}</h3><p>{item.output}</p></article>)}</div>
       <div className="hop-sector-band"><span>Sector coverage</span>{sectors.map((sector) => <strong key={sector}>{sector}</strong>)}</div>
     </div></section>
 
@@ -253,12 +254,12 @@ function HopLuuCaseStudy({ work }) {
     <section className="showcase-section hop-projects"><div className="page-shell">
       <h2 className="hop-section-title">Project sheets</h2>
       <div className="hop-project-gallery"><figure className="hop-visual-figure"><img src={hopLuuProjectSheets} alt="HỢP LƯU project sheets with process diagrams, scope matrices and commissioning evidence" width="1536" height="1024" loading="lazy"/></figure><figure className="hop-visual-figure"><img src={hopLuuFieldHandover} alt="Engineers using the HỢP LƯU profile, project binder and tablet during a site handover review" width="1536" height="1024" loading="lazy"/></figure></div>
-      <div className="hop-project-index">{projectRecords.map((project) => <article key={project.code}><span>{project.code}</span><h3>{project.title}</h3><dl><div><dt>Location</dt><dd>{project.location}</dd></div><div><dt>Year</dt><dd>{project.year}</dd></div><div><dt>Capacity</dt><dd>{project.capacity}</dd></div></dl></article>)}</div>
+      <div className="hop-project-index">{projectRecords.map((project) => <article key={project.code}><span>{project.code}</span><h3>{withoutTrailingPeriod(project.title)}</h3><dl><div><dt>Location</dt><dd>{project.location}</dd></div><div><dt>Year</dt><dd>{project.year}</dd></div><div><dt>Capacity</dt><dd>{project.capacity}</dd></div></dl></article>)}</div>
     </div></section>
 
     <section className="showcase-section hop-assurance"><div className="page-shell">
       <h2 className="hop-section-title">QA-QC and HSE</h2>
-      <div className="hop-assurance-layout"><div className="hop-assurance-list">{assuranceAreas.map((area) => <article key={area.title}><Check size={19}/><div><h3>{area.title}</h3><p>{area.copy}</p></div></article>)}</div><div className="hop-responsibility-map"><span>Project director</span><i/><span>Project manager</span><div><strong>Process</strong><strong>Mechanical</strong><strong>Electrical</strong><strong>Commissioning</strong></div><i/><span>Document control</span></div></div>
+      <div className="hop-assurance-layout"><div className="hop-assurance-list">{assuranceAreas.map((area) => <article key={area.title}><Check size={19}/><div><h3>{withoutTrailingPeriod(area.title)}</h3><p>{area.copy}</p></div></article>)}</div><div className="hop-responsibility-map"><span>Project director</span><i/><span>Project manager</span><div><strong>Process</strong><strong>Mechanical</strong><strong>Electrical</strong><strong>Commissioning</strong></div><i/><span>Document control</span></div></div>
       <figure className="hop-visual-figure hop-governance-figure"><img src={hopLuuGovernanceKit} alt="HỢP LƯU governance kit with QA-QC checklist, HSE plan, document register and approved drawing" width="1536" height="1024" loading="lazy"/></figure>
     </div></section>
 
