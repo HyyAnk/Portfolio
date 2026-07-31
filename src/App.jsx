@@ -13,10 +13,10 @@ import videoImage from './assets/generated/work-video.webp';
 import automationImage from './assets/generated/work-automation.webp';
 import blockchainImage from './assets/generated/work-blockchain.webp';
 import portraitImage from './assets/generated/portrait.webp';
-import mergeboardPreview from './assets/experiments/mergeboard.png';
-import photoIdPreview from './assets/experiments/photo-id-studio.png';
-import pdfCardPreview from './assets/experiments/pdf-business-card.png';
-import aiStudioPreview from './assets/experiments/ai-creative-studio.png';
+import mergeboardPreview from './assets/experiments/mergeboard-art.webp';
+import photoIdPreview from './assets/experiments/photo-id-art.webp';
+import pdfCardPreview from './assets/experiments/pdf-card-art.webp';
+import aiStudioPreview from './assets/experiments/ai-media-art.webp';
 import matCover from './assets/case-studies/mat-cover.webp';
 import kitepayCover from './assets/case-studies/kitepay-cover.webp';
 import muonCover from './assets/case-studies/muon-cover.webp';
@@ -53,6 +53,36 @@ function BrandIcon({ name }) {
   return <svg className={`brand-icon brand-icon-${name}`} viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill={fills[name]} d={paths[name]} /></svg>;
 }
 
+function ExperimentMark({ slug }) {
+  if (slug === 'mergeboard') return <svg className="experiment-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <rect x="2" y="3" width="10" height="10" rx="2" fill="currentColor" />
+    <rect x="20" y="3" width="10" height="10" rx="2" fill="currentColor" />
+    <rect x="11" y="20" width="10" height="10" rx="2" fill="currentColor" />
+    <line x1="12" y1="8" x2="20" y2="8" stroke="currentColor" strokeWidth="2" />
+    <line x1="16" y1="13" x2="16" y2="20" stroke="currentColor" strokeWidth="2" />
+  </svg>;
+
+  if (slug === 'photo-id') return <svg className="experiment-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <rect x="4" y="2" width="24" height="28" rx="4" fill="none" stroke="currentColor" strokeWidth="2" />
+    <circle cx="16" cy="11" r="4" fill="currentColor" />
+    <ellipse cx="16" cy="22" rx="7" ry="4" fill="currentColor" />
+    <line x1="1" y1="8" x2="7" y2="8" stroke="currentColor" strokeWidth="2" />
+    <line x1="25" y1="24" x2="31" y2="24" stroke="currentColor" strokeWidth="2" />
+  </svg>;
+
+  if (slug === 'pdf-card') return <svg className="experiment-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <rect x="4" y="2" width="20" height="28" rx="3" fill="none" stroke="currentColor" strokeWidth="2" />
+    <rect x="9" y="13" width="20" height="11" rx="2" fill="currentColor" />
+    <rect x="13" y="17" width="8" height="2" rx="1" fill="var(--paper-elevated)" />
+  </svg>;
+
+  return <svg className="experiment-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <rect x="3" y="4" width="18" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="2" />
+    <rect x="11" y="10" width="18" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="2" />
+    <rect x="13" y="12" width="7" height="7" rx="1.5" fill="currentColor" />
+  </svg>;
+}
+
 const contactLinks = [
   { key: 'telegram', label: 'Telegram', value: '@dungocminhhoang', href: 'https://t.me/dungocminhhoang', icon: TelegramLogo },
   { key: 'x', label: 'X', value: 'x.com/0x_HyyAnk', href: 'https://x.com/0x_HyyAnk', icon: XLogo },
@@ -84,7 +114,7 @@ const experiments = [
     description: 'Build reusable flows with text, media and generation nodes.',
     tech: ['React Flow', 'File System Access API', 'Local-first'],
     image: mergeboardPreview,
-    alt: 'MergeBoard node canvas with connected text, image and mixer nodes',
+    alt: 'Graphite modules, photographic fragments and orange cords arranged as a connected visual system',
     repo: 'https://github.com/HyyAnk/Merge-Board-Node',
     live: 'https://merge-board-node.vercel.app',
     featured: true,
@@ -96,7 +126,7 @@ const experiments = [
     description: 'Prepare print-ready ID photos from queued references.',
     tech: ['React', 'Express', 'Sharp'],
     image: photoIdPreview,
-    alt: 'Photo ID Studio dashboard with session queue, upload dock and result panel',
+    alt: 'Portrait lightbox and identity photo frames arranged on a photographic studio table',
     repo: 'https://github.com/HyyAnk/Photo-ID-Studio',
     live: 'https://photo-id-studio.vercel.app',
   },
@@ -107,7 +137,7 @@ const experiments = [
     description: 'Stamp business cards and QR details onto PDF files.',
     tech: ['TypeScript', 'pdf-lib', 'QR tooling'],
     image: pdfCardPreview,
-    alt: 'PDF Business Card interface with PDF upload canvas and card controls',
+    alt: 'Paper stack, black stamping block and embossed card arranged as a document production still life',
     repo: 'https://github.com/HyyAnk/Pdf-business-card-stamper',
     live: 'https://pdf-business-card-stamper.vercel.app',
   },
@@ -118,7 +148,7 @@ const experiments = [
     description: 'Generate and edit media with reference-driven AI tools.',
     tech: ['React', 'TypeScript', 'Google GenAI'],
     image: aiStudioPreview,
-    alt: 'Google AI Studio repository banner for a generative media workspace',
+    alt: 'Smoked glass, optical lens and film layers arranged as an experimental media workbench',
     repo: 'https://github.com/HyyAnk/Image-video-Google-API---Aistudio',
     wide: true,
   },
@@ -824,7 +854,7 @@ function Experiments() {
     <div className="experiments-stage">
       <div className="experiments-grid" role="list" aria-label="Experiment projects">{experiments.map((project, index) => <Reveal className="experiment-card" key={project.slug} delay={index * .045}>
         <button className={`experiment-selector ${activeExperiment === index ? 'is-active' : ''}`} type="button" aria-pressed={activeExperiment === index} onClick={() => setActiveExperiment(index)} onMouseEnter={() => setActiveExperiment(index)} onFocus={() => setActiveExperiment(index)}>
-          <span className="experiment-card-label">{project.label}</span>
+          <span className="experiment-card-head"><ExperimentMark slug={project.slug} /><span className="experiment-card-label">{project.label}</span></span>
           <h3>{project.title}</h3>
           <p>{project.description}</p>
         </button>
@@ -835,7 +865,7 @@ function Experiments() {
             const position = (index - activeExperiment + experiments.length) % experiments.length;
             return <figure className={`experiment-preview-frame is-position-${position}`} key={project.slug}><img src={project.image} alt="" loading="lazy" decoding="async" /></figure>;
           })}</div>
-          <span className="experiments-preview-caption"><span><strong>{activeProject.title}</strong><small>{activeProject.live ? 'Open live project' : 'View source code'}</small></span><ArrowUpRight size={18} /></span>
+          <span className="experiments-preview-caption"><span className="experiments-preview-identity"><ExperimentMark slug={activeProject.slug} /><span className="experiments-preview-copy"><strong>{activeProject.title}</strong><small>{activeProject.live ? 'Open live project' : 'View source code'}</small></span></span><ArrowUpRight size={18} /></span>
         </a>
       </Reveal>
     </div>

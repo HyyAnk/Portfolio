@@ -14,12 +14,15 @@ import hopLuuProfileSpreads from './assets/case-studies/hop-luu-profile-spreads.
 import hopLuuProjectSheets from './assets/case-studies/hop-luu-project-sheets.webp';
 import hopLuuGovernanceKit from './assets/case-studies/hop-luu-governance-kit.webp';
 import hopLuuDigitalReader from './assets/case-studies/hop-luu-digital-reader.webp';
+import hopLuuCapabilitySpread from './assets/case-studies/hop-luu-capability-spread-v2.webp';
+import hopLuuFieldHandover from './assets/case-studies/hop-luu-field-handover-v2.webp';
+import hopLuuProductionDetail from './assets/case-studies/hop-luu-production-detail-v2.webp';
 
 function ShowcaseEyebrow({ children }) {
   return <span className="showcase-eyebrow">{children}</span>;
 }
 
-function ShowcaseHero({ work, theme, label, summary, facts, image, imageAlt, demoLabel }) {
+function ShowcaseHero({ work, theme, label, summary, facts, image, imageAlt, demoLabel, disclosure }) {
   return <section className={`showcase-hero showcase-theme-${theme}`}>
     <div className="page-shell">
       <Link className="showcase-back" to="/#selected-works"><ArrowLeft size={16}/> Selected work</Link>
@@ -29,7 +32,7 @@ function ShowcaseHero({ work, theme, label, summary, facts, image, imageAlt, dem
       </div>
       <figure className="showcase-cover"><img src={image} alt={imageAlt}/></figure>
       <dl className="showcase-facts">{facts.map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl>
-      <p className="showcase-disclosure"><strong>Project status:</strong> This is a self-initiated concept. The strategy, identity, applications and interactive prototype are original portfolio work. No client engagement or commercial result is implied.</p>
+      <p className="showcase-disclosure">{disclosure || <><strong>Project status:</strong> This is a self-initiated concept. The strategy, identity, applications and interactive prototype are original portfolio work. No client engagement or commercial result is implied.</>}</p>
     </div>
   </section>;
 }
@@ -174,24 +177,24 @@ const profileChapters = [
 ];
 
 const capabilityRows = [
-  { code:'A', title:'Process engineering', scope:'Audit, sampling, mass balance, treatment selection and design basis.', output:'Design basis, PFD, hydraulic profile' },
-  { code:'B', title:'Mechanical and controls', scope:'Equipment sizing, piping, electrical load, instrumentation and control narrative.', output:'P&ID, equipment list, I/O schedule' },
-  { code:'C', title:'Supply and fabrication', scope:'Vendor coordination, submittals, fabrication inspection and factory acceptance.', output:'Datasheets, FAT file, material records' },
-  { code:'D', title:'Installation and commissioning', scope:'Method statements, site supervision, testing, training and performance verification.', output:'SAT, manuals, as-built, training log' },
+  { code:'A', title:'Process', output:'Design basis / PFD / hydraulic profile' },
+  { code:'B', title:'Mechanical', output:'P&ID / equipment list / I-O schedule' },
+  { code:'C', title:'Supply', output:'Datasheets / FAT / material records' },
+  { code:'D', title:'Commissioning', output:'SAT / manuals / as-built' },
 ];
 
 const sectors = ['Food and beverage','Electronics','Textile and dyeing','Industrial parks','Water reuse','Utilities'];
 
 const projectRecords = [
-  { code:'HL-24-07', title:'Beverage rinse-water recovery', location:'Long An', year:'2024', capacity:'480 m³/day', challenge:'Reduce freshwater demand from bottle and line rinsing.', scope:'Water audit, UF/RO polishing, controls integration and commissioning.', evidence:'Approved PFD, FAT record and 30-day performance log.' },
-  { code:'HL-23-11', title:'Electronics wastewater polishing', location:'Bắc Ninh', year:'2023', capacity:'315 m³/day', challenge:'Stabilize conductivity before process-water reuse.', scope:'Equalization, ion exchange, online monitoring and operator training.', evidence:'P&ID set, calibration records, SAT and operator sign-off.' },
-  { code:'HL-22-04', title:'Textile equalization upgrade', location:'Bình Dương', year:'2022', capacity:'620 m³/day', challenge:'Absorb color and COD peaks across changing production batches.', scope:'Tank retrofit, mixing, dosing logic and commissioning support.', evidence:'As-built drawings, commissioning trend and handover register.' },
+  { code:'HL-24-07', title:'Beverage rinse-water recovery', location:'Long An', year:'2024', capacity:'480 m³/day' },
+  { code:'HL-23-11', title:'Electronics wastewater polishing', location:'Bắc Ninh', year:'2023', capacity:'315 m³/day' },
+  { code:'HL-22-04', title:'Textile equalization upgrade', location:'Bình Dương', year:'2022', capacity:'620 m³/day' },
 ];
 
 const assuranceAreas = [
-  { title:'QA-QC', copy:'Inspection and test plan, hold points, material traceability, NCR closeout and acceptance records.' },
-  { title:'HSE', copy:'Task risk assessment, permit interface, toolbox briefing, site induction and incident reporting.' },
-  { title:'Document control', copy:'Document codes, revision status, transmittal history, review owner and retention location.' },
+  { title:'QA-QC', copy:'ITP / hold points / NCR' },
+  { title:'HSE', copy:'JSA / permits / toolbox' },
+  { title:'Document control', copy:'Revision / transmittal / register' },
 ];
 
 function HopLuuReader() {
@@ -218,66 +221,51 @@ function HopLuuReader() {
 
 function HopLuuCaseStudy({ work }) {
   const facts = [
-    { label: 'Project frame', value: 'Corporate profile concept' },
     { label: 'Role', value: 'Editorial direction and information design' },
-    { label: 'Deliverables', value: '96-page profile, project sheets and reader' },
-    { label: 'Prototype', value: 'Bilingual capability reader' },
+    { label: 'Format', value: '96 pages / VI-EN' },
+    { label: 'System', value: 'Print / project sheets / reader' },
   ];
   return <article className="showcase-case case-hop-luu">
-    <ShowcaseHero work={work} theme="hop" label="Corporate profile · Industrial engineering, 2026" summary="A complete bilingual profile for qualification, technical review and project handover." facts={facts} image={hopLuuCover} imageAlt="HỢP LƯU corporate profile, technical project sheets and digital reader arranged at an industrial water facility" demoLabel="Open the capability reader"/>
+    <ShowcaseHero work={work} theme="hop" label="Corporate profile · Industrial engineering, 2026" summary="Bilingual corporate profile for industrial water engineering" facts={facts} image={hopLuuCover} imageAlt="HỢP LƯU corporate profile, technical project sheets and digital reader arranged at an industrial water facility" demoLabel="Open reader" disclosure={<><strong>Self-initiated concept</strong> / no client engagement implied</>}/>
 
     <section className="showcase-section hop-overview"><div className="page-shell">
-      <ShowcaseLead title="The profile starts with what the company does." copy="HỢP LƯU is a concept engineering contractor for industrial water, wastewater and reuse systems in Vietnam."/>
+      <h2 className="hop-section-title">Company profile</h2>
       <div className="hop-company-snapshot">
-        <div className="hop-company-intro"><span>HỢP LƯU</span><h3>Engineering water systems from source to handover.</h3><p>Process design, equipment integration, installation supervision, commissioning and document-controlled handover.</p><dl><div><dt>Core market</dt><dd>Industrial facilities</dd></div><div><dt>Delivery model</dt><dd>Design to commissioning</dd></div><div><dt>Profile languages</dt><dd>Vietnamese and English</dd></div></dl></div>
+        <div className="hop-company-intro"><span>HỢP LƯU</span><h3>Industrial water systems</h3><p>Process design, equipment integration, commissioning and handover</p><dl><div><dt>Market</dt><dd>Industrial facilities</dd></div><div><dt>Delivery</dt><dd>Design to commissioning</dd></div><div><dt>Languages</dt><dd>Vietnamese / English</dd></div></dl></div>
         <ol className="hop-profile-index">{profileChapters.map(([number,vi,en]) => <li key={number}><span>{number}</span><strong>{vi}</strong><small>{en}</small></li>)}</ol>
       </div>
-    </div></section>
-
-    <section className="showcase-section hop-profile-visual"><div className="page-shell">
-      <ShowcaseLead title="Eight chapters, one review path." copy="Company facts, capability, sectors, delivery, projects and assurance sit in one indexed document."/>
-      <figure className="hop-visual-figure"><img src={hopLuuProfileSpreads} alt="HỢP LƯU profile cover, contents, company overview, capability matrix, scope and delivery-process spreads" width="1536" height="1024" loading="lazy"/><figcaption>Profile system · 96 pages with bilingual navigation</figcaption></figure>
+      <figure className="hop-visual-figure hop-overview-figure"><img src={hopLuuProfileSpreads} alt="HỢP LƯU profile cover, contents, company overview, capability matrix, scope and delivery-process spreads" width="1536" height="1024" loading="lazy"/></figure>
     </div></section>
 
     <section className="showcase-section hop-capabilities"><div className="page-shell">
-      <ShowcaseLead title="Capability is defined by its output." copy="Each discipline names the work, accountable boundary and document set available for review."/>
-      <div className="hop-capability-matrix"><header><span>Discipline</span><span>Scope</span><span>Reviewable output</span></header>{capabilityRows.map((item) => <article key={item.code}><b>{item.code}</b><h3>{item.title}</h3><p>{item.scope}</p><strong>{item.output}</strong></article>)}</div>
+      <h2 className="hop-section-title">Technical capability</h2>
+      <figure className="hop-visual-figure"><img src={hopLuuCapabilitySpread} alt="Open HỢP LƯU profile showing the technical capability matrix and engineering scope spread" width="1536" height="1024" loading="lazy"/></figure>
+      <div className="hop-capability-strip">{capabilityRows.map((item) => <article key={item.code}><b>{item.code}</b><h3>{item.title}</h3><p>{item.output}</p></article>)}</div>
       <div className="hop-sector-band"><span>Sector coverage</span>{sectors.map((sector) => <strong key={sector}>{sector}</strong>)}</div>
     </div></section>
 
     <section id="live-demo" className="showcase-section hop-demo-section"><div className="page-shell">
-      <ShowcaseLead label="Live document reader" title="Open the section you need to verify." copy="Switch language, profile path and evidence layer without losing the complete publication."/>
+      <h2 className="hop-section-title">Digital reader</h2>
       <HopLuuReader/>
-    </div></section>
-
-    <section className="showcase-section hop-project-visual"><div className="page-shell">
-      <ShowcaseLead title="Project sheets carry the proof." copy="Each sheet combines operating context, process diagram, responsibility boundary and commissioning record."/>
-      <figure className="hop-visual-figure"><img src={hopLuuProjectSheets} alt="HỢP LƯU project sheets with plant photography, process diagrams, scope matrices and commissioning evidence" width="1536" height="1024" loading="lazy"/><figcaption>Representative project-sheet system · A3 and A4 formats</figcaption></figure>
+      <figure className="hop-visual-figure hop-reader-device"><img src={hopLuuDigitalReader} alt="HỢP LƯU responsive profile reader on laptop, tablet and phone" width="1536" height="1024" loading="lazy"/></figure>
     </div></section>
 
     <section className="showcase-section hop-projects"><div className="page-shell">
-      <ShowcaseLead title="Three records test the system at real density." copy="Illustrative project data is used to validate long titles, technical scope, capacity and evidence references."/>
-      <div className="hop-project-records">{projectRecords.map((project) => <article key={project.code}><header><span>{project.code}</span><small>Illustrative record</small></header><h3>{project.title}</h3><dl><div><dt>Location</dt><dd>{project.location}</dd></div><div><dt>Year</dt><dd>{project.year}</dd></div><div><dt>Capacity</dt><dd>{project.capacity}</dd></div></dl><div className="hop-project-detail"><p><strong>Challenge</strong>{project.challenge}</p><p><strong>Scope</strong>{project.scope}</p><p><strong>Evidence</strong>{project.evidence}</p></div></article>)}</div>
+      <h2 className="hop-section-title">Project sheets</h2>
+      <div className="hop-project-gallery"><figure className="hop-visual-figure"><img src={hopLuuProjectSheets} alt="HỢP LƯU project sheets with process diagrams, scope matrices and commissioning evidence" width="1536" height="1024" loading="lazy"/></figure><figure className="hop-visual-figure"><img src={hopLuuFieldHandover} alt="Engineers using the HỢP LƯU profile, project binder and tablet during a site handover review" width="1536" height="1024" loading="lazy"/></figure></div>
+      <div className="hop-project-index">{projectRecords.map((project) => <article key={project.code}><span>{project.code}</span><h3>{project.title}</h3><dl><div><dt>Location</dt><dd>{project.location}</dd></div><div><dt>Year</dt><dd>{project.year}</dd></div><div><dt>Capacity</dt><dd>{project.capacity}</dd></div></dl></article>)}</div>
     </div></section>
 
     <section className="showcase-section hop-assurance"><div className="page-shell">
-      <ShowcaseLead title="Assurance belongs inside the profile." copy="Quality, safety and document control show how work is governed before a project starts."/>
+      <h2 className="hop-section-title">QA-QC and HSE</h2>
       <div className="hop-assurance-layout"><div className="hop-assurance-list">{assuranceAreas.map((area) => <article key={area.title}><Check size={19}/><div><h3>{area.title}</h3><p>{area.copy}</p></div></article>)}</div><div className="hop-responsibility-map"><span>Project director</span><i/><span>Project manager</span><div><strong>Process</strong><strong>Mechanical</strong><strong>Electrical</strong><strong>Commissioning</strong></div><i/><span>Document control</span></div></div>
-      <figure className="hop-visual-figure hop-governance-figure"><img src={hopLuuGovernanceKit} alt="HỢP LƯU governance kit with QA-QC checklist, HSE plan, document register, certificate sleeve and approved drawing" width="1536" height="1024" loading="lazy"/><figcaption>QA-QC and HSE · document control and production master</figcaption></figure>
-    </div></section>
-
-    <section className="showcase-section hop-digital"><div className="page-shell">
-      <ShowcaseLead title="Searchable on screen, useful at the table." copy="Bookmarks, evidence links, technical drawings and print spreads support the same engineering review."/>
-      <div className="hop-digital-pair">
-        <figure className="hop-visual-figure"><img src={hopLuuDigitalReader} alt="HỢP LƯU responsive profile reader on laptop, tablet and phone with contents, capability matrix and project evidence" width="1536" height="1024" loading="lazy"/><figcaption>Responsive reader · VI/EN with tagged document links</figcaption></figure>
-        <figure className="hop-visual-figure"><img src={hopLuuReview} alt="Engineers reviewing the HỢP LƯU bilingual process-water profile and digital reader in a plant control room" width="1536" height="1024" loading="lazy"/><figcaption>Print review · technical drawing with digital reference</figcaption></figure>
-      </div>
+      <figure className="hop-visual-figure hop-governance-figure"><img src={hopLuuGovernanceKit} alt="HỢP LƯU governance kit with QA-QC checklist, HSE plan, document register and approved drawing" width="1536" height="1024" loading="lazy"/></figure>
     </div></section>
 
     <section className="showcase-section hop-delivery"><div className="page-shell">
-      <ShowcaseLead title="A production system, not one final PDF." copy="Print, accessible PDF and source templates share one content register and update owner."/>
-      <dl className="hop-production-manifest"><div><dt>Print master</dt><dd>A4 portrait, 96 pages, CMYK, 3 mm bleed, chapter tabs and grayscale proof.</dd></div><div><dt>Accessible PDF</dt><dd>Tagged headings, bookmarks, reading order, selectable text and descriptive images.</dd></div><div><dt>Project-sheet kit</dt><dd>A3 and A4 templates for context, capacity, scope, responsibility and evidence.</dd></div><div><dt>Content register</dt><dd>Source file, review owner, revision date, approval state and next update.</dd></div></dl>
-      <p className="hop-prototype-note"><strong>Prototype boundary:</strong> document structure, bilingual stress cases, keyboard controls and responsive layouts were checked. Production press proof and procurement interviews remain future validation.</p>
+      <h2 className="hop-section-title">Production files</h2>
+      <div className="hop-production-gallery"><figure className="hop-visual-figure"><img src={hopLuuProductionDetail} alt="HỢP LƯU hardbound profile, chapter tabs, paper stock and binding detail" width="1536" height="1024" loading="lazy"/></figure><figure className="hop-visual-figure"><img src={hopLuuReview} alt="Engineers reviewing the HỢP LƯU profile and digital reference in a plant control room" width="1536" height="1024" loading="lazy"/></figure></div>
+      <dl className="hop-production-manifest"><div><dt>Print master</dt><dd>A4 / 96 pages / CMYK</dd></div><div><dt>Accessible PDF</dt><dd>Tagged / bookmarked / selectable</dd></div><div><dt>Project sheets</dt><dd>A3 / A4 / editable templates</dd></div><div><dt>Content register</dt><dd>Owner / revision / approval</dd></div></dl>
     </div></section>
   </article>;
 }

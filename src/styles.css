@@ -306,8 +306,11 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .experiment-selector { width: 100%; min-height: 184px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: color-mix(in srgb, var(--paper) 52%, transparent); text-align: left; transition: border-color .25s ease, background .25s ease, transform .25s cubic-bezier(.16,1,.3,1); }
 .experiment-selector:hover, .experiment-selector.is-active { border-color: color-mix(in srgb, var(--ink) 28%, var(--line)); background: var(--paper-elevated); transform: translateY(-2px); }
 .experiment-selector:active { transform: translateY(0) scale(.99); }
+.experiment-card-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.experiment-mark { width: 29px; height: 29px; flex: 0 0 auto; color: var(--ink); transition: color .25s ease, transform .25s cubic-bezier(.16,1,.3,1); }
+.experiment-selector.is-active .experiment-mark { color: var(--accent); transform: rotate(-3deg); }
 .experiment-card-label { display: block; color: var(--accent); font-size: .61rem; font-weight: 760; letter-spacing: .1em; text-transform: uppercase; }
-.experiment-selector h3 { margin-top: 23px; font-size: clamp(1.25rem, 1.8vw, 1.62rem); line-height: 1.04; letter-spacing: -.05em; }
+.experiment-selector h3 { margin-top: 18px; font-size: clamp(1.25rem, 1.8vw, 1.62rem); line-height: 1.04; letter-spacing: -.05em; }
 .experiment-selector p { max-width: 30ch; margin-top: 11px; font-size: .73rem; line-height: 1.5; }
 .experiments-preview-wrap { min-width: 0; }
 .experiments-preview { display: block; }
@@ -320,7 +323,9 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .experiment-preview-frame.is-position-3 { z-index: 1; opacity: .32; filter: saturate(.65); transform: translate(-22%, -5%) rotate(6deg) scale(.66); }
 .experiments-preview:hover .experiment-preview-frame.is-position-0 { transform: translate(-50%, -52%) rotate(0); }
 .experiments-preview-caption { width: min(82%, 440px); margin: -18px auto 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--ink); }
-.experiments-preview-caption > span { display: grid; gap: 3px; }
+.experiments-preview-identity { display: flex; align-items: center; gap: 11px; }
+.experiments-preview-identity .experiment-mark { width: 28px; height: 28px; color: var(--accent); }
+.experiments-preview-copy { display: grid; gap: 3px; }
 .experiments-preview-caption strong { font-size: .86rem; }
 .experiments-preview-caption small { color: var(--muted); font-size: .64rem; }
 .experiments-preview-caption svg { transition: color .2s ease, transform .2s ease; }
