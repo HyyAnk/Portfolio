@@ -371,6 +371,48 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   50% { border-color: transparent; }
 }
 
+@keyframes experiment-path {
+  0%, 14% { stroke-dashoffset: 120; opacity: 0; }
+  42%, 78% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: -120; opacity: 0; }
+}
+
+@keyframes experiment-node {
+  0%, 100% { opacity: .55; transform: scale(.72); }
+  50% { opacity: 1; transform: scale(1.35); }
+}
+
+@keyframes experiment-scan {
+  0%, 12% { opacity: 0; transform: translateY(-7px); }
+  28%, 72% { opacity: 1; }
+  88%, 100% { opacity: 0; transform: translateY(34px); }
+}
+
+@keyframes experiment-crop {
+  0%, 12% { stroke-dashoffset: 42; opacity: .25; }
+  42%, 76% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: -42; opacity: .25; }
+}
+
+@keyframes experiment-sheet {
+  0%, 100% { opacity: .45; transform: translateY(1px); }
+  50% { opacity: 1; transform: translateY(-1px); }
+}
+
+@keyframes experiment-pane-a {
+  0%, 100% { transform: translate(-1px, 1px) rotate(-1deg); }
+  50% { transform: translate(2px, -1px) rotate(1deg); }
+}
+
+@keyframes experiment-pane-b {
+  0%, 100% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-2px, 1px) rotate(-1deg); }
+}
+
+@keyframes experiment-orbit {
+  to { transform: rotate(360deg); }
+}
+
 .contact-section { position: relative; isolation: isolate; overflow: hidden; border-top: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 90%, var(--ink) 10%); color: var(--ink); transition: background .35s ease; }
 .contact-section::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='360' viewBox='0 0 520 360'%3E%3Cpath d='M0 300C110 228 204 240 287 174S420 34 560 64' fill='none' stroke='%23111211' stroke-opacity='.055' stroke-width='1'/%3E%3Cpath d='M0 344C110 272 204 284 287 218S420 78 560 108' fill='none' stroke='%23111211' stroke-opacity='.035' stroke-width='1'/%3E%3Ccircle cx='88' cy='82' r='3' fill='%23c9573e' fill-opacity='.18'/%3E%3Ccircle cx='438' cy='284' r='3' fill='%23c9573e' fill-opacity='.18'/%3E%3C/svg%3E"); background-size: 520px 360px; }
 .works-section > .page-shell, .about-section > .page-shell, .skill-blocks > .page-shell, .contact-section > .page-shell { position: relative; z-index: 1; }
@@ -554,7 +596,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .experiments-stage { grid-template-columns: 1fr; gap: 48px; }
   .experiments-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .experiments-preview-wrap { width: min(620px, 100%); margin-inline: auto; }
-  .experiments-stack { height: 430px; }
+  .experiments-stack { height: 520px; }
   .contact-grid .large-copy span { white-space: normal; }
   .project-heading, .project-story-grid { grid-template-columns: 1fr; gap: 32px; }
   .project-heading > p { padding-bottom: 0; }
@@ -623,9 +665,13 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .experiment-selector h3 { margin-top: 16px; font-size: clamp(1.06rem, 5vw, 1.28rem); }
   .experiment-selector p { display: -webkit-box; margin-top: 8px; overflow: hidden; font-size: .66rem; line-height: 1.42; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
   .experiment-card-label { font-size: .54rem; }
-  .experiments-stack { height: 310px; }
-  .experiment-preview-frame { width: min(80%, 290px); border-radius: 11px; }
-  .experiments-preview-caption { width: min(80%, 290px); margin-top: -6px; }
+  .experiments-stack { height: 390px; }
+  .experiment-preview-frame { border-radius: 11px; }
+  .experiment-preview-frame.is-position-0 { top: 18%; left: 7%; width: min(86%, 310px); }
+  .experiment-preview-frame.is-position-1 { top: 1%; left: 48%; width: min(53%, 190px); }
+  .experiment-preview-frame.is-position-2 { top: 59%; left: -1%; width: min(52%, 185px); }
+  .experiment-preview-frame.is-position-3 { top: 66%; left: 53%; width: min(46%, 165px); }
+  .experiments-preview-caption { width: min(86%, 310px); margin: -2px 0 0 7%; }
   .skill-index-copy { grid-column: 1; }
   .skill-index-row svg { grid-column: 2; grid-row: 1 / span 2; }
   .contact-grid h2 { font-size: clamp(2.7rem, 13vw, 4.25rem); }

@@ -201,7 +201,7 @@ const customCarouselAlts = [
   'Animated deployment pipeline progressing from source to live',
   'Animated wallet connection and blockchain transaction confirmation',
   'Animated cinematic editing timeline with colour grading controls',
-  'Animated sound effects board with pads, waveform and mixer levels',
+  'Animated website switching between Vietnamese, English, Chinese and Korean',
 ];
 const configuredCarouselImages = Array.from({ length: 7 }, (_, index) => ({
   ...(heroCarouselImages[index]),
