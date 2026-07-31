@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import './styles.css';
+import './case-studies.css';
 import '@fontsource-variable/manrope';
 import '@fontsource-variable/playfair-display';
 

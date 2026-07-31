@@ -16,10 +16,11 @@ import portraitImage from './assets/generated/portrait.webp';
 import playgroundLoop from './assets/generated/playground-loop.webp';
 import playgroundType from './assets/generated/playground-type.webp';
 import playgroundFins from './assets/generated/playground-fins.webp';
-import northstarImage from './assets/generated/case-northstar-v2.webp';
 import foldedMatterImage from './assets/generated/case-folded-matter-v2.webp';
 import stillMovingImage from './assets/generated/case-still-moving-v2.webp';
-import openLoopImage from './assets/generated/case-open-loop-v2.webp';
+import matCover from './assets/case-studies/mat-cover.webp';
+import kitepayCover from './assets/case-studies/kitepay-cover.webp';
+import { DeepCaseStudy } from './caseStudies.jsx';
 
 const person = 'HyyAnk';
 const fullName = 'Dư Ngọc Minh Hoàng';
@@ -67,17 +68,17 @@ const skills = [
 ];
 
 const works = [
-  { slug: 'northstar', title: 'Northstar', type: 'Digital product', year: '2026', role: 'Product design · Front-end', description: 'A calmer decision system for a complex financial product, designed across desktop and mobile.', challenge: 'Financial dashboards often surface more information than people can confidently act on. Northstar reorganises the experience around decisions, not data density.', outcome: 'A reusable interface system with clearer hierarchy, responsive states and a focused onboarding path.', tags: ['Product design', 'Web development'], image: northstarImage },
+  { slug: 'mat', title: 'MÁT', type: 'Web product · PWA', year: '2026', role: 'Product strategy · UX/UI · React', description: 'A heat-aware route planner that helps people choose a kinder path through hot, dense cities.', challenge: 'Most route planners optimize only time and distance, leaving heat exposure and recovery needs invisible.', outcome: 'A responsive routing concept that makes shade, heat, air quality and route trade-offs understandable.', tags: ['Product design', 'Web development'], image: matCover, deep: true },
   { slug: 'folded-matter', title: 'Folded Matter', type: 'Identity system', year: '2026', role: 'Art direction · Identity', description: 'A tactile identity for an exhibition exploring how material, place and memory shape one another.', challenge: 'The identity needed to hold together physical signage, editorial matter and digital announcements without losing its quiet character.', outcome: 'A modular system built from folds, circles and one warm signal colour, designed to change scale without changing voice.', tags: ['Art direction', 'Graphic design'], image: foldedMatterImage },
   { slug: 'still-moving', title: 'Still Moving', type: 'Title sequence', year: '2025', role: 'Editing · Motion direction', description: 'A restrained title language built from shadow, rhythm and a single line of moving light.', challenge: 'The sequence had to establish tension without competing with the film. Every transition needed to feel physical and intentional.', outcome: 'A modular motion grammar for titles, chapter cards and social cut-downs, paced around sound rather than spectacle.', tags: ['Editing', 'Motion design'], image: stillMovingImage },
-  { slug: 'open-loop', title: 'Open Loop', type: 'Operations system', year: '2025', role: 'Workflow design · Automation', description: 'A visible workflow that helps a small creative team spend less time coordinating routine work.', challenge: 'Requests, approvals and handoffs lived in separate tools, making ownership difficult to see and easy to lose.', outcome: 'A lightweight operating system connecting intake, review and delivery with explicit states and human checkpoints.', tags: ['Automation', 'Systems design'], image: openLoopImage },
+  { slug: 'kitepay', title: 'KitePay', type: 'BSC application', year: '2026', role: 'Product design · Web3 integration', description: 'A milestone escrow that makes scope, payment state and on-chain evidence clear to both sides.', challenge: 'Freelancers and clients need a shared payment state without turning every agreement into a crypto puzzle.', outcome: 'A testnet-ready product concept pairing explicit escrow states with human-readable transaction receipts.', tags: ['Blockchain', 'React'], image: kitepayCover, deep: true },
 ];
 
 const heroCarouselImages = [
-  { image: northstarImage, alt: 'Northstar product design shown on a laptop and phone' },
+  { image: matCover, alt: 'MÁT heat-aware route planning concept' },
   { image: foldedMatterImage, alt: 'Folded Matter identity system arranged on paper' },
   { image: stillMovingImage, alt: 'Still Moving title sequence study' },
-  { image: openLoopImage, alt: 'Open Loop operations system visual' },
+  { image: kitepayCover, alt: 'KitePay BSC milestone escrow concept' },
   { image: uiImage, alt: 'Responsive interface design study' },
   { image: graphicImage, alt: 'Graphic identity system study' },
   { image: videoImage, alt: 'Video editing and title design study' },
@@ -113,6 +114,21 @@ function usePageMeta(title, description) {
     const meta = document.querySelector('meta[name="description"]');
     if (meta && description) meta.setAttribute('content', description);
   }, [title, description]);
+}
+
+function RouteScrollManager() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      if (hash) {
+        document.getElementById(hash.slice(1))?.scrollIntoView({ block: 'start' });
+        return;
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname, hash]);
+  return null;
 }
 
 function useTheme() {
@@ -793,6 +809,7 @@ function Home() {
 
 function ProjectPage({ work }) {
   usePageMeta(`${work.title} - ${person}`, work.description);
+  if (work.deep) return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className={`project-page-deep project-page-${work.slug}`}><DeepCaseStudy work={work} /><Contact /></main><Footer /></>;
   return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="project-page">
     <section className="project-hero section-pad">
       <div className="page-shell"><Reveal><Link className="project-back" to="/#selected-works"><ArrowLeft size={16} /> Selected works</Link><div className="project-heading"><div><span className="eyebrow">{work.type} · {work.year}</span><h1>{work.title}</h1></div><p>{work.description}</p></div></Reveal><Reveal className="project-cover" delay={.08}><img src={work.image} alt={`${work.title} case study cover`} /></Reveal></div>
@@ -826,7 +843,7 @@ function SkillPage({ skill }) {
 }
 
 function App() {
-  return <Routes><Route path="/" element={<Home />} />{works.map((work) => <Route key={work.slug} path={`/work/${work.slug}`} element={<ProjectPage work={work} />} />)}{skills.map((skill) => <Route key={skill.slug} path={`/skills/${skill.slug}`} element={<SkillPage skill={skill} />} />)}<Route path="*" element={<Home />} /></Routes>;
+  return <><RouteScrollManager /><Routes><Route path="/" element={<Home />} />{works.map((work) => <Route key={work.slug} path={`/work/${work.slug}`} element={<ProjectPage work={work} />} />)}{skills.map((skill) => <Route key={skill.slug} path={`/skills/${skill.slug}`} element={<SkillPage skill={skill} />} />)}<Route path="*" element={<Home />} /></Routes></>;
 }
 
 export default App;
