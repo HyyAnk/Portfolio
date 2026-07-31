@@ -4,10 +4,38 @@ import { ArrowLeft, ArrowUpRight, CaretRight, Check } from '@phosphor-icons/reac
 
 import kitepayStateFlow from './assets/case-studies/kitepay-state-flow.svg';
 
+const matRoadEdges = {
+  riverStart: 'M72 306C105 300 135 288 165 278C205 266 232 238 270 224',
+  riverEnd: 'C310 209 350 216 390 205C432 194 455 169 500 155C545 141 570 137 610 125C642 115 663 82 688 58',
+  canopyStart: 'M72 306C58 298 48 291 45 280C38 245 39 213 45 185C68 170 100 161 130 155C165 143 195 148 230 140C265 132 280 110 315 100',
+  canopyEnd: 'C355 88 390 112 430 105C470 98 505 82 550 70C605 55 650 70 688 58',
+  orchardLink: 'C275 180 295 135 315 100',
+};
+
+const matPrimaryPaths = {
+  fast: `${matRoadEdges.riverStart}${matRoadEdges.riverEnd}`,
+  cool: `${matRoadEdges.canopyStart}${matRoadEdges.canopyEnd}`,
+  balanced: `${matRoadEdges.riverStart}${matRoadEdges.orchardLink}${matRoadEdges.canopyEnd}`,
+  connector: `M270 224${matRoadEdges.orchardLink}`,
+};
+
+const matFullRoads = {
+  riverWalk: `M-40 333C8 329 42 316 72 306${matPrimaryPaths.fast.replace('M72 306', '')}C720 45 752 28 800 12`,
+  canopyWay: `M-35 343C10 332 44 316 72 306${matPrimaryPaths.cool.replace('M72 306', '')}C724 48 756 39 800 33`,
+  orchardLink: `M235 390C248 330 257 266 270 224${matRoadEdges.orchardLink}C328 62 347 12 360 -35`,
+};
+
+const matSecondaryRoads = 'M-35 260C55 250 92 244 130 238C220 224 295 224 390 205C485 185 580 151 800 92 M135 390C154 333 160 303 165 278C175 230 185 185 195 148C200 99 205 42 218 -35 M365 390C380 322 382 251 390 205C398 165 410 130 430 105C452 70 471 25 493 -35 M585 390C594 307 585 234 590 175C596 150 603 135 610 125C630 88 653 38 684 -35 M735 390C714 320 706 246 720 184C735 118 758 54 786 -25 M-40 350C75 333 190 346 292 315C390 286 472 286 555 260C652 232 724 203 800 165';
+
+const matMapPaths = {
+  ...matPrimaryPaths,
+  network: `${matFullRoads.riverWalk} ${matFullRoads.canopyWay} ${matFullRoads.orchardLink} ${matSecondaryRoads}`,
+};
+
 const matModes = {
-  cool: { label: 'Coolest', time: '32 min', shade: '71%', heat: '2.8 / 5', distance: '2.4 km', note: 'More shade, two refill points', path: 'M90 315V220H230V135H380V55H690', directions: ['North from Market St', 'Turn onto shaded Oak Walk', 'Continue via Pine St to Hill Garden'] },
-  balanced: { label: 'Balanced', time: '26 min', shade: '54%', heat: '3.3 / 5', distance: '2.1 km', note: 'A practical everyday trade-off', path: 'M90 315H230V254.3L540 119.7V55H690', directions: ['East along Market St', 'Join Sunline Ave for 740 m', 'Exit north toward Hill Garden'] },
-  fast: { label: 'Fastest', time: '20 min', shade: '29%', heat: '4.2 / 5', distance: '1.8 km', note: 'Shorter, but exposed at midday', path: 'M90 315L690 55', directions: ['Join Sunline Ave', 'Continue directly for 1.6 km', 'Arrive at Hill Garden east gate'] },
+  cool: { label: 'Coolest', time: '32 min', shade: '71%', heat: '2.8 / 5', distance: '2.4 km', note: 'More shade, two refill points', path: matMapPaths.cool, directions: ['Follow the riverside shade north', 'Pass two refill points on Canopy Way', 'Continue east to Hill Garden'] },
+  balanced: { label: 'Balanced', time: '26 min', shade: '54%', heat: '3.3 / 5', distance: '2.1 km', note: 'A practical everyday trade-off', path: matMapPaths.balanced, directions: ['Join River Walk for 600 m', 'Turn north at Orchard Link', 'Continue along Canopy Way'] },
+  fast: { label: 'Fastest', time: '20 min', shade: '29%', heat: '4.2 / 5', distance: '1.8 km', note: 'Shorter, but exposed at midday', path: matMapPaths.fast, directions: ['Follow River Walk east', 'Keep right through Cedar Junction', 'Exit at Hill Garden east gate'] },
 };
 
 const kiteSteps = [
@@ -63,23 +91,36 @@ function InsightList({ items }) {
   </article>)}</div>;
 }
 
-function MatStreetMap({ mode = 'cool' }) {
+function MatMapBase({ buildingMaskId, motion = false }) {
+  return <>
+    <defs><mask id={buildingMaskId} maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="360"><rect width="760" height="360" fill="#fff"/><path d={matMapPaths.network} fill="none" stroke="#000" strokeWidth="42" strokeLinecap="round" strokeLinejoin="round"/></mask></defs>
+    <rect width="760" height="360" fill="#e6ebf1"/>
+    <path className="mat-product-river" d="M0 0H43C58 55 26 104 48 159C66 206 28 248 43 302C49 326 45 345 35 360H0Z"/>
+    <path className="mat-product-park" d="M43 0H105C91 48 102 91 79 134C58 174 83 215 62 259C48 289 60 330 48 360H35C45 345 49 326 43 302C28 248 66 206 48 159C26 104 58 55 43 0Z"/>
+    <g className="mat-product-streets">
+      <path className="mat-product-street-edge" d={matMapPaths.network}/><path className="mat-product-street-surface" d={matMapPaths.network}/><path className="mat-product-street-center" d={matMapPaths.network}/>
+    </g>
+    <g className="mat-product-buildings" mask={`url(#${buildingMaskId})`}>
+      <path d="M79 55L139 42L157 82L108 107L78 94Z"/><path d="M237 44L298 35L305 68L255 85L230 69Z"/><path d="M366 35L433 31L425 65L372 68Z"/><path d="M518 29L583 29L565 45L522 50Z"/><path d="M644 28L706 24L688 42L649 45Z"/>
+      <path d="M160 175L211 170L228 197L181 212L157 197Z"/><path d="M255 151L291 140L293 168L274 188L254 179Z"/><path d="M343 138L383 139L373 168L339 168Z"/><path d="M457 120L488 111L478 135L450 145Z"/><path d="M564 94L597 87L592 105L559 114Z"/>
+      <path d="M105 323L142 310L144 339L105 344Z"/><path d="M202 301L260 282L270 319L212 334Z"/><path d="M317 258L359 248L359 307L316 318Z"/><path d="M429 233L477 214L486 281L439 299Z"/><path d="M538 193L569 180L571 239L539 253Z"/><path d="M651 158L706 136L712 199L666 226Z"/>
+    </g>
+    <g className="mat-product-canopy"><circle cx="52" cy="267" r="14"/><circle cx="44" cy="225" r="15"/><circle cx="50" cy="184" r="13"/><circle cx="91" cy="164" r="14"/><circle cx="130" cy="155" r="13"/><circle cx="178" cy="145" r="14"/><circle cx="230" cy="140" r="13"/><circle cx="275" cy="120" r="12"/><circle cx="315" cy="100" r="14"/><circle cx="373" cy="100" r="13"/><circle cx="430" cy="105" r="14"/><circle cx="490" cy="87" r="13"/><circle cx="550" cy="70" r="14"/><circle cx="612" cy="63" r="12"/></g>
+    <path className={motion ? 'mat-motion-heat-corridor' : 'mat-product-heat-corridor'} d={matMapPaths.fast}/>
+    <g className="mat-product-junctions"><circle cx="165" cy="278" r="3.5"/><circle cx="270" cy="224" r="3.5"/><circle cx="315" cy="100" r="3.5"/><circle cx="390" cy="205" r="3.5"/><circle cx="430" cy="105" r="3.5"/><circle cx="500" cy="155" r="3.5"/><circle cx="550" cy="70" r="3.5"/><circle cx="610" cy="125" r="3.5"/></g>
+    <g className="mat-product-labels"><text x="310" y="87" transform="rotate(-8 310 87)">CANOPY WAY</text><text x="356" y="224" transform="rotate(-13 356 224)">RIVER WALK</text><text x="286" y="170" transform="rotate(-72 286 170)">ORCHARD LINK</text><text x="585" y="55" transform="rotate(-12 585 55)">GARDEN LOOP</text></g>
+  </>;
+}
+
+function MatStreetMap({ mode = 'cool', fit = 'slice' }) {
   const route = matModes[mode];
-  const diagonalCutId = useId().replace(/:/g, '');
-  return <svg className="mat-product-map" viewBox="0 0 760 360" preserveAspectRatio="xMidYMid slice">
-    <defs><mask id={diagonalCutId} maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="360"><rect width="760" height="360" fill="#fff"/><path d="M90 315L690 55" fill="none" stroke="#000" strokeWidth="38" strokeLinecap="round"/></mask></defs>
-    <rect width="760" height="360" fill="#dbe5f3"/>
-    <path className="mat-product-river" d="M0 0h52c-8 58 10 92-8 142s-20 103 0 145c9 20 9 44-3 73H0Z"/>
-    <path className="mat-product-park" d="M48 0h72v360H38c24-55 5-93 22-137s1-80 13-122S52 43 48 0Z"/>
-    <g><path className="mat-product-street-edge" d="M0 55H760M0 135H760M0 220H760M0 315H760M90 0V360M230 0V360M380 0V360M540 0V360M690 0V360"/><path className="mat-product-street-surface" d="M0 55H760M0 135H760M0 220H760M0 315H760M90 0V360M230 0V360M380 0V360M540 0V360M690 0V360"/><path className="mat-product-street-center" d="M0 55H760M0 135H760M0 220H760M0 315H760M90 0V360M230 0V360M380 0V360M540 0V360M690 0V360"/></g>
-    <g mask={`url(#${diagonalCutId})`}><g className="mat-product-lots"><rect x="108" y="72" width="104" height="46" rx="7"/><rect x="248" y="72" width="114" height="46" rx="7"/><rect x="398" y="72" width="124" height="46" rx="7"/><rect x="558" y="72" width="114" height="46" rx="7"/><rect x="108" y="152" width="104" height="51" rx="7"/><rect x="248" y="152" width="114" height="51" rx="7"/><rect x="398" y="152" width="124" height="51" rx="7"/><rect x="558" y="152" width="114" height="51" rx="7"/><rect x="108" y="237" width="104" height="61" rx="7"/><rect x="248" y="237" width="114" height="61" rx="7"/><rect x="398" y="237" width="124" height="61" rx="7"/><rect x="558" y="237" width="114" height="61" rx="7"/></g>
-    <g className="mat-product-buildings"><path d="M120 81h42v17h37v12h-79Z"/><rect x="260" y="81" width="38" height="28" rx="4"/><path d="M307 81h43v15h-18v13h-25Z"/><rect x="410" y="81" width="98" height="28" rx="4"/><rect x="570" y="81" width="88" height="28" rx="4"/><rect x="120" y="162" width="78" height="31" rx="4"/><path d="M260 162h46v12h44v19h-90Z"/><rect x="410" y="162" width="42" height="31" rx="4"/><rect x="462" y="162" width="46" height="20" rx="4"/><path d="M570 162h88v31h-34v-14h-54Z"/><rect x="120" y="248" width="35" height="40" rx="4"/><rect x="164" y="248" width="35" height="24" rx="4"/><path d="M260 248h90v40h-41v-17h-49Z"/><rect x="410" y="248" width="42" height="40" rx="4"/><rect x="462" y="248" width="46" height="24" rx="4"/><rect x="570" y="248" width="88" height="40" rx="4"/></g></g>
-    <g><path className="mat-product-diagonal-edge" d="M90 315L690 55"/><path className="mat-product-diagonal-surface" d="M90 315L690 55"/><path className="mat-product-diagonal-center" d="M90 315L690 55"/></g>
-    <g className="mat-product-canopy"><circle cx="90" cy="266" r="15"/><circle cx="150" cy="220" r="14"/><circle cx="205" cy="220" r="13"/><circle cx="230" cy="176" r="14"/><circle cx="286" cy="135" r="13"/><circle cx="344" cy="135" r="15"/><circle cx="380" cy="92" r="13"/><circle cx="444" cy="55" r="14"/><circle cx="506" cy="55" r="13"/></g>
-    <path className="mat-product-heat-corridor" d="M90 315L690 55"/>
+  const buildingMaskId = useId().replace(/:/g, '');
+  return <svg className="mat-product-map" viewBox="0 0 760 360" preserveAspectRatio={`xMidYMid ${fit}`}>
+    <MatMapBase buildingMaskId={buildingMaskId}/>
     <path key={mode} className={`mat-demo-route mat-product-route route-${mode}`} d={route.path}/>
-    <g className="mat-product-labels"><text x="310" y="49">HILL ST</text><text x="310" y="129">PINE ST</text><text x="310" y="214">OAK WALK</text><text x="310" y="309">MARKET ST</text><text x="388" y="196" transform="rotate(-23 388 196)">SUNLINE AVE</text></g>
-    <circle cx="90" cy="315" r="9" className="mat-route-point"/><circle cx="690" cy="55" r="9" className="mat-route-point"/>
+    {mode === 'cool' && <g className="mat-product-refills"><circle cx="230" cy="140" r="5"/><circle cx="550" cy="70" r="5"/></g>}
+    {mode === 'balanced' && <g className="mat-product-refills"><circle cx="550" cy="70" r="5"/></g>}
+    <circle cx="72" cy="306" r="9" className="mat-route-point"/><circle cx="688" cy="58" r="9" className="mat-route-point"/>
   </svg>;
 }
 
@@ -96,7 +137,7 @@ function MatRouteDemo() {
     </div>
     <div className="mat-demo-grid">
       <div className="mat-map" aria-hidden="true">
-        <MatStreetMap mode={mode}/>
+        <MatStreetMap mode={mode} fit="meet"/>
         <span className="mat-map-legend"><i /> shaded streets</span>
       </div>
       <aside className="mat-route-panel" aria-live="polite">
@@ -129,30 +170,18 @@ function MatDeviceStudy() {
 }
 
 function MatMotionStudy() {
+  const buildingMaskId = useId().replace(/:/g, '');
   return <figure className="case-motion-frame mat-motion-frame">
     <div id="motion-map-board" className="mat-motion-board" role="img" aria-label="Animated MÁT route comparison showing route candidates, environmental evidence and the cooler recommendation">
       <div className="mat-motion-stage" aria-hidden="true">
         <span className="mat-motion-phase"><b>01</b> Compare routes</span>
-        <svg viewBox="0 0 720 500" preserveAspectRatio="xMidYMid meet">
-          <defs><mask id="mat-motion-diagonal-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="720" height="500"><rect width="720" height="500" fill="#fff"/><path d="M102 452L598 86" fill="none" stroke="#000" strokeWidth="50" strokeLinecap="round"/></mask></defs>
-          <path className="mat-motion-river" d="M0 0H63C49 76 71 130 46 196S28 318 53 372 47 455 22 500H0Z"/>
-          <path className="mat-motion-park" d="M55 0h68v500H40c34-68 6-121 27-181s3-112 17-172S57 62 55 0Z"/>
-          <g className="mat-motion-streets">
-            <path className="mat-motion-street-edge" d="M0 86H720M0 210H720M0 336H720M0 452H720M102 0V500M260 0V500M432 0V500M598 0V500"/>
-            <path className="mat-motion-street-surface" d="M0 86H720M0 210H720M0 336H720M0 452H720M102 0V500M260 0V500M432 0V500M598 0V500"/>
-            <path className="mat-motion-street-center" d="M0 86H720M0 210H720M0 336H720M0 452H720M102 0V500M260 0V500M432 0V500M598 0V500"/>
-          </g>
-          <g mask="url(#mat-motion-diagonal-cut)"><g className="mat-motion-lots"><rect x="122" y="106" width="118" height="84" rx="9"/><rect x="280" y="106" width="132" height="84" rx="9"/><rect x="452" y="106" width="126" height="84" rx="9"/><rect x="618" y="106" width="102" height="84" rx="9"/><rect x="122" y="230" width="118" height="86" rx="9"/><rect x="280" y="230" width="132" height="86" rx="9"/><rect x="452" y="230" width="126" height="86" rx="9"/><rect x="618" y="230" width="102" height="86" rx="9"/><rect x="122" y="356" width="118" height="76" rx="9"/><rect x="280" y="356" width="132" height="76" rx="9"/><rect x="452" y="356" width="126" height="76" rx="9"/><rect x="618" y="356" width="102" height="76" rx="9"/></g>
-          <g className="mat-motion-buildings"><path d="M136 118h46v31h44v29h-90Z"/><rect x="294" y="119" width="48" height="59" rx="5"/><path d="M354 119h44v26h-18v33h-26Z"/><rect x="465" y="118" width="98" height="60" rx="5"/><rect x="631" y="118" width="74" height="60" rx="5"/><rect x="136" y="242" width="88" height="62" rx="5"/><path d="M294 242h54v22h48v40H294Z"/><rect x="466" y="242" width="42" height="62" rx="5"/><rect x="520" y="242" width="44" height="38" rx="5"/><path d="M632 242h72v62h-28v-25h-44Z"/><rect x="137" y="368" width="42" height="52" rx="5"/><rect x="188" y="368" width="38" height="31" rx="5"/><path d="M294 368h104v52h-47v-21h-57Z"/><rect x="466" y="368" width="44" height="52" rx="5"/><rect x="521" y="368" width="43" height="31" rx="5"/><rect x="632" y="368" width="72" height="52" rx="5"/></g></g>
-          <g className="mat-motion-diagonal-street"><path className="mat-motion-diagonal-edge" d="M102 452L598 86"/><path className="mat-motion-diagonal-surface" d="M102 452L598 86"/><path className="mat-motion-diagonal-center" d="M102 452L598 86"/></g>
-          <g className="mat-motion-canopy"><circle cx="102" cy="394" r="18"/><circle cx="164" cy="336" r="17"/><circle cx="224" cy="336" r="15"/><circle cx="260" cy="274" r="17"/><circle cx="318" cy="210" r="15"/><circle cx="382" cy="210" r="18"/><circle cx="432" cy="146" r="16"/><circle cx="492" cy="86" r="17"/><circle cx="548" cy="86" r="15"/></g>
-          <path className="mat-motion-heat-corridor" d="M102 452L598 86"/>
-          <path className="mat-motion-route mat-motion-route-fast" d="M102 452L598 86"/>
-          <path className="mat-motion-route mat-motion-route-cool" d="M102 452V336H260V210H432V86H598"/>
-          <circle className="mat-motion-traveler" r="8"><animateMotion dur="7s" begin="1.15s" repeatCount="indefinite" path="M102 452V336H260V210H432V86H598"/></circle>
-          <g className="mat-motion-intersections"><circle cx="102" cy="336" r="4"/><circle cx="260" cy="336" r="4"/><circle cx="260" cy="210" r="4"/><circle cx="432" cy="210" r="4"/><circle cx="432" cy="86" r="4"/></g>
-          <g className="mat-motion-labels"><text x="300" y="79">HILL ST</text><text x="300" y="203">PINE ST</text><text x="300" y="329">OAK WALK</text><text x="300" y="445">MARKET ST</text><text x="425" y="178" transform="rotate(-90 425 178)">2ND AVE</text><text x="69" y="270" transform="rotate(-90 69 270)">RIVER PARK</text><text x="346" y="270" transform="rotate(-36 346 270)">SUNLINE AVE</text></g>
-          <circle className="mat-motion-point" cx="102" cy="452" r="11"/><circle className="mat-motion-point" cx="598" cy="86" r="11"/>
+        <svg viewBox="0 0 760 360" preserveAspectRatio="xMidYMid meet">
+          <MatMapBase buildingMaskId={buildingMaskId} motion/>
+          <path className="mat-motion-route mat-motion-route-fast" d={matMapPaths.fast}/>
+          <path className="mat-motion-route mat-motion-route-cool" d={matMapPaths.cool}/>
+          <circle className="mat-motion-traveler" r="8"><animateMotion dur="7s" begin="1.15s" repeatCount="indefinite" path={matMapPaths.cool}/></circle>
+          <g className="mat-motion-intersections"><circle cx="45" cy="280" r="4"/><circle cx="45" cy="185" r="4"/><circle cx="130" cy="155" r="4"/><circle cx="230" cy="140" r="4"/><circle cx="315" cy="100" r="4"/><circle cx="430" cy="105" r="4"/><circle cx="550" cy="70" r="4"/></g>
+          <circle className="mat-motion-point" cx="72" cy="306" r="11"/><circle className="mat-motion-point" cx="688" cy="58" r="11"/>
         </svg>
         <span className="mat-motion-map-key"><i/> shaded streets</span>
         <span className="mat-motion-route-legend"><b><i/> Cooler</b><b><i/> Faster</b></span>

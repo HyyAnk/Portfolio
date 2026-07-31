@@ -16,11 +16,16 @@ import portraitImage from './assets/generated/portrait.webp';
 import playgroundLoop from './assets/generated/playground-loop.webp';
 import playgroundType from './assets/generated/playground-type.webp';
 import playgroundFins from './assets/generated/playground-fins.webp';
-import foldedMatterImage from './assets/generated/case-folded-matter-v2.webp';
-import stillMovingImage from './assets/generated/case-still-moving-v2.webp';
+import mergeboardPreview from './assets/experiments/mergeboard.png';
+import photoIdPreview from './assets/experiments/photo-id-studio.png';
+import pdfCardPreview from './assets/experiments/pdf-business-card.png';
+import aiStudioPreview from './assets/experiments/ai-creative-studio.png';
 import matCover from './assets/case-studies/mat-cover.webp';
 import kitepayCover from './assets/case-studies/kitepay-cover.webp';
+import muonCover from './assets/case-studies/muon-cover.webp';
+import hopLuuCover from './assets/case-studies/hop-luu-cover.webp';
 import { DeepCaseStudy } from './caseStudies.jsx';
+import { ShowcaseCaseStudy } from './showcaseCases.jsx';
 
 const person = 'HyyAnk';
 const fullName = 'Dư Ngọc Minh Hoàng';
@@ -69,15 +74,63 @@ const skills = [
 
 const works = [
   { slug: 'mat', title: 'MÁT', type: 'Web product · PWA', year: '2026', role: 'Product strategy · UX/UI · React', description: 'A heat-aware route planner that helps people choose a kinder path through hot, dense cities.', challenge: 'Most route planners optimize only time and distance, leaving heat exposure and recovery needs invisible.', outcome: 'A responsive routing concept that makes shade, heat, air quality and route trade-offs understandable.', tags: ['Product design', 'Web development'], image: matCover, deep: true },
-  { slug: 'folded-matter', title: 'Folded Matter', type: 'Identity system', year: '2026', role: 'Art direction · Identity', description: 'A tactile identity for an exhibition exploring how material, place and memory shape one another.', challenge: 'The identity needed to hold together physical signage, editorial matter and digital announcements without losing its quiet character.', outcome: 'A modular system built from folds, circles and one warm signal colour, designed to change scale without changing voice.', tags: ['Art direction', 'Graphic design'], image: foldedMatterImage },
-  { slug: 'still-moving', title: 'Still Moving', type: 'Title sequence', year: '2025', role: 'Editing · Motion direction', description: 'A restrained title language built from shadow, rhythm and a single line of moving light.', challenge: 'The sequence had to establish tension without competing with the film. Every transition needed to feel physical and intentional.', outcome: 'A modular motion grammar for titles, chapter cards and social cut-downs, paced around sound rather than spectacle.', tags: ['Editing', 'Motion design'], image: stillMovingImage },
+  { slug: 'folded-matter', title: 'MƯỢN', type: 'Brand identity · Community service', year: '2026', role: 'Strategy · Naming · Identity · Motion', description: 'A sharing identity that makes borrowing useful objects feel ordinary, local and worth repeating.', challenge: 'Shared tools need trust, clarity and a recognizable handoff across labels, lockers, spaces and screens.', outcome: 'A practical identity system spanning naming, object tags, spatial service, digital borrowing and motion.', tags: ['Brand identity', 'Art direction'], image: muonCover, deep: true },
+  { slug: 'still-moving', title: 'HỢP LƯU', type: 'Corporate profile · Editorial', year: '2026', role: 'Editorial direction · Information design', description: 'A bilingual capability profile that makes industrial water engineering clear, verifiable and ready for review.', challenge: 'Technical evidence was scattered across tender files, drawings, site photography and inconsistent sales decks.', outcome: 'A modular print and digital credential system organized around decisions, scope and proof.', tags: ['Editorial design', 'Information design'], image: hopLuuCover, deep: true },
   { slug: 'kitepay', title: 'KitePay', type: 'BSC application', year: '2026', role: 'Product design · Web3 integration', description: 'A milestone escrow that makes scope, payment state and on-chain evidence clear to both sides.', challenge: 'Freelancers and clients need a shared payment state without turning every agreement into a crypto puzzle.', outcome: 'A testnet-ready product concept pairing explicit escrow states with human-readable transaction receipts.', tags: ['Blockchain', 'React'], image: kitepayCover, deep: true },
+];
+
+const experiments = [
+  {
+    slug: 'mergeboard',
+    title: 'MergeBoard',
+    label: 'Local-first visual composer',
+    description: 'Connect text, images and generation nodes into reusable project graphs. Files stay in a folder you choose; Vercel only serves the interface.',
+    tech: ['React Flow', 'File System Access API', 'Local-first'],
+    image: mergeboardPreview,
+    alt: 'MergeBoard node canvas with connected text, image and mixer nodes',
+    repo: 'https://github.com/HyyAnk/Merge-Board-Node',
+    live: 'https://merge-board-node.vercel.app',
+    featured: true,
+  },
+  {
+    slug: 'photo-id',
+    title: 'Photo ID Studio',
+    label: 'AI image pipeline',
+    description: 'Queues reference photos by session, prepares 3x4 or 4x6 output at 600 DPI, and returns download-ready PNG or JPG results.',
+    tech: ['React', 'Express', 'Sharp'],
+    image: photoIdPreview,
+    alt: 'Photo ID Studio dashboard with session queue, upload dock and result panel',
+    repo: 'https://github.com/HyyAnk/Photo-ID-Studio',
+    live: 'https://photo-id-studio.vercel.app',
+  },
+  {
+    slug: 'pdf-card',
+    title: 'PDF Business Card',
+    label: 'In-browser document utility',
+    description: 'Places a configurable business card and QR layer on a PDF, previews every page, compresses toward a target size and exports locally.',
+    tech: ['TypeScript', 'pdf-lib', 'QR tooling'],
+    image: pdfCardPreview,
+    alt: 'PDF Business Card interface with PDF upload canvas and card controls',
+    repo: 'https://github.com/HyyAnk/Pdf-business-card-stamper',
+    live: 'https://pdf-business-card-stamper.vercel.app',
+  },
+  {
+    slug: 'ai-studio',
+    title: 'AI Media Studio',
+    label: 'Generative media workbench',
+    description: 'An image and video workspace with reference inputs, edit masking, batch history, local folder export and Veo experiments.',
+    tech: ['React', 'TypeScript', 'Google GenAI'],
+    image: aiStudioPreview,
+    alt: 'Google AI Studio repository banner for a generative media workspace',
+    repo: 'https://github.com/HyyAnk/Image-video-Google-API---Aistudio',
+    wide: true,
+  },
 ];
 
 const heroCarouselImages = [
   { image: matCover, alt: 'MÁT heat-aware route planning concept' },
-  { image: foldedMatterImage, alt: 'Folded Matter identity system arranged on paper' },
-  { image: stillMovingImage, alt: 'Still Moving title sequence study' },
+  { image: muonCover, alt: 'MƯỢN community lending identity system' },
+  { image: hopLuuCover, alt: 'HỢP LƯU corporate capability profile' },
   { image: kitepayCover, alt: 'KitePay BSC milestone escrow concept' },
   { image: uiImage, alt: 'Responsive interface design study' },
   { image: graphicImage, alt: 'Graphic identity system study' },
@@ -385,8 +438,8 @@ function ReadyProjectButton() {
     onFocusCapture={() => setEffectSource('focus', true)}
     onBlurCapture={() => setEffectSource('focus', false)}
   >
-    <a className="button ready-cta" href="#contact" aria-label="Ready for yahh — go to contact options">
-      <span className="ready-cta-label">Ready for yahh</span>
+    <a className="button ready-cta" href="#contact" aria-label="Ready to Delivery - go to contact options">
+      <span className="ready-cta-label">Ready to Delivery</span>
       <span className="ready-type" aria-hidden="true"><span>_</span><span>_</span><span>_</span></span>
     </a>
     <span className="ready-fx" aria-hidden="true" key={effectCycle}>
@@ -422,7 +475,7 @@ function Hero() {
 }
 
 function WorkCarousel() {
-  return <section id="selected-works" className="section-pad works-section"><div className="page-shell"><Reveal><div className="section-heading section-heading-stacked"><h2>Selected work</h2><p>Four self-initiated studies across product, identity, motion and systems.</p></div></Reveal><div className="work-gallery">{works.map((work, index) => <Reveal className={`work-card work-card-${index + 1}`} key={work.slug} delay={index * .05}><Link to={`/work/${work.slug}`} className="work-card-link" aria-label={`View ${work.title} project`}><figure className="work-card-image"><img src={work.image} alt={`${work.title} project visual`} loading={index > 1 ? 'lazy' : 'eager'} decoding="async" /><figcaption>View project <ArrowUpRight size={16} /></figcaption></figure><div className="work-card-kicker"><span>{String(index + 1).padStart(2, '0')} / 04</span><span>{work.deep ? 'Full case study' : 'Project study'}</span></div><div className="work-card-copy"><div><h3>{work.title}</h3><p>{work.description}</p></div><div className="work-card-meta"><span>{work.type}</span><span>{work.year}</span><ArrowUpRight size={20} /></div></div></Link></Reveal>)}</div></div></section>;
+  return <section id="selected-works" className="section-pad works-section"><div className="page-shell"><Reveal><div className="section-heading section-heading-stacked"><h2>Selected work</h2><p>Four self-initiated case studies across product, identity, editorial and systems.</p></div></Reveal><div className="work-gallery">{works.map((work, index) => <Reveal className={`work-card work-card-${index + 1}`} key={work.slug} delay={index * .05}><Link to={`/work/${work.slug}`} className="work-card-link" aria-label={`View ${work.title} project`}><figure className="work-card-image"><img src={work.image} alt={`${work.title} project visual`} loading={index > 1 ? 'lazy' : 'eager'} decoding="async" /><figcaption>View project <ArrowUpRight size={16} /></figcaption></figure><div className="work-card-kicker"><span>{String(index + 1).padStart(2, '0')} / 04</span><span>{work.deep ? 'Full case study' : 'Project study'}</span></div><div className="work-card-copy"><div><h3>{work.title}</h3><p>{work.description}</p></div><div className="work-card-meta"><span>{work.type}</span><span>{work.year}</span><ArrowUpRight size={20} /></div></div></Link></Reveal>)}</div></div></section>;
 }
 
 function About() {
@@ -765,9 +818,21 @@ function SkillBlocks() {
   return <section id="skills" className="section-pad skill-blocks"><div className="page-shell"><div className="skill-flow-layout"><Reveal className="skill-flow-copy"><div className="section-heading section-heading-stacked"><span className="skill-flow-eyebrow">The way I work</span><h2><span>Design</span><span>Develop</span><span>Deliver</span></h2><p>One connected flow from a sharp idea to a useful, finished experience.</p></div></Reveal><Reveal className="skill-flow-visual" delay={.08}><ThreeSkillFlow /></Reveal></div><div className="skills-index">{skills.map((skill, index) => <Reveal key={skill.slug} delay={index * .05}><Link className="skill-index-row" to={`/skills/${skill.slug}`}><span className="skill-index-title">{skill.title}</span><span className="skill-index-copy">{skill.short}</span><ArrowUpRight size={20} /></Link></Reveal>)}</div></div></section>;
 }
 
+function Experiments() {
+  return <section id="experiments" className="section-pad experiments-section"><div className="page-shell">
+    <Reveal><header className="experiments-heading"><div><h2>Experiments</h2><p>Small tools built to remove one practical friction at a time. Each one started with a working problem, not a portfolio category.</p></div><a className="experiments-github" href="https://github.com/HyyAnk" target="_blank" rel="noreferrer">Browse GitHub <GithubLogo size={18} weight="fill" /></a></header></Reveal>
+    <div className="experiments-grid">{experiments.map((project, index) => <Reveal className={`experiment-card ${project.featured ? 'experiment-featured' : ''} ${project.wide ? 'experiment-wide' : ''}`} key={project.slug} delay={index * .06}>
+      <article>
+        <figure className="experiment-visual"><img src={project.image} alt={project.alt} loading="lazy" decoding="async" /></figure>
+        <div className="experiment-copy"><span className="experiment-label">{project.label}</span><h3>{project.title}</h3><p>{project.description}</p><div className="experiment-footer"><ul aria-label={`${project.title} technologies`}>{project.tech.map((item) => <li key={item}>{item}</li>)}</ul><nav aria-label={`${project.title} links`}>{project.live && <a href={project.live} target="_blank" rel="noreferrer">Live demo <ArrowUpRight size={15} /></a>}<a href={project.repo} target="_blank" rel="noreferrer"><GithubLogo size={16} weight="fill" /> Source</a></nav></div></div>
+      </article>
+    </Reveal>)}</div>
+  </div></section>;
+}
+
 function Playground() {
   const items = [{ image: playgroundLoop, title: 'Balance study', label: 'Form' }, { image: playgroundType, title: 'Letter as structure', label: 'Type' }, { image: playgroundFins, title: 'A quiet wave', label: 'Motion' }];
-  return <section id="playground" className="section-pad playground-section"><div className="page-shell"><Reveal><div className="section-heading section-heading-stacked"><h2>Experiments</h2><p>Small studies in form, type and motion.</p></div></Reveal><div className="playground-grid">{items.map((item, index) => <Reveal className={`playground-item playground-${index + 1}`} key={item.title} delay={index * .08}><figure><div className="playground-image"><img src={item.image} alt={item.title} loading="lazy" /></div><figcaption><strong>{item.title}</strong><span>{item.label}</span></figcaption></figure></Reveal>)}</div></div></section>;
+  return <section id="playground" className="section-pad playground-section"><div className="page-shell"><Reveal><div className="section-heading section-heading-stacked"><h2>Visual notes</h2><p>Small studies in form, type and motion.</p></div></Reveal><div className="playground-grid">{items.map((item, index) => <Reveal className={`playground-item playground-${index + 1}`} key={item.title} delay={index * .08}><figure><div className="playground-image"><img src={item.image} alt={item.title} loading="lazy" /></div><figcaption><strong>{item.title}</strong><span>{item.label}</span></figcaption></figure></Reveal>)}</div></div></section>;
 }
 
 function Contact() {
@@ -804,12 +869,15 @@ function Footer() {
 
 function Home() {
   usePageMeta(`${person} - Designer and Developer`, `${person} (${fullName}) is a multidisciplinary designer and developer.`);
-  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content"><div id="top"><Hero /></div><WorkCarousel /><About /><SkillBlocks /><Playground /><Contact /></main><Footer /></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content"><div id="top"><Hero /></div><WorkCarousel /><About /><SkillBlocks /><Experiments /><Playground /><Contact /></main><Footer /></>;
 }
 
 function ProjectPage({ work }) {
   usePageMeta(`${work.title} - ${person}`, work.description);
-  if (work.deep) return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className={`project-page-deep project-page-${work.slug}`}><DeepCaseStudy work={work} /><Contact /></main><Footer /></>;
+  if (work.deep) {
+    const isShowcaseCase = work.slug === 'folded-matter' || work.slug === 'still-moving';
+    return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className={`project-page-deep project-page-${work.slug}`}>{isShowcaseCase ? <ShowcaseCaseStudy work={work}/> : <DeepCaseStudy work={work} />}<Contact /></main><Footer /></>;
+  }
   return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="project-page">
     <section className="project-hero section-pad">
       <div className="page-shell"><Reveal><Link className="project-back" to="/#selected-works"><ArrowLeft size={16} /> Selected works</Link><div className="project-heading"><div><span className="eyebrow">{work.type} · {work.year}</span><h1>{work.title}</h1></div><p>{work.description}</p></div></Reveal><Reveal className="project-cover" delay={.08}><img src={work.image} alt={`${work.title} case study cover`} /></Reveal></div>

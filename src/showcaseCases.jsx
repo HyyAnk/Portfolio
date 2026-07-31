@@ -4,6 +4,10 @@ import { ArrowLeft, ArrowUpRight, CaretRight, Check, Pause, Play } from '@phosph
 
 import muonCover from './assets/case-studies/muon-cover.webp';
 import muonSpace from './assets/case-studies/muon-space.webp';
+import muonPrintSystem from './assets/case-studies/muon-print-system.webp';
+import muonObjectApplications from './assets/case-studies/muon-object-applications.webp';
+import muonDigitalDevices from './assets/case-studies/muon-digital-devices.webp';
+import muonStreetApplications from './assets/case-studies/muon-street-applications.webp';
 import hopLuuCover from './assets/case-studies/hop-luu-cover.webp';
 import hopLuuReview from './assets/case-studies/hop-luu-review.webp';
 
@@ -27,7 +31,7 @@ function ShowcaseHero({ work, theme, label, summary, facts, image, imageAlt, dem
 }
 
 function ShowcaseLead({ label, title, copy }) {
-  return <header className="showcase-lead"><ShowcaseEyebrow>{label}</ShowcaseEyebrow><h2>{title}</h2>{copy && <p>{copy}</p>}</header>;
+  return <header className="showcase-lead">{label && <ShowcaseEyebrow>{label}</ShowcaseEyebrow>}<h2>{title}</h2>{copy && <p>{copy}</p>}</header>;
 }
 
 const muonModes = {
@@ -60,8 +64,19 @@ function MuonComposer() {
 function MuonMarkStudy() {
   return <div className="muon-mark-study" role="img" aria-label="Animated MƯỢN open bracket identity moving from storage to exchange">
     <div className="muon-mark-grid" aria-hidden="true">{Array.from({length:12},(_,i) => <i key={i}/>)}</div>
+    <div className="muon-safe-zone" aria-hidden="true"><span>x</span><span>x</span><span>x</span><span>x</span></div>
     <div className="muon-mark-sequence" aria-hidden="true"><span>[</span><span className="muon-object">●</span><span>]</span></div>
-    <div className="muon-mark-caption"><span>Store</span><span>Pass</span><span>Return</span></div>
+    <div className="muon-mark-caption"><span>Clear space 1x</span><span>Minimum 18 mm</span></div>
+  </div>;
+}
+
+function MuonMotionStudy() {
+  return <div className="muon-motion-study" role="img" aria-label="MƯỢN motion sequence showing an object stored, passed and returned">
+    <div className="muon-motion-track" aria-hidden="true">
+      <div className="muon-motion-frame"><span>[</span><i>●</i><span>]</span><small>Store</small></div>
+      <div className="muon-motion-frame"><span>[</span><i>●</i><span>]</span><small>Pass</small></div>
+      <div className="muon-motion-frame"><span>[</span><i>●</i><span>]</span><small>Return</small></div>
+    </div>
   </div>;
 }
 
@@ -73,47 +88,55 @@ function MuonCaseStudy({ work }) {
     { label: 'Prototype', value: 'Identity composer · Borrowing flow' },
   ];
   return <article className="showcase-case case-muon">
-    <ShowcaseHero work={work} theme="muon" label="Brand identity · Community service · 2026" summary="A sharing identity that makes borrowing useful objects feel ordinary, local and worth repeating." facts={facts} image={muonCover} imageAlt="MƯỢN identity system applied to a tote, member card, object tags, booklet and mobile borrowing interface" demoLabel="Build an identity signal"/>
+    <ShowcaseHero work={work} theme="muon" label="Brand identity · Community service · 2026" summary="A neighborhood borrowing identity built to move from object to object." facts={facts} image={muonCover} imageAlt="MƯỢN identity system applied to a tote, member card, object tags, booklet and mobile borrowing interface" demoLabel="Try the identity system"/>
 
-    <section className="showcase-section muon-brief"><div className="page-shell">
-      <ShowcaseLead label="The brief" title="Useful things should spend less time sitting still." copy="MƯỢN is a proposed neighborhood network for borrowing tools, kitchen equipment and event supplies. The identity must make shared ownership feel dependable rather than improvised."/>
-      <div className="muon-tension-grid">
-        <article><strong>Accessible</strong><span>not disposable</span></article><article><strong>Practical</strong><span>not institutional</span></article><article><strong>Local</strong><span>not nostalgic</span></article><article><strong>Shared</strong><span>not anonymous</span></article>
+    <section className="showcase-section muon-foundations-section"><div className="page-shell">
+      <ShowcaseLead title="A system for things that keep moving." copy="The open bracket holds each object long enough to name it, lend it and pass it on."/>
+      <div className="muon-foundations">
+        <MuonMarkStudy/>
+        <div className="muon-foundation-specs">
+          <div className="muon-wordmark-spec"><small>Primary wordmark</small><strong>MƯỢN</strong><span>Manrope Variable · 760</span></div>
+          <div className="muon-type-spec"><small>Vietnamese type specimen</small><strong>Mượn để dùng.<br/>Trả để tiếp tục.</strong><span>Display 56/52 · Body 16/25</span></div>
+          <dl className="muon-color-system">
+            <div><dt>Infrastructure</dt><dd>#142536</dd></div>
+            <div><dt>Action</dt><dd>#EF5848</dd></div>
+            <div><dt>Field</dt><dd>#DCE2E6</dd></div>
+            <div><dt>Information</dt><dd>#F4F6F6</dd></div>
+          </dl>
+        </div>
       </div>
     </div></section>
 
-    <section className="showcase-section muon-strategy"><div className="page-shell">
-      <ShowcaseLead label="Strategy" title="Borrowing should feel normal, not charitable." copy="The system removes the social friction around asking. Every touchpoint answers three questions quickly: what is it, where is it and when does it return?"/>
-      <div className="muon-principles"><article><span>Recognition</span><h3>One bracket holds the system.</h3><p>The open mark frames objects without pretending to own them.</p></article><article><span>Clarity</span><h3>Object language stays concrete.</h3><p>Names, condition and availability lead before any brand message.</p></article><article><span>Movement</span><h3>The object always travels forward.</h3><p>Motion shows storage, handoff and return as one continuous loop.</p></article></div>
-    </div></section>
-
-    <section className="showcase-section muon-identity"><div className="page-shell">
-      <ShowcaseLead label="Identity system" title="An open bracket becomes a place for exchange." copy="The mark expands, narrows and hands objects across formats. Coral identifies the active action; smoke blue carries the durable infrastructure around it."/>
-      <div className="muon-identity-layout"><MuonMarkStudy/><div className="muon-type-panel"><div><small>Display</small><strong>MƯỢN</strong><p>Manrope Variable · 760</p></div><div className="muon-palette"><i/><i/><i/><i/></div><p>Vietnamese diacritics remain part of the primary wordmark at every supported size.</p></div></div>
+    <section className="showcase-section muon-applications"><div className="page-shell">
+      <ShowcaseLead title="The identity earns trust on contact." copy="Paper, tags and working objects carry the same bracket, item code and return logic."/>
+      <div className="muon-application-gallery">
+        <figure><img src={muonPrintSystem} alt="MƯỢN poster series, program sheet, member cards, labels and inventory tags" width="1536" height="1024" loading="lazy"/><figcaption><strong>Print system</strong><span>Uncoated stock · coated tags · woven strap</span></figcaption></figure>
+        <figure><img src={muonObjectApplications} alt="MƯỢN identity applied to a drill case, projector crate, stockpot, table strap and staff apron" width="1536" height="1024" loading="lazy"/><figcaption><strong>Object system</strong><span>Item code · condition · checkout label</span></figcaption></figure>
+      </div>
     </div></section>
 
     <section id="live-demo" className="showcase-section muon-demo-section"><div className="page-shell">
-      <ShowcaseLead label="Live identity composer" title="Change the object. Keep the rule." copy="Switch the inventory family and format. The mark, hierarchy and motion adapt without turning every application into a new identity."/>
+      <ShowcaseLead label="Live identity composer" title="Change the object. Keep the rule." copy="Switch the family and format to test one identity across many shared things."/>
       <MuonComposer/>
     </div></section>
 
-    <section className="showcase-section muon-space"><div className="page-shell">
-      <ShowcaseLead label="Space and service" title="A brand people can use without instruction." copy="The bracket shifts from symbol to navigation device across lockers, pickup screens, bags and object labels."/>
-      <figure className="showcase-wide-image"><img src={muonSpace} alt="MƯỢN community lending lockers, kiosk, signage and reusable bags in a neighborhood pickup space" loading="lazy"/></figure>
-      <div className="muon-service-strip"><span>Choose an object</span><CaretRight/><span>Scan membership</span><CaretRight/><span>Collect locally</span><CaretRight/><span>Return visibly</span></div>
-    </div></section>
-
-    <section className="showcase-section muon-digital"><div className="page-shell">
-      <ShowcaseLead label="Digital behavior" title="The interface follows the same borrowing grammar." copy="Availability, condition and return timing stay visible before a request is sent. The brand signal only appears where an action changes state."/>
-      <div className="muon-device-stage">
-        <div className="muon-web-preview"><header><strong>MƯỢN</strong><span>Objects near you</span></header><div className="muon-web-grid"><article><b>Drill</b><small>Available today</small></article><article><b>Stockpot</b><small>Returns Friday</small></article><article><b>Projector</b><small>2 available</small></article></div></div>
-        <div className="muon-phone-preview"><span className="muon-phone-notch"/><small>T-0087</small><h3>Cordless drill</h3><p>Available at Bình Thạnh locker</p><div><span>Condition</span><strong>Ready</strong></div><button type="button">Request to borrow</button></div>
+    <section className="showcase-section muon-environment"><div className="page-shell">
+      <ShowcaseLead title="A neighborhood service, not a showroom." copy="The system moves from facade to locker to handoff without changing its visual grammar."/>
+      <div className="muon-environment-gallery">
+        <figure><img src={muonSpace} alt="MƯỢN community lending lockers, kiosk, signage and reusable bags in a neighborhood pickup space" width="1536" height="1024" loading="lazy"/><figcaption>Locker hub · Bình Thạnh</figcaption></figure>
+        <figure><img src={muonStreetApplications} alt="MƯỢN street facade, blade sign, pickup window, wayfinding, return tote and staff apron" width="1536" height="1024" loading="lazy"/><figcaption>Street pickup · Ho Chi Minh City</figcaption></figure>
       </div>
     </div></section>
 
-    <section className="showcase-section muon-validation"><div className="page-shell">
-      <ShowcaseLead label="Prototype checks" title="A distinct identity with practical limits." copy="The concept was checked across print, space and responsive formats. Business outcomes remain design targets until tested with a real operating network."/>
-      <div className="showcase-check-grid"><article><Check/><strong>Responsive composer</strong><p>Poster, tag and pass retain the same information hierarchy.</p></article><article><Check/><strong>Keyboard controls</strong><p>Every identity state is reachable without pointer input.</p></article><article><Check/><strong>Reduced motion</strong><p>The final exchange state remains understandable without animation.</p></article><article><Check/><strong>Next evidence</strong><p>Object-label durability, locker-distance legibility and moderated borrowing sessions.</p></article></div>
+    <section className="showcase-section muon-digital"><div className="page-shell">
+      <ShowcaseLead title="Availability before brand theatre." copy="Search, condition, pickup and return timing stay visible across every screen."/>
+      <figure className="muon-digital-figure"><img src={muonDigitalDevices} alt="MƯỢN laptop search interface, tablet locker pickup flow and mobile membership pass" width="1536" height="1024" loading="lazy"/><figcaption><span>Responsive service UI</span><strong>Search · reserve · collect · return</strong></figcaption></figure>
+    </div></section>
+
+    <section className="showcase-section muon-motion"><div className="page-shell">
+      <ShowcaseLead title="Store. Pass. Return." copy="Motion turns the bracket into a handoff, not a decorative flourish."/>
+      <MuonMotionStudy/>
+      <p className="muon-closing-note"><strong>Prototype boundary:</strong> print, responsive and reduced-motion states were checked. Service outcomes require a live borrowing network.</p>
     </div></section>
   </article>;
 }
@@ -161,17 +184,17 @@ function HopLuuCaseStudy({ work }) {
     </div></section>
 
     <section className="showcase-section hop-architecture"><div className="page-shell">
-      <ShowcaseLead label="Information architecture" title="Readers do not enter through page one." copy="The publication is organized around decisions. Each audience can qualify the company, review an approach or inspect related work without losing the complete narrative."/>
+      <ShowcaseLead title="Readers do not enter through page one." copy="The publication is organized around decisions. Each audience can qualify the company, review an approach or inspect related work without losing the complete narrative."/>
       <div className="hop-chapter-map"><div><strong>Qualify</strong><span>Company · control · industries</span></div><i/><div><strong>Review</strong><span>Condition · response · scope</span></div><i/><div><strong>Inspect</strong><span>Context · evidence · handover</span></div></div>
     </div></section>
 
     <section className="showcase-section hop-proof"><div className="page-shell">
-      <ShowcaseLead label="Content model" title="Every claim needs a source." copy="Marketing language becomes credible only when it connects to responsibility, evidence and a named content owner."/>
+      <ShowcaseLead title="Every claim needs a source." copy="Marketing language becomes credible only when it connects to responsibility, evidence and a named content owner."/>
       <div className="hop-proof-chain"><article><span>Claim</span><strong>Design and integration capability</strong></article><CaretRight/><article><span>Scope</span><strong>Process, mechanical and controls interfaces</strong></article><CaretRight/><article><span>Evidence</span><strong>Approved drawing · handover record · site image</strong></article><CaretRight/><article><span>Owner</span><strong>Engineering lead · document control</strong></article></div>
     </div></section>
 
     <section className="showcase-section hop-editorial"><div className="page-shell">
-      <ShowcaseLead label="Editorial system" title="One line carries the story." copy="A vermilion flow-line links chapters, process diagrams and evidence references. Vietnamese leads while English receives equal functional hierarchy."/>
+      <ShowcaseLead title="One line carries the story." copy="A vermilion flow-line links chapters, process diagrams and evidence references. Vietnamese leads while English receives equal functional hierarchy."/>
       <div className="hop-spread-stage"><div className="hop-spread-page"><small>02 / CAPABILITY</small><h3>Năng lực kỹ thuật</h3><p>Technical capabilities</p><div className="hop-spread-diagram"><i/><i/><i/><i/></div></div><div className="hop-spread-page"><small>03 / SCOPE</small><h3>Phạm vi công việc</h3><p>Scope of work</p><div className="hop-spread-photo"><span>Project context</span><span>Responsibility</span></div></div></div>
     </div></section>
 
@@ -181,14 +204,14 @@ function HopLuuCaseStudy({ work }) {
     </div></section>
 
     <section className="showcase-section hop-use"><div className="page-shell">
-      <ShowcaseLead label="Document in use" title="Technical without becoming opaque." copy="The profile supports a conversation at the table, then continues as a searchable mobile credential after the meeting."/>
+      <ShowcaseLead title="Technical without becoming opaque." copy="The profile supports a conversation at the table, then continues as a searchable mobile credential after the meeting."/>
       <figure className="showcase-wide-image showcase-square-image"><img src={hopLuuReview} alt="Engineers reviewing the HỢP LƯU bilingual process-water profile and digital reader in a plant control room" loading="lazy"/></figure>
     </div></section>
 
     <section className="showcase-section hop-delivery"><div className="page-shell">
-      <ShowcaseLead label="Production and handoff" title="Built for print, email and future evidence." copy="The working system separates print production, accessible digital delivery and reusable content ownership instead of treating one PDF as every final format."/>
+      <ShowcaseLead title="Built for print, email and future evidence." copy="The working system separates print production, accessible digital delivery and reusable content ownership instead of treating one PDF as every final format."/>
       <div className="hop-delivery-grid"><article><span>Print master</span><h3>A4 · 48 pages</h3><p>CMYK package, bleed, font embedding and office-proof version.</p></article><article><span>Digital PDF</span><h3>Tagged · searchable</h3><p>Bookmarks, reading order, selectable text and descriptive images.</p></article><article><span>Content kit</span><h3>Project sheets</h3><p>Source register, named owners and replaceable evidence fields.</p></article></div>
-      <div className="hop-next-evidence"><ShowcaseEyebrow>Prototype validation</ShowcaseEyebrow><ul><li><Check/>Bilingual templates stress-tested with long and short copy</li><li><Check/>Keyboard, mobile and reduced-motion states verified</li><li><Check/>Print and grayscale proof checks documented</li><li><CaretRight/>Next: real procurement comprehension sessions and production press proof</li></ul></div>
+      <div className="hop-next-evidence"><span className="hop-next-label">Prototype validation</span><ul><li><Check/>Bilingual templates stress-tested with long and short copy</li><li><Check/>Keyboard, mobile and reduced-motion states verified</li><li><Check/>Print and grayscale proof checks documented</li><li><CaretRight/>Next: real procurement comprehension sessions and production press proof</li></ul></div>
     </div></section>
   </article>;
 }
@@ -198,4 +221,3 @@ export function ShowcaseCaseStudy({ work }) {
   if (work.slug === 'still-moving') return <HopLuuCaseStudy work={work}/>;
   return null;
 }
-
