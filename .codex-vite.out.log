@@ -1,0 +1,28 @@
+
+> direction-c-portfolio@1.0.0 dev
+> vite --host 127.0.0.1 --port 4173
+
+
+  [32m[1mVITE[22m v7.3.6[39m  [2mready in [0m[1m1309[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m4173[22m/[39m
+[2m8:39:31 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/SkillPageContent.jsx[22m
+[2m8:39:48 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/App.jsx[22m
+[2m8:42:04 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/skill-showcase.css[22m
+[2m8:44:41 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/SkillPageContent.jsx[22m
+[2m8:45:18 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/skill-showcase.css[22m
+[2m8:51:42 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/SkillPageContent.jsx[22m
+[2m8:54:04 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/skill-showcase.css[22m
+[2m9:00:09 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/SkillPageContent.jsx[22m
+[2m9:00:09 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/skill-showcase.css[22m
+[2m9:05:14 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/SkillPageContent.jsx[22m
+[2m9:05:43 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/SkillPageContent.jsx[22m
+[2m9:07:30 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/skill-showcase.css[22m
+[2m9:11:12 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/SkillPageContent.jsx[22m
+[2m9:11:12 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/skill-showcase.css[22m
+[2m9:15:01 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/skill-showcase.css[22m
+[2m9:18:33 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/SkillPageContent.jsx[22m
+[2m9:21:44 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/skill-showcase.css[22m
+[2m9:24:55 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/SkillPageContent.jsx[22m
+[2m9:24:55 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/skill-showcase.css[22m
+[2m9:32:25 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/SkillPageContent.jsx[22m

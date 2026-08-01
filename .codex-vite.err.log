@@ -1,0 +1,38 @@
+[2m8:39:32 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./skill-showcase.css" from "src/SkillPageContent.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mD:/1a Cursor Project/Portfolio/src/SkillPageContent.jsx[39m:18:7
+[33m  24 |  import hopLuuDetail from "./assets/case-studies/hop-luu-production-detail-v2.webp";
+  25 |  import { withoutTrailingPeriod } from "./text.js";
+  26 |  import "./skill-showcase.css";
+     |          ^
+  27 |  function ArrowLink({ children, to = "#contact" }) {
+  28 |    return /* @__PURE__ */ React.createElement("a", { className: "arrow-link", href: to }, children, /* @__PURE__ */ Re...[39m
+      at TransformPluginContext._formatLog (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:29079:43)
+      at TransformPluginContext.error (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:29076:14)
+      at normalizeUrl (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:27199:18)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:27257:32
+      at async Promise.all (index 13)
+      at async TransformPluginContext.transform (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:27225:4)
+      at async EnvironmentPluginContainer.transform (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:28877:14)
+      at async loadAndTransform (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:22746:26)
+      at async viteTransformMiddleware (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:24622:20)
+[2m8:39:49 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./skill-showcase.css" from "src/SkillPageContent.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mD:/1a Cursor Project/Portfolio/src/SkillPageContent.jsx[39m:18:7
+[33m  24 |  import hopLuuDetail from "./assets/case-studies/hop-luu-production-detail-v2.webp";
+  25 |  import { withoutTrailingPeriod } from "./text.js";
+  26 |  import "./skill-showcase.css";
+     |          ^
+  27 |  function ArrowLink({ children, to = "#contact" }) {
+  28 |    return /* @__PURE__ */ React.createElement("a", { className: "arrow-link", href: to }, children, /* @__PURE__ */ Re...[39m
+      at TransformPluginContext._formatLog (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:29079:43)
+      at TransformPluginContext.error (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:29076:14)
+      at normalizeUrl (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:27199:18)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:27257:32
+      at async Promise.all (index 13)
+      at async TransformPluginContext.transform (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:27225:4)
+      at async EnvironmentPluginContainer.transform (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:28877:14)
+      at async loadAndTransform (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:22746:26)
+      at async viteTransformMiddleware (file:///D:/1a%20Cursor%20Project/Portfolio/node_modules/vite/dist/node/chunks/config.js:24622:20)

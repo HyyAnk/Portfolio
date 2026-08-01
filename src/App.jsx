@@ -1364,7 +1364,7 @@ function SkillPage({ skill }) {
   usePageMeta(seoByPath[`/skills/${skill.slug}`]);
   const related = works.filter((work) => work.tags.some((tag) => skill.tools.some((tool) => tag.toLowerCase().includes(tool.split(' ')[0].toLowerCase()))));
   const gallery = [skill.image, ...(related.length ? related.map((item) => item.image) : [uiImage, graphicImage])].slice(0, 3);
-  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="skill-page"><Suspense fallback={<RouteLoading label={`Loading ${skill.title}`} />}><SkillPageContent skill={skill} gallery={gallery} Reveal={Reveal} /></Suspense><Contact /></main><Footer /></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className={`skill-page skill-page-${skill.slug}`}><Suspense fallback={<RouteLoading label={`Loading ${skill.title}`} />}><SkillPageContent skill={skill} gallery={gallery} Reveal={Reveal} /></Suspense><Contact /></main><Footer /></>;
 }
 
 function NotFound() {
