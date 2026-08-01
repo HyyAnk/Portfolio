@@ -15,7 +15,6 @@ import muonObjects from './assets/case-studies/muon-object-applications.webp';
 import muonStreet from './assets/case-studies/muon-street-applications.webp';
 import muonDigital from './assets/case-studies/muon-digital-devices.webp';
 import matCover from './assets/case-studies/mat-cover.webp';
-import matRouteFlow from './assets/case-studies/mat-route-flow.svg';
 import kitepayStateFlow from './assets/case-studies/kitepay-state-flow.svg';
 import hopLuuSpread from './assets/case-studies/hop-luu-capability-spread-v2.webp';
 import hopLuuDetail from './assets/case-studies/hop-luu-production-detail-v2.webp';
@@ -23,6 +22,7 @@ import hopLuuCover from './assets/case-studies/hop-luu-cover.webp';
 import hopLuuProjectSheets from './assets/case-studies/hop-luu-project-sheets.webp';
 import hopLuuReview from './assets/case-studies/hop-luu-review.webp';
 import hopLuuFieldHandover from './assets/case-studies/hop-luu-field-handover-v2.webp';
+import { MatRouteComparisonMap, MatStreetMap, matModes } from './MatProductMap.jsx';
 import { withoutTrailingPeriod } from './text.js';
 import './skill-showcase.css';
 import './ui-showcase-v2.css';
@@ -265,7 +265,10 @@ function UiProductCase({ Reveal }) {
   return <section id="product-thinking" className="ui-section ui-product-section">
     <div className="page-shell">
       <Reveal className="ui-heading"><h2>A recommendation must explain itself</h2><p>MÁT compares the faster route with the cooler route before asking for commitment</p></Reveal>
-      <Reveal className="ui-product-visual" delay={0.06}><img src={matRouteFlow} alt="MÁT route comparison showing faster and cooler paths, shade coverage, heat score, air quality and the final recommendation" loading="lazy" /><a href="/work/mat">View MÁT case study <ArrowUpRight size={17} /></a></Reveal>
+      <Reveal className="ui-product-visual" delay={0.06}>
+        <div className="ui-product-map"><MatRouteComparisonMap fit="slice" label="MÁT street network comparing the faster and cooler routes from Riverside Market to Hill Garden" /><span className="ui-route-legend"><b><i /> Cooler</b><b><i /> Faster</b></span><span className="ui-map-place ui-map-place-start">Riverside Market</span><span className="ui-map-place ui-map-place-end">Hill Garden</span></div>
+        <aside className="ui-product-analysis"><span>Route comparison · 12:40 PM</span><strong>12 minutes buys 42% more shade</strong><p>The recommendation keeps the environmental cost attached to both options</p><dl><div><dt>Fastest</dt><dd>20 min · 29% shade</dd></div><div className="is-recommended"><dt>MÁT recommends</dt><dd>32 min · 71% shade</dd></div></dl><a href="/work/mat">View MÁT case study <ArrowUpRight size={17} /></a></aside>
+      </Reveal>
       <div className="ui-decision-grid">
         {productDecisions.map((item, index) => <Reveal className="ui-decision-card" key={item.title} delay={index * 0.05}>
             <DecisionVisual type={item.visual} />
@@ -293,34 +296,23 @@ function UiResponsive({ Reveal }) {
   return <section id="responsive-system" className="ui-section ui-responsive-section">
     <div className="page-shell">
       <Reveal className="ui-heading"><Devices size={32} weight="duotone" aria-hidden="true" /><h2>Responsive means reprioritised</h2><p>The interface changes order and control density instead of shrinking the desktop layout</p></Reveal>
-      <div className="ui-responsive-grid"><Reveal className="ui-desktop-proof"><header><span>MÁT</span><nav aria-label="Desktop product preview"><b>Plan route</b><i>Saved</i><i>Conditions</i></nav><small>1440 px</small></header><div className="ui-desktop-body"><div className="ui-proof-map" aria-hidden="true"><i /><i /><i /><b /></div><aside><span>Recommended</span><strong>Cooler route</strong><dl><div><dt>Time</dt><dd>32 min</dd></div><div><dt>Shade</dt><dd>71%</dd></div><div><dt>Heat</dt><dd>2.8 / 5</dd></div></dl><button type="button" tabIndex="-1">View directions</button></aside></div></Reveal><Reveal className="ui-mobile-proof" delay={0.06}><header><span>MÁT</span><small>390 px</small></header><div className="ui-proof-map" aria-hidden="true"><i /><i /><i /><b /></div><div className="ui-mobile-result"><span>Recommended</span><strong>Cooler route</strong><p>32 min · 71% shade</p><button type="button" tabIndex="-1">View directions</button></div><nav aria-label="Mobile product preview"><b>Route</b><i>Saved</i><i>Conditions</i></nav></Reveal></div>
+      <div className="ui-responsive-grid"><Reveal className="ui-desktop-proof"><header><span>MÁT</span><nav aria-label="Desktop product preview"><b>Plan route</b><i>Saved</i><i>Conditions</i></nav><small>1440 px</small></header><div className="ui-desktop-body"><div className="ui-proof-map"><MatStreetMap mode="cool" fit="slice" label="Desktop MÁT map with the cooler route and two refill points" /><span className="ui-proof-map-key"><i /> 71% shaded</span></div><aside><span>Recommended</span><strong>Cooler route</strong><dl><div><dt>Time</dt><dd>32 min</dd></div><div><dt>Shade</dt><dd>71%</dd></div><div><dt>Heat</dt><dd>2.8 / 5</dd></div></dl><button type="button" tabIndex="-1">View directions</button></aside></div></Reveal><Reveal className="ui-mobile-proof" delay={0.06}><header><span>MÁT</span><small>390 px</small></header><div className="ui-proof-map"><MatStreetMap mode="cool" fit="slice" label="Mobile MÁT map preserving street, canopy and heat evidence" /><span className="ui-proof-map-key"><i /> 71% shaded</span></div><div className="ui-mobile-result"><span>Recommended</span><strong>Cooler route</strong><p>32 min · 71% shade</p><button type="button" tabIndex="-1">View directions</button></div><nav aria-label="Mobile product preview"><b>Route</b><i>Saved</i><i>Conditions</i></nav></Reveal></div>
       <Reveal className="ui-responsive-rules"><dl><div><dt>Navigation</dt><dd>Top navigation becomes a three-item bottom bar</dd></div><div><dt>Map</dt><dd>Context remains visible while the result moves below it</dd></div><div><dt>Evidence</dt><dd>Primary metrics stay inline, secondary detail opens on demand</dd></div><div><dt>Action</dt><dd>The route action keeps full width and thumb reach</dd></div></dl></Reveal>
     </div>
   </section>;
 }
 
-const routeModes = {
-  shade: { label: 'Coolest', heading: 'Cooler route', time: '32 min', distance: '2.4 km', shade: '71%', heat: '2.8 / 5', copy: 'More shade with two refill points', confirmed: 'Route and next three directions cached', path: 'M72 306C58 298 48 291 45 280C38 245 39 213 45 185C68 170 100 161 130 155C165 143 195 148 230 140C265 132 280 110 315 100C355 88 390 112 430 105C470 98 505 82 550 70C605 55 650 70 688 58' },
-  balanced: { label: 'Balanced', heading: 'Balanced route', time: '26 min', distance: '2.1 km', shade: '54%', heat: '3.3 / 5', copy: 'A practical everyday trade-off', confirmed: 'Route and next three directions cached', path: 'M72 306C105 300 135 288 165 278C205 266 232 238 270 224C310 209 350 216 390 205C398 165 410 130 430 105C470 98 505 82 550 70C605 55 650 70 688 58' },
-  direct: { label: 'Fastest', heading: 'Fastest route', time: '20 min', distance: '1.8 km', shade: '29%', heat: '4.2 / 5', copy: 'Shorter with high midday exposure', confirmed: 'Route and next three directions cached', path: 'M72 306C105 300 135 288 165 278C205 266 232 238 270 224C310 209 350 216 390 205C432 194 455 169 500 155C545 141 570 137 610 125C642 115 663 82 688 58' },
-};
-
-function UiRouteMap({ mode, reduceMotion }) {
-  const active = routeModes[mode];
-  return <svg className="ui-route-map" viewBox="0 0 760 380" role="img" aria-labelledby="ui-route-title ui-route-desc"><title id="ui-route-title">{active.heading} on the MÁT route prototype</title><desc id="ui-route-desc">Route from Riverside Market to Hill Garden with heat and shade evidence</desc><rect width="760" height="380" rx="12" /><g className="ui-map-roads"><path d="M-20 330C118 300 218 270 390 205S610 125 780 42" /><path d="M-20 350C105 330 180 192 315 100S550 70 780 26" /><path d="M390 410C370 325 374 252 390 205C405 160 418 128 430 105C446 72 462 30 480 -20" /><path d="M110 410C130 330 145 252 165 185S205 60 220 -30" /><path d="M570 410C590 330 580 240 610 185S690 55 730 -20" /></g><g className="ui-map-heat"><circle cx="280" cy="230" r="76" /><circle cx="560" cy="142" r="64" /></g><motion.path key={mode} className="ui-map-active" d={active.path} fill="none" initial={reduceMotion ? false : { pathLength: 0, opacity: .35 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: reduceMotion ? 0 : .7, ease: [0.16, 1, 0.3, 1] }} /><g className="ui-map-points"><circle cx="72" cy="306" r="9" /><circle cx="688" cy="58" r="9" /></g></svg>;
-}
-
 function UiSandbox({ Reveal }) {
-  const [mode, setMode] = useState('shade');
+  const [mode, setMode] = useState('cool');
   const [selected, setSelected] = useState(false);
   const reduceMotion = useReducedMotion();
-  const active = routeModes[mode];
+  const active = matModes[mode];
   return <section id="state-prototype" className="ui-section ui-sandbox-section">
     <div className="page-shell ui-sandbox-layout">
-      <Reveal className="ui-sandbox-copy"><CursorClick size={32} weight="duotone" aria-hidden="true" /><h2>State changes stay inspectable</h2><p>Switch route strategy to compare the path, metrics, recommendation and confirmation state</p><div className="ui-mode-controls" role="group" aria-label="Route preference">{Object.entries(routeModes).map(([key, item]) => <button type="button" key={key} aria-pressed={mode === key} onClick={() => { setMode(key); setSelected(false); }}>{item.label}</button>)}</div><dl className="ui-sandbox-boundary"><div><dt>Status</dt><dd>Interactive concept</dd></div><div><dt>Not claimed</dt><dd>Live routing service</dd></div><div><dt>Next validation</dt><dd>Outdoor legibility + data reliability</dd></div></dl></Reveal>
+      <Reveal className="ui-sandbox-copy"><CursorClick size={32} weight="duotone" aria-hidden="true" /><h2>State changes stay inspectable</h2><p>Switch route strategy to compare the path, metrics, recommendation and confirmation state</p><div className="ui-mode-controls" role="group" aria-label="Route preference">{Object.entries(matModes).map(([key, item]) => <button type="button" key={key} aria-pressed={mode === key} onClick={() => { setMode(key); setSelected(false); }}>{item.label}</button>)}</div><dl className="ui-sandbox-boundary"><div><dt>Status</dt><dd>Interactive concept</dd></div><div><dt>Not claimed</dt><dd>Live routing service</dd></div><div><dt>Next validation</dt><dd>Outdoor legibility + data reliability</dd></div></dl></Reveal>
       <Reveal className="ui-sandbox" delay={0.08}>
-        <div className="ui-sandbox-map"><UiRouteMap mode={mode} reduceMotion={reduceMotion} /></div>
-        <motion.div className={`ui-sandbox-result ${selected ? 'is-selected' : ''}`} key={`${mode}-${selected}`} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.3 }} aria-live="polite"><span>{selected && <CheckCircle size={15} weight="fill" aria-hidden="true" />}{selected ? 'Route confirmed' : 'Route comparison'}</span><strong>{active.heading}</strong><p>{selected ? active.confirmed : active.copy}</p><dl><div><dt>Time</dt><dd>{active.time}</dd></div><div><dt>Distance</dt><dd>{active.distance}</dd></div><div><dt>Shade</dt><dd>{active.shade}</dd></div><div><dt>Heat</dt><dd>{active.heat}</dd></div></dl><button type="button" aria-pressed={selected} onClick={() => setSelected((value) => !value)}>{selected ? 'Change choice' : 'Select route'}</button></motion.div>
+        <div className="ui-sandbox-map"><MatStreetMap mode={mode} fit="slice" label={`${active.heading} on the MÁT street network from Riverside Market to Hill Garden`} /><span className="ui-map-key"><i /> Canopy and refill evidence</span></div>
+        <motion.div className={`ui-sandbox-result ${selected ? 'is-selected' : ''}`} key={`${mode}-${selected}`} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.3 }} aria-live="polite"><span>{selected && <CheckCircle size={15} weight="fill" aria-hidden="true" />}{selected ? 'Route confirmed' : 'Route comparison'}</span><strong>{active.heading}</strong><p>{selected ? active.confirmed : active.note}</p><dl><div><dt>Time</dt><dd>{active.time}</dd></div><div><dt>Distance</dt><dd>{active.distance}</dd></div><div><dt>Shade</dt><dd>{active.shade}</dd></div><div><dt>Heat</dt><dd>{active.heat}</dd></div></dl><button type="button" aria-pressed={selected} onClick={() => setSelected((value) => !value)}>{selected ? 'Change choice' : 'Select route'}</button></motion.div>
       </Reveal>
     </div>
   </section>;

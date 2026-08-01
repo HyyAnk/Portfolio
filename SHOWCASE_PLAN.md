@@ -298,3 +298,11 @@ Block confirmations, receipt expansion, chain handoff and state transitions. Mot
 - Round 1, viewer and blockchain specialist: removed the node sculpture, lifecycle still, generated GIF, generic event cards and tool badges. Rebuilt the page around one 250 USDT KitePay milestone with distinct wallet, permission, pending, finality, receipt and recovery states
 - Round 2, visual designer: rejected the remaining abstract KitePay hero during desktop review and replaced it with a code-native escrow product view. Added the real state-flow asset, concrete event-to-interface mapping, difficult trust states and an explicit integration architecture
 - Round 3, developer: deleted every legacy Blockchain selector and obsolete media import, verified wallet and recovery interactions, the KitePay case-study route, 390 and 1440 px layouts, light and dark themes, images, headings, punctuation, overflow, fresh console and production build
+
+## MÁT cartography correction review
+
+### UI/UX and Web Dev
+
+- Round 1, viewer and product specialist: rejected the standalone route animation, CSS road shapes and simplified interactive map because they did not match the MÁT case. Replaced all three with the exact street geometry, buildings, river, park, canopy, heat corridor, junctions, refill points, road labels and route data used by MÁT. The comparison was then corrected to show both the faster and cooler routes on the same network
+- Round 2, visual designer: compared the skill page directly with the live MÁT prototype, aligned route colors, line weights, map crop, endpoint treatment and evidence hierarchy, then removed the compressed desktop preview from the 390 px layout so the mobile product remains readable and honest
+- Round 3, developer: extracted MÁT routes and cartographic rendering into one shared component source used by both the case study and skill page, removed duplicate map code and obsolete selectors, tested route switching and confirmation through browser protocol, and verified mobile and desktop overflow, semantic labels, heading punctuation, route integrity and production build

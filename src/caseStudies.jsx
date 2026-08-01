@@ -4,43 +4,8 @@ import { ArrowLeft, ArrowUpRight, CaretRight, Check } from '@phosphor-icons/reac
 import './case-studies.css';
 
 import kitepayStateFlow from './assets/case-studies/kitepay-state-flow.svg';
+import { MatMapBase, MatStreetMap, matMapPaths, matModes } from './MatProductMap.jsx';
 import { withoutTrailingPeriod } from './text.js';
-
-const matRoadEdges = {
-  riverStart: 'M72 306C105 300 135 288 165 278C205 266 232 238 270 224C310 209 350 216 390 205',
-  riverEnd: 'C432 194 455 169 500 155C545 141 570 137 610 125C642 115 663 82 688 58',
-  canopyStart: 'M72 306C58 298 48 291 45 280C38 245 39 213 45 185C68 170 100 161 130 155C165 143 195 148 230 140C265 132 280 110 315 100C355 88 390 112 430 105',
-  canopyEnd: 'C470 98 505 82 550 70C605 55 650 70 688 58',
-  centralLink: 'C398 165 410 130 430 105',
-};
-
-const matPrimaryPaths = {
-  fast: `${matRoadEdges.riverStart}${matRoadEdges.riverEnd}`,
-  cool: `${matRoadEdges.canopyStart}${matRoadEdges.canopyEnd}`,
-  balanced: `${matRoadEdges.riverStart}${matRoadEdges.centralLink}${matRoadEdges.canopyEnd}`,
-  connector: `M390 205${matRoadEdges.centralLink}`,
-};
-
-const matFullRoads = {
-  riverWalk: `M-80 343C-12 336 38 317 72 306${matPrimaryPaths.fast.replace('M72 306', '')}C724 43 780 15 840 -18`,
-  canopyWay: `M-80 365C-10 347 38 318 72 306${matPrimaryPaths.cool.replace('M72 306', '')}C728 47 782 31 840 18`,
-  centralAvenue: `M350 460C367 355 378 265 390 205${matRoadEdges.centralLink}C452 70 483 5 520 -100`,
-};
-
-const matSecondaryRoads = 'M-80 264C35 254 88 245 130 238C220 224 295 224 390 205C485 185 612 137 840 78 M128 460C145 370 158 311 165 278C175 230 185 185 195 148C200 99 210 20 228 -100 M575 460C590 345 584 235 590 175C596 150 603 135 610 125C640 72 674 -8 716 -100 M748 460C715 348 704 252 720 184C741 92 780 4 824 -80 M-80 379C65 348 187 361 292 315C390 286 472 286 555 260C652 232 748 193 840 145 M-80 38C76 48 155 34 228 12C333 -18 425 -16 520 8C635 38 738 42 840 20';
-
-const matMapPaths = {
-  ...matPrimaryPaths,
-  primaryNetwork: `${matFullRoads.riverWalk} ${matFullRoads.canopyWay}`,
-  secondaryNetwork: `${matFullRoads.centralAvenue} ${matSecondaryRoads}`,
-  network: `${matFullRoads.riverWalk} ${matFullRoads.canopyWay} ${matFullRoads.centralAvenue} ${matSecondaryRoads}`,
-};
-
-const matModes = {
-  cool: { label: 'Coolest', time: '32 min', shade: '71%', heat: '2.8 / 5', distance: '2.4 km', note: 'More shade, two refill points', path: matMapPaths.cool, directions: ['Follow the riverside shade north', 'Pass two refill points on Canopy Way', 'Continue east to Hill Garden'] },
-  balanced: { label: 'Balanced', time: '26 min', shade: '54%', heat: '3.3 / 5', distance: '2.1 km', note: 'A practical everyday trade-off', path: matMapPaths.balanced, directions: ['Follow River Walk to Central Junction', 'Turn north onto Central Avenue', 'Join Canopy Way at Garden Junction'] },
-  fast: { label: 'Fastest', time: '20 min', shade: '29%', heat: '4.2 / 5', distance: '1.8 km', note: 'Shorter, but exposed at midday', path: matMapPaths.fast, directions: ['Follow River Walk east', 'Keep right through Cedar Junction', 'Exit at Hill Garden east gate'] },
-};
 
 const kiteSteps = [
   { name: 'Draft', copy: 'Milestone terms are agreed off-chain.' },
@@ -93,54 +58,6 @@ function InsightList({ items }) {
     <h3>{withoutTrailingPeriod(item.title)}</h3>
     <p>{item.copy}</p>
   </article>)}</div>;
-}
-
-function MatMapBase({ buildingMaskId, motion = false }) {
-  const tileClipId = `${buildingMaskId}-tile`;
-  return <>
-    <defs>
-      <clipPath id={tileClipId} clipPathUnits="userSpaceOnUse"><rect x="0" y="-60" width="760" height="480"/></clipPath>
-      <mask id={buildingMaskId} maskUnits="userSpaceOnUse" x="0" y="-60" width="760" height="480">
-        <rect x="0" y="-60" width="760" height="480" fill="#fff"/>
-        <path d={matMapPaths.network} fill="none" stroke="#000" strokeWidth="42" strokeLinecap="butt" strokeLinejoin="round"/>
-      </mask>
-    </defs>
-    <rect x="0" y="-60" width="760" height="480" fill="#e6ebf1"/>
-    <g clipPath={`url(#${tileClipId})`}>
-      <path className="mat-product-river" d="M0 -60H38C48 -42 52 -20 43 0C58 55 26 104 48 159C66 206 28 248 43 302C49 326 45 345 35 360C30 382 24 402 18 420H0Z"/>
-      <path className="mat-product-park" d="M38 -60H111C98 -36 102 -16 105 0C91 48 102 91 79 134C58 174 83 215 62 259C48 289 60 330 48 360C45 382 45 401 54 420H18C24 402 30 382 35 360C45 345 49 326 43 302C28 248 66 206 48 159C26 104 58 55 43 0C52 -20 48 -42 38 -60Z"/>
-      <g className="mat-product-streets mat-product-streets-secondary">
-        <path className="mat-product-street-edge-secondary" d={matMapPaths.secondaryNetwork}/><path className="mat-product-street-surface-secondary" d={matMapPaths.secondaryNetwork}/><path className="mat-product-street-center-secondary" d={matMapPaths.secondaryNetwork}/>
-      </g>
-      <g className="mat-product-streets mat-product-streets-primary">
-        <path className="mat-product-street-edge" d={matMapPaths.primaryNetwork}/><path className="mat-product-street-surface" d={matMapPaths.primaryNetwork}/><path className="mat-product-street-center" d={matMapPaths.primaryNetwork}/>
-      </g>
-      <g className="mat-product-buildings" mask={`url(#${buildingMaskId})`}>
-        <path d="M75 -48L151 -43L158 -12L91 -8Z"/><path d="M262 -51L333 -46L327 -13L270 -10Z"/><path d="M385 -46L460 -49L469 -16L393 -10Z"/><path d="M552 -48L628 -42L619 -9L550 -13Z"/><path d="M688 -46L749 -51L746 -12L700 -9Z"/>
-        <path d="M79 55L139 42L157 82L108 107L78 94Z"/><path d="M237 44L298 35L305 68L255 85L230 69Z"/><path d="M366 35L433 31L425 65L372 68Z"/><path d="M518 29L583 29L565 45L522 50Z"/><path d="M644 28L706 24L688 42L649 45Z"/>
-        <path d="M160 175L211 170L228 197L181 212L157 197Z"/><path d="M255 151L291 140L293 168L274 188L254 179Z"/><path d="M343 138L383 139L373 168L339 168Z"/><path d="M457 120L488 111L478 135L450 145Z"/><path d="M564 94L597 87L592 105L559 114Z"/>
-        <path d="M105 323L142 310L144 339L105 344Z"/><path d="M202 301L260 282L270 319L212 334Z"/><path d="M317 258L359 248L359 307L316 318Z"/><path d="M429 233L477 214L486 281L439 299Z"/><path d="M538 193L569 180L571 239L539 253Z"/><path d="M651 158L706 136L712 199L666 226Z"/>
-        <path d="M82 383L145 373L151 412L91 417Z"/><path d="M216 374L297 361L308 407L231 416Z"/><path d="M401 367L494 354L503 405L415 416Z"/><path d="M613 363L696 348L710 400L628 415Z"/>
-      </g>
-      <g className="mat-product-canopy"><circle cx="52" cy="267" r="14"/><circle cx="44" cy="225" r="15"/><circle cx="50" cy="184" r="13"/><circle cx="91" cy="164" r="14"/><circle cx="130" cy="155" r="13"/><circle cx="178" cy="145" r="14"/><circle cx="230" cy="140" r="13"/><circle cx="275" cy="120" r="12"/><circle cx="315" cy="100" r="14"/><circle cx="373" cy="100" r="13"/><circle cx="430" cy="105" r="14"/><circle cx="490" cy="87" r="13"/><circle cx="550" cy="70" r="14"/><circle cx="612" cy="63" r="12"/></g>
-      <path className={motion ? 'mat-motion-heat-corridor' : 'mat-product-heat-corridor'} d={matMapPaths.fast}/>
-      <g className="mat-product-junctions"><circle cx="165" cy="278" r="3.5"/><circle cx="270" cy="224" r="3.5"/><circle cx="315" cy="100" r="3.5"/><circle cx="390" cy="205" r="3.5"/><circle cx="430" cy="105" r="3.5"/><circle cx="500" cy="155" r="3.5"/><circle cx="550" cy="70" r="3.5"/><circle cx="610" cy="125" r="3.5"/></g>
-      <g className="mat-product-labels"><text x="310" y="87" transform="rotate(-8 310 87)">CANOPY WAY</text><text x="356" y="224" transform="rotate(-13 356 224)">RIVER WALK</text><text x="405" y="158" transform="rotate(-72 405 158)">CENTRAL AVE</text><text x="585" y="55" transform="rotate(-12 585 55)">GARDEN LOOP</text></g>
-    </g>
-  </>;
-}
-
-function MatStreetMap({ mode = 'cool', fit = 'slice' }) {
-  const route = matModes[mode];
-  const buildingMaskId = useId().replace(/:/g, '');
-  return <svg className="mat-product-map" viewBox="0 -60 760 480" preserveAspectRatio={`xMidYMid ${fit}`}>
-    <MatMapBase buildingMaskId={buildingMaskId}/>
-    <path key={mode} className={`mat-demo-route mat-product-route route-${mode}`} d={route.path}/>
-    {mode === 'cool' && <g className="mat-product-refills"><circle cx="230" cy="140" r="5"/><circle cx="550" cy="70" r="5"/></g>}
-    {mode === 'balanced' && <g className="mat-product-refills"><circle cx="550" cy="70" r="5"/></g>}
-    {mode === 'balanced' && <g className="mat-route-junctions" aria-hidden="true"><circle cx="390" cy="205" r="5"/><circle cx="430" cy="105" r="5"/></g>}
-    <circle cx="72" cy="306" r="9" className="mat-route-point"/><circle cx="688" cy="58" r="9" className="mat-route-point"/>
-  </svg>;
 }
 
 function MatRouteDemo() {
