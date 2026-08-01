@@ -607,17 +607,33 @@ function AutomationShowcase({ Reveal }) {
 function BlockchainHero({ Reveal }) {
   return <section className="bc-hero">
     <div className="page-shell bc-hero-layout">
-      <Reveal className="bc-hero-copy"><span className="bc-kicker">Blockchain integration</span><h1>Trust needs visible state</h1><p>Wallet, contract and transaction feedback people can understand</p><ArrowLink to="#wallet-flow">Follow the transaction</ArrowLink></Reveal>
+      <Reveal className="bc-hero-copy"><span className="bc-kicker">Blockchain integration</span><h1>Trust made visible</h1><p>Wallet, contract and transaction feedback people can understand</p><ArrowLink to="#wallet-flow">Follow the transaction</ArrowLink></Reveal>
       <Reveal className="bc-hero-lifecycle" delay={0.08}><figure><img src={blockchainLifecycle} alt="Five physical modules showing transaction intent, signature, pending, confirmation and receipt" /></figure><div className="bc-lifecycle-strip" aria-label="Transaction lifecycle"><span>Intent</span><i /><span>Sign</span><i /><span>Pending</span><i /><span>Confirmed</span><i /><span>Receipt</span></div></Reveal>
     </div>
   </section>;
 }
 
 const walletStates = {
-  connect: { label: 'Connection', icon: PlugsConnected, heading: 'Choose the right account', copy: 'Show the active network and account before any request', button: 'Review request', next: 'review' },
-  review: { label: 'Permission', icon: Fingerprint, heading: 'Explain what will be signed', copy: 'Describe the action, contract and expected outcome in plain language', button: 'Sign request', next: 'pending' },
-  pending: { label: 'Transaction', icon: Cube, heading: 'Keep pending state visible', copy: 'Preserve the user action while the network confirms finality', button: 'Show confirmation', next: 'confirmed' },
-  confirmed: { label: 'Confirmed', icon: CheckCircle, heading: 'Return a readable receipt', copy: 'Show what changed and keep a reference people can verify', button: 'Restart demo', next: 'connect' },
+  connect: {
+    label: 'Connection', icon: PlugsConnected, heading: 'Choose the right account',
+    copy: 'Confirm account and network before requesting any permission', button: 'Review request', next: 'review',
+    facts: [['Network', 'BSC Testnet'], ['Account', '0x72A4...91C2'], ['Access', 'View address only']],
+  },
+  review: {
+    label: 'Permission', icon: Fingerprint, heading: 'Explain the signature scope',
+    copy: 'One signature funds one milestone through the named escrow contract', button: 'Sign request', next: 'pending',
+    facts: [['Action', 'Fund milestone 02'], ['Amount', '250 USDT'], ['Contract', '0x84C2...11F0']],
+  },
+  pending: {
+    label: 'Transaction', icon: Cube, heading: 'Pending is not final',
+    copy: 'Keep the intended action visible while confirmations accumulate', button: 'Show confirmation', next: 'confirmed',
+    facts: [['Status', 'Accepted by network'], ['Finality', '2 of 12 confirmations'], ['Hash', '0x9F31...A8E4']],
+  },
+  confirmed: {
+    label: 'Confirmed', icon: CheckCircle, heading: 'Return a readable receipt',
+    copy: 'State what changed and keep the onchain reference available', button: 'Restart demo', next: 'connect',
+    facts: [['Result', 'Milestone 02 funded'], ['Value', '250 USDT in escrow'], ['Receipt', '0x9F31...A8E4']],
+  },
 };
 
 function BlockchainWalletFlow({ Reveal }) {
@@ -630,7 +646,7 @@ function BlockchainWalletFlow({ Reveal }) {
       <Reveal className="bc-wallet-copy"><Wallet size={34} weight="duotone" aria-hidden="true" /><h2>Wallet onboarding without guesswork</h2><p>Connection, permission, pending and confirmation stay distinct from one another</p><div className="bc-wallet-steps" aria-label="Wallet flow steps">{Object.entries(walletStates).map(([key, item]) => <button type="button" key={key} aria-pressed={state === key} onClick={() => setState(key)}>{item.label}</button>)}</div></Reveal>
       <Reveal className="bc-wallet-demo" delay={0.08}>
         <div className="bc-wallet-motion"><img src={blockchainGif} alt="Animated blockchain nodes and transaction verification progress" loading="lazy" /></div>
-        <motion.div className={`bc-wallet-card is-${state}`} key={state} initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .4 }} aria-live="polite"><ActiveIcon size={32} weight="duotone" /><span>{active.label}</span><strong>{active.heading}</strong><p>{active.copy}</p><button type="button" onClick={() => setState(active.next)}>{active.button}</button></motion.div>
+        <motion.div className={`bc-wallet-card is-${state}`} key={state} initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .4 }} aria-live="polite"><ActiveIcon size={32} weight="duotone" /><span>{active.label}</span><strong>{active.heading}</strong><p>{active.copy}</p><dl className="bc-state-facts">{active.facts.map(([term, value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl><button type="button" onClick={() => setState(active.next)}>{active.button}</button></motion.div>
       </Reveal>
     </div>
   </section>;
@@ -652,14 +668,14 @@ function BlockchainMapping({ Reveal }) {
 }
 
 const trustStates = [
-  { title: 'Wrong network', copy: 'Name the expected network and offer a switch', icon: WifiSlash, className: 'is-warning' },
-  { title: 'Request rejected', copy: 'Keep the prior state and allow a safe retry', icon: XCircle, className: 'is-error' },
-  { title: 'Transaction failed', copy: 'Explain failure without claiming completion', icon: WarningCircle, className: 'is-error' },
-  { title: 'Transaction confirmed', copy: 'Show the resulting state and receipt reference', icon: CheckCircle, className: 'is-success' },
+  { title: 'Wrong network', copy: 'Connected to BSC Mainnet. This action expects BSC Testnet', action: 'Switch network', icon: WifiSlash, className: 'is-warning' },
+  { title: 'Request rejected', copy: 'No signature was sent. Keep the funded amount unchanged', action: 'Review request', icon: XCircle, className: 'is-error' },
+  { title: 'Transaction failed', copy: 'The contract reverted before state changed. Surface the decoded reason', action: 'Review reason', icon: WarningCircle, className: 'is-error' },
+  { title: 'Transaction confirmed', copy: 'Milestone 02 now holds 250 USDT with a verifiable receipt', action: 'Open receipt', icon: CheckCircle, className: 'is-success' },
 ];
 
 function BlockchainTrustStates({ Reveal }) {
-  return <section className="bc-section bc-trust-section"><div className="page-shell"><Reveal className="bc-heading"><LockKey size={32} weight="duotone" aria-hidden="true" /><h2>Trust includes the difficult states</h2><p>Rejection, network mismatch and failure deserve the same care as success</p></Reveal><div className="bc-trust-grid">{trustStates.map((item, index) => { const Icon = item.icon; return <Reveal className={`bc-trust-card ${item.className}`} key={item.title} delay={index * .05}><div className="bc-trust-icon"><Icon size={34} weight="duotone" /></div><h3>{item.title}</h3><p>{item.copy}</p><span>{item.className === 'is-success' ? 'State complete' : 'Action available'}</span></Reveal>; })}</div></div></section>;
+  return <section className="bc-section bc-trust-section"><div className="page-shell"><Reveal className="bc-heading"><LockKey size={32} weight="duotone" aria-hidden="true" /><h2>Trust includes the difficult states</h2><p>Rejection, network mismatch and failure deserve the same care as success</p></Reveal><div className="bc-trust-grid">{trustStates.map((item, index) => { const Icon = item.icon; return <Reveal className={`bc-trust-card ${item.className}`} key={item.title} delay={index * .05}><div className="bc-trust-icon"><Icon size={34} weight="duotone" /></div><h3>{item.title}</h3><p>{item.copy}</p><span>{item.action}</span></Reveal>; })}</div></div></section>;
 }
 
 function BlockchainTools({ Reveal }) {

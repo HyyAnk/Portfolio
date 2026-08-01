@@ -913,15 +913,20 @@
 .bc-wallet-steps button { min-height:42px; padding:0 13px; border:1px solid var(--line); border-radius:3px; color:var(--muted); font-size:.69rem; font-weight:700; transition:background .22s ease,border-color .22s ease,color .22s ease,transform .2s ease; }
 .bc-wallet-steps button[aria-pressed="true"] { border-color:var(--accent); background:var(--accent); color:#fff; }
 .bc-wallet-steps button:active,.bc-wallet-card button:active { transform:translateY(1px) scale(.98); }
-.bc-wallet-demo { position:relative; min-height:650px; overflow:hidden; border-radius:6px; background:var(--paper-elevated); box-shadow:inset 0 0 0 1px var(--line); }
-.bc-wallet-motion { position:absolute; inset:0 0 31%; overflow:hidden; background:#f1ede4; }
+.bc-wallet-demo { position:relative; min-height:720px; overflow:hidden; border-radius:6px; background:var(--paper-elevated); box-shadow:inset 0 0 0 1px var(--line); }
+.bc-wallet-motion { position:absolute; inset:0 0 42%; overflow:hidden; background:#f1ede4; }
 .bc-wallet-motion img { object-fit:cover; }
-.bc-wallet-card { position:absolute; right:24px; bottom:24px; left:24px; z-index:2; min-height:235px; padding:22px; display:flex; flex-direction:column; align-items:flex-start; border:1px solid var(--line); border-radius:4px; background:color-mix(in srgb,var(--paper-elevated) 94%,transparent); backdrop-filter:blur(18px); }
+.bc-wallet-card { position:absolute; right:24px; bottom:24px; left:24px; z-index:2; min-height:340px; padding:22px; display:flex; flex-direction:column; align-items:flex-start; border:1px solid var(--line); border-radius:4px; background:color-mix(in srgb,var(--paper-elevated) 94%,transparent); backdrop-filter:blur(18px); }
 .bc-wallet-card > svg { color:var(--accent); }
 .bc-wallet-card > span { margin-top:18px; color:var(--accent); font-size:.62rem; font-weight:740; }
 .bc-wallet-card strong { margin-top:8px; color:var(--ink); font-size:clamp(1.55rem,2.5vw,2.55rem); letter-spacing:-.055em; }
 .bc-wallet-card p { margin-top:8px; color:var(--muted); font-size:.72rem; }
-.bc-wallet-card button { margin-top:20px; min-height:42px; padding:0 14px; border-radius:3px; background:var(--accent); color:#fff; font-size:.71rem; font-weight:720; transition:transform .2s ease,background .2s ease; }
+.bc-state-facts { width:100%; margin-top:18px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.bc-state-facts div { min-width:0; padding:12px 11px; border-left:1px solid var(--line); }
+.bc-state-facts div:first-child { padding-left:0; border-left:0; }
+.bc-state-facts dt { color:var(--muted); font-size:.56rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+.bc-state-facts dd { margin:5px 0 0; overflow:hidden; color:var(--ink); font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:.65rem; font-variant-numeric:tabular-nums; text-overflow:ellipsis; white-space:nowrap; }
+.bc-wallet-card button { margin-top:auto; min-height:42px; padding:0 14px; border-radius:3px; background:var(--accent); color:#fff; font-size:.71rem; font-weight:720; transition:transform .2s ease,background .2s ease; }
 .bc-wallet-card.is-confirmed > svg,.bc-wallet-card.is-confirmed > span { color:#55b995; }
 .bc-wallet-card.is-confirmed button { background:#327d65; }
 
@@ -1017,8 +1022,13 @@
   .bc-lifecycle-strip { right:8px; bottom:0; left:8px; min-height:58px; grid-template-columns:auto 1fr auto 1fr auto; }
   .bc-lifecycle-strip span:nth-of-type(n+4),.bc-lifecycle-strip i:nth-of-type(n+3){display:none}
   .bc-wallet-steps button { flex:1 1 auto; }
-  .bc-wallet-demo { min-height:560px; }
-  .bc-wallet-card { right:12px; bottom:12px; left:12px; min-height:245px; padding:18px; }
+  .bc-wallet-demo { min-height:690px; }
+  .bc-wallet-motion { bottom:46%; }
+  .bc-wallet-card { right:12px; bottom:12px; left:12px; min-height:360px; padding:18px; }
+  .bc-state-facts { grid-template-columns:1fr; }
+  .bc-state-facts div { padding:8px 0; border-left:0; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; }
+  .bc-state-facts div:first-child { border-top:0; }
+  .bc-state-facts dd { margin:0; text-align:right; }
   .bc-escrow-grid { grid-template-columns:1fr; gap:18px; }
   .bc-escrow-cover { height:115vw; min-height:430px; max-height:620px; }
   .bc-escrow-flow { height:100vw; min-height:390px; max-height:540px; margin-top:0; padding:14px; }
