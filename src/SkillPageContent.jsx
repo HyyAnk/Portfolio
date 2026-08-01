@@ -1,230 +1,86 @@
 import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import {
-  ArrowClockwise, ArrowsLeftRight, ArrowUpRight, Browser, CheckCircle,
-  CirclesThreePlus, Code, Cpu, Cube, CursorClick, Devices, Fingerprint,
-  FlowArrow, FrameCorners, Funnel, Gauge, GridFour, Lightning, LinkSimple,
-  LockKey, Palette, PenNib, Play, PlugsConnected, Printer, Receipt,
-  Scissors, SkipForward, SlidersHorizontal, SpeakerHigh, StopCircle,
+  ArrowsLeftRight, ArrowUpRight, Browser, CaretDown, CheckCircle,
+  Code, Cube, CursorClick, Devices, Fingerprint,
+  FlowArrow, FrameCorners, LinkSimple,
+  LockKey, Play, PlugsConnected,
+  Scissors, SlidersHorizontal, SpeakerHigh,
   TerminalWindow, TextAa, TextAlignCenter, TextAlignLeft, Wallet, Warning,
   WarningCircle, Waveform, WifiSlash, XCircle,
 } from '@phosphor-icons/react';
 
-import graphicApplications from './assets/skills/graphic-applications.webp';
-import graphicCover from './assets/generated/work-graphic.webp';
-import videoCover from './assets/generated/work-video.webp';
-import videoEditorGif from './assets/generated/gifs/video-editor.gif';
-import uiWebGif from './assets/generated/gifs/uiux-webdev.gif';
-import automationGif from './assets/generated/gifs/automation.gif';
-import blockchainGif from './assets/generated/gifs/blockchain.gif';
 import videoSequence from './assets/skills/video-sequence.webp';
-import uiResponsiveProduct from './assets/skills/ui-responsive-product.webp';
-import uiCover from './assets/generated/work-ui.webp';
-import automationCover from './assets/generated/work-automation.webp';
-import automationOrchestration from './assets/skills/automation-orchestration.webp';
-import blockchainCover from './assets/generated/work-blockchain.webp';
-import blockchainLifecycle from './assets/skills/blockchain-lifecycle.webp';
-import muonCover from './assets/case-studies/muon-cover.webp';
-import muonPrint from './assets/case-studies/muon-print-system.webp';
 import muonObjects from './assets/case-studies/muon-object-applications.webp';
 import muonStreet from './assets/case-studies/muon-street-applications.webp';
 import muonDigital from './assets/case-studies/muon-digital-devices.webp';
 import matCover from './assets/case-studies/mat-cover.webp';
 import matRouteFlow from './assets/case-studies/mat-route-flow.svg';
-import kitepayCover from './assets/case-studies/kitepay-cover.webp';
 import kitepayStateFlow from './assets/case-studies/kitepay-state-flow.svg';
-import hopLuuCover from './assets/case-studies/hop-luu-cover.webp';
 import hopLuuSpread from './assets/case-studies/hop-luu-capability-spread-v2.webp';
 import hopLuuDetail from './assets/case-studies/hop-luu-production-detail-v2.webp';
+import hopLuuCover from './assets/case-studies/hop-luu-cover.webp';
+import hopLuuProjectSheets from './assets/case-studies/hop-luu-project-sheets.webp';
+import hopLuuReview from './assets/case-studies/hop-luu-review.webp';
+import hopLuuFieldHandover from './assets/case-studies/hop-luu-field-handover-v2.webp';
 import { withoutTrailingPeriod } from './text.js';
 import './skill-showcase.css';
+import './ui-showcase-v2.css';
+import './automation-showcase-v2.css';
+import './blockchain-showcase-v2.css';
 
 function ArrowLink({ children, to = '#contact' }) {
   return <a className="arrow-link" href={to}>{children}<ArrowUpRight size={17} /></a>;
 }
 
-function GraphicHero({ Reveal }) {
-  return <section className="gd-hero">
-    <div className="page-shell gd-hero-grid">
-      <Reveal className="gd-hero-copy">
-        <span className="gd-kicker">Graphic design</span>
-        <h1>Ideas made recognisable</h1>
-        <p>Identity, editorial and campaign work built to stay coherent across every format</p>
-        <ArrowLink to="#identity-system">See the system</ArrowLink>
-      </Reveal>
-      <Reveal className="gd-hero-art" delay={0.08}>
-        <figure>
-          <img src={graphicApplications} alt="Cobalt identity system applied across a poster, booklet, cards, packaging and fabric label" />
-        </figure>
-        <div className="gd-hero-crop gd-hero-crop-left" aria-hidden="true"><img src={graphicApplications} alt="" /></div>
-        <div className="gd-hero-crop gd-hero-crop-right" aria-hidden="true"><img src={graphicApplications} alt="" /></div>
-      </Reveal>
-    </div>
-  </section>;
-}
+const graphicIdentityEvidenceV2 = [
+  { image: muonStreet, alt: 'MƯỢN storefront, service counter, lockers, uniform and wayfinding operating on a city street', context: 'Public space', outcome: 'Recognisable from street distance', rule: 'Bracket mark, navy field and red directional cues', className: 'is-wide' },
+  { image: muonObjects, alt: 'MƯỢN identity applied to tools, containers, item tags, QR labels and service materials', context: 'Service objects', outcome: 'Every item stays traceable', rule: 'Category code, item ID and QR hierarchy' },
+  { image: muonDigital, alt: 'MƯỢN product interface across desktop, tablet and membership phone view', context: 'Digital service', outcome: 'Browse, pickup and membership stay coherent', rule: 'The same navigation, status and red action language' },
+];
 
-function GraphicSystem({ Reveal }) {
-  return <section id="identity-system" className="gd-section gd-system-section">
-    <div className="page-shell">
-      <Reveal className="gd-heading">
-        <h2>One idea, many surfaces</h2>
-        <p>A strong identity holds its character from the smallest mark to the largest application</p>
-      </Reveal>
-      <div className="gd-system-grid">
-        <Reveal className="gd-system-tile gd-system-image gd-system-tile-cover">
-          <figure><img src={muonCover} alt="Muon identity cover with a bold modular symbol" loading="lazy" /></figure>
-          <span>Identity direction</span>
-        </Reveal>
-        <Reveal className="gd-system-tile gd-mark-lab" delay={0.05}>
-          <div className="gd-mark-stage" aria-label="Animated modular mark study">
-            <span className="gd-mark-bracket">[</span><span className="gd-mark-core">M</span><span className="gd-mark-bracket">]</span>
-          </div>
-          <span>Recognisable structure</span>
-        </Reveal>
-        <Reveal className="gd-system-tile gd-color-lab" delay={0.1}>
-          <div className="gd-color-stack" aria-label="Cobalt, cyan, graphite and yellow color system">
-            <i /><i /><i /><i />
-          </div>
-          <span>Controlled contrast</span>
-        </Reveal>
-        <Reveal className="gd-system-tile gd-system-image gd-system-tile-editorial" delay={0.15}>
-          <figure><img src={hopLuuCover} alt="Technical corporate profile designed as a precise editorial system" loading="lazy" /></figure>
-          <span>Editorial architecture</span>
-        </Reveal>
-      </div>
-    </div>
-  </section>;
-}
-
-const specimenScales = {
-  display: { label: 'Display', size: 'clamp(3.3rem, 8vw, 8.4rem)', width: '9ch' },
-  editorial: { label: 'Editorial', size: 'clamp(2.25rem, 5vw, 5.2rem)', width: '13ch' },
+const evidenceSpecimens = {
+  display: { label: 'Cover', text: 'HỢP LƯU', size: 'clamp(3.3rem, 8vw, 8.4rem)', width: '8ch', role: 'Primary identification', setting: '64-104 px / 0.88 leading' },
+  editorial: { label: 'Section', text: 'Technical capabilities', size: 'clamp(2.25rem, 5vw, 5.2rem)', width: '13ch', role: 'Chapter navigation', setting: '36-64 px / 0.96 leading' },
 };
 
-function GraphicTypeLab({ Reveal }) {
+const graphicProductionEvidenceV2 = [
+  { image: hopLuuReview, alt: 'HỢP LƯU capability profile reviewed beside a tablet and original engineering drawing inside the plant', title: 'Content review', copy: 'P&ID, field photography and scope text are checked together' },
+  { image: hopLuuDetail, alt: 'HỢP LƯU hardcover profile showing section tabs, binding, bilingual contents and production materials', title: 'Production detail', copy: 'Hardcover, section tabs and bilingual pagination are resolved before handoff' },
+  { image: hopLuuFieldHandover, alt: 'Printed profile, project sheets, binder and tablet version aligned for HỢP LƯU field handover', title: 'Field handover', copy: 'Book, project sheets, binder and tablet version carry the same evidence structure' },
+];
+
+function GraphicHeroV2({ Reveal }) {
+  return <section className="gd-hero gd-hero-v2"><div className="page-shell gd-hero-grid"><Reveal className="gd-hero-copy"><span className="gd-kicker">Graphic design</span><h1>Systems built for use</h1><p>Identity and information design proven across public space, technical documents and product interfaces</p><ArrowLink to="#identity-evidence">See the evidence</ArrowLink><dl className="gd-hero-facts"><div><dt>Scope</dt><dd>Identity + information</dd></div><div><dt>Formats</dt><dd>Print + field + digital</dd></div><div><dt>Working set</dt><dd>VI / EN + production files</dd></div></dl></Reveal><Reveal className="gd-hero-art gd-hero-evidence" delay={0.08}><figure><img src={hopLuuCover} alt="HỢP LƯU technical capability profile, project sheets and digital reader shown inside an industrial facility" /></figure><figcaption>HỢP LƯU capability system photographed in the environment it documents</figcaption></Reveal></div></section>;
+}
+
+function GraphicSystemV2({ Reveal }) {
+  return <section id="identity-evidence" className="gd-section gd-system-section"><div className="page-shell"><Reveal className="gd-heading"><h2>One identity, three contexts</h2><p>MƯỢN keeps the same recognition logic from the street to each object and service screen</p></Reveal><div className="gd-evidence-grid">{graphicIdentityEvidenceV2.map((item, index) => <Reveal className={`gd-evidence-card ${item.className || ''}`} key={item.context} delay={index * .05}><a href="/work/folded-matter" aria-label={`View MƯỢN case study from ${item.context}`}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><span>{item.context}</span><strong>{item.outcome}</strong><p>{item.rule}</p><ArrowUpRight size={17} aria-hidden="true" /></figcaption></figure></a></Reveal>)}</div></div></section>;
+}
+
+function GraphicInformationV2({ Reveal }) {
+  return <section className="gd-section gd-information-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Complex content, visible hierarchy</h2><p>HỢP LƯU turns engineering evidence into a bilingual capability profile that can be reviewed, printed and reused</p></Reveal><div className="gd-information-layout"><Reveal className="gd-information-main"><figure><img src={hopLuuSpread} alt="Bilingual HỢP LƯU spread combining a capability matrix, process diagram, work scope and evidence links" loading="lazy" /><figcaption>Capability matrix + process flow + linked evidence</figcaption></figure></Reveal><div className="gd-information-side"><Reveal><figure><img src={hopLuuProjectSheets} alt="HỢP LƯU project sheets combining plant photography, technical diagrams, scope tables and delivery milestones" loading="lazy" /><figcaption>Project proof follows one repeatable evidence template</figcaption></figure></Reveal><Reveal className="gd-information-facts" delay={0.06}><dl><div><dt>Structure</dt><dd>8 chapters / 96 pages</dd></div><div><dt>Language</dt><dd>Vietnamese + English</dd></div><div><dt>Evidence</dt><dd>P&amp;ID + field photography + scope</dd></div><div><dt>Outputs</dt><dd>Hardcover + loose sheets + digital reader</dd></div></dl><a href="/work/still-moving">View HỢP LƯU case study <ArrowUpRight size={17} /></a></Reveal></div></div></div></section>;
+}
+
+function GraphicTypeLabV2({ Reveal }) {
   const [scale, setScale] = useState('display');
   const [alignment, setAlignment] = useState('left');
   const reduceMotion = useReducedMotion();
-  const specimen = specimenScales[scale];
-
-  return <section className="gd-section gd-type-section">
-    <div className="page-shell gd-type-layout">
-      <Reveal className="gd-type-copy">
-        <TextAa size={34} weight="duotone" aria-hidden="true" />
-        <h2>Type sets the voice</h2>
-        <p>Scale, spacing and alignment decide whether information feels urgent, technical or calm</p>
-        <div className="gd-type-controls" aria-label="Typography specimen controls">
-          <fieldset>
-            <legend>Scale</legend>
-            {Object.entries(specimenScales).map(([key, value]) => <button key={key} type="button" aria-pressed={scale === key} onClick={() => setScale(key)}>{value.label}</button>)}
-          </fieldset>
-          <fieldset>
-            <legend>Alignment</legend>
-            <button type="button" aria-label="Align specimen left" aria-pressed={alignment === 'left'} onClick={() => setAlignment('left')}><TextAlignLeft size={18} /></button>
-            <button type="button" aria-label="Center specimen" aria-pressed={alignment === 'center'} onClick={() => setAlignment('center')}><TextAlignCenter size={18} /></button>
-          </fieldset>
-        </div>
-      </Reveal>
-      <Reveal className="gd-type-stage" delay={0.08}>
-        <div className="gd-type-grid" aria-hidden="true" />
-        <motion.p
-          key={`${scale}-${alignment}`}
-          className={`gd-type-specimen is-${alignment}`}
-          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          style={{ '--specimen-size': specimen.size, '--specimen-width': specimen.width }}
-        >Ideas need a visible system</motion.p>
-        <span className="gd-type-note">Variable scale specimen</span>
-      </Reveal>
-    </div>
-  </section>;
+  const specimen = evidenceSpecimens[scale];
+  return <section className="gd-section gd-type-section"><div className="page-shell gd-type-layout"><Reveal className="gd-type-copy"><TextAa size={34} weight="duotone" aria-hidden="true" /><h2>Scale is assigned by job</h2><p>The specimen compares the cover voice with the denser chapter hierarchy used inside the same document</p><div className="gd-type-controls" aria-label="Typography specimen controls"><fieldset><legend>Hierarchy</legend>{Object.entries(evidenceSpecimens).map(([key, value]) => <button key={key} type="button" aria-pressed={scale === key} onClick={() => setScale(key)}>{value.label}</button>)}</fieldset><fieldset><legend>Alignment</legend><button type="button" aria-label="Align specimen left" aria-pressed={alignment === 'left'} onClick={() => setAlignment('left')}><TextAlignLeft size={18} /></button><button type="button" aria-label="Center specimen" aria-pressed={alignment === 'center'} onClick={() => setAlignment('center')}><TextAlignCenter size={18} /></button></fieldset></div></Reveal><Reveal className="gd-type-stage" delay={0.08}><div className="gd-type-grid" aria-hidden="true" /><motion.p key={`${scale}-${alignment}`} className={`gd-type-specimen is-${alignment}`} initial={reduceMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .35, ease: [0.16, 1, 0.3, 1] }} style={{ '--specimen-size': specimen.size, '--specimen-width': specimen.width }}>{specimen.text}</motion.p><dl className="gd-type-metrics"><div><dt>Role</dt><dd>{specimen.role}</dd></div><div><dt>Setting</dt><dd>{specimen.setting}</dd></div><div><dt>Grid</dt><dd>7 columns / 12 mm margin</dd></div></dl></Reveal></div></section>;
 }
 
-const graphicApplicationsGallery = [
-  { image: muonObjects, alt: 'Muon visual identity applied to object tags and sharing materials', title: 'Objects and service', className: 'gd-application-wide' },
-  { image: hopLuuSpread, alt: 'Bilingual engineering capability profile spread with structured diagrams and photography', title: 'Complex information', className: 'gd-application-tall' },
-  { image: muonPrint, alt: 'Muon print system with modular identity applications', title: 'Print system', className: '' },
-  { image: muonStreet, alt: 'Muon identity applied to large outdoor and street formats', title: 'Public scale', className: '' },
-  { image: graphicCover, alt: 'Red, black and paper-toned graphic identity study', title: 'Campaign language', className: 'gd-application-wide' },
-];
-
-function GraphicApplications({ Reveal }) {
-  return <section className="gd-section gd-applications-section">
-    <div className="page-shell">
-      <Reveal className="gd-heading gd-heading-compact">
-        <h2>Designed beyond the mockup</h2>
-        <p>Each system is tested where people actually meet it</p>
-      </Reveal>
-      <div className="gd-applications-grid">
-        {graphicApplicationsGallery.map((item, index) => <Reveal className={`gd-application ${item.className}`} key={item.title} delay={index * 0.04}>
-          <figure>
-            <div><img src={item.image} alt={item.alt} loading="lazy" /></div>
-            <figcaption>{item.title}</figcaption>
-          </figure>
-        </Reveal>)}
-      </div>
-    </div>
-  </section>;
-}
-
-const graphicProcess = [
-  { icon: PenNib, title: 'Find the central idea', copy: 'Clarify the audience, context and one thought the system must carry', visual: 'brief' },
-  { icon: GridFour, title: 'Build the structure', copy: 'Set the grid, type behavior and composition rules before adding volume', visual: 'grid' },
-  { icon: Palette, title: 'Test the character', copy: 'Push contrast, imagery and color until the direction has a clear voice', visual: 'color' },
-  { icon: Printer, title: 'Prepare the handoff', copy: 'Resolve formats, production detail and repeatable guidance for the team', visual: 'production' },
-];
-
-function ProcessVisual({ type }) {
-  if (type === 'brief') return <div className="gd-process-visual gd-process-brief" aria-hidden="true"><span /><span /><span /></div>;
-  if (type === 'grid') return <div className="gd-process-visual gd-process-grid" aria-hidden="true"><span /><span /><span /><span /></div>;
-  if (type === 'color') return <div className="gd-process-visual gd-process-color" aria-hidden="true"><span /><span /><span /></div>;
-  return <div className="gd-process-visual gd-process-production" aria-hidden="true"><span>CMYK</span><i /><i /><i /></div>;
-}
-
-function GraphicProcess({ Reveal }) {
-  return <section className="gd-section gd-process-section">
-    <div className="page-shell">
-      <Reveal className="gd-heading"><h2>From direction to production</h2><p>The work stays visual at every stage, so decisions remain easy to evaluate</p></Reveal>
-      <div className="gd-process-grid-list">
-        {graphicProcess.map((item, index) => {
-          const Icon = item.icon;
-          return <Reveal className="gd-process-card" key={item.title} delay={index * 0.05}>
-            <ProcessVisual type={item.visual} />
-            <Icon size={23} weight="duotone" aria-hidden="true" />
-            <h3>{item.title}</h3>
-            <p>{item.copy}</p>
-          </Reveal>;
-        })}
-      </div>
-    </div>
-  </section>;
-}
-
-function GraphicFinale({ Reveal }) {
-  const tools = ['Photoshop', 'Illustrator', 'InDesign', 'Figma'];
-  return <section className="gd-finale">
-    <div className="page-shell gd-finale-layout">
-      <Reveal className="gd-finale-image"><img src={hopLuuDetail} alt="Close production view of a printed editorial layout and binding detail" loading="lazy" /></Reveal>
-      <Reveal className="gd-finale-copy" delay={0.08}>
-        <CirclesThreePlus size={35} weight="duotone" aria-hidden="true" />
-        <h2>Craft that survives delivery</h2>
-        <p>The final files, production notes and reusable components are part of the design</p>
-        <div className="gd-tool-list" aria-label="Graphic design tools">{tools.map((tool) => <span key={tool}>{tool}</span>)}</div>
-        <a className="gd-contact-link" href="#contact">Discuss a design brief <ArrowUpRight size={18} /></a>
-      </Reveal>
-    </div>
-  </section>;
+function GraphicProductionV2({ Reveal }) {
+  return <section className="gd-section gd-production-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Review continues through handover</h2><p>The design is checked against source evidence, physical production and the final working environment</p></Reveal><div className="gd-production-grid">{graphicProductionEvidenceV2.map((item, index) => <Reveal className={`gd-production-card is-${index + 1}`} key={item.title} delay={index * .05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><strong>{item.title}</strong><p>{item.copy}</p></figcaption></figure></Reveal>)}</div><Reveal className="gd-deliverables"><h3>Concrete deliverables</h3><dl><div><dt>Identity</dt><dd>Mark system, signage, uniforms, object labels</dd></div><div><dt>Editorial</dt><dd>96-page bilingual profile and project sheets</dd></div><div><dt>Digital</dt><dd>Service UI, membership card and QR asset system</dd></div><div><dt>Handoff</dt><dd>Print specifications, source files and layout rules</dd></div></dl><nav aria-label="Graphic design case studies"><a href="/work/folded-matter">MƯỢN case study <ArrowUpRight size={17} /></a><a href="/work/still-moving">HỢP LƯU case study <ArrowUpRight size={17} /></a></nav></Reveal></div></section>;
 }
 
 function GraphicDesignShowcase({ Reveal }) {
   return <article className="skill-showcase skill-showcase-graphic">
-    <GraphicHero Reveal={Reveal} />
-    <GraphicSystem Reveal={Reveal} />
-    <GraphicTypeLab Reveal={Reveal} />
-    <GraphicApplications Reveal={Reveal} />
-    <GraphicProcess Reveal={Reveal} />
-    <GraphicFinale Reveal={Reveal} />
+    <GraphicHeroV2 Reveal={Reveal} />
+    <GraphicSystemV2 Reveal={Reveal} />
+    <GraphicInformationV2 Reveal={Reveal} />
+    <GraphicTypeLabV2 Reveal={Reveal} />
+    <GraphicProductionV2 Reveal={Reveal} />
   </article>;
 }
 
@@ -234,50 +90,49 @@ function VideoHero({ Reveal }) {
       <Reveal className="ve-hero-copy">
         <span className="ve-kicker">Video editor</span>
         <h1>Every cut matters</h1>
-        <p>Picture, sound and type shaped into stories with a clear rhythm</p>
+        <p>A 12.6-second cyclist sequence used to show shot logic, continuity, sound and delivery decisions</p>
         <ArrowLink to="#edit-rhythm">Enter the timeline</ArrowLink>
+        <dl className="ve-hero-facts"><div><dt>Sequence</dt><dd>4 shots / 12.6 sec</dd></div><div><dt>Master</dt><dd>16:9 / 24 fps</dd></div><div><dt>Focus</dt><dd>Motion + atmosphere</dd></div></dl>
       </Reveal>
       <Reveal className="ve-hero-screen" delay={0.08}>
         <figure><img src={videoSequence} alt="Four cinematic shots following a cyclist through a rain-darkened underpass" /></figure>
         <div className="ve-hero-monitor" aria-hidden="true">
-          <span><Play size={15} weight="fill" /> Playing sequence</span>
-          <b>00:00:12:18</b>
+          <span><Play size={15} weight="fill" /> Edit preview</span>
+          <b>4 SHOTS / 16:9</b>
         </div>
-        <div className="ve-frame-focus" aria-hidden="true"><i /><i /><i /><i /></div>
       </Reveal>
     </div>
   </section>;
 }
 
 const timelineClips = [
-  { label: 'Establish', className: 'is-wide' },
-  { label: 'Track', className: '' },
-  { label: 'Detail', className: 'is-short' },
-  { label: 'Resolve', className: 'is-wide' },
+  { id: 'establish', label: 'Establish', time: '00:00-00:03.2', duration: '3.2 sec', frame: 'Wide / locked', cut: 'Environment to movement', audio: 'Rain bed enters first', purpose: 'Establish direction, weather and isolation before accelerating the sequence' },
+  { id: 'track', label: 'Track', time: '00:03.2-00:06.0', duration: '2.8 sec', frame: 'Medium / follow', cut: 'Match on travel direction', audio: 'Chain and tyre rise', purpose: 'Stay with the cyclist long enough to carry speed into the close detail' },
+  { id: 'detail', label: 'Detail', time: '00:06.0-00:07.4', duration: '1.4 sec', frame: 'Close / low angle', cut: 'Movement accent', audio: 'Water impact peaks', purpose: 'Compress time and add tactile texture without breaking screen direction' },
+  { id: 'resolve', label: 'Resolve', time: '00:07.4-00:12.6', duration: '5.2 sec', frame: 'Wide / retreat', cut: 'Action to release', audio: 'Music opens, rain remains', purpose: 'Hold the exit longer so the visual path and sound bed can resolve' },
 ];
 
 function VideoRhythm({ Reveal }) {
+  const [activeClip, setActiveClip] = useState('establish');
+  const reduceMotion = useReducedMotion();
+  const active = timelineClips.find((clip) => clip.id === activeClip);
+  const activeIndex = timelineClips.findIndex((clip) => clip.id === activeClip) + 1;
   return <section id="edit-rhythm" className="ve-section ve-rhythm-section">
     <div className="page-shell">
-      <Reveal className="ve-heading"><Scissors size={30} weight="duotone" aria-hidden="true" /><h2>Rhythm is a decision</h2><p>Shot length follows attention, movement and the emotion that should land next</p></Reveal>
-      <Reveal className="ve-timeline" delay={0.08}>
-        <div className="ve-timeline-preview"><img src={videoEditorGif} alt="Animated editing timeline with footage frames, waveform and active cuts" loading="lazy" /></div>
-        <div className="ve-timeline-ruler" aria-hidden="true">{Array.from({ length: 32 }, (_, index) => <i key={index} />)}</div>
-        <div className="ve-timeline-track" aria-label="Four-shot edit sequence">
-          {timelineClips.map((clip) => <span className={clip.className} key={clip.label}>{clip.label}</span>)}
-        </div>
-        <div className="ve-audio-track" aria-label="Audio waveform"><span /></div>
-        <i className="ve-playhead" aria-hidden="true" />
-      </Reveal>
+      <Reveal className="ve-heading"><Scissors size={30} weight="duotone" aria-hidden="true" /><h2>The cut has a reason</h2><p>Select a shot to inspect its duration, framing, transition, sound cue and narrative purpose</p></Reveal>
+      <div className="ve-cut-layout">
+        <Reveal className="ve-cut-viewer"><div className="ve-cut-frame"><div className={`ve-sequence-crop ve-sequence-crop-${activeIndex}`}><img src={videoSequence} alt={`${active.label} shot from the cyclist sequence`} loading="lazy" /></div><span>{active.time}</span></div><motion.dl key={active.id} initial={reduceMotion ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .28 }} aria-live="polite"><div><dt>Duration</dt><dd>{active.duration}</dd></div><div><dt>Frame</dt><dd>{active.frame}</dd></div><div><dt>Cut</dt><dd>{active.cut}</dd></div><div><dt>Sound</dt><dd>{active.audio}</dd></div><div className="is-purpose"><dt>Purpose</dt><dd>{active.purpose}</dd></div></motion.dl></Reveal>
+        <Reveal className="ve-cut-list" delay={0.08} role="group" aria-label="Cut plan">{timelineClips.map((clip, index) => <button type="button" key={clip.id} aria-pressed={activeClip === clip.id} onClick={() => setActiveClip(clip.id)}><span>{String(index + 1).padStart(2, '0')} / {clip.label}</span><strong>{clip.duration}</strong><small>{clip.time}</small></button>)}</Reveal>
+      </div>
     </div>
   </section>;
 }
 
 const sequenceNotes = [
-  { title: 'Set the space', copy: 'A wide frame establishes direction and isolation' },
-  { title: 'Stay with motion', copy: 'The medium shot carries speed into the cut' },
-  { title: 'Cut on detail', copy: 'A wheel and water give the sequence texture' },
-  { title: 'Release the tension', copy: 'The exit shot resolves the visual path' },
+  { title: 'Set the space', shot: 'Wide', duration: '3.2 sec', continuity: 'Travel left to right', copy: 'Establish direction, weather and isolation' },
+  { title: 'Stay with motion', shot: 'Medium', duration: '2.8 sec', continuity: 'Match travel axis', copy: 'Carry speed and warm practical light into the cut' },
+  { title: 'Cut on detail', shot: 'Close', duration: '1.4 sec', continuity: 'Wheel repeats direction', copy: 'Add texture without resetting geography' },
+  { title: 'Release the tension', shot: 'Wide', duration: '5.2 sec', continuity: 'Exit on same axis', copy: 'Hold the final image long enough to resolve' },
 ];
 
 function VideoSequence({ Reveal }) {
@@ -286,7 +141,7 @@ function VideoSequence({ Reveal }) {
       <Reveal className="ve-heading ve-heading-wide"><h2>Continuity without repetition</h2><p>Each frame changes scale while preserving direction, weather and intent</p></Reveal>
       <div className="ve-sequence-grid">
         {sequenceNotes.map((item, index) => <Reveal className="ve-sequence-frame" key={item.title} delay={index * 0.05}>
-          <figure><div className={`ve-sequence-crop ve-sequence-crop-${index + 1}`}><img src={videoSequence} alt={`${item.title}: cyclist sequence frame ${index + 1}`} loading="lazy" /></div><figcaption><strong>{item.title}</strong><span>{item.copy}</span></figcaption></figure>
+          <figure><div className={`ve-sequence-crop ve-sequence-crop-${index + 1}`}><img src={videoSequence} alt={`${item.title}: cyclist sequence frame ${index + 1}`} loading="lazy" /></div><figcaption><strong>{item.title}</strong><span>{item.copy}</span><dl><div><dt>Shot</dt><dd>{item.shot}</dd></div><div><dt>Duration</dt><dd>{item.duration}</dd></div><div><dt>Continuity</dt><dd>{item.continuity}</dd></div></dl></figcaption></figure>
         </Reveal>)}
       </div>
     </div>
@@ -302,33 +157,34 @@ function VideoGrade({ Reveal }) {
         <SlidersHorizontal size={32} weight="duotone" aria-hidden="true" />
         <h2>Color supports the story</h2>
         <p>The grade separates the cold environment from the warm practical light without crushing detail</p>
+        <dl className="ve-grade-targets"><div><dt>Neutralise</dt><dd>Rain-blue cast in concrete</dd></div><div><dt>Protect</dt><dd>Wet-road highlight detail</dd></div><div><dt>Separate</dt><dd>Amber practicals from cool exterior</dd></div></dl>
         <div className="ve-grade-controls" role="group" aria-label="Color grading view">
-          <button type="button" aria-pressed={grade === 'source'} onClick={() => setGrade('source')}>Source</button>
-          <button type="button" aria-pressed={grade === 'final'} onClick={() => setGrade('final')}>Final grade</button>
+          <button type="button" aria-pressed={grade === 'source'} onClick={() => setGrade('source')}>Neutral pass</button>
+          <button type="button" aria-pressed={grade === 'final'} onClick={() => setGrade('final')}>Story grade</button>
         </div>
       </Reveal>
       <Reveal className="ve-grade-viewer" delay={0.08}>
         <motion.img
           key={grade}
           src={videoSequence}
-          alt={grade === 'final' ? 'Final cool-blue and amber color grade on the cyclist sequence' : 'Flat low-contrast source look on the cyclist sequence'}
+          alt={grade === 'final' ? 'Cool-blue and amber story grade on the cyclist sequence' : 'Neutral low-contrast color pass on the cyclist sequence'}
           className={grade === 'source' ? 'is-source' : 'is-final'}
           initial={reduceMotion ? false : { opacity: 0.35 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: reduceMotion ? 0 : .4 }}
           loading="lazy"
         />
-        <span>{grade === 'final' ? 'Final grade' : 'Source look'}</span>
+        <span>{grade === 'final' ? 'Story grade' : 'Neutral pass'}</span>
       </Reveal>
     </div>
   </section>;
 }
 
-const soundLayers = [
-  { name: 'Dialogue', level: 'voice' },
-  { name: 'Atmosphere', level: 'atmosphere' },
-  { name: 'Music', level: 'music' },
-  { name: 'Impact', level: 'impact' },
+const soundCues = [
+  { time: '00:00.0', source: 'Rain room tone', function: 'Continuity bed', mix: '-18 LUFS bed', width: '100%' },
+  { time: '00:03.2', source: 'Chain + tyre', function: 'Motion handoff', mix: '-12 dB peak', width: '72%' },
+  { time: '00:06.0', source: 'Water impact', function: 'Cut accent', mix: '-9 dB peak', width: '28%' },
+  { time: '00:07.4', source: 'Music release', function: 'Resolve the exit', mix: '-16 LUFS bed', width: '58%' },
 ];
 
 function VideoSound({ Reveal }) {
@@ -336,21 +192,18 @@ function VideoSound({ Reveal }) {
     <div className="page-shell ve-sound-layout">
       <Reveal className="ve-sound-copy">
         <SpeakerHigh size={32} weight="duotone" aria-hidden="true" />
-        <h2>Sound creates the cut you feel</h2>
-        <p>Dialogue stays intelligible while atmosphere, music and impact define pace and scale</p>
+        <h2>Sound is mapped to picture</h2>
+        <p>Every cue has a timestamp, source, editorial function and mix target</p>
       </Reveal>
-      <Reveal className="ve-sound-mixer" delay={0.08}>
-        <div className="ve-waveform" aria-label="Animated sound waveform">{Array.from({ length: 54 }, (_, index) => <i key={index} style={{ '--bar': index }} />)}</div>
-        <div className="ve-sound-layers">{soundLayers.map((layer) => <div key={layer.name}><span>{layer.name}</span><i className={`is-${layer.level}`} aria-hidden="true" /></div>)}</div>
-      </Reveal>
+      <Reveal className="ve-cue-sheet" delay={0.08}><div className="ve-cue-head"><span>Time</span><span>Source</span><span>Function</span><span>Mix target</span></div>{soundCues.map((cue) => <div className="ve-cue-row" key={cue.time}><time>{cue.time}</time><strong>{cue.source}</strong><span>{cue.function}</span><span>{cue.mix}</span><i style={{ '--cue-width': cue.width }} aria-hidden="true" /></div>)}<p>Atmosphere runs continuously beneath the edit. Accents only enter where picture movement needs support</p></Reveal>
     </div>
   </section>;
 }
 
 const deliveryFormats = [
-  { title: 'Campaign film', ratio: '16:9', className: 'is-landscape' },
-  { title: 'Social cut', ratio: '9:16', className: 'is-portrait' },
-  { title: 'Square story', ratio: '1:1', className: 'is-square' },
+  { title: 'Campaign master', ratio: '16:9', size: '3840 × 2160', crop: 'Full environment', output: 'ProRes master + H.264 review', className: 'is-landscape' },
+  { title: 'Vertical social', ratio: '9:16', size: '1080 × 1920', crop: 'Cyclist held center', output: 'H.264 + caption file', className: 'is-portrait' },
+  { title: 'Square feed', ratio: '1:1', size: '1080 × 1080', crop: 'Action weighted right', output: 'H.264 + thumbnail', className: 'is-square' },
 ];
 
 function VideoDelivery({ Reveal }) {
@@ -359,11 +212,11 @@ function VideoDelivery({ Reveal }) {
       <Reveal className="ve-heading"><FrameCorners size={32} weight="duotone" aria-hidden="true" /><h2>One story, every screen</h2><p>Framing and title-safe areas are rebuilt for the destination, not cropped as an afterthought</p></Reveal>
       <div className="ve-delivery-grid">
         {deliveryFormats.map((format, index) => <Reveal className={`ve-delivery-card ${format.className}`} key={format.title} delay={index * 0.06}>
-          <div className="ve-delivery-frame"><img src={index === 0 ? videoSequence : videoCover} alt={`${format.title} preview in ${format.ratio} format`} loading="lazy" /><i aria-hidden="true" /></div>
-          <div><strong>{format.title}</strong><span>{format.ratio}</span></div>
+          <div className="ve-delivery-frame"><img src={videoSequence} alt={`${format.title} preview of the cyclist story in ${format.ratio} format`} loading="lazy" /><i aria-hidden="true" /></div>
+          <div className="ve-delivery-info"><strong>{format.title}</strong><span>{format.ratio}</span><dl><div><dt>Frame</dt><dd>{format.size}</dd></div><div><dt>Crop</dt><dd>{format.crop}</dd></div><div><dt>Package</dt><dd>{format.output}</dd></div></dl></div>
         </Reveal>)}
       </div>
-      <Reveal className="ve-delivery-footer"><div className="ve-tool-line" aria-label="Video editing tools"><span>Premiere Pro</span><span>After Effects</span><span>DaVinci Resolve</span><span>Audition</span></div><a href="#contact">Shape the next cut <ArrowUpRight size={18} /></a></Reveal>
+      <Reveal className="ve-delivery-footer"><dl><div><dt>Picture</dt><dd>Master + review encodes</dd></div><div><dt>Sound</dt><dd>Stereo mix + stems</dd></div><div><dt>Access</dt><dd>SRT captions + safe-area check</dd></div><div><dt>Archive</dt><dd>Project + linked media + grade</dd></div></dl><a href="#contact">Shape the next cut <ArrowUpRight size={18} /></a></Reveal>
     </div>
   </section>;
 }
@@ -384,100 +237,106 @@ function UiHero({ Reveal }) {
     <div className="page-shell ui-hero-layout">
       <Reveal className="ui-hero-copy">
         <span className="ui-kicker">UI/UX and web development</span>
-        <h1>Designed to ship</h1>
-        <p>Clear user flows, responsive systems and production-ready React</p>
-        <ArrowLink to="#product-thinking">Explore the product</ArrowLink>
+        <h1>Decisions made visible</h1>
+        <p>Product strategy, interface states and front-end implementation shown through one route-planning prototype</p>
+        <ArrowLink to="#product-thinking">Inspect the product</ArrowLink>
+        <dl className="ui-hero-facts"><div><dt>Case</dt><dd>MÁT route planner</dd></div><div><dt>Model</dt><dd>3 route strategies</dd></div><div><dt>Signals</dt><dd>Shade + heat + AQI</dd></div></dl>
       </Reveal>
       <Reveal className="ui-hero-media" delay={0.08}>
-        <figure><img src={uiResponsiveProduct} alt="Responsive heat-aware route planner shown on desktop and mobile screens" /></figure>
-        <div className="ui-breakpoint-readout" aria-label="Responsive viewport animation"><span>390</span><i /><span>1440</span></div>
+        <figure><img src={matCover} alt="MÁT city route model showing a heat-aware path across exposed and shaded districts" /><figcaption><span>Prototype case</span><strong>Heat-aware route planning</strong><p>Environmental evidence becomes a route a person can compare and act on</p></figcaption></figure>
       </Reveal>
     </div>
   </section>;
 }
 
 const productDecisions = [
-  { icon: CursorClick, title: 'Choice before detail', copy: 'Show route trade-offs before asking for commitment', visual: 'choice' },
-  { icon: Gauge, title: 'Risk people can read', copy: 'Turn heat and shade data into visible route context', visual: 'risk' },
-  { icon: CheckCircle, title: 'A clear next state', copy: 'Confirm the selected route and preserve confidence', visual: 'confirm' },
+  { title: 'Compare before choosing', context: 'Route choice', question: 'What changes if I avoid exposure', output: 'Time, distance, shade and heat stay visible together', visual: 'compare' },
+  { title: 'Explain the score', context: 'Risk evidence', question: 'Why is this route cooler', output: 'Canopy, sun angle, surface and AQI support the recommendation', visual: 'evidence' },
+  { title: 'Confirm the next state', context: 'Route handoff', question: 'What is ready after selection', output: 'Choice, directions and refill points remain available', visual: 'confirm' },
 ];
 
 function DecisionVisual({ type }) {
-  if (type === 'choice') return <div className="ui-decision-visual ui-choice-visual" aria-hidden="true"><span /><span /></div>;
-  if (type === 'risk') return <div className="ui-decision-visual ui-risk-visual" aria-hidden="true"><i /><i /><i /></div>;
-  return <div className="ui-decision-visual ui-confirm-visual" aria-hidden="true"><span><CheckCircle size={34} weight="fill" /></span></div>;
+  if (type === 'compare') return <div className="ui-decision-visual ui-compare-visual"><div><span>Fastest</span><strong>20 min</strong><small>29% shade</small></div><div className="is-selected"><span>Coolest</span><strong>32 min</strong><small>71% shade</small></div></div>;
+  if (type === 'evidence') return <div className="ui-decision-visual ui-evidence-visual"><div><span>Shade coverage</span><strong>71%</strong><i style={{ '--value': '71%' }} /></div><div><span>Heat score</span><strong>2.8 / 5</strong><i style={{ '--value': '56%' }} /></div><div><span>Air quality</span><strong>Moderate</strong><i style={{ '--value': '62%' }} /></div></div>;
+  return <div className="ui-decision-visual ui-confirm-visual"><CheckCircle size={22} weight="fill" aria-hidden="true" /><div><span>Route ready</span><strong>Cooler route</strong><small>2 refill points saved</small></div></div>;
 }
 
 function UiProductCase({ Reveal }) {
   return <section id="product-thinking" className="ui-section ui-product-section">
     <div className="page-shell">
-      <Reveal className="ui-heading"><h2>Start with the decision</h2><p>MÁT reframes route planning around exposure, recovery and the trade-off a person can act on</p></Reveal>
-      <Reveal className="ui-product-visual" delay={0.06}><img src={matCover} alt="MÁT heat-aware route planning concept mapped across a city" loading="lazy" /><a href="/work/mat">View MÁT case study <ArrowUpRight size={17} /></a></Reveal>
+      <Reveal className="ui-heading"><h2>A recommendation must explain itself</h2><p>MÁT compares the faster route with the cooler route before asking for commitment</p></Reveal>
+      <Reveal className="ui-product-visual" delay={0.06}><img src={matRouteFlow} alt="MÁT route comparison showing faster and cooler paths, shade coverage, heat score, air quality and the final recommendation" loading="lazy" /><a href="/work/mat">View MÁT case study <ArrowUpRight size={17} /></a></Reveal>
       <div className="ui-decision-grid">
-        {productDecisions.map((item, index) => {
-          const Icon = item.icon;
-          return <Reveal className="ui-decision-card" key={item.title} delay={index * 0.05}>
+        {productDecisions.map((item, index) => <Reveal className="ui-decision-card" key={item.title} delay={index * 0.05}>
             <DecisionVisual type={item.visual} />
-            <Icon size={22} weight="duotone" aria-hidden="true" />
-            <h3>{item.title}</h3><p>{item.copy}</p>
-          </Reveal>;
-        })}
+            <span>{item.context}</span><h3>{item.title}</h3><dl><div><dt>Question</dt><dd>{item.question}</dd></div><div><dt>Output</dt><dd>{item.output}</dd></div></dl>
+          </Reveal>)}
       </div>
     </div>
   </section>;
 }
 
+const uiFlowSteps = [
+  { index: '01', screen: 'Set intent', question: 'Where and when are you travelling', input: 'Origin + destination + departure', output: 'A route request with time context' },
+  { index: '02', screen: 'Compare routes', question: 'Which trade-off fits the journey', input: 'Fastest + balanced + coolest', output: 'Time and exposure stay comparable' },
+  { index: '03', screen: 'Review evidence', question: 'Why is one route recommended', input: 'Shade + heat + AQI + refill', output: 'A readable recommendation' },
+  { index: '04', screen: 'Confirm journey', question: 'What remains available next', input: 'Selected route + directions', output: 'Cached guidance and recovery points' },
+];
+
 function UiFlow({ Reveal }) {
-  return <section className="ui-section ui-flow-section">
-    <div className="page-shell ui-flow-layout">
-      <Reveal className="ui-flow-copy"><FlowArrow size={32} weight="duotone" aria-hidden="true" /><h2>Make the task path visible</h2><p>Each screen answers one question, keeps progress clear and prepares the next action</p><div className="ui-flow-steps" aria-label="Route selection flow"><span>Set intent</span><span>Compare routes</span><span>Review exposure</span><span>Confirm journey</span></div></Reveal>
-      <Reveal className="ui-flow-visual" delay={0.08}><img src={matRouteFlow} alt="User flow from route intent through comparison, exposure review and journey confirmation" loading="lazy" /></Reveal>
-    </div>
+  return <section id="task-flow" className="ui-section ui-flow-section">
+    <div className="page-shell"><Reveal className="ui-heading"><FlowArrow size={32} weight="duotone" aria-hidden="true" /><h2>One question per state</h2><p>The flow keeps the decision legible from route request to cached guidance</p></Reveal><div className="ui-flow-board" aria-label="MÁT route selection flow">{uiFlowSteps.map((step, index) => <Reveal className="ui-flow-step" key={step.index} delay={index * .05}><header><span>{step.index}</span><strong>{step.screen}</strong></header><p>{step.question}</p><dl><div><dt>Input</dt><dd>{step.input}</dd></div><div><dt>Output</dt><dd>{step.output}</dd></div></dl></Reveal>)}</div></div>
   </section>;
 }
 
 function UiResponsive({ Reveal }) {
-  return <section className="ui-section ui-responsive-section">
+  return <section id="responsive-system" className="ui-section ui-responsive-section">
     <div className="page-shell">
-      <Reveal className="ui-heading"><Devices size={32} weight="duotone" aria-hidden="true" /><h2>Priority shifts with space</h2><p>The same system changes hierarchy, controls and reading order as space changes</p></Reveal>
-      <div className="ui-responsive-grid">
-        <Reveal className="ui-responsive-photo"><img src={uiCover} alt="Laptop and phone showing one responsive interface system" loading="lazy" /></Reveal>
-        <Reveal className="ui-responsive-motion" delay={0.08}><img src={uiWebGif} alt="Animated browser and phone layouts adapting a design system into responsive code" loading="lazy" /><div aria-hidden="true"><span>Desktop</span><i /><span>Mobile</span></div></Reveal>
-      </div>
+      <Reveal className="ui-heading"><Devices size={32} weight="duotone" aria-hidden="true" /><h2>Responsive means reprioritised</h2><p>The interface changes order and control density instead of shrinking the desktop layout</p></Reveal>
+      <div className="ui-responsive-grid"><Reveal className="ui-desktop-proof"><header><span>MÁT</span><nav aria-label="Desktop product preview"><b>Plan route</b><i>Saved</i><i>Conditions</i></nav><small>1440 px</small></header><div className="ui-desktop-body"><div className="ui-proof-map" aria-hidden="true"><i /><i /><i /><b /></div><aside><span>Recommended</span><strong>Cooler route</strong><dl><div><dt>Time</dt><dd>32 min</dd></div><div><dt>Shade</dt><dd>71%</dd></div><div><dt>Heat</dt><dd>2.8 / 5</dd></div></dl><button type="button" tabIndex="-1">View directions</button></aside></div></Reveal><Reveal className="ui-mobile-proof" delay={0.06}><header><span>MÁT</span><small>390 px</small></header><div className="ui-proof-map" aria-hidden="true"><i /><i /><i /><b /></div><div className="ui-mobile-result"><span>Recommended</span><strong>Cooler route</strong><p>32 min · 71% shade</p><button type="button" tabIndex="-1">View directions</button></div><nav aria-label="Mobile product preview"><b>Route</b><i>Saved</i><i>Conditions</i></nav></Reveal></div>
+      <Reveal className="ui-responsive-rules"><dl><div><dt>Navigation</dt><dd>Top navigation becomes a three-item bottom bar</dd></div><div><dt>Map</dt><dd>Context remains visible while the result moves below it</dd></div><div><dt>Evidence</dt><dd>Primary metrics stay inline, secondary detail opens on demand</dd></div><div><dt>Action</dt><dd>The route action keeps full width and thumb reach</dd></div></dl></Reveal>
     </div>
   </section>;
 }
 
 const routeModes = {
-  shade: { label: 'More shade', heading: 'Cooler route', copy: 'Prioritises shade and recovery points' },
-  balanced: { label: 'Balanced', heading: 'Balanced route', copy: 'Balances walking time with exposure' },
-  direct: { label: 'Most direct', heading: 'Direct route', copy: 'Prioritises the shortest practical path' },
+  shade: { label: 'Coolest', heading: 'Cooler route', time: '32 min', distance: '2.4 km', shade: '71%', heat: '2.8 / 5', copy: 'More shade with two refill points', confirmed: 'Route and next three directions cached', path: 'M72 306C58 298 48 291 45 280C38 245 39 213 45 185C68 170 100 161 130 155C165 143 195 148 230 140C265 132 280 110 315 100C355 88 390 112 430 105C470 98 505 82 550 70C605 55 650 70 688 58' },
+  balanced: { label: 'Balanced', heading: 'Balanced route', time: '26 min', distance: '2.1 km', shade: '54%', heat: '3.3 / 5', copy: 'A practical everyday trade-off', confirmed: 'Route and next three directions cached', path: 'M72 306C105 300 135 288 165 278C205 266 232 238 270 224C310 209 350 216 390 205C398 165 410 130 430 105C470 98 505 82 550 70C605 55 650 70 688 58' },
+  direct: { label: 'Fastest', heading: 'Fastest route', time: '20 min', distance: '1.8 km', shade: '29%', heat: '4.2 / 5', copy: 'Shorter with high midday exposure', confirmed: 'Route and next three directions cached', path: 'M72 306C105 300 135 288 165 278C205 266 232 238 270 224C310 209 350 216 390 205C432 194 455 169 500 155C545 141 570 137 610 125C642 115 663 82 688 58' },
 };
+
+function UiRouteMap({ mode, reduceMotion }) {
+  const active = routeModes[mode];
+  return <svg className="ui-route-map" viewBox="0 0 760 380" role="img" aria-labelledby="ui-route-title ui-route-desc"><title id="ui-route-title">{active.heading} on the MÁT route prototype</title><desc id="ui-route-desc">Route from Riverside Market to Hill Garden with heat and shade evidence</desc><rect width="760" height="380" rx="12" /><g className="ui-map-roads"><path d="M-20 330C118 300 218 270 390 205S610 125 780 42" /><path d="M-20 350C105 330 180 192 315 100S550 70 780 26" /><path d="M390 410C370 325 374 252 390 205C405 160 418 128 430 105C446 72 462 30 480 -20" /><path d="M110 410C130 330 145 252 165 185S205 60 220 -30" /><path d="M570 410C590 330 580 240 610 185S690 55 730 -20" /></g><g className="ui-map-heat"><circle cx="280" cy="230" r="76" /><circle cx="560" cy="142" r="64" /></g><motion.path key={mode} className="ui-map-active" d={active.path} fill="none" initial={reduceMotion ? false : { pathLength: 0, opacity: .35 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: reduceMotion ? 0 : .7, ease: [0.16, 1, 0.3, 1] }} /><g className="ui-map-points"><circle cx="72" cy="306" r="9" /><circle cx="688" cy="58" r="9" /></g></svg>;
+}
 
 function UiSandbox({ Reveal }) {
   const [mode, setMode] = useState('shade');
   const [selected, setSelected] = useState(false);
   const reduceMotion = useReducedMotion();
   const active = routeModes[mode];
-  return <section className="ui-section ui-sandbox-section">
+  return <section id="state-prototype" className="ui-section ui-sandbox-section">
     <div className="page-shell ui-sandbox-layout">
-      <Reveal className="ui-sandbox-copy"><CursorClick size={32} weight="duotone" aria-hidden="true" /><h2>States explain change</h2><p>Try a route preference and watch the hierarchy, path and confirmation update together</p><div className="ui-mode-controls" role="group" aria-label="Route preference">{Object.entries(routeModes).map(([key, item]) => <button type="button" key={key} aria-pressed={mode === key} onClick={() => { setMode(key); setSelected(false); }}>{item.label}</button>)}</div></Reveal>
+      <Reveal className="ui-sandbox-copy"><CursorClick size={32} weight="duotone" aria-hidden="true" /><h2>State changes stay inspectable</h2><p>Switch route strategy to compare the path, metrics, recommendation and confirmation state</p><div className="ui-mode-controls" role="group" aria-label="Route preference">{Object.entries(routeModes).map(([key, item]) => <button type="button" key={key} aria-pressed={mode === key} onClick={() => { setMode(key); setSelected(false); }}>{item.label}</button>)}</div><dl className="ui-sandbox-boundary"><div><dt>Status</dt><dd>Interactive concept</dd></div><div><dt>Not claimed</dt><dd>Live routing service</dd></div><div><dt>Next validation</dt><dd>Outdoor legibility + data reliability</dd></div></dl></Reveal>
       <Reveal className="ui-sandbox" delay={0.08}>
-        <div className="ui-sandbox-map"><img src={matCover} alt="City map used for the interactive route preference preview" loading="lazy" /><motion.i key={mode} className={`is-${mode}`} initial={reduceMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.55, ease: [0.16,1,0.3,1] }} aria-hidden="true" /></div>
-        <motion.div className="ui-sandbox-result" key={mode} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.38 }} aria-live="polite"><span>{active.label}</span><strong>{active.heading}</strong><p>{active.copy}</p><button type="button" onClick={() => setSelected(true)}>{selected ? 'Route selected' : 'Select route'}</button></motion.div>
+        <div className="ui-sandbox-map"><UiRouteMap mode={mode} reduceMotion={reduceMotion} /></div>
+        <motion.div className={`ui-sandbox-result ${selected ? 'is-selected' : ''}`} key={`${mode}-${selected}`} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.3 }} aria-live="polite"><span>{selected && <CheckCircle size={15} weight="fill" aria-hidden="true" />}{selected ? 'Route confirmed' : 'Route comparison'}</span><strong>{active.heading}</strong><p>{selected ? active.confirmed : active.copy}</p><dl><div><dt>Time</dt><dd>{active.time}</dd></div><div><dt>Distance</dt><dd>{active.distance}</dd></div><div><dt>Shade</dt><dd>{active.shade}</dd></div><div><dt>Heat</dt><dd>{active.heat}</dd></div></dl><button type="button" aria-pressed={selected} onClick={() => setSelected((value) => !value)}>{selected ? 'Change choice' : 'Select route'}</button></motion.div>
       </Reveal>
     </div>
   </section>;
 }
 
-const buildChecks = ['Semantic structure', 'Keyboard paths', 'Responsive states', 'Reduced motion'];
+const buildChecks = [
+  { check: 'Semantic outline', method: 'Landmarks + one H1 + ordered sections', result: 'Pass' },
+  { check: 'Keyboard path', method: 'Native controls + visible focus', result: 'Pass' },
+  { check: 'State feedback', method: 'aria-pressed + aria-live', result: 'Pass' },
+  { check: 'Reduced motion', method: 'Complete state without animation', result: 'Pass' },
+  { check: 'Responsive layout', method: '390 + 768 + 1440 px inspection', result: 'Pass' },
+];
 
 function UiBuildProof({ Reveal }) {
-  return <section className="ui-section ui-build-section">
-    <div className="page-shell ui-build-layout">
-      <Reveal className="ui-build-media"><img src={muonDigital} alt="Responsive digital identity system displayed across desktop, tablet and mobile devices" loading="lazy" /></Reveal>
-      <Reveal className="ui-build-copy" delay={0.08}><Code size={34} weight="duotone" aria-hidden="true" /><h2>Design and code stay connected</h2><p>Components carry the spacing, states and accessibility decisions made during design</p><div className="ui-check-grid">{buildChecks.map((item) => <span key={item}><CheckCircle size={17} weight="fill" />{item}</span>)}</div><div className="ui-tool-list" aria-label="Interface design and web development tools"><span>Figma</span><span>React</span><span>Vite</span><span>Motion</span><span>CSS</span></div><a href="#contact">Build a useful interface <ArrowUpRight size={18} /></a></Reveal>
-    </div>
+  return <section id="build-proof" className="ui-section ui-build-section">
+    <div className="page-shell"><Reveal className="ui-heading"><Code size={34} weight="duotone" aria-hidden="true" /><h2>Implementation keeps the decision intact</h2><p>The handoff connects route data, scoring, component state and accessible feedback</p></Reveal><div className="ui-build-layout"><Reveal className="ui-build-pipeline"><div><span>01</span><strong>Route request</strong><small>Origin + destination + time</small></div><i aria-hidden="true" /><div><span>02</span><strong>Scoring model</strong><small>Shade + heat + AQI + refill</small></div><i aria-hidden="true" /><div><span>03</span><strong>UI state</strong><small>Compare + select + recover</small></div><i aria-hidden="true" /><div><span>04</span><strong>User feedback</strong><small>Metrics + route + directions</small></div></Reveal><Reveal className="ui-build-report" delay={0.08}><header><span>Verification report</span><strong>5 / 5 passed</strong></header><div>{buildChecks.map((item) => <article key={item.check}><CheckCircle size={17} weight="fill" aria-hidden="true" /><strong>{item.check}</strong><span>{item.method}</span><b>{item.result}</b></article>)}</div><footer><WarningCircle size={18} weight="fill" aria-hidden="true" /><p><strong>Prototype boundary</strong>Production still requires routing data validation, moderated comparisons and outdoor legibility testing</p></footer></Reveal></div><Reveal className="ui-build-actions"><a href="/work/mat">Read the full MÁT case study <ArrowUpRight size={18} /></a><a href="#contact">Build a useful interface <ArrowUpRight size={18} /></a></Reveal></div>
   </section>;
 }
 
@@ -497,36 +356,38 @@ function AutomationHero({ Reveal }) {
     <div className="page-shell au-hero-layout">
       <Reveal className="au-hero-copy">
         <span className="au-kicker">Automation</span>
-        <h1>Reliable automation</h1>
-        <p>Observable workflows, safe retries and browser-protocol control</p>
+        <h1>Every run leaves evidence</h1>
+        <p>Multi-profile browser work with explicit inputs, protocol-only control, safe recovery and structured results</p>
         <ArrowLink to="#workflow-anatomy">Follow the workflow</ArrowLink>
       </Reveal>
-      <Reveal className="au-hero-rig" delay={0.08}>
-        <figure><img src={automationOrchestration} alt="Industrial orchestration rig with parallel workers, retry loop and verified output" /></figure>
-        <div className="au-run-status" aria-label="Automation startup summary"><span>Mode</span><strong>Concurrent</strong><span>Profiles</span><strong>3</strong><span>Concurrency</span><strong>3</strong><span>Method</span><strong>CDP</strong><span>Config</span><strong>GPM API</strong></div>
+      <Reveal className="au-hero-console" delay={0.08}>
+        <header><span><i />RUN ops-2408</span><strong>Protocol automation</strong></header>
+        <dl className="au-startup-summary"><div><dt>Mode</dt><dd>concurrent</dd></div><div><dt>Profiles</dt><dd>3</dd></div><div><dt>Workers</dt><dd>3</dd></div><div><dt>Profile API</dt><dd>GPM v3</dd></div><div><dt>Browser</dt><dd>Chromium CDP</dd></div><div><dt>Artifacts</dt><dd>DOM + screenshot + JSON</dd></div></dl>
+        <ol className="au-hero-pipeline"><li className="is-done"><span>01</span><div><strong>Config validated</strong><small>3 profiles · 3 wallets · schema pass</small></div><b>OK</b></li><li className="is-done"><span>02</span><div><strong>Profiles started</strong><small>debuggerAddress received from GPM API</small></div><b>OK</b></li><li className="is-running"><span>03</span><div><strong>CDP sessions attached</strong><small>worker-1 running · worker-2 retry queued</small></div><b>LIVE</b></li><li><span>04</span><div><strong>Evidence and summary</strong><small>result.json waits for all terminal states</small></div><b>WAIT</b></li></ol>
+        <footer><span>Total 3</span><span>Success 1</span><span>Running 1</span><span>Retrying 1</span><span>Failed 0</span></footer>
       </Reveal>
     </div>
   </section>;
 }
 
 const workflowStages = [
-  { icon: Lightning, title: 'Trigger', copy: 'Receive a schedule, event or explicit request', className: 'is-trigger' },
-  { icon: Funnel, title: 'Validate', copy: 'Check profile, input and required state', className: 'is-validate' },
-  { icon: Cpu, title: 'Execute', copy: 'Run the scoped browser or API action', className: 'is-execute' },
-  { icon: CheckCircle, title: 'Report', copy: 'Record outcome, evidence and next action', className: 'is-report' },
+  { id: 'trigger', index: '01', title: 'Trigger', input: 'schedule 09:42', method: 'Create run_id ops-2408', output: 'Immutable run context', guard: 'Reject duplicate run_id' },
+  { id: 'validate', index: '02', title: 'Validate', input: 'profiles.json + wallets.csv', method: 'Schema and ownership checks', output: '3 runnable profile jobs', guard: 'Stop before browser launch' },
+  { id: 'profile', index: '03', title: 'Start profile', input: 'gpm_profile_id', method: 'GPM Login API v3', output: 'debuggerAddress', guard: 'Bounded startup timeout' },
+  { id: 'attach', index: '04', title: 'Attach browser', input: 'debuggerAddress', method: 'Playwright connectOverCDP', output: 'Isolated browser session', guard: 'No OS input dependency' },
+  { id: 'action', index: '05', title: 'Execute action', input: 'scoped selector + expected state', method: 'DOM read, click and response check', output: 'Verified state change', guard: 'Assert before mutation' },
+  { id: 'artifact', index: '06', title: 'Capture evidence', input: 'browser state + response data', method: 'Screenshot, DOM excerpt and JSON', output: 'Per-profile artifact bundle', guard: 'Redact sensitive fields' },
+  { id: 'summary', index: '07', title: 'Write summary', input: 'all terminal job results', method: 'Aggregate status and retries', output: 'Machine and human report', guard: 'Never hide skipped work' },
 ];
 
 function AutomationAnatomy({ Reveal }) {
+  const [stageId, setStageId] = useState('attach');
+  const reduceMotion = useReducedMotion();
+  const active = workflowStages.find((stage) => stage.id === stageId);
   return <section id="workflow-anatomy" className="au-section au-anatomy-section">
     <div className="page-shell">
-      <Reveal className="au-heading"><h2>A workflow with visible state</h2><p>Every stage declares what entered, what changed and what should happen next</p></Reveal>
-      <Reveal className="au-anatomy-visual" delay={0.06}><img src={automationGif} alt="Animated trigger, filter, action and output workflow" loading="lazy" /></Reveal>
-      <div className="au-stage-grid">
-        {workflowStages.map((stage, index) => {
-          const Icon = stage.icon;
-          return <Reveal className={`au-stage ${stage.className}`} key={stage.title} delay={index * 0.05}><div className="au-stage-signal" aria-hidden="true"><i /><i /><i /></div><Icon size={22} weight="duotone" aria-hidden="true" /><h3>{stage.title}</h3><p>{stage.copy}</p></Reveal>;
-        })}
-      </div>
+      <Reveal className="au-heading"><h2>The executable path is inspectable</h2><p>Select a stage to see its input, method, output and safety boundary</p></Reveal>
+      <div className="au-anatomy-layout"><Reveal className="au-stage-list" role="group" aria-label="Automation execution stages">{workflowStages.map((stage) => <button type="button" key={stage.id} aria-pressed={stageId === stage.id} onClick={() => setStageId(stage.id)}><span>{stage.index}</span><strong>{stage.title}</strong><small>{stage.output}</small></button>)}</Reveal><Reveal className="au-stage-inspector" delay={0.08}><motion.div key={active.id} initial={reduceMotion ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .28 }} aria-live="polite"><header><span>STEP {active.index}</span><strong>{active.title}</strong></header><dl><div><dt>Input</dt><dd>{active.input}</dd></div><div><dt>Method</dt><dd>{active.method}</dd></div><div><dt>Output</dt><dd>{active.output}</dd></div><div><dt>Safety boundary</dt><dd>{active.guard}</dd></div></dl><footer><CheckCircle size={18} weight="fill" aria-hidden="true" />A stage advances only after its output is verified</footer></motion.div></Reveal></div>
     </div>
   </section>;
 }
@@ -538,59 +399,64 @@ const workerRows = [
 ];
 
 function AutomationOperations({ Reveal }) {
-  return <section className="au-section au-operations-section">
+  return <section id="operations-console" className="au-section au-operations-section">
     <div className="page-shell">
       <Reveal className="au-heading"><TerminalWindow size={32} weight="duotone" aria-hidden="true" /><h2>Concurrency without confusion</h2><p>Profiles keep a stable color while every event carries worker, wallet, step and status context</p></Reveal>
       <Reveal className="au-console" delay={0.08}>
         <header><div><i /><span>Example multi-profile run</span></div><strong>Automation method: GPM API + CDP</strong></header>
-        <div className="au-table-wrap"><table><thead><tr><th>Profile</th><th>Wallet</th><th>Worker</th><th>Current step</th><th>Status</th><th>Retry</th><th>Elapsed</th><th>Last message</th></tr></thead><tbody>{workerRows.map((row) => <tr key={row.profile}><td><span className={`au-profile ${row.profileClass}`}>{row.profile}</span></td><td className="au-wallet">{row.wallet}</td><td>{row.worker}</td><td>{row.step}</td><td><span className={`au-status ${row.statusClass}`}>{row.status}</span></td><td>{row.retries}</td><td>{row.elapsed}</td><td>{row.message}</td></tr>)}</tbody></table></div>
-        <div className="au-log-stream" aria-label="Structured automation log">
+        <div className="au-table-wrap" role="region" aria-label="Multi-profile operation table" tabIndex="0"><table><thead><tr><th>Profile</th><th>Wallet</th><th>Worker</th><th>Current step</th><th>Status</th><th>Retry</th><th>Elapsed</th><th>Last message</th></tr></thead><tbody>{workerRows.map((row) => <tr key={row.profile}><td><span className={`au-profile ${row.profileClass}`}>{row.profile}</span></td><td className="au-wallet">{row.wallet}</td><td>{row.worker}</td><td>{row.step}</td><td><span className={`au-status ${row.statusClass}`}>{row.status}</span></td><td>{row.retries}</td><td>{row.elapsed}</td><td>{row.message}</td></tr>)}</tbody></table></div>
+        <div className="au-log-stream" role="region" aria-label="Structured automation log" tabIndex="0">
           <p><time>09:42:11</time><b className="is-info">[INFO]</b><span>[T:worker-1]</span><span className="is-cyan">[P:Atlas 07]</span><em>[W:0x72A4...91C2]</em><strong>[STEP:Connect CDP]</strong>Remote endpoint attached</p>
           <p><time>09:42:18</time><b className="is-warn">[WARN]</b><span>[T:worker-2]</span><span className="is-magenta">[P:Cinder 12]</span><em>[W:0x18F9...4B70]</em><strong>[STEP:Verify state]</strong>State not ready, retry queued</p>
           <p><time>09:42:24</time><b className="is-ok">[OK]</b><span>[T:worker-3]</span><span className="is-amber">[P:Moss 03]</span><em>[W:0xA631...0D55]</em><strong>[STEP:Write report]</strong>Evidence saved</p>
         </div>
-        <footer><span>Total 3</span><span>Success 1</span><span>Failed 0</span><span>Running 1</span><span>Retries 1</span><span>Elapsed 00:26</span></footer>
+        <footer aria-label="Run summary" tabIndex="0"><span>Total 3</span><span>Success 1</span><span>Failed 0</span><span>Skipped 0</span><span>Running 1</span><span>Retries 1</span><span>Elapsed 00:26</span></footer>
       </Reveal>
     </div>
   </section>;
 }
 
 const recoveryModes = {
-  retry: { label: 'Retry safely', icon: ArrowClockwise, heading: 'Retry only the failed step', copy: 'Keep completed work and preserve the same profile context' },
-  skip: { label: 'Skip intentionally', icon: SkipForward, heading: 'Skip with a recorded reason', copy: 'Continue only when the missing step is explicitly non-blocking' },
-  stop: { label: 'Stop clearly', icon: StopCircle, heading: 'Stop before state becomes unsafe', copy: 'Leave evidence and a concrete next action for the operator' },
+  retry: { label: 'State not ready', decision: 'Retry', retryable: 'Yes', safe: 'Yes', limit: '3 attempts', next: 'Back off 2, 4 and 8 seconds, then retry only Verify state', reason: 'The failed step is read-only and completed work remains valid' },
+  skip: { label: 'Optional screenshot missing', decision: 'Skip', retryable: 'No', safe: 'Yes', limit: 'Configured exception', next: 'Record skipped artifact and continue to summary', reason: 'The primary result and DOM evidence already exist' },
+  stop: { label: 'Wallet does not match profile', decision: 'Stop', retryable: 'No', safe: 'No', limit: 'Immediate stop', next: 'Close the session and request operator review', reason: 'Continuing could mutate the wrong account state' },
 };
 
 function AutomationRecovery({ Reveal }) {
   const [mode, setMode] = useState('retry');
   const reduceMotion = useReducedMotion();
   const active = recoveryModes[mode];
-  const ActiveIcon = active.icon;
-  return <section className="au-section au-recovery-section">
+  return <section id="recovery-matrix" className="au-section au-recovery-section">
     <div className="page-shell au-recovery-layout">
-      <Reveal className="au-recovery-copy"><Warning size={32} weight="duotone" aria-hidden="true" /><h2>Failure is part of the design</h2><p>Recovery rules decide whether a workflow retries, skips or stops without hiding the reason</p><div className="au-recovery-controls" role="group" aria-label="Recovery strategy">{Object.entries(recoveryModes).map(([key, item]) => <button type="button" key={key} aria-pressed={mode === key} onClick={() => setMode(key)}>{item.label}</button>)}</div></Reveal>
-      <Reveal className="au-recovery-visual" delay={0.08}>
-        <div className="au-recovery-branch" aria-hidden="true"><span>Input</span><i /><span>Worker</span><i /><span className="is-gate">Gate</span><i /><span>Output</span></div>
-        <motion.div className={`au-recovery-result is-${mode}`} key={mode} initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .4 }} aria-live="polite"><ActiveIcon size={30} weight="duotone" /><span>{active.label}</span><strong>{active.heading}</strong><p>{active.copy}</p></motion.div>
-      </Reveal>
+      <Reveal className="au-recovery-copy"><Warning size={32} weight="duotone" aria-hidden="true" /><h2>Recovery is a decision table</h2><p>Retry, skip and stop depend on retryability and whether the current state is safe</p><div className="au-recovery-controls" role="group" aria-label="Recovery case">{Object.entries(recoveryModes).map(([key, item]) => <button className={`is-${key}`} type="button" key={key} aria-pressed={mode === key} onClick={() => setMode(key)}>{item.label}</button>)}</div></Reveal>
+      <Reveal className="au-recovery-visual" delay={0.08}><div className="au-decision-table" role="table" aria-label="Recovery decision matrix"><div role="row" className="is-head"><span role="columnheader">Signal</span><span role="columnheader">Retryable</span><span role="columnheader">State safe</span><span role="columnheader">Decision</span></div>{Object.entries(recoveryModes).map(([key, item]) => <button type="button" role="row" key={key} className={`is-${key}`} aria-pressed={mode === key} onClick={() => setMode(key)}><span role="cell">{item.label}</span><span role="cell">{item.retryable}</span><span role="cell">{item.safe}</span><strong role="cell">{item.decision}</strong></button>)}</div><motion.div className={`au-recovery-result is-${mode}`} key={mode} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .3 }} aria-live="polite"><span>{active.decision}</span><strong>{active.next}</strong><p>{active.reason}</p><dl><div><dt>Limit</dt><dd>{active.limit}</dd></div><div><dt>Evidence</dt><dd>Error + step + profile + wallet + worker</dd></div></dl></motion.div></Reveal>
     </div>
   </section>;
 }
 
-const browserMethods = ['Playwright', 'Selenium', 'WebDriver', 'Chrome DevTools Protocol', 'GPM remote debugging'];
+const browserMethods = [
+  { name: 'GPM Login API', purpose: 'Start and stop the named profile', boundary: 'Returns remote debugging address' },
+  { name: 'Playwright + CDP', purpose: 'Read DOM, navigate, click and capture', boundary: 'Runs inside the browser session' },
+  { name: 'Selenium + WebDriver', purpose: 'Alternative browser session control', boundary: 'Uses driver or debugging endpoint' },
+];
 
 function AutomationBoundary({ Reveal }) {
-  return <section className="au-section au-boundary-section">
+  return <section id="browser-boundary" className="au-section au-boundary-section">
     <div className="page-shell au-boundary-layout">
-      <Reveal className="au-boundary-visual"><img src={automationCover} alt="Physical workflow model showing connected automation branches" loading="lazy" /><div className="au-browser-window" aria-hidden="true"><Browser size={30} weight="duotone" /><span /><span /><i /></div></Reveal>
-      <Reveal className="au-boundary-copy" delay={0.08}><Browser size={34} weight="duotone" aria-hidden="true" /><h2>Browser control stays inside the browser</h2><p>Protocol automation keeps the active desktop, focus and user input untouched</p><div className="au-method-grid">{browserMethods.map((method) => <span key={method}><CheckCircle size={16} weight="fill" />{method}</span>)}</div><div className="au-no-os"><Warning size={20} weight="fill" /><span><strong>No OS-level input control</strong>No mouse coordinates, keyboard takeover, clipboard driving or focus stealing</span></div></Reveal>
+      <Reveal className="au-boundary-visual"><div className="au-protocol-path" aria-label="Browser protocol architecture"><div><span>01</span><strong>GPM API</strong><small>profile_id → debuggerAddress</small></div><i /><div><span>02</span><strong>CDP or WebDriver</strong><small>isolated browser session</small></div><i /><div><span>03</span><strong>Page protocol</strong><small>DOM + network + download</small></div><i /><div><span>04</span><strong>Artifacts</strong><small>screenshot + result.json</small></div></div><div className="au-boundary-state"><Browser size={26} weight="duotone" aria-hidden="true" /><div><span>Active desktop</span><strong>Mouse, keyboard, clipboard and focus remain untouched</strong></div><CheckCircle size={22} weight="fill" aria-hidden="true" /></div></Reveal>
+      <Reveal className="au-boundary-copy" delay={0.08}><Browser size={34} weight="duotone" aria-hidden="true" /><h2>Browser control stays inside the browser</h2><p>Each allowed method has a defined scope and endpoint</p><div className="au-method-grid">{browserMethods.map((method) => <article key={method.name}><CheckCircle size={16} weight="fill" aria-hidden="true" /><strong>{method.name}</strong><span>{method.purpose}</span><small>{method.boundary}</small></article>)}</div><div className="au-no-os"><XCircle size={20} weight="fill" /><span><strong>OS-level input is prohibited</strong>No coordinates, desktop keystrokes, clipboard driving, image clicking or focus stealing</span></div></Reveal>
     </div>
   </section>;
 }
 
 function AutomationSummary({ Reveal }) {
-  const outputs = ['Structured log', 'Evidence capture', 'Retry history', 'Final summary'];
-  return <section className="au-section au-summary-section"><div className="page-shell au-summary-layout"><Reveal className="au-summary-copy"><CheckCircle size={34} weight="duotone" aria-hidden="true" /><h2>The run ends with evidence</h2><p>A useful automation reports what happened, what failed and what to do next</p><div className="au-output-grid">{outputs.map((item, index) => <span key={item}><i>{String(index + 1).padStart(2, '0')}</i>{item}</span>)}</div><a href="#contact">Plan an automation <ArrowUpRight size={18} /></a></Reveal><Reveal className="au-summary-image" delay={0.08}><img src={automationOrchestration} alt="Verified output module completing a parallel automation workflow" loading="lazy" /></Reveal></div></section>;
+  const outputs = [
+    { file: 'run.log', source: 'central logger', purpose: 'Serialized worker events', status: 'written' },
+    { file: 'profiles/atlas-07.png', source: 'worker-1', purpose: 'Verified browser state', status: 'written' },
+    { file: 'profiles/cinder-12.error.json', source: 'worker-2', purpose: 'Retry context and next action', status: 'written' },
+    { file: 'summary.json', source: 'orchestrator', purpose: 'Totals, retries and elapsed time', status: 'written' },
+  ];
+  return <section id="run-artifacts" className="au-section au-summary-section"><div className="page-shell"><Reveal className="au-heading"><CheckCircle size={34} weight="duotone" aria-hidden="true" /><h2>The run ends with evidence</h2><p>Artifacts make success, retry and failure independently reviewable</p></Reveal><div className="au-summary-layout"><Reveal className="au-artifact-manifest"><header><span>Artifact manifest</span><strong>4 files</strong></header><div className="au-artifact-head"><span>File</span><span>Produced by</span><span>Purpose</span><span>Status</span></div>{outputs.map((item) => <article key={item.file}><code>{item.file}</code><span>{item.source}</span><p>{item.purpose}</p><strong>{item.status}</strong></article>)}</Reveal><Reveal className="au-final-summary" delay={0.08}><header><TerminalWindow size={22} weight="duotone" aria-hidden="true" /><span>FINAL SUMMARY</span></header><dl><div><dt>Total</dt><dd>3</dd></div><div><dt>Success</dt><dd>2</dd></div><div><dt>Failed</dt><dd>0</dd></div><div><dt>Skipped</dt><dd>0</dd></div><div><dt>Retries</dt><dd>1</dd></div><div><dt>Elapsed</dt><dd>00:41</dd></div></dl><p><CheckCircle size={18} weight="fill" aria-hidden="true" />All terminal states recorded and no OS-level input used</p><a href="#contact">Plan an automation <ArrowUpRight size={18} /></a></Reveal></div></div></section>;
 }
 
 function AutomationShowcase({ Reveal }) {
@@ -607,8 +473,8 @@ function AutomationShowcase({ Reveal }) {
 function BlockchainHero({ Reveal }) {
   return <section className="bc-hero">
     <div className="page-shell bc-hero-layout">
-      <Reveal className="bc-hero-copy"><span className="bc-kicker">Blockchain integration</span><h1>Trust made visible</h1><p>Wallet, contract and transaction feedback people can understand</p><ArrowLink to="#wallet-flow">Follow the transaction</ArrowLink></Reveal>
-      <Reveal className="bc-hero-lifecycle" delay={0.08}><figure><img src={blockchainLifecycle} alt="Five physical modules showing transaction intent, signature, pending, confirmation and receipt" /></figure><div className="bc-lifecycle-strip" aria-label="Transaction lifecycle"><span>Intent</span><i /><span>Sign</span><i /><span>Pending</span><i /><span>Confirmed</span><i /><span>Receipt</span></div></Reveal>
+      <Reveal className="bc-hero-copy"><span className="bc-kicker">Blockchain integration</span><h1>From signature to receipt</h1><p>Wallet permissions, contract state, finality and recovery translated into product feedback</p><ArrowLink to="#wallet-flow">Follow the transaction</ArrowLink><dl className="bc-hero-facts"><div><dt>Case</dt><dd>KitePay escrow</dd></div><div><dt>Milestone</dt><dd>02 · 250 USDT</dd></div><div><dt>Network</dt><dd>BNB Testnet</dd></div><div><dt>Contract</dt><dd>0x84C2...11F0</dd></div></dl></Reveal>
+      <Reveal className="bc-hero-product" delay={0.08}><div className="bc-product-shell" aria-label="KitePay milestone escrow product proof"><header><div><span>KITEPAY</span><strong>Milestone escrow</strong></div><b>BNB TESTNET</b></header><div className="bc-product-overview"><article><span>Escrow balance</span><strong>250.00 USDT</strong><small>Contract 0x84C2...11F0</small></article><article><span>Current milestone</span><strong>02 · Product delivery</strong><small>Client review closes in 18h 42m</small></article></div><div className="bc-product-progress"><div className="is-done"><span>01</span><strong>Funded</strong><small>250 USDT locked</small></div><div className="is-done"><span>02</span><strong>Submitted</strong><small>3 files attached</small></div><div className="is-current"><span>03</span><strong>Review</strong><small>24-hour window</small></div><div><span>04</span><strong>Release</strong><small>Waiting for approval</small></div></div><footer><div><span>Latest receipt</span><code>0x9F31...A8E4</code></div><strong><i />REVIEW ACTIVE</strong></footer></div></Reveal>
     </div>
   </section>;
 }
@@ -616,71 +482,83 @@ function BlockchainHero({ Reveal }) {
 const walletStates = {
   connect: {
     label: 'Connection', icon: PlugsConnected, heading: 'Choose the right account',
-    copy: 'Confirm account and network before requesting any permission', button: 'Review request', next: 'review',
-    facts: [['Network', 'BSC Testnet'], ['Account', '0x72A4...91C2'], ['Access', 'View address only']],
+    copy: 'Confirm the account and target network before requesting any permission', button: 'Review connection', next: 'review',
+    facts: [['Network', 'BNB Smart Chain Testnet'], ['Demo account', '0x72A4...91C2'], ['Access', 'Public address only']],
   },
   review: {
     label: 'Permission', icon: Fingerprint, heading: 'Explain the signature scope',
-    copy: 'One signature funds one milestone through the named escrow contract', button: 'Sign request', next: 'pending',
-    facts: [['Action', 'Fund milestone 02'], ['Amount', '250 USDT'], ['Contract', '0x84C2...11F0']],
+    copy: 'Sign one typed-data permit. No transaction or gas is sent yet', button: 'Approve permit', next: 'pending',
+    facts: [['Scope', 'Fund milestone 02'], ['Spend limit', '250 USDT'], ['Verifying contract', '0x84C2...11F0']],
   },
   pending: {
     label: 'Transaction', icon: Cube, heading: 'Pending is not final',
-    copy: 'Keep the intended action visible while confirmations accumulate', button: 'Show confirmation', next: 'confirmed',
-    facts: [['Status', 'Accepted by network'], ['Finality', '2 of 12 confirmations'], ['Hash', '0x9F31...A8E4']],
+    copy: 'The permit is submitted to escrow. Keep the action visible until finality', button: 'Advance finality', next: 'confirmed',
+    facts: [['Status', 'Included in block'], ['Finality', 'Awaiting finality'], ['Transaction', '0x9F31...A8E4']],
   },
   confirmed: {
     label: 'Confirmed', icon: CheckCircle, heading: 'Return a readable receipt',
     copy: 'State what changed and keep the onchain reference available', button: 'Restart demo', next: 'connect',
-    facts: [['Result', 'Milestone 02 funded'], ['Value', '250 USDT in escrow'], ['Receipt', '0x9F31...A8E4']],
+    facts: [['Result', 'Milestone 02 funded'], ['Finality', 'Finality reached'], ['Receipt', '0x9F31...A8E4']],
   },
 };
+
+const walletStateOrder = ['connect', 'review', 'pending', 'confirmed'];
 
 function BlockchainWalletFlow({ Reveal }) {
   const [state, setState] = useState('connect');
   const reduceMotion = useReducedMotion();
   const active = walletStates[state];
   const ActiveIcon = active.icon;
+  const activeIndex = walletStateOrder.indexOf(state);
   return <section id="wallet-flow" className="bc-section bc-wallet-section">
     <div className="page-shell bc-wallet-layout">
-      <Reveal className="bc-wallet-copy"><Wallet size={34} weight="duotone" aria-hidden="true" /><h2>Wallet onboarding without guesswork</h2><p>Connection, permission, pending and confirmation stay distinct from one another</p><div className="bc-wallet-steps" aria-label="Wallet flow steps">{Object.entries(walletStates).map(([key, item]) => <button type="button" key={key} aria-pressed={state === key} onClick={() => setState(key)}>{item.label}</button>)}</div></Reveal>
+      <Reveal className="bc-wallet-copy"><Wallet size={34} weight="duotone" aria-hidden="true" /><h2>Wallet states stay separate</h2><p>Connection, permission, submission and confirmation never collapse into one vague loading state</p><div className="bc-wallet-steps" aria-label="Wallet flow steps">{Object.entries(walletStates).map(([key, item]) => <button type="button" key={key} aria-pressed={state === key} onClick={() => setState(key)}>{item.label}</button>)}</div></Reveal>
       <Reveal className="bc-wallet-demo" delay={0.08}>
-        <div className="bc-wallet-motion"><img src={blockchainGif} alt="Animated blockchain nodes and transaction verification progress" loading="lazy" /></div>
-        <motion.div className={`bc-wallet-card is-${state}`} key={state} initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .4 }} aria-live="polite"><ActiveIcon size={32} weight="duotone" /><span>{active.label}</span><strong>{active.heading}</strong><p>{active.copy}</p><dl className="bc-state-facts">{active.facts.map(([term, value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl><button type="button" onClick={() => setState(active.next)}>{active.button}</button></motion.div>
+        <header className="bc-wallet-context"><div><span>Escrow action</span><strong>Fund milestone 02</strong></div><dl><div><dt>Account</dt><dd>0x72A4...91C2</dd></div><div><dt>Target</dt><dd>BNB Testnet</dd></div><div><dt>Amount</dt><dd>250 USDT</dd></div></dl></header>
+        <div className="bc-wallet-progress" aria-label="Transaction progress">{walletStateOrder.map((key, index) => <div className={index < activeIndex ? 'is-done' : index === activeIndex ? 'is-current' : ''} key={key}><span>{String(index + 1).padStart(2, '0')}</span><strong>{walletStates[key].label}</strong><i /></div>)}</div>
+        <motion.div className={`bc-wallet-card is-${state}`} key={state} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .3 }} aria-live="polite"><ActiveIcon size={32} weight="duotone" /><span>{active.label}</span><strong>{active.heading}</strong><p>{active.copy}</p><dl className="bc-state-facts">{active.facts.map(([term, value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl><button type="button" onClick={() => setState(active.next)}>{active.button}</button></motion.div>
       </Reveal>
     </div>
   </section>;
 }
 
 function BlockchainEscrow({ Reveal }) {
-  return <section className="bc-section bc-escrow-section"><div className="page-shell"><Reveal className="bc-heading"><h2>Escrow state both sides can read</h2><p>KitePay keeps scope, funding, approval and release explicit throughout a milestone</p></Reveal><div className="bc-escrow-grid"><Reveal className="bc-escrow-cover"><img src={kitepayCover} alt="KitePay milestone escrow product concept" loading="lazy" /><a href="/work/kitepay">View KitePay case study <ArrowUpRight size={17} /></a></Reveal><Reveal className="bc-escrow-flow" delay={0.08}><img src={kitepayStateFlow} alt="KitePay escrow flow from agreement and funding to approval and release" loading="lazy" /></Reveal></div></div></section>;
+  return <section id="escrow-state" className="bc-section bc-escrow-section"><div className="page-shell"><Reveal className="bc-heading"><h2>Escrow state both sides can read</h2><p>KitePay keeps funding, delivery, review and release explicit throughout one milestone</p></Reveal><div className="bc-escrow-grid"><Reveal className="bc-escrow-flow"><img src={kitepayStateFlow} alt="KitePay milestone 02 moving through funded, submitted, review and released contract states" loading="lazy" /></Reveal><Reveal className="bc-escrow-evidence" delay={0.08}><span>Milestone 02</span><h3>250 USDT under explicit rules</h3><dl><div><dt>Funded</dt><dd>Client deposits to escrow contract</dd></div><div><dt>Submitted</dt><dd>Freelancer attaches delivery proof</dd></div><div><dt>Review</dt><dd>24-hour client review window</dd></div><div><dt>Released</dt><dd>Receipt and updated balance returned</dd></div></dl><div className="bc-escrow-boundary"><WarningCircle size={18} weight="fill" aria-hidden="true" /><p><strong>Prototype boundary</strong>Production requires contract audit, live network testing and dispute-policy validation</p></div><a href="/work/kitepay">View KitePay case study <ArrowUpRight size={17} /></a></Reveal></div></div></section>;
 }
 
 const eventMappings = [
-  { event: 'Wallet connected', feedback: 'Show account and network', icon: PlugsConnected },
-  { event: 'Signature requested', feedback: 'Explain permission and scope', icon: Fingerprint },
-  { event: 'Transaction submitted', feedback: 'Preserve pending progress', icon: Cube },
-  { event: 'Contract confirmed', feedback: 'Return receipt and new state', icon: Receipt },
+  { event: 'wallet_chainChanged', parsed: 'chainId 0x61', state: 'networkMismatch = false', message: 'BNB Testnet selected', recovery: 'Enable transaction review' },
+  { event: 'Permit signed', parsed: 'owner + spender + 250 USDT', state: 'permission = approved', message: 'Permit approved, no gas sent yet', recovery: 'Allow transaction submission' },
+  { event: 'MilestoneFunded', parsed: 'id 02 + amount 250 USDT', state: 'tx = pendingFinality', message: 'Funding included, awaiting finality', recovery: 'Keep receipt action disabled' },
+  { event: 'Finality reached', parsed: 'receipt 0x9F31...A8E4', state: 'milestone = funded', message: 'Milestone 02 funded', recovery: 'Expose receipt and new balance' },
 ];
 
 function BlockchainMapping({ Reveal }) {
-  return <section className="bc-section bc-mapping-section"><div className="page-shell"><Reveal className="bc-heading"><LinkSimple size={32} weight="duotone" aria-hidden="true" /><h2>Contract events become human feedback</h2><p>Technical state matters only when the interface turns it into a clear next step</p></Reveal><div className="bc-mapping-grid">{eventMappings.map((item, index) => { const Icon = item.icon; return <Reveal className="bc-mapping-card" key={item.event} delay={index * .05}><div className="bc-event-visual" aria-hidden="true"><span /><i /><span /></div><Icon size={23} weight="duotone" aria-hidden="true" /><h3>{item.event}</h3><p>{item.feedback}</p></Reveal>; })}</div></div></section>;
+  return <section id="event-mapping" className="bc-section bc-mapping-section"><div className="page-shell"><Reveal className="bc-heading"><LinkSimple size={32} weight="duotone" aria-hidden="true" /><h2>Events become product feedback</h2><p>Each protocol event maps to parsed data, UI state, user language and a recovery rule</p></Reveal><Reveal className="bc-event-table"><header><span>Event</span><span>Parsed data</span><span>UI state</span><span>User message</span><span>Recovery action</span></header>{eventMappings.map((item) => <article key={item.event}><code>{item.event}</code><span>{item.parsed}</span><strong>{item.state}</strong><p>{item.message}</p><b>{item.recovery}</b></article>)}</Reveal></div></section>;
 }
 
 const trustStates = [
-  { title: 'Wrong network', copy: 'Connected to BSC Mainnet. This action expects BSC Testnet', action: 'Switch network', icon: WifiSlash, className: 'is-warning' },
-  { title: 'Request rejected', copy: 'No signature was sent. Keep the funded amount unchanged', action: 'Review request', icon: XCircle, className: 'is-error' },
-  { title: 'Transaction failed', copy: 'The contract reverted before state changed. Surface the decoded reason', action: 'Review reason', icon: WarningCircle, className: 'is-error' },
-  { title: 'Transaction confirmed', copy: 'Milestone 02 now holds 250 USDT with a verifiable receipt', action: 'Open receipt', icon: CheckCircle, className: 'is-success' },
+  { title: 'Wrong network', copy: 'Connected to BNB Smart Chain Mainnet. This demo expects its testnet', action: 'Prepare switch', resultLabel: 'Target selected', result: 'BNB Smart Chain Testnet. Continue after the wallet confirms the switch', icon: WifiSlash, className: 'is-warning' },
+  { title: 'Request rejected', copy: 'No signature was created and no transaction was submitted', action: 'Review request', resultLabel: 'No state change', result: 'The permission details remain available to review before trying again', icon: XCircle, className: 'is-error' },
+  { title: 'Transaction failed', copy: 'The contract reverted before escrow state changed', action: 'Decode reason', resultLabel: 'Decoded revert', result: 'Milestone 02 is already funded. Change the milestone or stop the flow', icon: WarningCircle, className: 'is-error' },
+  { title: 'Transaction confirmed', copy: 'Milestone 02 now holds 250 USDT with a verifiable receipt', action: 'Inspect receipt', resultLabel: 'Receipt verified', result: 'Finality reached. The receipt and updated escrow balance are available', icon: CheckCircle, className: 'is-success' },
 ];
 
 function BlockchainTrustStates({ Reveal }) {
-  return <section className="bc-section bc-trust-section"><div className="page-shell"><Reveal className="bc-heading"><LockKey size={32} weight="duotone" aria-hidden="true" /><h2>Trust includes the difficult states</h2><p>Rejection, network mismatch and failure deserve the same care as success</p></Reveal><div className="bc-trust-grid">{trustStates.map((item, index) => { const Icon = item.icon; return <Reveal className={`bc-trust-card ${item.className}`} key={item.title} delay={index * .05}><div className="bc-trust-icon"><Icon size={34} weight="duotone" /></div><h3>{item.title}</h3><p>{item.copy}</p><span>{item.action}</span></Reveal>; })}</div></div></section>;
+  const [expandedState, setExpandedState] = useState(null);
+  const reduceMotion = useReducedMotion();
+  return <section id="trust-states" className="bc-section bc-trust-section"><div className="page-shell"><Reveal className="bc-heading"><LockKey size={32} weight="duotone" aria-hidden="true" /><h2>Trust includes the difficult states</h2><p>Rejection, network mismatch and failure deserve the same care as success</p></Reveal><div className="bc-trust-grid">{trustStates.map((item, index) => { const Icon = item.icon; const isExpanded = expandedState === item.title; return <Reveal className={`bc-trust-card ${item.className}`} key={item.title} delay={index * .05}><div className="bc-trust-icon"><Icon size={34} weight="duotone" aria-hidden="true" /></div><h3>{item.title}</h3><p>{item.copy}</p><button type="button" aria-expanded={isExpanded} onClick={() => setExpandedState(isExpanded ? null : item.title)}>{isExpanded ? 'Close detail' : item.action}<CaretDown size={16} aria-hidden="true" /></button>{isExpanded && <motion.div className="bc-trust-response" initial={reduceMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .25 }} aria-live="polite"><strong>{item.resultLabel}</strong><span>{item.result}</span></motion.div>}</Reveal>; })}</div></div></section>;
 }
 
 function BlockchainTools({ Reveal }) {
-  const tools = ['Ethereum', 'Solana', 'Solidity', 'WalletConnect', 'viem', 'ethers'];
-  return <section className="bc-section bc-tools-section"><div className="page-shell bc-tools-layout"><Reveal className="bc-tools-image"><img src={blockchainCover} alt="Physical network model with one highlighted transaction node" loading="lazy" /></Reveal><Reveal className="bc-tools-copy" delay={0.08}><ArrowsLeftRight size={34} weight="duotone" aria-hidden="true" /><h2>Integration from contract to interface</h2><p>Network tooling, readable state and frontend delivery stay part of one product system</p><div className="bc-tool-list" aria-label="Blockchain integration tools">{tools.map((tool) => <span key={tool}>{tool}</span>)}</div><div className="bc-delivery-checks"><span><CheckCircle size={17} weight="fill" />Network-aware onboarding</span><span><CheckCircle size={17} weight="fill" />Transaction lifecycle</span><span><CheckCircle size={17} weight="fill" />Readable receipts</span></div><a href="#contact">Plan an integration <ArrowUpRight size={18} /></a></Reveal></div></section>;
+  const layers = [
+    { index: '01', name: 'Wallet adapter', implementation: 'WalletConnect + injected provider', boundary: 'Account and network only' },
+    { index: '02', name: 'Typed client', implementation: 'viem reads, simulation and write request', boundary: 'No write before simulation' },
+    { index: '03', name: 'Escrow contract', implementation: 'Solidity milestone state machine', boundary: 'Fund, submit, approve, release' },
+    { index: '04', name: 'Event parser', implementation: 'Decoded logs + receipt status', boundary: 'Typed data into UI state' },
+    { index: '05', name: 'Product feedback', implementation: 'React states + recovery actions', boundary: 'Plain language and next step' },
+  ];
+  return <section id="integration-architecture" className="bc-section bc-tools-section"><div className="page-shell"><Reveal className="bc-heading"><ArrowsLeftRight size={34} weight="duotone" aria-hidden="true" /><h2>Integration has explicit boundaries</h2><p>Wallet, client, contract, events and interface form one inspectable path</p></Reveal><div className="bc-architecture-layout"><Reveal className="bc-architecture-flow">{layers.map((layer, index) => <React.Fragment key={layer.name}><article><span>{layer.index}</span><div><strong>{layer.name}</strong><p>{layer.implementation}</p><small>{layer.boundary}</small></div></article>{index < layers.length - 1 && <i aria-hidden="true" />}</React.Fragment>)}</Reveal><Reveal className="bc-architecture-proof" delay={0.08}><header><span>Implementation boundary</span><strong>EVM escrow demo</strong></header><dl><div><dt>Read path</dt><dd>Account, network, allowance, milestone and receipt</dd></div><div><dt>Write path</dt><dd>Simulate, request signature, submit, confirm</dd></div><div><dt>Error path</dt><dd>Reject, wrong network, revert and finality delay</dd></div><div><dt>Before production</dt><dd>Audit, RPC resilience, monitoring and dispute policy</dd></div></dl><a href="#contact">Plan an integration <ArrowUpRight size={18} /></a></Reveal></div></div></section>;
 }
 
 function BlockchainShowcase({ Reveal }) {

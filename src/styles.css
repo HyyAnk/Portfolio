@@ -32,7 +32,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--paper); }
-body { min-width: 320px; margin: 0; background: var(--paper); color: var(--ink); transition: background .35s ease, color .35s ease; }
+body { min-width: 280px; margin: 0; background: var(--paper); color: var(--ink); transition: background .35s ease, color .35s ease; }
 body, button, input, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 a { color: inherit; text-decoration: none; }
@@ -217,7 +217,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .hero-mobile-card { width: 320px; flex: none; overflow: hidden; margin: 0; border-radius: var(--radius-card); }
 .hero-mobile-card img { width: 100%; height: auto; aspect-ratio: 1200 / 780; object-fit: cover; }
 
-#selected-works, #about, #skills, #experiments, #contact, #capabilities, #skill-work { scroll-margin-top: 100px; }
+#selected-works, #about, #skills, #experiments, #contact, #capabilities, #skill-work, #identity-system, #edit-rhythm, #product-thinking, #workflow-anatomy { scroll-margin-top: 100px; }
 .works-section { position: relative; isolation: isolate; overflow: hidden; padding-top: 116px; background: var(--paper-elevated); transition: background .35s ease; }
 .works-section::before, .about-section::before, .skill-blocks::before, .contact-section::before { position: absolute; inset: 0; z-index: 0; content: ''; pointer-events: none; background-repeat: repeat; opacity: .74; transition: opacity .35s ease, filter .35s ease; }
 .works-section::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='620' height='420' viewBox='0 0 620 420'%3E%3Cpath d='M-30 315C95 235 173 268 270 211S460 68 650 116' fill='none' stroke='%23111211' stroke-opacity='.07' stroke-width='1'/%3E%3Cpath d='M-20 365C96 288 182 320 284 263S476 120 650 167' fill='none' stroke='%23111211' stroke-opacity='.045' stroke-width='1'/%3E%3Ccircle cx='510' cy='88' r='4' fill='%23c9573e' fill-opacity='.16'/%3E%3C/svg%3E"); background-size: 620px 420px; }
