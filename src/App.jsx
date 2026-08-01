@@ -473,13 +473,11 @@ function useTheme() {
 }
 
 function Nav() {
-  const [brandOpen, setBrandOpen] = useState(false);
   const [skillsOpen, setSkillsOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useTheme();
   const location = useLocation();
-  const isHome = location.pathname === '/';
   const navRef = useRef(null);
   useEffect(() => {
     const sentinel = document.querySelector('[data-nav-sentinel]');
@@ -491,28 +489,16 @@ function Nav() {
   useEffect(() => {
     const close = (event) => {
       if (event.key === 'Escape' || (event.type === 'pointerdown' && !navRef.current?.contains(event.target))) {
-        setBrandOpen(false); setSkillsOpen(false); setContactOpen(false);
+        setSkillsOpen(false); setContactOpen(false);
       }
     };
     document.addEventListener('keydown', close);
     document.addEventListener('pointerdown', close);
     return () => { document.removeEventListener('keydown', close); document.removeEventListener('pointerdown', close); };
   }, []);
-  useEffect(() => setBrandOpen(false), [location.pathname]);
   return <header className={`site-nav ${scrolled ? 'is-scrolled' : ''}`} ref={navRef}>
     <div className="nav-inner">
-      <div
-        className={`wordmark-menu-wrap ${isHome ? 'has-brand-preview' : 'is-home-link'}`}
-        {...(isHome ? {
-          onPointerEnter: () => setBrandOpen(true),
-          onPointerLeave: () => setBrandOpen(false),
-          onFocusCapture: () => setBrandOpen(true),
-          onBlur: (event) => { if (!event.currentTarget.contains(event.relatedTarget)) setBrandOpen(false); },
-        } : {})}
-      >
-        <Link className="wordmark" to="/" aria-label={isHome ? person : 'Back to home'} aria-expanded={isHome ? brandOpen : undefined} aria-haspopup={isHome ? 'dialog' : undefined} onClick={() => { setBrandOpen(false); setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-mark" aria-hidden="true"><img className="brand-logo-light" src="/deer-logo.svg" alt="" /><img className="brand-logo-dark" src="/deer-logo-white.svg" alt="" /></span><span>{person}</span></Link>
-        {isHome && <BrandDropdown />}
-      </div>
+      <Link className="wordmark" to="/" aria-label={`${person} | ${fullName}, back to home`} onClick={() => { setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-mark" aria-hidden="true"><img className="brand-logo-light" src="/deer-logo.svg" alt="" /><img className="brand-logo-dark" src="/deer-logo-white.svg" alt="" /></span><span className="wordmark-copy"><strong className="wordmark-alias">{person}</strong><span className="wordmark-divider" aria-hidden="true">|</span><span className="wordmark-fullname">{fullName}</span></span></Link>
       <div className="nav-actions">
         <a className="nav-link nav-link-simple" href="/#selected-works">Work</a>
         <a className="nav-link nav-link-simple" href="/#about">About</a>
@@ -532,24 +518,6 @@ function Nav() {
       </div>
     </div>
   </header>;
-}
-
-function BrandDropdown() {
-  return <div className="dropdown brand-dropdown" role="dialog" aria-label="About HyyAnk">
-    <div className="brand-logo-panel" aria-hidden="true">
-      <span className="brand-logo-orbit brand-logo-orbit-one" />
-      <span className="brand-logo-orbit brand-logo-orbit-two" />
-      <img className="brand-logo-light brand-dropdown-logo" src="/deer-logo.svg" alt="" />
-      <img className="brand-logo-dark brand-dropdown-logo" src="/deer-logo-white.svg" alt="" />
-    </div>
-    <div className="brand-intro">
-      <span className="brand-intro-kicker">HyyAnk</span>
-      <div className="brand-typing" aria-label={`My name is ${fullName}`}>
-        <span className="brand-typing-line brand-typing-greeting">My name is</span>
-        <strong className="brand-typing-line brand-typing-name">{fullName}</strong>
-      </div>
-    </div>
-  </div>;
 }
 
 function ContactDropdown() {
