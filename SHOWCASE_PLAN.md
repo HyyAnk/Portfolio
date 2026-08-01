@@ -146,3 +146,30 @@ Block confirmations, receipt expansion, chain handoff and state transitions. Mot
 - Light and dark themes retain contrast and personality
 - Every section includes image, animation or interaction
 - Motion is disabled or simplified when reduced motion is requested
+
+## Review record
+
+### Graphic Design
+
+- Pass 1: verified identity logic, type hierarchy, print applications and production credibility
+- Pass 2: shortened the hero to two lines, checked specimen controls, image crops, mobile order, dark mode and punctuation
+
+### Video Editor
+
+- Pass 1: verified edit grammar, sequence rhythm, continuity, grading logic, sound layers and delivery formats
+- Pass 2: shortened the hero to two lines, checked the timeline, grading control, waveform, responsive layouts and reduced motion
+
+### UI/UX and Web Dev
+
+- Pass 1: verified product flow, interaction states, responsive behavior and implementation proof
+- Pass 2: shortened the hero to two lines, corrected the mobile crop, tested the interaction sandbox, dark mode and overflow
+
+### Automation
+
+- Pass 1: verified workflow anatomy, observability, concurrent profile context, retries and browser protocol safety
+- Pass 2: shortened the hero to two lines, made the operations table independently scrollable, tested recovery states and mobile readability
+
+### Blockchain Integration
+
+- Pass 1: added explicit account and network context, signature scope, contract and amount, finality progress, readable receipts and specific recovery actions
+- Pass 2: shortened the hero to two lines, tested all four wallet states, inspected every section at desktop and 390px, checked light and dark themes, alt text, punctuation and overflow
