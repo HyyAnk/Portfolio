@@ -264,10 +264,10 @@ function DecisionVisual({ type }) {
 function UiProductCase({ Reveal }) {
   return <section id="product-thinking" className="ui-section ui-product-section">
     <div className="page-shell">
-      <Reveal className="ui-heading"><h2>A recommendation must explain itself</h2><p>MÁT compares the faster route with the cooler route before asking for commitment</p></Reveal>
+      <Reveal className="ui-heading"><h2>The recommendation shows its work</h2><p>MÁT keeps the faster and cooler routes comparable before asking for commitment</p></Reveal>
       <Reveal className="ui-product-visual" delay={0.06}>
         <div className="ui-product-map"><MatRouteComparisonMap fit="slice" label="MÁT street network comparing the faster and cooler routes from Riverside Market to Hill Garden" /><span className="ui-route-legend"><b><i /> Cooler</b><b><i /> Faster</b></span><span className="ui-map-place ui-map-place-start">Riverside Market</span><span className="ui-map-place ui-map-place-end">Hill Garden</span></div>
-        <aside className="ui-product-analysis"><span>Route comparison · 12:40 PM</span><strong>12 minutes buys 42% more shade</strong><p>The recommendation keeps the environmental cost attached to both options</p><dl><div><dt>Fastest</dt><dd>20 min · 29% shade</dd></div><div className="is-recommended"><dt>MÁT recommends</dt><dd>32 min · 71% shade</dd></div></dl><a href="/work/mat">View MÁT case study <ArrowUpRight size={17} /></a></aside>
+        <aside className="ui-product-analysis"><span>Midday comparison <time dateTime="12:40">12:40 PM</time></span><h3>A cooler trade-off</h3><div className="ui-route-deltas" role="group" aria-label="Difference from the fastest route to the coolest route"><div><span>Extra time</span><strong>+12</strong><small>min</small></div><div><span>Shade gained</span><strong>+42</strong><small>pts</small></div></div><p>Canopy Way raises estimated shade coverage from 29% to 71%</p><dl><div><dt>Fastest</dt><dd><strong>20 min</strong><span>29% shade</span></dd></div><div className="is-recommended"><dt>MÁT recommends</dt><dd><strong>32 min</strong><span>71% shade</span></dd></div></dl><a href="/work/mat">View MÁT case study <ArrowUpRight size={17} /></a></aside>
       </Reveal>
       <div className="ui-decision-grid">
         {productDecisions.map((item, index) => <Reveal className="ui-decision-card" key={item.title} delay={index * 0.05}>

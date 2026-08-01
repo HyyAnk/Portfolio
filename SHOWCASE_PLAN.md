@@ -306,3 +306,11 @@ Block confirmations, receipt expansion, chain handoff and state transitions. Mot
 - Round 1, viewer and product specialist: rejected the standalone route animation, CSS road shapes and simplified interactive map because they did not match the MÁT case. Replaced all three with the exact street geometry, buildings, river, park, canopy, heat corridor, junctions, refill points, road labels and route data used by MÁT. The comparison was then corrected to show both the faster and cooler routes on the same network
 - Round 2, visual designer: compared the skill page directly with the live MÁT prototype, aligned route colors, line weights, map crop, endpoint treatment and evidence hierarchy, then removed the compressed desktop preview from the 390 px layout so the mobile product remains readable and honest
 - Round 3, developer: extracted MÁT routes and cartographic rendering into one shared component source used by both the case study and skill page, removed duplicate map code and obsolete selectors, tested route switching and confirmation through browser protocol, and verified mobile and desktop overflow, semantic labels, heading punctuation, route integrity and production build
+
+## MÁT typography correction review
+
+### UI/UX and Web Dev
+
+- Round 1, viewer: measured the route panel at 280 px wide with a 41.6 px headline forced into five lines. Replaced the sentence headline with a two-line title, two labelled route deltas and a concrete route explanation
+- Round 2, visual designer: widened the analysis column, balanced the title, metrics, explanation, route rows and action, increased small-text size and contrast, and verified the same hierarchy at desktop and 390 px without horizontal overflow
+- Round 3, developer: changed the route delta into a labelled semantic group, reduced the section heading from four lines to two on desktop, verified title punctuation, console output, responsive measures and delta overflow, then completed the production build
