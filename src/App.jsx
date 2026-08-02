@@ -8,7 +8,7 @@ import {
 import {
   siBlender, siCss, siEthereum, siFigma, siGithubactions, siHtml5,
   siJavascript, siOkx, siPython, siReact, siSelenium, siSolana,
-  siSolidity, siUnrealengine, siVite, siWalletconnect,
+  siSolidity, siUnrealengine, siWalletconnect,
 } from 'simple-icons';
 
 import uiImage from './assets/generated/work-ui.webp';
@@ -234,6 +234,16 @@ const capCutIcon = {
   path: 'M24.189 6.442V2.671l-4.535 2.383V4.91c.002-1.505-1.078-2.411-2.638-2.411H2.64C.993 2.5 0 3.407 0 4.91V8.72L6.354 12 0 15.316v3.8C0 20.595 1 21.5 2.64 21.5h14.373c1.56 0 2.639-.907 2.639-2.382v-.197l4.536 2.409v-3.828L13.64 12 24.19 6.443zM9.982 13.873l7.797 4.083H2.157l7.825-4.083zm7.741-7.828l-7.742 4.057-7.825-4.057h15.567z',
 };
 
+function FigmaToolLogo() {
+  return <svg className="skill-tool-figma-logo" viewBox="0 0 38 57" focusable="false">
+    <path fill="#F24E1E" d="M19 0h9.5a9.5 9.5 0 1 1 0 19H19V0Z" />
+    <path fill="#A259FF" d="M0 28.5A9.5 9.5 0 0 1 9.5 19H19v19H9.5A9.5 9.5 0 0 1 0 28.5Z" />
+    <path fill="#1ABCFE" d="M19 28.5a9.5 9.5 0 1 1 9.5 9.5H19v-9.5Z" />
+    <path fill="#0ACF83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0Z" />
+    <path fill="#FF7262" d="M0 9.5A9.5 9.5 0 0 1 9.5 0H19v19H9.5A9.5 9.5 0 0 1 0 9.5Z" />
+  </svg>;
+}
+
 const skillToolsets = {
   'graphic-design': {
     motion: 'graphic',
@@ -249,22 +259,22 @@ const skillToolsets = {
     motion: 'video',
     label: 'After Effects, Premiere Pro, CapCut, Blender and Unreal Engine',
     tools: [
-      { name: 'Adobe After Effects', label: 'After Effects', mark: 'Ae', color: '#9999FF' },
-      { name: 'Adobe Premiere Pro', label: 'Premiere Pro', mark: 'Pr', color: '#9999FF' },
+      { name: 'Adobe After Effects', label: 'After Effects', mark: 'Ae', color: '#9999FF', markSize: '0.9rem' },
+      { name: 'Adobe Premiere Pro', label: 'Premiere Pro', mark: 'Pr', color: '#9999FF', markSize: '0.9rem' },
       { name: 'CapCut', icon: capCutIcon, mono: true },
-      { name: 'Blender', icon: siBlender, color: '#F5792A' },
-      { name: 'Unreal Engine', icon: siUnrealengine, mono: true },
+      { name: 'Blender', icon: siBlender, color: `#${siBlender.hex}` },
+      { name: 'Unreal Engine', icon: siUnrealengine, mono: true, iconSize: 25, mobileIconSize: 23 },
     ],
   },
   'uiux-webdev': {
     motion: 'ui',
-    label: 'Vite, React, JavaScript, HTML and CSS',
+    label: 'Figma, React, JavaScript, HTML and CSS',
     tools: [
-      { name: 'Vite', icon: siVite, color: '#9135FF' },
-      { name: 'React', icon: siReact, color: '#61DAFB' },
-      { name: 'JavaScript', icon: siJavascript, color: '#F7DF1E' },
-      { name: 'HTML5', icon: siHtml5, color: '#E34F26' },
-      { name: 'CSS', icon: siCss, color: '#663399' },
+      { name: 'Figma', brandIcon: 'figma', color: `#${siFigma.hex}`, iconSize: 23, mobileIconSize: 21 },
+      { name: 'React', icon: siReact, color: `#${siReact.hex}` },
+      { name: 'JavaScript', icon: siJavascript, color: `#${siJavascript.hex}` },
+      { name: 'HTML5', icon: siHtml5, color: `#${siHtml5.hex}` },
+      { name: 'CSS', icon: siCss, color: `#${siCss.hex}` },
     ],
   },
   automation: {
@@ -301,10 +311,15 @@ function SkillToolIcon({ tool, index }) {
     '--tool-chars': label.length,
     '--tool-expanded-width': `${expandedWidth}px`,
     '--tool-text-width': `${label.length + .5}ch`,
+    ...(tool.iconSize ? { '--tool-icon-size': `${tool.iconSize}px` } : {}),
+    ...(tool.mobileIconSize ? { '--tool-icon-size-mobile': `${tool.mobileIconSize}px` } : {}),
+    ...(tool.markSize ? { '--tool-mark-size': tool.markSize } : {}),
   }}>
     <span className={`skill-tool-icon ${tool.mono ? 'is-monochrome' : ''}`}>
       <span className="skill-tool-symbol" aria-hidden="true">
-        {tool.icon
+        {tool.brandIcon === 'figma'
+          ? <FigmaToolLogo />
+          : tool.icon
           ? <svg viewBox="0 0 24 24" focusable="false"><path d={tool.icon.path} /></svg>
           : <span className="skill-tool-mark">{tool.mark}</span>}
       </span>
@@ -390,13 +405,13 @@ const customCarouselByIndex = Object.entries(carouselFolderAssets).reduce((resul
   return result;
 }, {});
 const customCarouselAlts = [
-  'Animated kinetic HyyAnk identity using masked typography and colour wipes',
-  'Animated browser interaction with hover, settings and theme controls',
-  'Animated terminal installing the HyyAnk design package',
-  'Animated deployment pipeline progressing from source to live',
-  'Animated wallet connection and blockchain transaction confirmation',
-  'Animated cinematic editing timeline with colour grading controls',
-  'Animated website switching between Vietnamese, English, Chinese and Korean',
+  'Ivory and cobalt furniture studio website hero featuring a sculptural lounge chair',
+  'Slate and amber B2B operations website hero showing a live supply chain handoff map',
+  'Midnight indigo blockchain infrastructure website hero with transparent settlement blocks and transaction flow',
+  'Pearl and plum skincare website hero centered on a sculptural serum bottle and calm clinical copy',
+  'Ultramarine and coral culture festival website hero with kinetic type and a rotating stage signal',
+  'Sand, sage and terracotta hospitality website hero with a modern retreat opening onto layered hills',
+  'Sky blue multilingual product website hero switching a booking interface between Vietnamese, English, Chinese and Korean',
 ];
 const configuredCarouselImages = Array.from({ length: 7 }, (_, index) => ({
   ...(heroCarouselImages[index]),
