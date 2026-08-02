@@ -405,13 +405,13 @@ const customCarouselByIndex = Object.entries(carouselFolderAssets).reduce((resul
   return result;
 }, {});
 const customCarouselAlts = [
-  'Ivory and cobalt furniture studio website hero featuring a sculptural lounge chair',
-  'Slate and amber B2B operations website hero showing a live supply chain handoff map',
-  'Midnight indigo blockchain infrastructure website hero with transparent settlement blocks and transaction flow',
-  'Pearl and plum skincare website hero centered on a sculptural serum bottle and calm clinical copy',
-  'Ultramarine and coral culture festival website hero with kinetic type and a rotating stage signal',
-  'Sand, sage and terracotta hospitality website hero with a modern retreat opening onto layered hills',
-  'Sky blue multilingual product website hero switching a booking interface between Vietnamese, English, Chinese and Korean',
+  'Complete furniture ecommerce homepage with a lounge chair gallery, finish selector, price, specifications and product navigation',
+  'Complete B2B logistics homepage with port photography, live route control, exception status and operational proof',
+  'Complete blockchain settlement protocol homepage with wallet connection, network state, glass ledger visual and transaction receipt',
+  'Complete skincare product page with a serum gallery, purchase options, ingredients and clinical proof',
+  'Complete electronic music festival homepage with ticket actions, preview player, stage schedule and pass availability',
+  'Complete boutique hospitality booking homepage with retreat details, dates, guests, nightly price and availability',
+  'Complete multilingual localization SaaS homepage with Vietnamese, English, Chinese and Korean controls, live preview and publishing status',
 ];
 const configuredCarouselImages = Array.from({ length: 7 }, (_, index) => ({
   ...(heroCarouselImages[index]),
