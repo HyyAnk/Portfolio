@@ -1257,7 +1257,7 @@ function Contact() {
 }
 
 function Footer() {
-  return <footer className="site-footer"><div className="page-shell footer-inner"><span>{person} - {fullName}</span><span>Designing with care.</span><a href="#top" onClick={(event) => { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Back to top <ArrowUpRight size={15} /></a></div></footer>;
+  return <footer className="site-footer"><div className="page-shell footer-inner"><span>{person} - {fullName}</span><a href="#top" onClick={(event) => { event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Back to top <ArrowUpRight size={15} /></a></div></footer>;
 }
 
 function RouteLoading({ label = 'Loading page' }) {

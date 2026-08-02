@@ -862,7 +862,6 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .contact-channel { min-height: 94px; padding: 13px; }
   .contact-channel-primary { min-height: 106px; }
   .footer-inner { min-height: 102px; flex-wrap: wrap; padding: 20px 0; }
-  .footer-inner span:nth-child(2) { order: 3; width: 100%; }
   .not-found { align-items: start; padding-top: 146px; }
   .not-found-grid { grid-template-columns: 1fr; gap: 52px; }
   .not-found h1 { font-size: clamp(4.7rem, 24vw, 7rem); }
