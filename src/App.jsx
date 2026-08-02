@@ -227,6 +227,9 @@ const skills = [
   { slug: 'blockchain', title: 'Blockchain Integration', short: 'Trust made tangible', body: 'I help teams use decentralised technology where it creates real ownership, not extra noise', image: blockchainImage, variant: 'blockchain', tools: ['Wallets', 'Onchain UX', 'Contracts'], details: ['Wallet and onboarding UX', 'Smart contract integration', 'Onchain transaction states', 'Trust and ownership design'] },
 ];
 
+const primarySkills = ['uiux-webdev', 'video-editor'].map((slug) => skills.find((skill) => skill.slug === slug));
+const supportingSkills = ['graphic-design', 'automation', 'blockchain'].map((slug) => skills.find((skill) => skill.slug === slug));
+
 const capCutIcon = {
   path: 'M24.189 6.442V2.671l-4.535 2.383V4.91c.002-1.505-1.078-2.411-2.638-2.411H2.64C.993 2.5 0 3.407 0 4.91V8.72L6.354 12 0 15.316v3.8C0 20.595 1 21.5 2.64 21.5h14.373c1.56 0 2.639-.907 2.639-2.382v-.197l4.536 2.409v-3.828L13.64 12 24.19 6.443zM9.982 13.873l7.797 4.083H2.157l7.825-4.083zm7.741-7.828l-7.742 4.057-7.825-4.057h15.567z',
 };
@@ -1228,7 +1231,36 @@ function ThreeSkillFlow() {
 }
 
 function SkillBlocks() {
-  return <section id="skills" className="section-pad skill-blocks"><div className="page-shell"><div className="skill-flow-layout"><Reveal className="skill-flow-copy"><div className="section-heading section-heading-stacked"><span className="skill-flow-eyebrow">The way I work</span><h2><span>Design</span><span>Develop</span><span>Deliver</span></h2><p>One connected flow from a sharp idea to a useful, finished experience.</p></div></Reveal><Reveal className="skill-flow-visual" delay={.08}><ThreeSkillFlow /></Reveal></div><div className="skills-index">{skills.map((skill, index) => <Reveal key={skill.slug} delay={index * .05}><Link className="skill-index-row" to={`/skills/${skill.slug}`}><span className="skill-index-title">{skill.title}</span><SkillToolMotion skill={skill} /><ArrowUpRight className="skill-index-arrow" size={20} /></Link></Reveal>)}</div></div></section>;
+  return <section id="skills" className="section-pad skill-blocks"><div className="page-shell">
+    <div className="skill-flow-layout"><Reveal className="skill-flow-copy"><div className="section-heading section-heading-stacked"><span className="skill-flow-eyebrow">The way I work</span><h2><span>Design</span><span>Develop</span><span>Deliver</span></h2><p>One connected flow from a sharp idea to a useful, finished experience.</p></div></Reveal><Reveal className="skill-flow-visual" delay={.08}><ThreeSkillFlow /></Reveal></div>
+
+    <div className="skills-directory">
+      <section className="skills-primary" aria-labelledby="primary-skills-title">
+        <Reveal><header className="skills-group-heading"><h3 id="primary-skills-title">Core practices</h3><p>Interface design, web development and moving-image craft are where I lead the work.</p></header></Reveal>
+        <div className="skills-primary-grid">{primarySkills.map((skill, index) => <Reveal key={skill.slug} delay={index * .07}>
+          <Link className={`skill-primary-card skill-primary-card-${skill.variant}`} to={`/skills/${skill.slug}`}>
+            <figure className="skill-primary-media"><img src={skill.image} alt={`${skill.title} practice visual`} loading="lazy" decoding="async" /></figure>
+            <div className="skill-primary-content">
+              <div><h4>{withoutTrailingPeriod(skill.title)}</h4><p>{skill.short}</p></div>
+              <SkillToolMotion skill={skill} />
+              <span className="skill-primary-cta">Explore practice <ArrowUpRight size={18} /></span>
+            </div>
+          </Link>
+        </Reveal>)}</div>
+      </section>
+
+      <section className="skills-supporting" aria-labelledby="supporting-skills-title">
+        <Reveal><header className="skills-group-heading skills-group-heading-supporting"><h3 id="supporting-skills-title">Supporting practices</h3><p>Three complementary systems that strengthen the core work from concept through delivery.</p></header></Reveal>
+        <div className="skills-support-list">{supportingSkills.map((skill, index) => <Reveal key={skill.slug} delay={index * .05}>
+          <Link className="skill-support-row" to={`/skills/${skill.slug}`}>
+            <div className="skill-support-copy"><h4>{withoutTrailingPeriod(skill.title)}</h4><p>{skill.short}</p></div>
+            <SkillToolMotion skill={skill} />
+            <ArrowUpRight className="skill-support-arrow" size={20} />
+          </Link>
+        </Reveal>)}</div>
+      </section>
+    </div>
+  </div></section>;
 }
 
 function Experiments() {
