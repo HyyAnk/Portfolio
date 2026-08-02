@@ -181,26 +181,40 @@ const skillToolsets = {
   },
 };
 
-function SkillToolIcon({ tool, index }) {
+const measuredToolTextWidths = {
+  Figma: 33,
+  React: 32,
+  JavaScript: 57,
+  HTML5: 37,
+  CSS: 24,
+  'After Effects': 68,
+  'Premiere Pro': 70,
+  CapCut: 42,
+  Blender: 42,
+  'Unreal Engine': 75,
+};
+
+function createRandomToolOrder(count) {
+  const shuffled = Array.from({ length: count }, (_, index) => index);
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+  }
+  return shuffled.reduce((orderByTool, toolIndex, sequenceIndex) => {
+    orderByTool[toolIndex] = sequenceIndex;
+    return orderByTool;
+  }, []);
+}
+
+function SkillToolIcon({ tool, index, order }) {
   const color = tool.mono ? 'var(--ink)' : (tool.color || 'currentColor');
   const label = tool.label || tool.name;
-  const measuredTextWidths = {
-    Figma: 33,
-    React: 32,
-    JavaScript: 57,
-    HTML5: 37,
-    CSS: 24,
-    'After Effects': 68,
-    'Premiere Pro': 70,
-    CapCut: 42,
-    Blender: 42,
-    'Unreal Engine': 75,
-  };
-  const textWidth = measuredTextWidths[label] || Math.max(32, Math.ceil(label.length * 5.8));
+  const textWidth = measuredToolTextWidths[label] || Math.max(32, Math.ceil(label.length * 5.8));
   const expandedWidth = Math.min(128, Math.max(60, textWidth + 18));
   return <span className="skill-tool-slot" style={{
     '--tool-color': color,
     '--tool-index': index,
+    '--tool-order': order,
     '--tool-chars': label.length,
     '--tool-expanded-width': `${expandedWidth}px`,
     '--tool-text-width': `${textWidth}px`,
@@ -223,9 +237,13 @@ function SkillToolIcon({ tool, index }) {
 
 function SkillToolMotion({ skill }) {
   const toolset = skillToolsets[skill.slug];
-  return <span className={`skill-tool-motion skill-tool-motion-${toolset.motion}`} role="img" aria-label={toolset.label}>
+  const [toolOrder] = useState(() => createRandomToolOrder(toolset.tools.length));
+  const [rowPhase] = useState(() => toolset.motion === 'video'
+    ? `${-(1.55 + Math.random() * 1.2).toFixed(2)}s`
+    : `${-(Math.random() * .35).toFixed(2)}s`);
+  return <span className={`skill-tool-motion skill-tool-motion-${toolset.motion}`} role="img" aria-label={toolset.label} style={{ '--tool-row-phase': rowPhase }}>
     <span className="skill-tool-track" aria-hidden="true">
-      {toolset.tools.map((tool, index) => <SkillToolIcon key={tool.name} tool={tool} index={index} />)}
+      {toolset.tools.map((tool, index) => <SkillToolIcon key={tool.name} tool={tool} index={index} order={toolOrder[index]} />)}
     </span>
   </span>;
 }

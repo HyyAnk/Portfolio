@@ -441,11 +441,11 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .skill-compact-core-link .skill-tool-motion-video::before,
 .skill-compact-core-link .skill-tool-motion-video .skill-tool-track::after,
 .skill-compact-core-link .skill-tool-motion-ui::before { opacity: 0; animation: none; }
-.skill-compact-core-link .skill-tool-icon { --core-tool-cycle: 22.5s; transform: translateX(-50%) translateY(var(--ui-rest, var(--video-rest, 0px))) scale(.99); transform-origin: 50% 50%; animation: skill-core-tool-cycle var(--core-tool-cycle) linear infinite; animation-delay: calc(var(--tool-index) * 4.5s); }
+.skill-compact-core-link .skill-tool-icon { --core-tool-cycle: 22.5s; transform: translateX(-50%) translateY(var(--ui-rest, var(--video-rest, 0px))) scale(.99); transform-origin: 50% 50%; animation: skill-core-tool-cycle var(--core-tool-cycle) linear infinite; animation-delay: calc((var(--tool-order, var(--tool-index)) * 4.5s) + var(--tool-row-phase, 0s)); }
 .skill-compact-core-link .skill-tool-slot:first-child .skill-tool-icon { --core-tool-anchor-x: -12%; }
 .skill-compact-core-link .skill-tool-slot:last-child .skill-tool-icon { --core-tool-anchor-x: -88%; }
-.skill-compact-core-link .skill-tool-symbol { animation: skill-core-tool-symbol var(--core-tool-cycle) ease-in-out infinite; animation-delay: calc(var(--tool-index) * 4.5s); }
-.skill-compact-core-link .skill-tool-name { animation-name: skill-core-tool-name-fade, skill-core-tool-name-type; animation-duration: var(--core-tool-cycle), var(--core-tool-cycle); animation-delay: calc(var(--tool-index) * 4.5s), calc(var(--tool-index) * 4.5s); animation-timing-function: ease-in-out, steps(var(--tool-chars), end); animation-iteration-count: infinite, infinite; }
+.skill-compact-core-link .skill-tool-symbol { animation: skill-core-tool-symbol var(--core-tool-cycle) ease-in-out infinite; animation-delay: calc((var(--tool-order, var(--tool-index)) * 4.5s) + var(--tool-row-phase, 0s)); }
+.skill-compact-core-link .skill-tool-name { animation-name: skill-core-tool-name-fade, skill-core-tool-name-type; animation-duration: var(--core-tool-cycle), var(--core-tool-cycle); animation-delay: calc((var(--tool-order, var(--tool-index)) * 4.5s) + var(--tool-row-phase, 0s)), calc((var(--tool-order, var(--tool-index)) * 4.5s) + var(--tool-row-phase, 0s)); animation-timing-function: ease-in-out, steps(var(--tool-chars), end); animation-iteration-count: infinite, infinite; }
 
 @media (hover: hover) and (pointer: fine) {
   .skill-tool-motion:not(.skill-tool-motion-graphic) .skill-tool-slot:first-child .skill-tool-icon { --hover-anchor-x: -12%; }
