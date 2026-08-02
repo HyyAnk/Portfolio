@@ -390,7 +390,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .skill-tool-icon svg { width: var(--tool-icon-size, 21px); height: var(--tool-icon-size, 21px); display: block; fill: currentColor; }
 .skill-tool-icon .skill-tool-figma-logo { width: auto; height: var(--tool-icon-size, 23px); }
 .skill-tool-mark { font-size: var(--tool-mark-size, .76rem); font-weight: 760; letter-spacing: .02em; line-height: 1; }
-.skill-tool-name { position: absolute; top: 50%; left: 16px; width: 0; overflow: hidden; border-right: 1px solid transparent; color: var(--ink); font-size: .72rem; font-weight: 720; letter-spacing: -.015em; line-height: 1.1; opacity: 0; transform: translateY(-50%); white-space: nowrap; }
+.skill-tool-name { position: absolute; top: 50%; left: calc((var(--tool-expanded-width) - var(--tool-text-width)) / 2); width: 0; overflow: hidden; border-right: 1px solid transparent; color: var(--ink); font-size: .72rem; font-weight: 720; letter-spacing: -.015em; line-height: 1.1; opacity: 0; transform: translateY(-50%); white-space: nowrap; }
 
 .skill-tool-motion-graphic .skill-tool-slot { top: 17px; }
 .skill-tool-motion-graphic .skill-tool-icon { animation: skill-graphic-shuffle 5.6s cubic-bezier(.45,0,.55,1) infinite; animation-delay: calc(var(--tool-index) * -.58s); }
