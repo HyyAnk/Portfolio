@@ -390,7 +390,7 @@ const customCarouselByIndex = Object.entries(carouselFolderAssets).reduce((resul
   return result;
 }, {});
 const customCarouselAlts = [
-  'Animated motion path, shape morphing and layered composition',
+  'Animated motion design editor assembling a kinetic identity from layers and keyframes',
   'Animated browser interaction with hover, settings and theme controls',
   'Animated terminal installing the HyyAnk design package',
   'Animated deployment pipeline progressing from source to live',
