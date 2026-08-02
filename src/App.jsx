@@ -16,6 +16,10 @@ import graphicImage from './assets/generated/work-graphic.webp';
 import videoImage from './assets/generated/work-video.webp';
 import automationImage from './assets/generated/work-automation.webp';
 import blockchainImage from './assets/generated/work-blockchain.webp';
+import mergeboardShowcase from './assets/experiments/mergeboard.webp';
+import photoIdShowcase from './assets/experiments/photo-id-studio.webp';
+import pdfBusinessCardShowcase from './assets/experiments/pdf-business-card.webp';
+import aiMediaStudioShowcase from './assets/experiments/ai-media-studio.webp';
 import portraitImage from './assets/generated/portrait.webp';
 import matCover from './assets/case-studies/mat-cover.webp';
 import kitepayCover from './assets/case-studies/kitepay-cover.webp';
@@ -85,130 +89,6 @@ function ExperimentMark({ slug }) {
     <rect x="11" y="10" width="18" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="2" />
     <rect x="13" y="12" width="7" height="7" rx="1.5" fill="currentColor" />
   </svg>;
-}
-
-function ShowcaseChrome({ slug, title, children, active }) {
-  return <svg className={`experiment-showcase experiment-showcase-${slug} ${active ? 'is-animated' : ''}`} viewBox="0 0 160 100" role="presentation" focusable="false">
-    <rect className="showcase-backdrop" width="160" height="100" rx="3" />
-    <rect className="showcase-window" x="4" y="4" width="152" height="92" rx="2.5" />
-    <rect className="showcase-bar" x="4" y="4" width="152" height="14" rx="2.5" />
-    <circle className="showcase-dot showcase-dot-accent" cx="12" cy="11" r="2" />
-    <circle className="showcase-dot" cx="19" cy="11" r="2" />
-    <circle className="showcase-dot" cx="26" cy="11" r="2" />
-    <text className="showcase-title" x="80" y="13" textAnchor="middle">{title}</text>
-    {children}
-  </svg>;
-}
-
-function ExperimentShowcase({ slug, active }) {
-  if (slug === 'mergeboard') return <ShowcaseChrome slug={slug} title="MERGEBOARD / LOCAL WORKSPACE" active={active}>
-    <path className="showcase-grid" d="M8 30H152 M8 46H152 M8 62H152 M8 78H152 M24 20V92 M48 20V92 M72 20V92 M96 20V92 M120 20V92 M144 20V92" />
-    <path className="merge-connector" d="M48 39C59 39 59 50 69 50 M48 72C59 72 59 60 69 60 M99 55C108 55 108 50 117 50" />
-    <g className="showcase-node">
-      <rect x="12" y="28" width="36" height="22" rx="4" />
-      <text x="17" y="35">TEXT</text>
-      <rect className="showcase-line" x="17" y="39" width="21" height="2" rx="1" />
-      <rect className="showcase-line showcase-line-short" x="17" y="44" width="14" height="2" rx="1" />
-    </g>
-    <g className="showcase-node">
-      <rect x="12" y="61" width="36" height="22" rx="4" />
-      <text x="17" y="68">IMAGE</text>
-      <path className="showcase-image-glyph" d="M17 78l6-6 5 4 4-3 8 5H17Z" />
-    </g>
-    <g className="showcase-node showcase-node-accent">
-      <rect x="69" y="43" width="30" height="24" rx="5" />
-      <text x="84" y="52" textAnchor="middle">MIX</text>
-      <circle cx="78" cy="59" r="2" />
-      <circle cx="84" cy="59" r="2" />
-      <circle cx="90" cy="59" r="2" />
-    </g>
-    <g className="showcase-node merge-output">
-      <rect x="117" y="31" width="31" height="39" rx="5" />
-      <text x="132.5" y="39" textAnchor="middle">OUTPUT</text>
-      <rect className="merge-output-media" x="122" y="43" width="21" height="15" rx="2" />
-      <rect className="showcase-line" x="122" y="62" width="15" height="2" rx="1" />
-    </g>
-    <circle className="merge-pulse merge-pulse-a" cx="48" cy="39" r="2.2" />
-    <circle className="merge-pulse merge-pulse-b" cx="48" cy="72" r="2.2" />
-    <circle className="merge-pulse merge-pulse-c" cx="99" cy="55" r="2.2" />
-    <g className="showcase-status merge-status"><circle cx="137" cy="82" r="4" /><path d="m135 82 1.4 1.4 2.8-3" /></g>
-  </ShowcaseChrome>;
-
-  if (slug === 'photo-id') return <ShowcaseChrome slug={slug} title="PHOTO ID STUDIO / 4x6" active={active}>
-    <rect className="showcase-panel" x="9" y="23" width="91" height="66" rx="5" />
-    <text className="showcase-kicker" x="15" y="31">REFERENCE SET</text>
-    {[0, 1, 2].map((index) => <g className={`photo-reference photo-reference-${index + 1}`} key={index} transform={`translate(${15 + (index * 27)} 37)`}>
-      <rect width="22" height="33" rx="3" />
-      <circle cx="11" cy="11" r="5" />
-      <path d="M4 28c1-7 4-10 7-10s6 3 7 10" />
-      <text x="11" y="31" textAnchor="middle">0{index + 1}</text>
-    </g>)}
-    <path className="photo-flow" d="M37 54H47 M64 54H74 M91 54H109" />
-    <rect className="photo-result-paper" x="108" y="23" width="43" height="66" rx="4" />
-    <text className="showcase-kicker" x="129.5" y="31" textAnchor="middle">600 DPI</text>
-    <g className="photo-result-portrait">
-      <rect x="114" y="35" width="31" height="43" rx="2" />
-      <circle cx="129.5" cy="48" r="7" />
-      <path d="M118 73c1-12 6-17 11.5-17S140 61 141 73" />
-    </g>
-    <rect className="photo-scan" x="113" y="36" width="33" height="2" rx="1" />
-    <g className="showcase-status photo-status"><circle cx="143" cy="83" r="4" /><path d="m141 83 1.4 1.4 2.8-3" /></g>
-  </ShowcaseChrome>;
-
-  if (slug === 'pdf-card') return <ShowcaseChrome slug={slug} title="PDF BUSINESS CARD / PAGE 03" active={active}>
-    <rect className="showcase-panel" x="9" y="23" width="43" height="66" rx="5" />
-    <text className="showcase-kicker" x="15" y="31">CARD KIT</text>
-    <rect className="pdf-control" x="15" y="38" width="31" height="12" rx="2" />
-    <rect className="pdf-control" x="15" y="55" width="31" height="12" rx="2" />
-    <rect className="pdf-control pdf-control-accent" x="15" y="72" width="20" height="10" rx="2" />
-    <rect className="pdf-page" x="60" y="22" width="90" height="68" rx="3" />
-    <rect className="showcase-line" x="69" y="31" width="45" height="3" rx="1.5" />
-    <rect className="showcase-line showcase-line-short" x="69" y="39" width="62" height="2" rx="1" />
-    <rect className="showcase-line showcase-line-short" x="69" y="45" width="53" height="2" rx="1" />
-    <path className="pdf-guides" d="M88 55v30 M64 70h82" />
-    <g className="pdf-card-stamp">
-      <rect x="92" y="56" width="48" height="26" rx="3" />
-      <circle cx="101" cy="65" r="4" />
-      <rect x="108" y="62" width="16" height="2" rx="1" />
-      <rect x="108" y="68" width="12" height="2" rx="1" />
-      <g className="pdf-qr"><rect x="128" y="61" width="7" height="7" /><path d="M129 62h2v2h-2zM132 65h2v2h-2zM132 62h2v2h-2zM129 65h2v2h-2z" /></g>
-      <rect className="pdf-card-accent" x="97" y="74" width="38" height="3" rx="1.5" />
-    </g>
-    <g className="showcase-status pdf-status"><circle cx="144" cy="84" r="4" /><path d="m142 84 1.4 1.4 2.8-3" /></g>
-  </ShowcaseChrome>;
-
-  return <ShowcaseChrome slug={slug} title="AI MEDIA STUDIO / IMAGE TO VIDEO" active={active}>
-    <rect className="showcase-panel" x="9" y="23" width="48" height="66" rx="5" />
-    <text className="showcase-kicker" x="15" y="31">PROMPT + CONTEXT</text>
-    <rect className="media-context" x="15" y="37" width="15" height="15" rx="2" />
-    <path className="showcase-image-glyph" d="M17 49l4-4 3 2 2-2 3 4H17Z" />
-    <rect className="showcase-line" x="34" y="38" width="16" height="2" rx="1" />
-    <rect className="showcase-line showcase-line-short" x="34" y="44" width="13" height="2" rx="1" />
-    <rect className="showcase-line showcase-line-short" x="15" y="59" width="35" height="2" rx="1" />
-    <rect className="showcase-line showcase-line-short" x="15" y="65" width="28" height="2" rx="1" />
-    <rect className="media-generate-button" x="15" y="74" width="26" height="8" rx="3" />
-    <path className="media-flow" d="M57 55H67 M105 44H113" />
-    <g className="media-output">
-      <rect x="67" y="24" width="38" height="39" rx="4" />
-      <rect className="media-output-image" x="72" y="30" width="28" height="21" rx="2" />
-      <path className="showcase-image-glyph" d="M74 49l7-8 5 5 4-4 8 7H74Z" />
-      <text x="72" y="58">GENERATED</text>
-    </g>
-    <g className="media-video">
-      <rect x="113" y="24" width="38" height="39" rx="4" />
-      <rect x="118" y="30" width="28" height="21" rx="2" />
-      <path className="media-play" d="m129 36 8 5-8 5Z" />
-      <text x="118" y="58">16:9 VIDEO</text>
-    </g>
-    <g className="media-timeline">
-      <rect x="67" y="70" width="84" height="14" rx="3" />
-      <rect x="72" y="74" width="20" height="6" rx="1" />
-      <rect x="94" y="74" width="20" height="6" rx="1" />
-      <rect x="116" y="74" width="20" height="6" rx="1" />
-      <line className="media-playhead" x1="72" y1="69" x2="72" y2="85" />
-    </g>
-    <g className="showcase-status media-status"><circle cx="145" cy="90" r="4" /><path d="m143 90 1.4 1.4 2.8-3" /></g>
-  </ShowcaseChrome>;
 }
 
 const contactLinks = [
@@ -304,7 +184,7 @@ const skillToolsets = {
 function SkillToolIcon({ tool, index }) {
   const color = tool.mono ? 'var(--ink)' : (tool.color || 'currentColor');
   const label = tool.label || tool.name;
-  const expandedWidth = Math.min(164, Math.max(108, Math.ceil(36 + label.length * 7.8)));
+  const expandedWidth = Math.min(128, Math.max(60, Math.ceil(18 + label.length * 6.25)));
   return <span className="skill-tool-slot" style={{
     '--tool-color': color,
     '--tool-index': index,
@@ -352,6 +232,7 @@ const experiments = [
     description: 'Build reusable flows with text, media and generation nodes.',
     tech: ['React Flow', 'File System Access API', 'Local-first'],
     alt: 'Graphite modules, photographic fragments and orange cords arranged as a connected visual system',
+    image: mergeboardShowcase,
     repo: 'https://github.com/HyyAnk/Merge-Board-Node',
     live: 'https://merge-board-node.vercel.app',
     featured: true,
@@ -363,6 +244,7 @@ const experiments = [
     description: 'Prepare print-ready ID photos from queued references.',
     tech: ['React', 'Express', 'Sharp'],
     alt: 'Portrait lightbox and identity photo frames arranged on a photographic studio table',
+    image: photoIdShowcase,
     repo: 'https://github.com/HyyAnk/Photo-ID-Studio',
     live: 'https://photo-id-studio.vercel.app',
   },
@@ -373,6 +255,7 @@ const experiments = [
     description: 'Stamp business cards and QR details onto PDF files.',
     tech: ['TypeScript', 'pdf-lib', 'QR tooling'],
     alt: 'Paper stack, black stamping block and embossed card arranged as a document production still life',
+    image: pdfBusinessCardShowcase,
     repo: 'https://github.com/HyyAnk/Pdf-business-card-stamper',
     live: 'https://pdf-business-card-stamper.vercel.app',
   },
@@ -383,6 +266,7 @@ const experiments = [
     description: 'Generate and edit media with reference-driven AI tools.',
     tech: ['React', 'TypeScript', 'Google GenAI'],
     alt: 'Smoked glass, optical lens and film layers arranged as an experimental media workbench',
+    image: aiMediaStudioShowcase,
     repo: 'https://github.com/HyyAnk/Image-video-Google-API---Aistudio',
     wide: true,
   },
@@ -1300,7 +1184,7 @@ function Experiments() {
         <a className="experiments-preview" href={activeProject.live || activeProject.repo} target="_blank" rel="noreferrer" aria-label={`Open ${activeProject.title} ${activeProject.live ? 'live demo' : 'source code'}`} onMouseEnter={() => setAutoPaused(true)} onMouseLeave={() => setAutoPaused(false)} onFocus={() => setAutoPaused(true)} onBlur={() => setAutoPaused(false)}>
           <div className="experiments-stack" aria-hidden="true">{experiments.map((project, index) => {
             const position = (index - activeExperiment + experiments.length) % experiments.length;
-            return <figure className={`experiment-preview-frame is-position-${position}`} key={project.slug}><ExperimentShowcase slug={project.slug} active={position === 0} /></figure>;
+            return <figure className={`experiment-preview-frame is-position-${position}`} key={project.slug}><img className="experiment-preview-image" src={project.image} alt="" /></figure>;
           })}</div>
           <span className={`experiments-preview-caption is-${activeProject.slug}`} key={activeProject.slug}>
             <span className="experiments-preview-progress" aria-hidden="true" />
