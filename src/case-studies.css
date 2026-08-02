@@ -44,7 +44,7 @@
 .case-insight-list article > span { color: var(--case-accent); font-size: .69rem; font-weight: 800; }
 .case-insight-list h3 { max-width: 240px; margin: 36px 0 14px; color: var(--case-ink); font-size: clamp(1.45rem, 2.2vw, 2.2rem); line-height: 1.02; }
 .case-insight-list p { max-width: 310px; font-size: .88rem; }
-/* MÁT — cool cartographic product language. */
+/* MÁT - cool cartographic product language. */
 .case-mat { --case-bg: #eef3fb; --case-surface: #f9fbff; --case-ink: #17315f; --case-muted: #657494; --case-accent: #1f58e7; }
 .case-theme-mat { --case-bg: #eef3fb; --case-surface: #f9fbff; --case-ink: #17315f; --case-muted: #657494; --case-accent: #1f58e7; }
 .case-theme-mat .deep-case-cover { box-shadow: 0 35px 90px -64px #183f9b; }
@@ -240,7 +240,7 @@
 .case-outcome span { color: var(--case-muted); font-size: .71rem; text-transform: uppercase; }
 .case-outcome > p { max-width: 720px; margin-top: 48px; font-size: .83rem; }
 
-/* KitePay — dark protocol language. */
+/* KitePay - dark protocol language. */
 .case-kite { --case-bg:#111411; --case-surface:#1b201c; --case-ink:#f2f2e9; --case-muted:#929a92; --case-accent:#e9f25f; }
 .case-theme-kite { --case-bg:#111411; --case-surface:#1b201c; --case-ink:#f2f2e9; --case-muted:#929a92; --case-accent:#e9f25f; }
 .case-theme-kite .deep-case-cover { box-shadow: 0 40px 90px -62px #000; }

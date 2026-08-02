@@ -159,7 +159,7 @@ function MatScenarioStudy() {
     <aside className="mat-scenario-notes">
       <CaseEyebrow>Decision in context</CaseEyebrow>
       <h3>12 minutes buys 42% more shade</h3>
-      <p>The product makes that trade-off visible before the walk begins—not after the user is already exposed.</p>
+      <p>The product makes that trade-off visible before the walk begins, not after the user is already exposed.</p>
       <div className="mat-scenario-evidence">
         <article><i className="evidence-sun"/><div><strong>Midday changes the answer</strong><span>Sun angle increases exposure on River Walk.</span></div></article>
         <article><i className="evidence-tree"/><div><strong>Comfort becomes measurable</strong><span>Canopy coverage and refill access explain the detour.</span></div></article>
@@ -279,7 +279,7 @@ function KitePayDemo() {
         <div className="kite-demo-cards">
           <article><span>Recipient</span><strong>hyank.studio</strong><code>0x71A9…A92f</code></article>
           <article><span>Review window</span><strong>24 hours</strong><small>Release requires client confirmation</small></article>
-          <article><span>Escrow balance</span><strong>{active === 4 ? '0.00' : active === 0 ? '—' : '250.00'} USDT</strong><small>{active === 4 ? 'Released to recipient' : 'Held by milestone contract'}</small></article>
+          <article><span>Escrow balance</span><strong>{active === 4 ? '0.00' : active === 0 ? '-' : '250.00'} USDT</strong><small>{active === 4 ? 'Released to recipient' : 'Held by milestone contract'}</small></article>
         </div>
         <div className="kite-demo-actions"><button type="button" onClick={reset} disabled={active === 0}>Reset</button><button type="button" onClick={advance} disabled={active === kiteSteps.length - 1}>{active === kiteSteps.length - 1 ? 'Flow complete' : `Simulate ${kiteSteps[active + 1].name}`} <CaretRight size={16}/></button></div>
       </div>
@@ -305,7 +305,7 @@ function KitePayCaseStudy({ work }) {
     { label: 'Prototype scope', value: 'Milestones · receipts · disputes' },
   ];
   return <article className="deep-case case-kite">
-    <CaseHero work={work} theme="kite" label="BSC application · Escrow UX · 2026" summary="A milestone escrow that gives clients and independent teams one shared source of truth—from agreed scope to on-chain release." facts={facts} demoLabel="Run the escrow simulation" />
+    <CaseHero work={work} theme="kite" label="BSC application · Escrow UX · 2026" summary="A milestone escrow that gives clients and independent teams one shared source of truth, from agreed scope to on-chain release." facts={facts} demoLabel="Run the escrow simulation" />
 
     <section className="case-section kite-premise"><div className="page-shell">
       <CaseLead index="01" eyebrow="The trust gap" title="Payment uncertainty is a product problem before it is a contract problem." copy="Freelancers worry about getting paid. Clients worry about releasing funds too early. KitePay turns the agreement into explicit states that both sides can read before they sign." />

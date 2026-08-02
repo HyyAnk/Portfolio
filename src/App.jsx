@@ -1235,8 +1235,7 @@ function SkillBlocks() {
     <div className="skill-flow-layout"><Reveal className="skill-flow-copy"><div className="section-heading section-heading-stacked"><span className="skill-flow-eyebrow">The way I work</span><h2><span>Design</span><span>Develop</span><span>Deliver</span></h2><p>One connected flow from a sharp idea to a useful, finished experience.</p></div></Reveal><Reveal className="skill-flow-visual" delay={.08}><ThreeSkillFlow /></Reveal></div>
 
     <Reveal className="skills-directory">
-      <section className="skills-compact-board" aria-labelledby="skills-catalog-title">
-        <header className="skills-compact-heading"><h3 id="skills-catalog-title">Skills at a glance</h3><p>Two lead disciplines, strengthened by three supporting practices.</p></header>
+      <section className="skills-compact-board" aria-label="Skills">
         <div className="skills-compact-core">{primarySkills.map((skill) =>
           <Link className="skill-compact-core-link" key={skill.slug} to={`/skills/${skill.slug}`}>
             <div className="skill-compact-core-copy"><h4>{withoutTrailingPeriod(skill.title)}</h4><p>{skill.short}</p></div>
@@ -1249,7 +1248,6 @@ function SkillBlocks() {
           <div className="skills-compact-support-list">{supportingSkills.map((skill) =>
             <Link className="skill-compact-support-link" key={skill.slug} to={`/skills/${skill.slug}`}>
               <h4>{withoutTrailingPeriod(skill.title)}</h4>
-              <SkillToolMotion skill={skill} />
               <ArrowUpRight className="skill-compact-arrow" size={17} />
             </Link>
           )}</div>
@@ -1366,7 +1364,7 @@ function SkillPage({ skill }) {
 function NotFound() {
   const location = useLocation();
   usePageMeta({ ...notFoundSeo, path: location.pathname });
-  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="not-found-page"><section className="not-found section-pad"><div className="page-shell not-found-grid"><div><span className="eyebrow">Error / 404</span><h1>Lost path.</h1></div><div className="not-found-copy"><p className="large-copy">This page is not part of the current portfolio. The selected work is still close by.</p><Link className="button button-dark" to="/#selected-works">Return to selected work <ArrowUpRight size={18} /></Link></div></div></section></main><Footer /></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="not-found-page"><section className="not-found section-pad"><div className="page-shell not-found-grid"><div><span className="eyebrow">Error / 404</span><h1>Lost path</h1></div><div className="not-found-copy"><p className="large-copy">This page is not part of the current portfolio. The selected work is still close by.</p><Link className="button button-dark" to="/#selected-works">Return to selected work <ArrowUpRight size={18} /></Link></div></div></section></main><Footer /></>;
 }
 
 function App() {
