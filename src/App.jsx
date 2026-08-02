@@ -184,13 +184,26 @@ const skillToolsets = {
 function SkillToolIcon({ tool, index }) {
   const color = tool.mono ? 'var(--ink)' : (tool.color || 'currentColor');
   const label = tool.label || tool.name;
-  const expandedWidth = Math.min(128, Math.max(60, Math.ceil(18 + label.length * 6.25)));
+  const measuredTextWidths = {
+    Figma: 33,
+    React: 32,
+    JavaScript: 57,
+    HTML5: 37,
+    CSS: 24,
+    'After Effects': 68,
+    'Premiere Pro': 70,
+    CapCut: 42,
+    Blender: 42,
+    'Unreal Engine': 75,
+  };
+  const textWidth = measuredTextWidths[label] || Math.max(32, Math.ceil(label.length * 5.8));
+  const expandedWidth = Math.min(128, Math.max(60, textWidth + 18));
   return <span className="skill-tool-slot" style={{
     '--tool-color': color,
     '--tool-index': index,
     '--tool-chars': label.length,
     '--tool-expanded-width': `${expandedWidth}px`,
-    '--tool-text-width': `${label.length + .5}ch`,
+    '--tool-text-width': `${textWidth}px`,
     ...(tool.iconSize ? { '--tool-icon-size': `${tool.iconSize}px` } : {}),
     ...(tool.mobileIconSize ? { '--tool-icon-size-mobile': `${tool.mobileIconSize}px` } : {}),
     ...(tool.markSize ? { '--tool-mark-size': tool.markSize } : {}),
