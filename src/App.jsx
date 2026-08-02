@@ -1245,7 +1245,7 @@ function SkillBlocks() {
           </Link>
         )}</div>
         <div className="skills-compact-supporting">
-          <span className="skills-compact-support-label">Supporting practices</span>
+          <span className="skills-compact-support-label">Supporting skills</span>
           <div className="skills-compact-support-list">{supportingSkills.map((skill) =>
             <Link className="skill-compact-support-link" key={skill.slug} to={`/skills/${skill.slug}`}>
               <h4>{withoutTrailingPeriod(skill.title)}</h4>
