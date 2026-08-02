@@ -406,12 +406,12 @@ const customCarouselByIndex = Object.entries(carouselFolderAssets).reduce((resul
 }, {});
 const customCarouselAlts = [
   'Complete furniture ecommerce homepage with a lounge chair gallery, finish selector, price, specifications and product navigation',
-  'Complete B2B logistics homepage with port photography, live route control, exception status and operational proof',
-  'Complete blockchain settlement protocol homepage with wallet connection, network state, glass ledger visual and transaction receipt',
+  'Trang chủ năng lượng sạch bằng tiếng Việt với ảnh điện mặt trời kết hợp nông nghiệp, quy trình khảo sát, thiết kế và vận hành',
+  'Trang chủ nhà đấu giá nghệ thuật đương đại Việt Nam bằng tiếng Việt với tác phẩm sơn mài đỏ, thông tin phiên và đăng ký hồ sơ',
   'Complete skincare product page with a serum gallery, purchase options, ingredients and clinical proof',
   'Complete electronic music festival homepage with ticket actions, preview player, stage schedule and pass availability',
   'Complete boutique hospitality booking homepage with retreat details, dates, guests, nightly price and availability',
-  'Complete multilingual localization SaaS homepage with Vietnamese, English, Chinese and Korean controls, live preview and publishing status',
+  'Trang chủ phòng khám gia đình bằng tiếng Việt với ảnh bác sĩ tư vấn, form đặt lịch và các chuyên khoa nhi khoa, nội tổng quát, dinh dưỡng',
 ];
 const configuredCarouselImages = Array.from({ length: 7 }, (_, index) => ({
   ...(heroCarouselImages[index]),
