@@ -1,21 +1,17 @@
 # Hero carousel assets
 
-Đặt tối đa 7 asset vào thư mục này và đặt tên theo số thứ tự:
+Thư mục này chỉ chứa 7 ảnh WebP đang được website sử dụng:
 
 ```text
-1.svg
-2.svg
-3.svg
-4.svg
-5.svg
-6.svg
-7.svg
+1.webp
+2.webp
+3.webp
+4.webp
+5.webp
+6.webp
+7.webp
 ```
 
-Website tự động nhận diện các file từ `1` đến `7`, không cần sửa code.
+Website tự động nhận diện asset từ `1` đến `7`. Mỗi basename chỉ được giữ một file để tránh lựa chọn không xác định trong quá trình build.
 
-Định dạng được hỗ trợ: SVG, PNG, JPG, JPEG, JPB, GIF, WebP và AVIF.
-
-Chỉ nên giữ một file cho mỗi basename. Ví dụ, nếu đã có `1.svg` thì không giữ thêm `1.png` hoặc `1.gif`.
-
-SVG có thể sử dụng SMIL hoặc CSS animation nội bộ và được hiển thị qua thẻ `<img>`.
+Các định dạng được loader hỗ trợ: SVG, PNG, JPG, JPEG, JPB, GIF, WebP và AVIF.

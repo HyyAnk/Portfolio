@@ -12,3 +12,7 @@ dist/
 Thumbs.db
 .idea/
 .vscode/
+
+# Local development artifacts
+tmp/
+.codex-*.log
