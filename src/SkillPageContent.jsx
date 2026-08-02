@@ -236,7 +236,7 @@ function UiHero({ Reveal }) {
   return <section className="ui-hero">
     <div className="page-shell ui-hero-layout">
       <Reveal className="ui-hero-copy">
-        <span className="ui-kicker">UI/UX and web development</span>
+        <span className="ui-kicker">Web design</span>
         <h1>Decisions made visible</h1>
         <p>Product strategy, interface states and front-end implementation shown through one route-planning prototype</p>
         <ArrowLink to="#product-thinking">Inspect the product</ArrowLink>

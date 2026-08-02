@@ -222,7 +222,7 @@ const contactLinks = [
 const skills = [
   { slug: 'graphic-design', title: 'Graphic Design', short: 'Identity systems with a point of view', body: 'I build visual systems that make an idea legible before anyone reads the details', image: graphicImage, variant: 'graphic', tools: ['Art direction', 'Identity', 'Editorial'], details: ['Visual identity systems', 'Editorial layout direction', 'Typography and colour systems', 'Campaign art direction'] },
   { slug: 'video-editor', title: 'Video Editor', short: 'Motion with an honest rhythm', body: 'I shape footage, sound and type into clear stories that know when to pause', image: videoImage, variant: 'video', tools: ['Editing', 'Title design', 'Sound'], details: ['Advanced transitions', 'Professional SFX design', 'Special effects and motion effects', 'Cinematic storytelling'] },
-  { slug: 'uiux-webdev', title: 'UI/UX and Web Dev', short: 'Interfaces that feel considered', body: 'I design and code responsive experiences where the visual idea survives the interaction', image: uiImage, variant: 'ui', tools: ['Product design', 'React', 'Systems'], details: ['UX flows and product structure', 'Responsive design systems', 'React implementation', 'Interaction and interface motion'] },
+  { slug: 'uiux-webdev', title: 'Web Design', short: 'Interfaces that feel considered', body: 'I design and code responsive experiences where the visual idea survives the interaction', image: uiImage, variant: 'ui', tools: ['Product design', 'React', 'Systems'], details: ['UX flows and product structure', 'Responsive design systems', 'React implementation', 'Interaction and interface motion'] },
   { slug: 'automation', title: 'Automation', short: 'The quiet work behind the work', body: 'I connect the small steps that slow a team down and turn them into a dependable flow', image: automationImage, variant: 'automation', tools: ['Workflows', 'APIs', 'Operations'], details: ['Workflow architecture', 'API and webhook orchestration', 'Content and task automation', 'Operational clarity'] },
   { slug: 'blockchain', title: 'Blockchain Integration', short: 'Trust made tangible', body: 'I help teams use decentralised technology where it creates real ownership, not extra noise', image: blockchainImage, variant: 'blockchain', tools: ['Wallets', 'Onchain UX', 'Contracts'], details: ['Wallet and onboarding UX', 'Smart contract integration', 'Onchain transaction states', 'Trust and ownership design'] },
 ];
@@ -390,7 +390,7 @@ const customCarouselByIndex = Object.entries(carouselFolderAssets).reduce((resul
   return result;
 }, {});
 const customCarouselAlts = [
-  'Animated motion design editor assembling a kinetic identity from layers and keyframes',
+  'Animated kinetic HyyAnk identity using masked typography and colour wipes',
   'Animated browser interaction with hover, settings and theme controls',
   'Animated terminal installing the HyyAnk design package',
   'Animated deployment pipeline progressing from source to live',
