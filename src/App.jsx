@@ -616,8 +616,8 @@ function ReadyProjectButton() {
     onFocusCapture={() => setEffectSource('focus', true)}
     onBlurCapture={() => setEffectSource('focus', false)}
   >
-    <a className="button ready-cta" href="#contact" aria-label="Ready to Delivery - go to contact options">
-      <span className="ready-cta-label">Ready to Delivery</span>
+    <a className="button ready-cta" href="#contact" aria-label="Ready to Deliver - go to contact options">
+      <span className="ready-cta-label">Ready to Deliver</span>
       <span className="ready-type" aria-hidden="true"><span>_</span><span>_</span><span>_</span></span>
     </a>
     <span className="ready-fx" aria-hidden="true" key={effectCycle}>
