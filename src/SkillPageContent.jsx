@@ -19,13 +19,12 @@ import dauScreens from './assets/case-studies/dau-screens.webp';
 import dauScan from './assets/case-studies/dau-scan.webp';
 import dauDesktop from './assets/case-studies/dau-desktop.webp';
 import dauStates from './assets/case-studies/dau-states.webp';
-import lamCover from './assets/case-studies/lam-cover.webp';
-import lamOverview from './assets/case-studies/lam-overview.webp';
-import lamScience from './assets/case-studies/lam-science.webp';
-import lamMaterials from './assets/case-studies/lam-materials.webp';
-import lamImpact from './assets/case-studies/lam-impact.webp';
-import lamDigital from './assets/case-studies/lam-digital.webp';
-import vetLifecycle from './assets/case-studies/vet-lifecycle.webp';
+import hxsCover from './assets/case-studies/hxs-01.webp';
+import hxsContents from './assets/case-studies/hxs-02.webp';
+import hxsProduct from './assets/case-studies/hxs-05.webp';
+import hxsEngineering from './assets/case-studies/hxs-07.webp';
+import hxsProjects from './assets/case-studies/hxs-12.webp';
+import relayEntry from './assets/case-studies/relay-entry.webp';
 import { withoutTrailingPeriod } from './text.js';
 import './skill-showcase.css';
 import './ui-showcase-v2.css';
@@ -43,18 +42,18 @@ const graphicIdentityEvidenceV2 = [
 ];
 
 const evidenceSpecimens = {
-  display: { label: 'Cover', text: 'LAM', size: 'clamp(3.3rem, 8vw, 8.4rem)', width: '8ch', role: 'Primary identification', setting: '64-104 px / 0.88 leading' },
-  editorial: { label: 'Section', text: 'Marine materials', size: 'clamp(2.25rem, 5vw, 5.2rem)', width: '13ch', role: 'Chapter navigation', setting: '36-64 px / 0.96 leading' },
+  display: { label: 'Cover', text: 'HUAXINSHENG', size: 'clamp(2.4rem, 6.4vw, 6.8rem)', width: '12ch', role: 'Primary identification', setting: 'Inter 800 / 64 to 104 px' },
+  editorial: { label: 'Section', text: 'Lưới thép hàn', size: 'clamp(2.25rem, 5vw, 5.2rem)', width: '13ch', role: 'Product chapter', setting: 'Inter 700 / 36 to 64 px' },
 };
 
 const graphicProductionEvidenceV2 = [
-  { image: lamScience, alt: 'LAM profile science spreads with microscopy, extraction and material testing', title: 'Science chapter', copy: 'Species, process and performance records' },
-  { image: lamMaterials, alt: 'LAM profile and translucent seaweed-based material samples', title: 'Material library', copy: 'Film, molded form, coating and sample data' },
-  { image: lamDigital, alt: 'LAM profile, cultivation map and digital material library in a coastal laboratory', title: 'Digital handover', copy: 'Farm map, batches and partner data room' },
+  { image: hxsProduct, alt: 'HUAXINSHENG production and welded mesh product spread', title: 'Product chapter', copy: 'Production line, quality control and construction' },
+  { image: hxsEngineering, alt: 'HUAXINSHENG engineering detail and standards spread', title: 'Engineering detail', copy: 'Slab reinforcement and standard compliance' },
+  { image: hxsProjects, alt: 'HUAXINSHENG featured industrial projects spread', title: 'Project evidence', copy: 'Factory, logistics and infrastructure applications' },
 ];
 
 function GraphicHeroV2({ Reveal }) {
-  return <section className="gd-hero gd-hero-v2"><div className="page-shell gd-hero-grid"><Reveal className="gd-hero-copy"><span className="gd-kicker">Graphic design</span><h1>Identity + editorial</h1><p>Two complete systems across material, print, space and screen</p><ArrowLink to="#identity-evidence">View the work</ArrowLink><dl className="gd-hero-facts"><div><dt>Scope</dt><dd>Identity + information</dd></div><div><dt>Formats</dt><dd>Print + field + digital</dd></div><div><dt>Working set</dt><dd>VI / EN + production files</dd></div></dl></Reveal><Reveal className="gd-hero-art gd-hero-evidence" delay={0.08}><figure><img src={lamCover} alt="LAM marine biomaterials profile, seaweed samples and translucent sheets in a coastal lab" /></figure><figcaption>LAM / 104-page profile system</figcaption></Reveal></div></section>;
+  return <section className="gd-hero gd-hero-v2"><div className="page-shell gd-hero-grid"><Reveal className="gd-hero-copy"><span className="gd-kicker">Graphic design</span><h1>Identity + editorial</h1><p>Two complete systems across material, print, space and screen</p><ArrowLink to="#identity-evidence">View the work</ArrowLink><dl className="gd-hero-facts"><div><dt>Scope</dt><dd>Identity + information</dd></div><div><dt>Formats</dt><dd>Print + field + digital</dd></div><div><dt>Working set</dt><dd>Vietnamese + production files</dd></div></dl></Reveal><Reveal className="gd-hero-art gd-hero-evidence" delay={0.08}><figure><img src={hxsCover} alt="HUAXINSHENG industrial catalogue front and back cover" /></figure><figcaption>HUAXINSHENG / 12 A3 spreads</figcaption></Reveal></div></section>;
 }
 
 function GraphicSystemV2({ Reveal }) {
@@ -62,7 +61,7 @@ function GraphicSystemV2({ Reveal }) {
 }
 
 function GraphicInformationV2({ Reveal }) {
-  return <section className="gd-section gd-information-section"><div className="page-shell"><Reveal className="gd-heading"><h2>LAM / profile architecture</h2><p>Cultivation, science, materials and impact in one 104-page system</p></Reveal><div className="gd-information-layout"><Reveal className="gd-information-main"><figure><img src={lamOverview} alt="LAM contents, company overview and cultivation network spreads" loading="lazy" /><figcaption>Origin + network + company model</figcaption></figure></Reveal><div className="gd-information-side"><Reveal><figure><img src={lamImpact} alt="LAM impact records with coastal farm data and lifecycle diagrams" loading="lazy" /><figcaption>Impact records / field evidence</figcaption></figure></Reveal><Reveal className="gd-information-facts" delay={0.06}><dl><div><dt>Structure</dt><dd>8 chapters / 104 pages</dd></div><div><dt>Language</dt><dd>Vietnamese + English</dd></div><div><dt>Evidence</dt><dd>Tests + samples + field data</dd></div><div><dt>Outputs</dt><dd>Profile + library + data room</dd></div></dl><a href="/work/still-moving">View LAM case study <ArrowUpRight size={17} /></a></Reveal></div></div></div></section>;
+  return <section className="gd-section gd-information-section"><div className="page-shell"><Reveal className="gd-heading"><h2>HUAXINSHENG / catalogue architecture</h2><p>Company, product, engineering and application in one compact sequence</p></Reveal><div className="gd-information-layout"><Reveal className="gd-information-main"><figure><img src={hxsContents} alt="HUAXINSHENG contents and product ecosystem spread" loading="lazy" /><figcaption>Contents + product ecosystem</figcaption></figure></Reveal><div className="gd-information-side"><Reveal><figure><img src={hxsProduct} alt="HUAXINSHENG production and product construction spread" loading="lazy" /><figcaption>Production + product proof</figcaption></figure></Reveal><Reveal className="gd-information-facts" delay={0.06}><dl><div><dt>Structure</dt><dd>4 chapters / 12 spreads</dd></div><div><dt>Format</dt><dd>A3 landscape / 24 A4 pages</dd></div><div><dt>Typeface</dt><dd>Inter variable family</dd></div><div><dt>Language</dt><dd>Vietnamese</dd></div></dl><a href="/work/still-moving">View HUAXINSHENG case study <ArrowUpRight size={17} /></a></Reveal></div></div></div></section>;
 }
 
 function GraphicTypeLabV2({ Reveal }) {
@@ -74,7 +73,7 @@ function GraphicTypeLabV2({ Reveal }) {
 }
 
 function GraphicProductionV2({ Reveal }) {
-  return <section className="gd-section gd-production-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Production + handover</h2><p>Print, samples and the partner data room use the same evidence structure</p></Reveal><div className="gd-production-grid">{graphicProductionEvidenceV2.map((item, index) => <Reveal className={`gd-production-card is-${index + 1}`} key={item.title} delay={index * .05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><strong>{item.title}</strong><p>{item.copy}</p></figcaption></figure></Reveal>)}</div><Reveal className="gd-deliverables"><h3>Deliverables</h3><dl><div><dt>Identity</dt><dd>Mark, palette, samples, packaging and space</dd></div><div><dt>Editorial</dt><dd>104-page bilingual profile and material records</dd></div><div><dt>Digital</dt><dd>Catalogue and responsive profile reader</dd></div><div><dt>Handoff</dt><dd>Print masters, sources and content register</dd></div></dl><nav aria-label="Graphic design case studies"><a href="/work/folded-matter">VỤN case study <ArrowUpRight size={17} /></a><a href="/work/still-moving">LAM case study <ArrowUpRight size={17} /></a></nav></Reveal></div></section>;
+  return <section className="gd-section gd-production-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Production + handover</h2><p>Print-ready pages keep commercial and technical evidence in one visual system</p></Reveal><div className="gd-production-grid">{graphicProductionEvidenceV2.map((item, index) => <Reveal className={`gd-production-card is-${index + 1}`} key={item.title} delay={index * .05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><strong>{item.title}</strong><p>{item.copy}</p></figcaption></figure></Reveal>)}</div><Reveal className="gd-deliverables"><h3>Deliverables</h3><dl><div><dt>Identity</dt><dd>VỤN mark, palette, samples, packaging and space</dd></div><div><dt>Editorial</dt><dd>HUAXINSHENG 12-spread A3 catalogue</dd></div><div><dt>Content</dt><dd>Company, product, standards and projects</dd></div><div><dt>Handoff</dt><dd>Print-ready artwork and digital PDF</dd></div></dl><nav aria-label="Graphic design case studies"><a href="/work/folded-matter">VỤN case study <ArrowUpRight size={17} /></a><a href="/work/still-moving">HUAXINSHENG case study <ArrowUpRight size={17} /></a></nav></Reveal></div></section>;
 }
 
 function GraphicDesignShowcase({ Reveal }) {
@@ -474,32 +473,32 @@ function AutomationShowcase({ Reveal }) {
 function BlockchainHero({ Reveal }) {
   return <section className="bc-hero">
     <div className="page-shell bc-hero-layout">
-      <Reveal className="bc-hero-copy"><span className="bc-kicker">Blockchain integration</span><h1>From garment to next owner</h1><p>Origin, repair, ownership and recovery translated into a product passport people can actually use</p><ArrowLink to="#wallet-flow">Follow the lifecycle</ArrowLink><dl className="bc-hero-facts"><div><dt>Case</dt><dd>VẾT digital passport</dd></div><div><dt>Item</dt><dd>Utility Jacket 07</dd></div><div><dt>Registry</dt><dd>EVM testnet</dd></div><div><dt>Passport</dt><dd>24-SS-B07-0007</dd></div></dl></Reveal>
-      <Reveal className="bc-hero-product" delay={0.08}><div className="bc-product-shell" aria-label="VẾT garment passport product proof"><header><div><span>VẾT</span><strong>Digital product passport</strong></div><b>VERIFIED</b></header><div className="bc-product-overview"><article><span>Garment</span><strong>UTILITY JACKET 07</strong><small>Passport 24-SS-B07-0007</small></article><article><span>Current state</span><strong>Active ownership</strong><small>Repair history available</small></article></div><div className="bc-product-progress"><div className="is-done"><span>01</span><strong>Issued</strong><small>Origin recorded</small></div><div className="is-done"><span>02</span><strong>Repaired</strong><small>Care event added</small></div><div className="is-current"><span>03</span><strong>Resold</strong><small>Ownership verified</small></div><div><span>04</span><strong>Recover</strong><small>Future routing</small></div></div><footer><div><span>Latest event</span><code>OwnershipTransferred</code></div><strong><i />PASSPORT ACTIVE</strong></footer></div></Reveal>
+      <Reveal className="bc-hero-copy"><span className="bc-kicker">Blockchain integration</span><h1>From ticket to gate</h1><p>Verified ownership, transfer and capped resale translated into event access people can use</p><ArrowLink to="#wallet-flow">Follow the ticket</ArrowLink><dl className="bc-hero-facts"><div><dt>Case</dt><dd>RELAY event ticket</dd></div><div><dt>Event</dt><dd>HAZE / 04</dd></div><div><dt>Registry</dt><dd>EVM testnet</dd></div><div><dt>Ticket</dt><dd>RL-26-0421</dd></div></dl></Reveal>
+      <Reveal className="bc-hero-product" delay={0.08}><div className="bc-product-shell" aria-label="RELAY verified event ticket proof"><header><div><span>RELAY</span><strong>Verified event ticket</strong></div><b>READY</b></header><div className="bc-product-overview"><article><span>Event</span><strong>HAZE / 04</strong><small>Ticket RL-26-0421</small></article><article><span>Current state</span><strong>Ready for entry</strong><small>Resale cap enforced</small></article></div><div className="bc-product-progress"><div className="is-done"><span>01</span><strong>Issued</strong><small>Face value recorded</small></div><div className="is-done"><span>02</span><strong>Transferred</strong><small>Holder verified</small></div><div className="is-current"><span>03</span><strong>Resold</strong><small>Cap enforced</small></div><div><span>04</span><strong>Entry</strong><small>One-time scan</small></div></div><footer><div><span>Latest event</span><code>ResaleSettled</code></div><strong><i />TICKET ACTIVE</strong></footer></div></Reveal>
     </div>
   </section>;
 }
 
 const walletStates = {
   connect: {
-    label: 'Scan', icon: PlugsConnected, heading: 'Open the garment record',
-    copy: 'NFC or QR resolves the public passport before any wallet action', button: 'Review passport', next: 'review',
-    facts: [['Item', 'Utility Jacket 07'], ['Passport', '24-SS-B07-0007'], ['Access', 'Public product data']],
+    label: 'Open', icon: PlugsConnected, heading: 'Open the verified ticket',
+    copy: 'The public ticket resolves before any transfer or resale action', button: 'Review ticket', next: 'review',
+    facts: [['Event', 'HAZE / 04'], ['Ticket', 'RL-26-0421'], ['Access', 'Gate 02']],
   },
   review: {
-    label: 'Review', icon: Fingerprint, heading: 'Review the transfer scope',
-    copy: 'Show the garment, history and next owner before requesting a signature', button: 'Approve transfer', next: 'pending',
-    facts: [['Scope', 'Transfer item ownership'], ['History', 'Origin + one repair'], ['Registry', '0x84C2...11F0']],
+    label: 'Review', icon: Fingerprint, heading: 'Review holder and price',
+    copy: 'Show the recipient, ticket and price cap before requesting approval', button: 'Approve transfer', next: 'pending',
+    facts: [['Recipient', 'Mina Lee'], ['Price cap', '748,000 ₫'], ['Registry', '0x84C2...11F0']],
   },
   pending: {
-    label: 'Registry', icon: Cube, heading: 'Pending is not transferred',
-    copy: 'Keep both owners and the garment state visible until finality', button: 'Advance finality', next: 'confirmed',
-    facts: [['Status', 'Included in block'], ['Finality', 'Awaiting finality'], ['Event', '0x9F31...A8E4']],
+    label: 'Registry', icon: Cube, heading: 'Pending is not complete',
+    copy: 'Keep both holders and the ticket state visible until finality', button: 'Advance finality', next: 'confirmed',
+    facts: [['Status', 'Included in block'], ['Entry code', 'Still locked'], ['Event', '0x9F31...A8E4']],
   },
   confirmed: {
-    label: 'Confirmed', icon: CheckCircle, heading: 'Return the updated passport',
-    copy: 'State who owns the item now and preserve its complete history', button: 'Restart demo', next: 'connect',
-    facts: [['Result', 'Ownership transferred'], ['Finality', 'Finality reached'], ['Receipt', '0x9F31...A8E4']],
+    label: 'Confirmed', icon: CheckCircle, heading: 'Return the updated ticket',
+    copy: 'State who holds the ticket now and issue a new rotating entry code', button: 'Restart demo', next: 'connect',
+    facts: [['Result', 'Holder updated'], ['Entry code', 'Ready'], ['Receipt', '0x9F31...A8E4']],
   },
 };
 
@@ -513,9 +512,9 @@ function BlockchainWalletFlow({ Reveal }) {
   const activeIndex = walletStateOrder.indexOf(state);
   return <section id="wallet-flow" className="bc-section bc-wallet-section">
     <div className="page-shell bc-wallet-layout">
-      <Reveal className="bc-wallet-copy"><Wallet size={34} weight="duotone" aria-hidden="true" /><h2>Transfer states stay separate</h2><p>Public record, signature scope, registry state and confirmation never collapse into one loading state</p><div className="bc-wallet-steps" aria-label="Ownership transfer steps">{Object.entries(walletStates).map(([key, item]) => <button type="button" key={key} aria-pressed={state === key} onClick={() => setState(key)}>{item.label}</button>)}</div></Reveal>
+      <Reveal className="bc-wallet-copy"><Wallet size={34} weight="duotone" aria-hidden="true" /><h2>Transfer states stay separate</h2><p>Ticket, recipient, registry state and confirmation remain visible throughout the flow</p><div className="bc-wallet-steps" aria-label="Ticket transfer steps">{Object.entries(walletStates).map(([key, item]) => <button type="button" key={key} aria-pressed={state === key} onClick={() => setState(key)}>{item.label}</button>)}</div></Reveal>
       <Reveal className="bc-wallet-demo" delay={0.08}>
-        <header className="bc-wallet-context"><div><span>Passport action</span><strong>Transfer Utility Jacket 07</strong></div><dl><div><dt>From</dt><dd>0x72A4...91C2</dd></div><div><dt>Registry</dt><dd>EVM testnet</dd></div><div><dt>Item</dt><dd>24-SS-B07-0007</dd></div></dl></header>
+        <header className="bc-wallet-context"><div><span>Ticket action</span><strong>Transfer HAZE / 04</strong></div><dl><div><dt>From</dt><dd>0x72A4...91C2</dd></div><div><dt>Registry</dt><dd>EVM testnet</dd></div><div><dt>Ticket</dt><dd>RL-26-0421</dd></div></dl></header>
         <div className="bc-wallet-progress" aria-label="Transaction progress">{walletStateOrder.map((key, index) => <div className={index < activeIndex ? 'is-done' : index === activeIndex ? 'is-current' : ''} key={key}><span>{String(index + 1).padStart(2, '0')}</span><strong>{walletStates[key].label}</strong><i /></div>)}</div>
         <motion.div className={`bc-wallet-card is-${state}`} key={state} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .3 }} aria-live="polite"><ActiveIcon size={32} weight="duotone" /><span>{active.label}</span><strong>{active.heading}</strong><p>{active.copy}</p><dl className="bc-state-facts">{active.facts.map(([term, value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl><button type="button" onClick={() => setState(active.next)}>{active.button}</button></motion.div>
       </Reveal>
@@ -524,14 +523,14 @@ function BlockchainWalletFlow({ Reveal }) {
 }
 
 function BlockchainEscrow({ Reveal }) {
-  return <section id="escrow-state" className="bc-section bc-escrow-section"><div className="page-shell"><Reveal className="bc-heading"><h2>The lifecycle stays readable</h2><p>VẾT keeps origin, repair, transfer and recovery explicit throughout one garment history</p></Reveal><div className="bc-escrow-grid"><Reveal className="bc-escrow-flow"><img src={vetLifecycle} alt="VẾT ownership transfer, lifecycle timeline and verified resale listing" loading="lazy" /></Reveal><Reveal className="bc-escrow-evidence" delay={0.08}><span>Passport 24-SS-B07-0007</span><h3>One item under explicit records</h3><dl><div><dt>Issued</dt><dd>Studio registers origin, materials and batch</dd></div><div><dt>Repaired</dt><dd>Certified partner adds component and care notes</dd></div><div><dt>Transferred</dt><dd>Both owners approve the handover</dd></div><div><dt>Recovered</dt><dd>End-of-life partner records the next material route</dd></div></dl><div className="bc-escrow-boundary"><WarningCircle size={18} weight="fill" aria-hidden="true" /><p><strong>Prototype boundary</strong>Production requires contract audit, partner governance and consumer testing</p></div><a href="/work/kitepay">View VẾT case study <ArrowUpRight size={17} /></a></Reveal></div></div></section>;
+  return <section id="escrow-state" className="bc-section bc-escrow-section"><div className="page-shell"><Reveal className="bc-heading"><h2>The ticket stays readable</h2><p>RELAY keeps issue, transfer, resale and entry explicit throughout one ticket history</p></Reveal><div className="bc-escrow-grid"><Reveal className="bc-escrow-flow"><img src={relayEntry} alt="Venue staff scanning a RELAY digital ticket at entry" loading="lazy" /></Reveal><Reveal className="bc-escrow-evidence" delay={0.08}><span>Ticket RL-26-0421</span><h3>One ticket under explicit records</h3><dl><div><dt>Issued</dt><dd>Organizer records event, access tier and face value</dd></div><div><dt>Transferred</dt><dd>Holder approves the recipient and expiry</dd></div><div><dt>Resold</dt><dd>Marketplace enforces price cap and royalty</dd></div><div><dt>Admitted</dt><dd>Gate scanner confirms one-time entry</dd></div></dl><div className="bc-escrow-boundary"><WarningCircle size={18} weight="fill" aria-hidden="true" /><p><strong>Prototype boundary</strong>Production requires contract audit, organizer governance and load testing</p></div><a href="/work/kitepay">View RELAY case study <ArrowUpRight size={17} /></a></Reveal></div></div></section>;
 }
 
 const eventMappings = [
-  { event: 'PassportIssued', parsed: 'item + batch + material set', state: 'passport = active', message: 'Garment passport verified', recovery: 'Expose origin and care data' },
-  { event: 'RepairAdded', parsed: 'partner + component + note', state: 'history = updated', message: 'Repair added to item history', recovery: 'Refresh care recommendations' },
-  { event: 'OwnershipTransferred', parsed: 'item + from + to', state: 'transfer = pendingFinality', message: 'Transfer included, awaiting finality', recovery: 'Keep both owners visible' },
-  { event: 'RecoveryRouteAdded', parsed: 'partner + material route', state: 'lifecycle = recovered', message: 'Next material route recorded', recovery: 'Close ownership actions' },
+  { event: 'TicketIssued', parsed: 'event + tier + face value', state: 'ticket = active', message: 'Ticket ready', recovery: 'Expose event and access data' },
+  { event: 'TicketTransferred', parsed: 'ticket + from + to', state: 'holder = updated', message: 'Ticket holder updated', recovery: 'Rotate the entry code' },
+  { event: 'ResaleSettled', parsed: 'price + cap + royalty', state: 'resale = settled', message: 'Verified resale completed', recovery: 'Show price and new holder' },
+  { event: 'EntryConfirmed', parsed: 'ticket + gate + time', state: 'entry = used', message: 'Entry confirmed', recovery: 'Lock the rotating code' },
 ];
 
 function BlockchainMapping({ Reveal }) {
@@ -539,10 +538,10 @@ function BlockchainMapping({ Reveal }) {
 }
 
 const trustStates = [
-  { title: 'Wrong registry', copy: 'The connected network does not contain this garment passport', action: 'Prepare switch', resultLabel: 'Registry selected', result: 'The target test registry is ready for wallet confirmation', icon: WifiSlash, className: 'is-warning' },
-  { title: 'Transfer rejected', copy: 'No signature was created and ownership did not change', action: 'Review request', resultLabel: 'No state change', result: 'The garment and transfer scope remain available before trying again', icon: XCircle, className: 'is-error' },
-  { title: 'Event failed', copy: 'The contract reverted before the passport history changed', action: 'Decode reason', resultLabel: 'Decoded revert', result: 'The current owner no longer matches the transfer request', icon: WarningCircle, className: 'is-error' },
-  { title: 'Transfer confirmed', copy: 'The new owner and complete garment history are now verifiable', action: 'Inspect passport', resultLabel: 'Passport verified', result: 'Finality reached and the updated ownership record is available', icon: CheckCircle, className: 'is-success' },
+  { title: 'Wrong registry', copy: 'The connected network does not contain this event ticket', action: 'Prepare switch', resultLabel: 'Registry selected', result: 'The target test registry is ready for confirmation', icon: WifiSlash, className: 'is-warning' },
+  { title: 'Transfer rejected', copy: 'No signature was created and the holder did not change', action: 'Review request', resultLabel: 'No state change', result: 'The ticket and recipient remain available before trying again', icon: XCircle, className: 'is-error' },
+  { title: 'Price cap failed', copy: 'The resale request exceeds the organizer limit', action: 'Review cap', resultLabel: 'Price corrected', result: 'The listing now matches the allowed resale range', icon: WarningCircle, className: 'is-error' },
+  { title: 'Entry confirmed', copy: 'The ticket is valid and has not been used at another gate', action: 'Inspect ticket', resultLabel: 'Ticket admitted', result: 'The rotating code is locked after successful entry', icon: CheckCircle, className: 'is-success' },
 ];
 
 function BlockchainTrustStates({ Reveal }) {
@@ -553,13 +552,13 @@ function BlockchainTrustStates({ Reveal }) {
 
 function BlockchainTools({ Reveal }) {
   const layers = [
-    { index: '01', name: 'Passport resolver', implementation: 'NFC + QR + public item route', boundary: 'Public product data first' },
+    { index: '01', name: 'Ticket resolver', implementation: 'Rotating QR + public ticket route', boundary: 'Public event data first' },
     { index: '02', name: 'Typed client', implementation: 'viem reads, simulation and write request', boundary: 'No write before simulation' },
-    { index: '03', name: 'Passport registry', implementation: 'Solidity lifecycle event model', boundary: 'Issue, repair, transfer, recover' },
+    { index: '03', name: 'Ticket registry', implementation: 'Solidity event access model', boundary: 'Issue, transfer, resale, entry' },
     { index: '04', name: 'Event parser', implementation: 'Decoded logs + receipt status', boundary: 'Typed data into UI state' },
     { index: '05', name: 'Product feedback', implementation: 'React states + recovery actions', boundary: 'Plain language and next step' },
   ];
-  return <section id="integration-architecture" className="bc-section bc-tools-section"><div className="page-shell"><Reveal className="bc-heading"><ArrowsLeftRight size={34} weight="duotone" aria-hidden="true" /><h2>Integration has explicit boundaries</h2><p>Resolver, client, registry, events and interface form one inspectable path</p></Reveal><div className="bc-architecture-layout"><Reveal className="bc-architecture-flow">{layers.map((layer, index) => <React.Fragment key={layer.name}><article><span>{layer.index}</span><div><strong>{layer.name}</strong><p>{layer.implementation}</p><small>{layer.boundary}</small></div></article>{index < layers.length - 1 && <i aria-hidden="true" />}</React.Fragment>)}</Reveal><Reveal className="bc-architecture-proof" delay={0.08}><header><span>Implementation boundary</span><strong>EVM passport demo</strong></header><dl><div><dt>Read path</dt><dd>Item, batch, materials, repairs and current owner</dd></div><div><dt>Write path</dt><dd>Simulate, request signature, submit, confirm</dd></div><div><dt>Error path</dt><dd>Reject, wrong registry, revert and finality delay</dd></div><div><dt>Before production</dt><dd>Audit, partner governance, monitoring and privacy policy</dd></div></dl><a href="#contact">Plan an integration <ArrowUpRight size={18} /></a></Reveal></div></div></section>;
+  return <section id="integration-architecture" className="bc-section bc-tools-section"><div className="page-shell"><Reveal className="bc-heading"><ArrowsLeftRight size={34} weight="duotone" aria-hidden="true" /><h2>Integration has explicit boundaries</h2><p>Resolver, client, registry, events and interface form one inspectable path</p></Reveal><div className="bc-architecture-layout"><Reveal className="bc-architecture-flow">{layers.map((layer, index) => <React.Fragment key={layer.name}><article><span>{layer.index}</span><div><strong>{layer.name}</strong><p>{layer.implementation}</p><small>{layer.boundary}</small></div></article>{index < layers.length - 1 && <i aria-hidden="true" />}</React.Fragment>)}</Reveal><Reveal className="bc-architecture-proof" delay={0.08}><header><span>Implementation boundary</span><strong>EVM ticket demo</strong></header><dl><div><dt>Read path</dt><dd>Event, ticket, holder, price cap and entry state</dd></div><div><dt>Write path</dt><dd>Simulate, request signature, submit, confirm</dd></div><div><dt>Error path</dt><dd>Reject, wrong registry, cap breach and finality delay</dd></div><div><dt>Before production</dt><dd>Audit, organizer governance, monitoring and load testing</dd></div></dl><a href="#contact">Plan an integration <ArrowUpRight size={18} /></a></Reveal></div></div></section>;
 }
 
 function BlockchainShowcase({ Reveal }) {

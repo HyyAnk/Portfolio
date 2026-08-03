@@ -22,14 +22,14 @@ import pdfBusinessCardShowcase from './assets/experiments/pdf-business-card.webp
 import aiMediaStudioShowcase from './assets/experiments/ai-media-studio.webp';
 import portraitImage from './assets/generated/portrait.webp';
 import dauCover from './assets/case-studies/dau-cover.webp';
-import vetCover from './assets/case-studies/vet-cover.webp';
+import relayCover from './assets/case-studies/relay-cover.webp';
 import vunCover from './assets/case-studies/vun-cover.webp';
-import lamCover from './assets/case-studies/lam-cover.webp';
+import hxsCover from './assets/case-studies/hxs-01.webp';
 import { notFoundSeo, seoByPath, siteIdentity } from './seo.js';
 import { withoutTrailingPeriod } from './text.js';
 
 const DeepCaseStudy = lazy(() => import('./caseStudies.jsx').then((module) => ({ default: module.DeepCaseStudy })));
-const ShowcaseCaseStudy = lazy(() => import('./showcaseCases.jsx?rev=visual-flow-v2').then((module) => ({ default: module.ShowcaseCaseStudy })));
+const ShowcaseCaseStudy = lazy(() => import('./showcaseCases.jsx?rev=visual-flow-v3').then((module) => ({ default: module.ShowcaseCaseStudy })));
 const SkillPageContent = lazy(() => import('./SkillPageContent.jsx'));
 
 const person = siteIdentity.name;
@@ -251,8 +251,8 @@ function SkillToolMotion({ skill }) {
 const works = [
   { slug: 'mat', title: 'DẤU', type: 'Cultural archive · Web app', year: '2026', role: 'Product strategy · UX/UI', description: 'A visual archive for scanning Vietnamese craft motifs and finding the people, places and techniques behind them.', challenge: 'Cultural records are often detached from the object and difficult to explore during a real museum or workshop visit.', outcome: 'A responsive archive connecting recognition, artifact context, maker audio, collections and offline access.', tags: ['Product design', 'Cultural archive'], image: dauCover, deep: true },
   { slug: 'folded-matter', title: 'VỤN', type: 'Brand identity · Circular materials', year: '2026', role: 'Strategy · Identity · Art direction', description: 'Identity for a studio that turns construction offcuts into useful objects.', challenge: 'A material-led studio needed one recognisable system across samples, products, packaging, space and catalogue.', outcome: 'A fragment-based identity built from four colours, three material families and one modular V mark.', tags: ['Brand identity', 'Art direction'], image: vunCover, deep: true },
-  { slug: 'still-moving', title: 'LAM', type: 'Corporate profile · Marine biomaterials', year: '2026', role: 'Editorial direction · Information design', description: 'A complete company profile for a coastal laboratory growing seaweed into next-generation materials.', challenge: 'Scientific process, material performance and coastal impact had to remain credible to both partners and researchers.', outcome: 'A bilingual profile system connecting cultivation, science, applications, samples, impact and a digital data room.', tags: ['Editorial design', 'Information design'], image: lamCover, deep: true },
-  { slug: 'kitepay', title: 'VẾT', type: 'Blockchain product · Digital passport', year: '2026', role: 'Product strategy · UX/UI · Web3', description: 'A garment passport that keeps origin, material, repair and ownership history available throughout its life.', challenge: 'Independent fashion needs verifiable lifecycle data without making customers navigate blockchain mechanics.', outcome: 'A physical and digital system connecting NFC access, brand issuance, repair, transfer, recovery and verified resale.', tags: ['Blockchain', 'Product design'], image: vetCover, deep: true },
+  { slug: 'still-moving', title: 'HUAXINSHENG', type: 'Company catalogue · Industrial materials', year: '2026', role: 'Catalogue design · Art direction', description: 'A 24-page Vietnamese sales catalogue for welded steel mesh, from company capability to technical application.', challenge: 'Company scale, product proof, engineering detail and real applications had to remain easy to scan in one compact document.', outcome: 'An A3 spread system built around a clear Inter hierarchy, industrial blue palette and evidence-led page sequence.', tags: ['Editorial design', 'Catalogue'], image: hxsCover, deep: true },
+  { slug: 'kitepay', title: 'RELAY', type: 'Blockchain product · Event ticketing', year: '2026', role: 'Product strategy · UX/UI · Web3', description: 'Verified event tickets with simple transfer, capped resale and fraud-resistant entry.', challenge: 'Ticket ownership needed to stay trustworthy without exposing customers or gate staff to blockchain mechanics.', outcome: 'One access system across mobile tickets, resale, scanners, wristbands and organizer operations.', tags: ['Blockchain', 'Product design'], image: relayCover, deep: true },
 ];
 
 const experiments = [
@@ -306,8 +306,8 @@ const experiments = [
 const heroCarouselImages = [
   { image: dauCover, alt: 'DẤU Vietnamese craft archive across web and mobile' },
   { image: vunCover, alt: 'VỤN circular-material studio identity system' },
-  { image: lamCover, alt: 'LAM marine biomaterials corporate profile' },
-  { image: vetCover, alt: 'VẾT blockchain garment passport' },
+  { image: hxsCover, alt: 'HUAXINSHENG industrial welded mesh company catalogue' },
+  { image: relayCover, alt: 'RELAY verified event ticketing system' },
   { image: uiImage, alt: 'Responsive interface design study' },
   { image: graphicImage, alt: 'Graphic identity system study' },
   { image: videoImage, alt: 'Video editing and title design study' },

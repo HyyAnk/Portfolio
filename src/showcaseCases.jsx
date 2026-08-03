@@ -10,15 +10,21 @@ import vunPackaging from './assets/case-studies/vun-packaging.webp';
 import vunSpace from './assets/case-studies/vun-space.webp';
 import vunCampaign from './assets/case-studies/vun-campaign.webp';
 import vunDigital from './assets/case-studies/vun-digital.webp';
-import lamCover from './assets/case-studies/lam-cover.webp';
-import lamOverview from './assets/case-studies/lam-overview.webp';
-import lamScience from './assets/case-studies/lam-science.webp';
-import lamMaterials from './assets/case-studies/lam-materials.webp';
-import lamImpact from './assets/case-studies/lam-impact.webp';
-import lamDigital from './assets/case-studies/lam-digital.webp';
+import hxs01 from './assets/case-studies/hxs-01.webp';
+import hxs02 from './assets/case-studies/hxs-02.webp';
+import hxs03 from './assets/case-studies/hxs-03.webp';
+import hxs04 from './assets/case-studies/hxs-04.webp';
+import hxs05 from './assets/case-studies/hxs-05.webp';
+import hxs06 from './assets/case-studies/hxs-06.webp';
+import hxs07 from './assets/case-studies/hxs-07.webp';
+import hxs08 from './assets/case-studies/hxs-08.webp';
+import hxs09 from './assets/case-studies/hxs-09.webp';
+import hxs10 from './assets/case-studies/hxs-10.webp';
+import hxs11 from './assets/case-studies/hxs-11.webp';
+import hxs12 from './assets/case-studies/hxs-12.webp';
 import { withoutTrailingPeriod } from './text.js';
 
-function CaseHeader({ work, variant, kicker, intro, facts, image, imageAlt, action }) {
+function CaseHeader({ work, variant, kicker, intro, facts, image, imageAlt, action, note = 'Self-initiated fictional brief / original art direction, design system and prototype' }) {
   return <section className={`flow-hero flow-hero-${variant}`}>
     <div className="flow-shell">
       <Link className="flow-back" to="/#portfolio"><ArrowLeft size={16}/> Portfolio</Link>
@@ -29,7 +35,7 @@ function CaseHeader({ work, variant, kicker, intro, facts, image, imageAlt, acti
       <figure className="flow-cover"><img src={image} alt={imageAlt}/></figure>
       <div className="flow-meta">
         <dl>{facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-        <p>Self-initiated fictional brief / original art direction, design system and prototype</p>
+        <p>{note}</p>
       </div>
     </div>
   </section>;
@@ -95,7 +101,10 @@ function VunCaseStudy({ work }) {
     <section className="flow-section vun-foundation"><div className="flow-shell">
       <FlowLabel number="01">Identity + material language</FlowLabel>
       <Visual src={vunFoundations} alt="VỤN wordmark, fragment symbol, four-color palette and recovered material specimens"/>
-      <div className="vun-spec-strip" aria-label="VỤN identity specification"><span>Vermilion<br/><b>#F04B2F</b></span><span>Dusty lilac<br/><b>#B9A7FF</b></span><span>Rice paper<br/><b>#E9E0D2</b></span><span>Charcoal<br/><b>#171717</b></span><strong>V = fragment<br/>Grid = 8 × 8</strong></div>
+      <div className="vun-identity-spec" aria-label="VỤN color palette and typography">
+        <div className="vun-palette"><span style={{ '--swatch': '#F04B2F' }}><b>Vermilion</b><small>#F04B2F</small></span><span style={{ '--swatch': '#B9A7FF' }}><b>Dusty lilac</b><small>#B9A7FF</small></span><span style={{ '--swatch': '#E9E0D2' }}><b>Rice paper</b><small>#E9E0D2</small></span><span style={{ '--swatch': '#171717' }}><b>Charcoal</b><small>#171717</small></span></div>
+        <div className="vun-type"><span>Manrope Variable</span><strong>VỤN</strong><p>Aa 01 / 200 to 800</p><small>Fragments become structure</small></div>
+      </div>
     </div></section>
 
     <section className="flow-section vun-applications"><div className="flow-shell">
@@ -126,77 +135,80 @@ function VunCaseStudy({ work }) {
   </article>;
 }
 
-const lamChapters = [
-  ['01','Origin','04-11'],['02','Cultivation','12-25'],['03','Science','26-43'],['04','Materials','44-63'],
-  ['05','Applications','64-77'],['06','Impact','78-89'],['07','Partners','90-99'],['08','Data room','100-104'],
-];
+const hxsPages = [hxs01, hxs02, hxs03, hxs04, hxs05, hxs06, hxs07, hxs08, hxs09, hxs10, hxs11, hxs12];
 
-const lamReaderViews = {
-  company: { label: 'Company', image: lamOverview, pages: '04-25', facts: ['Coastal origin','Cultivation network','Company model'] },
-  science: { label: 'Science', image: lamScience, pages: '26-43', facts: ['Biopolymer extraction','Barrier testing','Pilot protocols'] },
-  materials: { label: 'Materials', image: lamMaterials, pages: '44-77', facts: ['Film','Molded form','Coating'] },
-  field: { label: 'Field data', image: lamDigital, pages: 'Live', facts: ['Farm map','Batch records','Material library'] },
+const hxsReaderViews = {
+  company: { label: 'Company', image: hxs03, page: '03', note: 'Vietnam operation and logistics network' },
+  production: { label: 'Production', image: hxs05, page: '05', note: 'Factory, quality control and product construction' },
+  standards: { label: 'Standards', image: hxs07, page: '07', note: 'Slab detailing and standard compliance' },
+  specs: { label: 'Specifications', image: hxs10, page: '10', note: 'Material grades, dimensions and test references' },
 };
 
-function LamReader() {
+function HxsReader() {
   const [view, setView] = useState('company');
-  const active = lamReaderViews[view];
-  return <div className="lam-reader">
-    <nav aria-label="LAM profile preview">{Object.entries(lamReaderViews).map(([key, item]) => <button type="button" key={key} aria-pressed={view === key} onClick={() => setView(key)}><span>{item.label}</span><small>{item.pages}</small></button>)}</nav>
-    <div className="lam-reader-stage" aria-live="polite">
-      <img src={active.image} alt={`LAM ${active.label.toLowerCase()} profile preview`}/>
-      <div><span>{active.pages}</span>{active.facts.map((fact) => <strong key={fact}>{fact}</strong>)}</div>
+  const active = hxsReaderViews[view];
+  return <div className="hxs-reader">
+    <nav aria-label="HUAXINSHENG catalogue preview">{Object.entries(hxsReaderViews).map(([key, item]) => <button type="button" key={key} aria-pressed={view === key} onClick={() => setView(key)}><span>{item.label}</span><small>{item.page}</small></button>)}</nav>
+    <div className="hxs-reader-stage" aria-live="polite">
+      <img src={active.image} alt={`HUAXINSHENG catalogue page ${active.page}, ${active.note}`}/>
+      <div><span>{active.page} / 12</span><strong>{active.note}</strong></div>
     </div>
   </div>;
 }
 
-function LamCells() {
-  return <div className="lam-cells" role="img" aria-label="Animated seaweed cell pattern">
-    {Array.from({ length: 8 }, (_, index) => <svg key={index} viewBox="0 0 120 120" aria-hidden="true"><path d="M15 66C32 20 53 25 60 57c7 31 27 36 45-3M17 84c24-17 36-13 46 4 9 16 23 14 40-8"/></svg>)}
-  </div>;
-}
+function HxsCaseStudy({ work }) {
+  const facts = [['Role','Catalogue design · Art direction'],['Format','12 A3 spreads · 24 A4 pages'],['Language','Vietnamese'],['Typeface','Inter variable family']];
+  return <article className="flow-case case-hxs">
+    <CaseHeader work={work} variant="hxs" kicker="Company catalogue · Industrial materials · 2026" intro="A compact sales catalogue for welded steel mesh, from company capability to technical application" facts={facts} image={hxs01} imageAlt="HUAXINSHENG catalogue front and back cover in white and deep blue" action="Browse catalogue" note="Final artwork presented from the original HUAXINSHENG X24 PDF"/>
 
-function LamCaseStudy({ work }) {
-  const facts = [['Role','Editorial direction · Information design'],['Format','104 pages · VI / EN'],['Outputs','Profile · samples · data room'],['Duration','8-week concept sprint']];
-  return <article className="flow-case case-lam">
-    <CaseHeader work={work} variant="lam" kicker="Corporate profile · Marine biomaterials · 2026" intro="Company profile for a coastal lab growing seaweed into next-generation materials" facts={facts} image={lamCover} imageAlt="LAM marine biomaterials profile, seaweed samples and translucent material sheets in a coastal laboratory" action="Open profile reader"/>
-
-    <section className="flow-section lam-architecture"><div className="flow-shell">
-      <FlowLabel number="01">Profile system / 104 pages</FlowLabel>
-      <Visual src={lamOverview} alt="LAM company profile cover, contents, company story and cultivation network spreads"/>
-      <ol>{lamChapters.map(([number, title, pages]) => <li key={number}><span>{number}</span><strong>{title}</strong><small>{pages}</small></li>)}</ol>
+    <section className="flow-section hxs-architecture"><div className="flow-shell">
+      <FlowLabel number="01">Catalogue architecture / 12 spreads</FlowLabel>
+      <div className="hxs-spread-stack">
+        <figure><img src={hxs02} alt="HUAXINSHENG contents and product ecosystem spread"/></figure>
+        <figure><img src={hxs03} alt="HUAXINSHENG Vietnam company and logistics capability spread"/></figure>
+      </div>
+      <ol><li><span>01</span><strong>Company</strong><small>03 to 04</small></li><li><span>02</span><strong>Product</strong><small>05 to 07</small></li><li><span>03</span><strong>Applications</strong><small>08 to 10</small></li><li><span>04</span><strong>Partners</strong><small>11 to 12</small></li></ol>
     </div></section>
 
-    <section className="lam-science-frame">
-      <Visual src={lamScience} alt="LAM science chapter showing seaweed microscopy, extraction stages and barrier testing"/>
-      <div className="lam-science-tag"><span>02</span><strong>Science library</strong><small>Species / process / performance</small></div>
-    </section>
-
-    <section id="live-demo" className="flow-section lam-demo"><div className="flow-shell">
-      <FlowLabel number="03" tone="is-light">Profile reader</FlowLabel>
-      <LamReader/>
-    </div></section>
-
-    <section className="flow-section lam-materials"><div className="flow-shell">
-      <FlowLabel number="04">Material portfolio</FlowLabel>
-      <div className="flow-pair lam-material-grid">
-        <Visual src={lamMaterials} alt="LAM seaweed films, molded trays, coated papers and agricultural material samples" number="04A" label="Material families"/>
-        <Visual src={lamImpact} alt="LAM impact report spreads with farm data, lifecycle diagrams and coastal field documentation" number="04B" label="Impact record"/>
+    <section className="flow-section hxs-system"><div className="flow-shell">
+      <FlowLabel number="02" tone="is-light">Colour + typography</FlowLabel>
+      <div className="hxs-system-board">
+        <div className="hxs-palette"><span style={{ '--swatch': '#003A78' }}><b>Core navy</b><small>#003A78</small></span><span style={{ '--swatch': '#006DB6' }}><b>Industrial blue</b><small>#006DB6</small></span><span style={{ '--swatch': '#00A7D8' }}><b>Signal cyan</b><small>#00A7D8</small></span><span style={{ '--swatch': '#AFC2D1' }}><b>Steel</b><small>#AFC2D1</small></span><span style={{ '--swatch': '#F4F7F9' }}><b>Paper</b><small>#F4F7F9</small></span></div>
+        <div className="hxs-type"><span>Inter / 400 · 600 · 800</span><strong>LƯỚI THÉP HÀN</strong><p>Huaxinsheng Việt Nam</p><small>0123456789 / CRB550 / A3 landscape</small></div>
       </div>
     </div></section>
 
-    <section className="flow-section lam-handover"><div className="flow-shell">
-      <FlowLabel number="05" tone="is-light">Lab to partner</FlowLabel>
-      <Visual src={lamDigital} alt="LAM printed profile, material samples, cultivation map and responsive digital library in a coastal lab"/>
-      <dl className="lam-manifest"><div><dt>Profile</dt><dd>104 pp / VI + EN</dd></div><div><dt>Material library</dt><dd>12 sample records</dd></div><div><dt>Impact data</dt><dd>Farm to end use</dd></div><div><dt>Digital room</dt><dd>Map / batches / tests</dd></div></dl>
+    <section className="flow-section hxs-product"><div className="flow-shell">
+      <FlowLabel number="03">Product proof</FlowLabel>
+      <div className="flow-pair hxs-proof-grid"><Visual src={hxs05} alt="Production line and welded steel mesh construction diagrams" number="03A" label="Production + construction"/><Visual src={hxs06} alt="Four core advantages of welded steel mesh" number="03B" label="Core advantages"/></div>
     </div></section>
 
-    <section className="lam-close"><LamCells/><div className="flow-shell"><span>Marine material lab / Vietnam</span><strong>LAM</strong><small>Seaweed / science / scale</small></div></section>
+    <section id="live-demo" className="flow-section hxs-demo"><div className="flow-shell">
+      <FlowLabel number="04" tone="is-light">Catalogue reader</FlowLabel>
+      <HxsReader/>
+    </div></section>
+
+    <section className="flow-section hxs-engineering"><div className="flow-shell">
+      <FlowLabel number="05">Engineering detail</FlowLabel>
+      <div className="hxs-engineering-grid"><Visual src={hxs07} alt="HUAXINSHENG slab reinforcement details and compliance diagrams"/><Visual src={hxs10} alt="HUAXINSHENG welded mesh technical specification table"/></div>
+    </div></section>
+
+    <section className="flow-section hxs-applications"><div className="flow-shell">
+      <FlowLabel number="06">Application library</FlowLabel>
+      <div className="hxs-application-grid"><Visual src={hxs08} alt="Welded mesh applications for airport deck, refinery and port"/><Visual src={hxs09} alt="Welded mesh applications for tunnel, bridge and water infrastructure"/><Visual src={hxs12} alt="HUAXINSHENG featured industrial projects"/></div>
+    </div></section>
+
+    <section className="flow-section hxs-sequence"><div className="flow-shell">
+      <FlowLabel number="07" tone="is-light">Complete page sequence</FlowLabel>
+      <div className="hxs-page-grid">{hxsPages.map((page, index) => <figure key={page}><img src={page} alt={`HUAXINSHENG catalogue page ${String(index + 1).padStart(2, '0')}`} loading="lazy"/><figcaption>{String(index + 1).padStart(2, '0')}</figcaption></figure>)}</div>
+    </div></section>
+
+    <section className="hxs-close"><div className="flow-shell"><span>12 A3 spreads / 24 A4 pages / Vietnamese</span><strong>HUAXINSHENG</strong><small>Company · Product · Application · Projects</small></div></section>
   </article>;
 }
 
 export function ShowcaseCaseStudy({ work }) {
   if (work.slug === 'folded-matter') return <VunCaseStudy work={work}/>;
-  if (work.slug === 'still-moving') return <LamCaseStudy work={work}/>;
+  if (work.slug === 'still-moving') return <HxsCaseStudy work={work}/>;
   return null;
 }

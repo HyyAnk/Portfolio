@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowLeft, ArrowUpRight, ArrowsLeftRight, BookmarkSimple, CaretRight,
-  Headphones, LinkSimple, MapPin, Needle, Recycle, Scan, ShieldCheck,
+  Headphones, LinkSimple, MapPin, Recycle, Scan, ShieldCheck,
 } from '@phosphor-icons/react';
 import './case-studies.css';
 
@@ -12,12 +12,10 @@ import dauScan from './assets/case-studies/dau-scan.webp';
 import dauDesktop from './assets/case-studies/dau-desktop.webp';
 import dauMuseum from './assets/case-studies/dau-museum.webp';
 import dauStates from './assets/case-studies/dau-states.webp';
-import vetCover from './assets/case-studies/vet-cover.webp';
-import vetPhysical from './assets/case-studies/vet-physical.webp';
-import vetMobile from './assets/case-studies/vet-mobile.webp';
-import vetConsole from './assets/case-studies/vet-console.webp';
-import vetScan from './assets/case-studies/vet-scan.webp';
-import vetLifecycle from './assets/case-studies/vet-lifecycle.webp';
+import relayCover from './assets/case-studies/relay-cover.webp';
+import relayEntry from './assets/case-studies/relay-entry.webp';
+import relayKit from './assets/case-studies/relay-kit.webp';
+import relaySpace from './assets/case-studies/relay-space.webp';
 import { withoutTrailingPeriod } from './text.js';
 
 function ProductHero({ work, variant, label, summary, facts, image, imageAlt, action }) {
@@ -109,10 +107,19 @@ function DauArchiveDemo() {
   </div>;
 }
 
+function DauIdentityBoard() {
+  return <div className="dau-identity-board" aria-label="DẤU color palette and typography">
+    <div className="dau-palette"><span style={{ '--swatch': '#2545C6' }}><b>Cobalt</b><small>#2545C6</small></span><span style={{ '--swatch': '#16191C' }}><b>Archive ink</b><small>#16191C</small></span><span style={{ '--swatch': '#E6E7E4' }}><b>Museum grey</b><small>#E6E7E4</small></span><span style={{ '--swatch': '#D7CA9F' }}><b>Artifact gold</b><small>#D7CA9F</small></span></div>
+    <div className="dau-type-specimen"><span>Playfair Display + Manrope</span><strong>Dấu tích</strong><p>Ă Â Ê Ô Ơ Ư Đ</p><small>Sơn mài · Gốm · Dệt</small></div>
+  </div>;
+}
+
 function DauCaseStudy({ work }) {
   const facts = [['Role','Product strategy, UX/UI'],['Platform','Responsive web and mobile'],['Core flows','Explore, scan, listen, save'],['Prototype','Interactive archive finder']];
   return <article className="product-case case-dau">
     <ProductHero work={work} variant="dau" label="Cultural archive / web app / 2026" summary="Scan a craft motif, find its context, and keep the maker's voice attached" facts={facts} image={dauCover} imageAlt="DẤU cultural archive across laptop and phone beside lacquer, textile and ceramic objects" action="Try archive finder"/>
+
+    <section className="product-section dau-system"><div className="product-shell"><FlowHeading title="Colour + typography"/><DauIdentityBoard/></div></section>
 
     <section className="product-section dau-screen-run"><div className="product-shell"><FlowHeading title="One archive across every visit" copy="Discovery, map, material filters, saved records and maker audio"/><ProductVisual src={dauScreens} alt="DẤU mobile and tablet screen family for discovery, map, filtering, collections, audio and artifact detail"/></div></section>
 
@@ -128,60 +135,69 @@ function DauCaseStudy({ work }) {
   </article>;
 }
 
-const passportEvents = [
-  { key:'issued', label:'Issued', icon:ShieldCheck, event:'PassportIssued', actor:'Studio administrator', record:'Fiber declaration and maker certificate', result:'Passport active' },
-  { key:'repair', label:'Repair', icon:Needle, event:'RepairAdded', actor:'Repair partner', record:'Work note and component update', result:'History updated' },
-  { key:'transfer', label:'Transfer', icon:ArrowsLeftRight, event:'OwnershipTransferred', actor:'Current and next owner', record:'Signed transfer approval', result:'Ownership moved' },
-  { key:'recover', label:'Recovery', icon:Recycle, event:'RecoveryRouteAdded', actor:'Material recovery partner', record:'End-of-life routing note', result:'Next use recorded' },
+const relayEvents = [
+  { key:'issued', label:'Issue', icon:ShieldCheck, event:'TicketIssued', actor:'Event organizer', record:'Event, access tier and face value', result:'Ticket ready' },
+  { key:'transfer', label:'Transfer', icon:ArrowsLeftRight, event:'TicketTransferred', actor:'Current holder', record:'Recipient and transfer expiry', result:'Ownership moved' },
+  { key:'resale', label:'Resale', icon:Recycle, event:'ResaleSettled', actor:'Verified marketplace', record:'Resale cap, royalty and next holder', result:'Resale settled' },
+  { key:'entry', label:'Entry', icon:Scan, event:'EntryConfirmed', actor:'Gate scanner 02', record:'Rotating ticket proof and gate', result:'Admitted once' },
 ];
 
-function VetPassportDemo() {
+function RelayProductScreens() {
+  const screens = [
+    { label:'My ticket', title:'HAZE / 04', meta:'21 AUG · GATE 02', state:'READY', detail:'Rotating entry code', action:'Open ticket' },
+    { label:'Transfer', title:'Mina Lee', meta:'Expires 14:36', state:'REVIEW', detail:'One ticket · full history', action:'Review recipient' },
+    { label:'Verified resale', title:'748,000 ₫', meta:'Face value 680,000 ₫', state:'CAPPED', detail:'Royalty 2% · holder verified', action:'List ticket' },
+  ];
+  return <div className="relay-phone-stage" aria-label="RELAY mobile ticket, transfer and resale screens">{screens.map((screen, index) => <article className={`relay-phone is-${index + 1}`} key={screen.label}><header><span>RELAY</span><i>{screen.label}</i></header><div className="relay-phone-ticket"><small>{screen.state}</small><strong>{screen.title}</strong><span>{screen.meta}</span><div className="relay-code" aria-hidden="true">{Array.from({ length: 24 }, (_, bar) => <i key={bar}/>)}</div><p>{screen.detail}</p></div><b>{screen.action}<CaretRight size={15}/></b></article>)}</div>;
+}
+
+function RelayRegistryDemo() {
   const [activeKey, setActiveKey] = useState('issued');
   const [confirmed, setConfirmed] = useState(false);
-  const active = passportEvents.find((item) => item.key === activeKey);
+  const active = relayEvents.find((item) => item.key === activeKey);
   const ActiveIcon = active.icon;
   const choose = (key) => { setActiveKey(key); setConfirmed(false); };
-  return <div className="vet-demo">
-    <header><strong>VẾT</strong><span>EVM testnet simulation</span></header>
-    <div className="vet-demo-grid">
-      <nav aria-label="Passport event preview">{passportEvents.map((item) => { const Icon = item.icon; return <button type="button" key={item.key} aria-pressed={activeKey === item.key} onClick={() => choose(item.key)}><Icon size={19}/><span>{item.label}</span></button>; })}</nav>
+  return <div className="relay-demo">
+    <header><strong>RELAY</strong><span>Ticket registry simulation</span></header>
+    <div className="relay-demo-grid">
+      <nav aria-label="Ticket event preview">{relayEvents.map((item) => { const Icon = item.icon; return <button type="button" key={item.key} aria-pressed={activeKey === item.key} onClick={() => choose(item.key)}><Icon size={19}/><span>{item.label}</span></button>; })}</nav>
       <section aria-live="polite">
-        <div className="vet-event-title"><ActiveIcon size={29}/><div><span>Contract event</span><h3>{active.event}</h3></div></div>
+        <div className="relay-event-title"><ActiveIcon size={29}/><div><span>Registry event</span><h3>{active.event}</h3></div></div>
         <dl><div><dt>Actor</dt><dd>{active.actor}</dd></div><div><dt>Record</dt><dd>{active.record}</dd></div><div><dt>Result</dt><dd>{confirmed ? active.result : 'Ready to simulate'}</dd></div></dl>
-        <button type="button" className="vet-confirm" onClick={() => setConfirmed(true)} disabled={confirmed}>{confirmed ? 'Event recorded' : 'Simulate event'}<CaretRight size={17}/></button>
+        <button type="button" className="relay-confirm" onClick={() => setConfirmed(true)} disabled={confirmed}>{confirmed ? 'Event recorded' : 'Simulate event'}<CaretRight size={17}/></button>
       </section>
-      <aside><span>Garment passport</span><strong>24-SS-B07-0007</strong><small>{confirmed ? active.result : 'Local prototype only'}</small><div className={`vet-passport-visual is-${activeKey} ${confirmed ? 'is-confirmed' : ''}`}>
-        <svg viewBox="0 0 180 220" role="img" aria-label="Utility Jacket 07 passport preview"><path d="M62 25 33 48 18 102l27 10 8-31v117h74V81l8 31 27-10-15-54-29-23-15 15H77L62 25Z"/><path d="M76 40v30h28V40M54 91h28v38H54m44-38h28v38H98M90 70v128"/></svg>
-        <div>{passportEvents.map((item) => <i className={item.key === activeKey ? 'is-current' : ''} key={item.key}/>)}</div>
+      <aside><span>Verified ticket</span><strong>RL-26-0421</strong><small>{confirmed ? active.result : 'Local prototype only'}</small><div className={`relay-ticket-visual is-${activeKey} ${confirmed ? 'is-confirmed' : ''}`}>
+        <svg viewBox="0 0 220 280" role="img" aria-label="HAZE 04 event ticket preview"><path d="M30 20h160v240H30V20Z"/><path d="M30 186h160M62 20v240M82 52h78M82 72h52M82 118h76M82 138h48M82 214h78M82 232h44"/><circle cx="30" cy="186" r="9"/><circle cx="190" cy="186" r="9"/></svg>
+        <div>{relayEvents.map((item) => <i className={item.key === activeKey ? 'is-current' : ''} key={item.key}/>)}</div>
         <b>{active.label}</b>
       </div></aside>
     </div>
   </div>;
 }
 
-function VetCaseStudy({ work }) {
-  const facts = [['Role','Product strategy, UX/UI'],['System','Product passport and event registry'],['Interfaces','Brand console, item view, resale'],['Prototype','Local EVM event simulation']];
-  return <article className="product-case case-vet">
-    <ProductHero work={work} variant="vet" label="Blockchain product / digital passport / 2026" summary="A garment record for origin, repair and resale, with verification kept behind the interface" facts={facts} image={vetCover} imageAlt="VẾT garment passport across NFC tag, phone and batch console beside a black jacket" action="Try passport events"/>
+function RelayCaseStudy({ work }) {
+  const facts = [['Role','Product strategy · UX/UI'],['System','Verified event ticket registry'],['Interfaces','Holder · resale · gate · organizer'],['Prototype','Local event simulation']];
+  return <article className="product-case case-relay">
+    <ProductHero work={work} variant="relay" label="Blockchain product / event ticketing / 2026" summary="Verified ticket ownership, capped resale and fraud-resistant entry without exposing blockchain mechanics" facts={facts} image={relayCover} imageAlt="RELAY event ticketing system with phones, gate scanner, wristband, paper ticket and staff lanyard" action="Try ticket events"/>
 
-    <section className="product-section vet-physical"><div className="product-shell"><FlowHeading title="The passport starts on the garment" copy="NFC label, serial tag, care card and repair sample"/><ProductVisual src={vetPhysical} alt="VẾT physical product passport kit with NFC labels, metal tags, care cards and repair samples"/></div></section>
+    <section className="product-section relay-system"><div className="product-shell"><FlowHeading title="Colour + typography"/><div className="relay-system-board" aria-label="RELAY color palette and typography"><div className="relay-palette"><span style={{ '--swatch': '#FF5A1F' }}><b>Signal orange</b><small>#FF5A1F</small></span><span style={{ '--swatch': '#101011' }}><b>Venue black</b><small>#101011</small></span><span style={{ '--swatch': '#C8C8C4' }}><b>Scanner silver</b><small>#C8C8C4</small></span><span style={{ '--swatch': '#F3F0E8' }}><b>Ticket stock</b><small>#F3F0E8</small></span></div><div className="relay-type"><span>Space Grotesk / UI Mono</span><strong>RELAY</strong><p>ACCESS 21:30 / GATE 02</p><small>500 · 600 · 700</small></div></div></div></section>
 
-    <section className="product-section vet-mobile"><div className="product-shell"><FlowHeading title="Product information before chain data"/><ProductVisual src={vetMobile} alt="VẾT mobile screens for garment overview, materials, batch, repair and ownership transfer"/></div></section>
+    <section className="product-section relay-mobile"><div className="product-shell"><FlowHeading title="Ticket, transfer and resale"/><RelayProductScreens/></div></section>
 
-    <section id="live-demo" className="product-section vet-live"><div className="product-shell"><FlowHeading title="Preview the event registry" copy="A local simulation of four lifecycle events"/><VetPassportDemo/></div></section>
+    <section className="product-section relay-kit"><div className="product-shell"><FlowHeading title="Access becomes physical"/><ProductVisual src={relayKit} alt="RELAY paper tickets, wristbands, staff passes, scanner dock and printed event kit on a steel table"/></div></section>
 
-    <section className="product-section vet-console"><div className="product-shell"><FlowHeading title="Brands register the batch once"/><ProductVisual src={vetConsole} alt="VẾT batch registration console and item verification tablet inside a fashion production studio"/></div></section>
+    <section id="live-demo" className="product-section relay-live"><div className="product-shell"><FlowHeading title="Preview the ticket registry" copy="Issue, transfer, resale and one-time entry"/><RelayRegistryDemo/></div></section>
 
-    <section className="product-section vet-use"><div className="product-shell"><FlowHeading title="Verification works at the point of use"/><ProductVisual src={vetScan} alt="Customer scanning a VẾT NFC label and reviewing repair and ownership history in a boutique"/></div></section>
+    <section className="product-section relay-entry"><div className="product-shell"><FlowHeading title="Verification at the gate"/><ProductVisual src={relayEntry} alt="Venue staff scanning a guest's RELAY digital ticket at an event entrance"/></div></section>
 
-    <section className="product-section vet-lifecycle"><div className="product-shell"><FlowHeading title="History follows repair and resale"/><ProductVisual src={vetLifecycle} alt="VẾT ownership transfer, lifecycle events and verified resale listing across devices"/></div></section>
+    <section className="product-section relay-space"><div className="product-shell"><FlowHeading title="One access language across the venue"/><ProductVisual src={relaySpace} alt="RELAY orange and silver event access system applied to venue signage, queue rails and wristband counters"/></div></section>
 
-    <section className="vet-close"><div className="product-shell"><strong>VẾT</strong><div className="vet-event-rail">{passportEvents.map((item) => <span key={item.key}>{item.event}</span>)}</div><p>Interface prototype only. No production chain or commercial deployment is implied.</p></div></section>
+    <section className="relay-close"><div className="product-shell"><strong>RELAY</strong><div className="relay-event-rail">{relayEvents.map((item) => <span key={item.key}>{item.event}</span>)}</div><p>Self-initiated interface prototype. No production network or commercial deployment is implied.</p></div></section>
   </article>;
 }
 
 export function DeepCaseStudy({ work }) {
   if (work.slug === 'mat') return <DauCaseStudy work={work}/>;
-  if (work.slug === 'kitepay') return <VetCaseStudy work={work}/>;
+  if (work.slug === 'kitepay') return <RelayCaseStudy work={work}/>;
   return null;
 }

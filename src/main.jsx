@@ -5,6 +5,8 @@ import App from './App.jsx';
 import './styles.css';
 import '@fontsource-variable/manrope';
 import '@fontsource-variable/playfair-display';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/space-grotesk';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
