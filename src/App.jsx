@@ -438,15 +438,12 @@ function Nav() {
         <div className="nav-menu-wrap">
           <button className="nav-link" type="button" aria-expanded={skillsOpen} onClick={() => { setSkillsOpen((value) => !value); setContactOpen(false); }}>Skills <CaretDown size={15} weight="bold" /></button>
           {skillsOpen && <nav className="dropdown skills-dropdown" aria-label="Skills navigation">
-            <span className="skills-dropdown-label">Core skills</span>
             <div className="skills-dropdown-primary">
               {primarySkills.map((skill) => <Link className="skills-dropdown-primary-link" key={skill.slug} to={`/skills/${skill.slug}`} onClick={() => setSkillsOpen(false)}>
                 <span>{skill.title}</span>
-                <ArrowUpRight size={14} weight="bold" aria-hidden="true" />
               </Link>)}
             </div>
             <div className="skills-dropdown-support">
-              <span className="skills-dropdown-label">Supporting</span>
               {supportingSkills.map((skill) => <Link className="skills-dropdown-support-link" key={skill.slug} to={`/skills/${skill.slug}`} onClick={() => setSkillsOpen(false)}>{skill.title}</Link>)}
             </div>
           </nav>}
