@@ -1,279 +1,204 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, CaretRight, Check, Pause, Play } from '@phosphor-icons/react';
+import { ArrowLeft, ArrowUpRight, Pause, Play } from '@phosphor-icons/react';
 import './showcase-cases.css';
 
-import muonCover from './assets/case-studies/muon-cover.webp';
-import muonSpace from './assets/case-studies/muon-space.webp';
-import muonPrintSystem from './assets/case-studies/muon-print-system.webp';
-import muonObjectApplications from './assets/case-studies/muon-object-applications.webp';
-import muonDigitalDevices from './assets/case-studies/muon-digital-devices.webp';
-import muonStreetApplications from './assets/case-studies/muon-street-applications.webp';
-import hopLuuCover from './assets/case-studies/hop-luu-cover.webp';
-import hopLuuReview from './assets/case-studies/hop-luu-review.webp';
-import hopLuuProfileSpreads from './assets/case-studies/hop-luu-profile-spreads.webp';
-import hopLuuProjectSheets from './assets/case-studies/hop-luu-project-sheets.webp';
-import hopLuuGovernanceKit from './assets/case-studies/hop-luu-governance-kit.webp';
-import hopLuuDigitalReader from './assets/case-studies/hop-luu-digital-reader.webp';
-import hopLuuCapabilitySpread from './assets/case-studies/hop-luu-capability-spread-v2.webp';
-import hopLuuFieldHandover from './assets/case-studies/hop-luu-field-handover-v2.webp';
-import hopLuuProductionDetail from './assets/case-studies/hop-luu-production-detail-v2.webp';
+import vunCover from './assets/case-studies/vun-cover.webp';
+import vunFoundations from './assets/case-studies/vun-foundations.webp';
+import vunStationery from './assets/case-studies/vun-stationery.webp';
+import vunPackaging from './assets/case-studies/vun-packaging.webp';
+import vunSpace from './assets/case-studies/vun-space.webp';
+import vunCampaign from './assets/case-studies/vun-campaign.webp';
+import vunDigital from './assets/case-studies/vun-digital.webp';
+import trucCover from './assets/case-studies/truc-cover.webp';
+import trucOverview from './assets/case-studies/truc-overview.webp';
+import trucProjects from './assets/case-studies/truc-projects.webp';
+import trucGovernance from './assets/case-studies/truc-governance.webp';
+import trucProduction from './assets/case-studies/truc-production.webp';
+import trucDigital from './assets/case-studies/truc-digital.webp';
+import trucReview from './assets/case-studies/truc-review.webp';
 import { withoutTrailingPeriod } from './text.js';
 
-function ShowcaseEyebrow({ children }) {
-  return <span className="showcase-eyebrow">{children}</span>;
-}
-
-function ShowcaseHero({ work, theme, label, summary, facts, image, imageAlt, demoLabel, disclosure }) {
-  return <section className={`showcase-hero showcase-theme-${theme}`}>
-    <div className="page-shell">
-      <Link className="showcase-back" to="/#portfolio"><ArrowLeft size={16}/> Portfolio</Link>
-      <div className="showcase-heading">
-        <div><ShowcaseEyebrow>{label}</ShowcaseEyebrow><h1>{withoutTrailingPeriod(work.title)}</h1></div>
-        <div className="showcase-summary"><p>{summary}</p><a href="#live-demo">{demoLabel}<ArrowUpRight size={17}/></a></div>
+function CaseHeader({ work, variant, kicker, intro, facts, image, imageAlt, action }) {
+  return <section className={`flow-hero flow-hero-${variant}`}>
+    <div className="flow-shell">
+      <Link className="flow-back" to="/#portfolio"><ArrowLeft size={16}/> Portfolio</Link>
+      <header className="flow-heading">
+        <div><span>{kicker}</span><h1>{withoutTrailingPeriod(work.title)}</h1></div>
+        <div className="flow-heading-side"><p>{intro}</p><a href="#live-demo">{action}<ArrowUpRight size={17}/></a></div>
+      </header>
+      <figure className="flow-cover"><img src={image} alt={imageAlt}/></figure>
+      <div className="flow-meta">
+        <dl>{facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+        <p>Self-initiated fictional brief / original art direction, design system and prototype</p>
       </div>
-      <figure className="showcase-cover"><img src={image} alt={imageAlt}/></figure>
-      <dl className="showcase-facts">{facts.map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl>
-      <p className="showcase-disclosure">{disclosure || <><strong>Project status:</strong> This is a self-initiated concept. The strategy, identity, applications and interactive prototype are original portfolio work. No client engagement or commercial result is implied.</>}</p>
     </div>
   </section>;
 }
 
-function ShowcaseLead({ label, title, copy }) {
-  return <header className="showcase-lead">{label && <ShowcaseEyebrow>{label}</ShowcaseEyebrow>}<h2>{withoutTrailingPeriod(title)}</h2>{copy && <p>{copy}</p>}</header>;
+function FlowLabel({ number, children, tone = '' }) {
+  return <div className={`flow-label ${tone}`}><span>{number}</span><strong>{children}</strong></div>;
 }
 
-const muonModes = {
-  tool: { label: 'Tools', item: 'Cordless drill', code: 'T-0087', time: 'Available today', color: '#f05a49', symbol: ']' },
-  kitchen: { label: 'Kitchen', item: 'Large stockpot', code: 'K-0142', time: 'Returns Friday', color: '#f05a49', symbol: '[' },
-  event: { label: 'Events', item: 'Folding table', code: 'E-0029', time: '2 available', color: '#f05a49', symbol: '][' },
+function Visual({ src, alt, number, label, className = '' }) {
+  return <figure className={`flow-visual ${className}`}>
+    <img src={src} alt={alt} width="1536" height="1024" loading="lazy"/>
+    {(number || label) && <figcaption><span>{number}</span><strong>{label}</strong></figcaption>}
+  </figure>;
+}
+
+const materialModes = {
+  aggregate: { label: 'Aggregate', base: '#f04b2f', accent: '#e9e0d2', texture: 'speckle', code: 'M-01' },
+  paper: { label: 'Paper', base: '#e9e0d2', accent: '#171717', texture: 'fiber', code: 'M-02' },
+  aluminium: { label: 'Aluminium', base: '#bfc2c4', accent: '#f04b2f', texture: 'line', code: 'M-03' },
 };
 
-function MuonComposer() {
-  const [mode, setMode] = useState('tool');
-  const [format, setFormat] = useState('poster');
+function VunComposer() {
+  const [material, setMaterial] = useState('aggregate');
   const [playing, setPlaying] = useState(true);
-  const item = muonModes[mode];
-  return <div className={`muon-composer muon-format-${format} ${playing ? 'is-playing' : 'is-paused'}`} aria-label="Interactive MƯỢN identity composer">
-    <div className="muon-controls">
-      <div><span>Object family</span><div role="group" aria-label="Object family">{Object.entries(muonModes).map(([key, value]) => <button type="button" key={key} aria-pressed={mode === key} onClick={() => setMode(key)}>{value.label}</button>)}</div></div>
-      <div><span>Format</span><div role="group" aria-label="Format">{['poster','tag','pass'].map((value) => <button type="button" key={value} aria-pressed={format === value} onClick={() => setFormat(value)}>{value[0].toUpperCase() + value.slice(1)}</button>)}</div></div>
-      <button className="muon-motion-toggle" type="button" aria-pressed={playing} onClick={() => setPlaying((value) => !value)}>{playing ? <Pause size={15}/> : <Play size={15}/>} {playing ? 'Pause motion' : 'Preview motion'}</button>
+  const active = materialModes[material];
+  return <div className={`vun-composer ${playing ? 'is-playing' : 'is-paused'}`} style={{ '--material-base': active.base, '--material-accent': active.accent }}>
+    <div className="vun-composer-controls">
+      <span>Material</span>
+      <div role="group" aria-label="Material preview">{Object.entries(materialModes).map(([key, value]) => <button type="button" key={key} aria-pressed={material === key} onClick={() => setMaterial(key)}><i style={{ background: value.base }}/>{value.label}</button>)}</div>
+      <button className="vun-play" type="button" aria-pressed={playing} onClick={() => setPlaying((value) => !value)}>{playing ? <Pause size={15}/> : <Play size={15}/>} {playing ? 'Pause' : 'Play'}</button>
     </div>
-    <div className="muon-output" aria-live="polite">
-      <div className="muon-output-mark" aria-hidden="true"><i>[</i><i>]</i></div>
-      <span className="muon-output-brand">MƯỢN</span>
-      <div className="muon-output-copy"><small>{item.code}</small><h3>{withoutTrailingPeriod(item.item)}</h3><p>{item.time}</p></div>
-      <div className="muon-output-action"><span>Borrow nearby</span><CaretRight size={18}/></div>
-      <strong className="muon-output-symbol" aria-hidden="true">{item.symbol}</strong>
-    </div>
-  </div>;
-}
-
-function MuonMarkStudy() {
-  return <div className="muon-mark-study" role="img" aria-label="Animated MƯỢN open bracket identity moving from storage to exchange">
-    <div className="muon-mark-grid" aria-hidden="true">{Array.from({length:12},(_,i) => <i key={i}/>)}</div>
-    <div className="muon-safe-zone" aria-hidden="true"><span>x</span><span>x</span><span>x</span><span>x</span></div>
-    <div className="muon-mark-sequence" aria-hidden="true"><span>[</span><span className="muon-object">●</span><span>]</span></div>
-    <div className="muon-mark-caption"><span>Clear space 1x</span><span>Minimum 18 mm</span></div>
-  </div>;
-}
-
-function MuonMotionStudy() {
-  return <div className="muon-motion-study" role="img" aria-label="MƯỢN motion sequence showing an object stored, passed and returned">
-    <div className="muon-motion-track" aria-hidden="true">
-      <div className="muon-motion-frame"><span>[</span><i>●</i><span>]</span><small>Store</small></div>
-      <div className="muon-motion-frame"><span>[</span><i>●</i><span>]</span><small>Pass</small></div>
-      <div className="muon-motion-frame"><span>[</span><i>●</i><span>]</span><small>Return</small></div>
+    <div className={`vun-composer-stage is-${active.texture}`} aria-live="polite">
+      <svg viewBox="0 0 900 620" role="img" aria-label={`${active.label} fragments assembling into the VỤN symbol`}>
+        <defs>
+          <pattern id="speckle" width="28" height="28" patternUnits="userSpaceOnUse"><rect width="28" height="28" fill="var(--material-base)"/><circle cx="6" cy="8" r="2.5" fill="var(--material-accent)"/><circle cx="20" cy="19" r="4" fill="#72716f"/><circle cx="26" cy="4" r="1.6" fill="var(--material-accent)"/></pattern>
+          <pattern id="fiber" width="36" height="36" patternUnits="userSpaceOnUse"><rect width="36" height="36" fill="var(--material-base)"/><path d="M2 7h15M22 25h11M7 34h21M25 9h8" stroke="#b8afa3" strokeWidth="1"/></pattern>
+          <pattern id="line" width="18" height="18" patternUnits="userSpaceOnUse"><rect width="18" height="18" fill="var(--material-base)"/><path d="M0 4h18M0 13h18" stroke="#909598" strokeWidth=".8"/></pattern>
+        </defs>
+        <g className="vun-fragments" fill={`url(#${active.texture})`}>
+          <path d="M118 92h214l76 148-100 200z"/>
+          <path d="M568 92h214L592 440 492 240z"/>
+          <path d="M354 202h192l-96 192z"/>
+        </g>
+        <path className="vun-axis" d="M90 510H810"/>
+      </svg>
+      <div className="vun-stage-mark"><span>{active.code}</span><strong>VỤN</strong><small>Recovered / remade</small></div>
     </div>
   </div>;
 }
 
-function MuonCaseStudy({ work }) {
-  const facts = [
-    { label: 'Project frame', value: '5-week identity sprint' },
-    { label: 'Role', value: 'Strategy · Naming · Identity · Motion' },
-    { label: 'Scope', value: 'Brand system · Space · Digital' },
-    { label: 'Prototype', value: 'Identity composer · Borrowing flow' },
-  ];
-  return <article className="showcase-case case-muon">
-    <ShowcaseHero work={work} theme="muon" label="Brand identity · Community service · 2026" summary="A neighborhood borrowing identity built to move from object to object." facts={facts} image={muonCover} imageAlt="MƯỢN identity system applied to a tote, member card, object tags, booklet and mobile borrowing interface" demoLabel="Try the identity system"/>
+function VunMotionBand() {
+  return <div className="vun-motion-band" role="img" aria-label="Animated VỤN fragment system">
+    {Array.from({ length: 9 }, (_, index) => <svg key={index} viewBox="0 0 80 70" aria-hidden="true"><path d="M8 8h24l8 17-12 35zM48 8h24L52 60 40 25z"/></svg>)}
+  </div>;
+}
 
-    <section className="showcase-section muon-foundations-section"><div className="page-shell">
-      <ShowcaseLead title="A system for things that keep moving." copy="The open bracket holds each object long enough to name it, lend it and pass it on."/>
-      <div className="muon-foundations">
-        <MuonMarkStudy/>
-        <div className="muon-foundation-specs">
-          <div className="muon-wordmark-spec"><small>Primary wordmark</small><strong>MƯỢN</strong><span>Manrope Variable · 760</span></div>
-          <div className="muon-type-spec"><small>Vietnamese type specimen</small><strong>Mượn để dùng.<br/>Trả để tiếp tục.</strong><span>Display 56/52 · Body 16/25</span></div>
-          <dl className="muon-color-system">
-            <div><dt>Infrastructure</dt><dd>#142536</dd></div>
-            <div><dt>Action</dt><dd>#EF5848</dd></div>
-            <div><dt>Field</dt><dd>#DCE2E6</dd></div>
-            <div><dt>Information</dt><dd>#F4F6F6</dd></div>
-          </dl>
-        </div>
+function VunCaseStudy({ work }) {
+  const facts = [['Role','Strategy · Identity · Art direction'],['Format','Physical · Spatial · Digital'],['System','4 colors · 3 material families'],['Duration','6-week concept sprint']];
+  return <article className="flow-case case-vun">
+    <CaseHeader work={work} variant="vun" kicker="Brand identity · Circular materials · 2026" intro="Identity for a studio that turns construction offcuts into useful objects" facts={facts} image={vunCover} imageAlt="VỤN circular-material identity across sculptural objects, material samples, packaging and tote in a workshop" action="Open material demo"/>
+
+    <section className="flow-section vun-foundation"><div className="flow-shell">
+      <FlowLabel number="01">Identity + material language</FlowLabel>
+      <Visual src={vunFoundations} alt="VỤN wordmark, fragment symbol, four-color palette and recovered material specimens"/>
+      <div className="vun-spec-strip" aria-label="VỤN identity specification"><span>Vermilion<br/><b>#F04B2F</b></span><span>Dusty lilac<br/><b>#B9A7FF</b></span><span>Rice paper<br/><b>#E9E0D2</b></span><span>Charcoal<br/><b>#171717</b></span><strong>V = fragment<br/>Grid = 8 × 8</strong></div>
+    </div></section>
+
+    <section className="flow-section vun-applications"><div className="flow-shell">
+      <FlowLabel number="02">Working set</FlowLabel>
+      <div className="flow-pair flow-pair-staggered">
+        <Visual src={vunStationery} alt="VỤN stationery, sample case, numbered material tags, tapes, binder and tactile swatches" number="02A" label="Sample library"/>
+        <Visual src={vunPackaging} alt="VỤN fitted packaging system for upcycled stool, tray and tile objects" number="02B" label="Product packaging"/>
       </div>
     </div></section>
 
-    <section className="showcase-section muon-applications"><div className="page-shell">
-      <ShowcaseLead title="The identity earns trust on contact." copy="Paper, tags and working objects carry the same bracket, item code and return logic."/>
-      <div className="muon-application-gallery">
-        <figure><img src={muonPrintSystem} alt="MƯỢN poster series, program sheet, member cards, labels and inventory tags" width="1536" height="1024" loading="lazy"/><figcaption><strong>Print system</strong><span>Uncoated stock · coated tags · woven strap</span></figcaption></figure>
-        <figure><img src={muonObjectApplications} alt="MƯỢN identity applied to a drill case, projector crate, stockpot, table strap and staff apron" width="1536" height="1024" loading="lazy"/><figcaption><strong>Object system</strong><span>Item code · condition · checkout label</span></figcaption></figure>
-      </div>
+    <section id="live-demo" className="flow-section vun-demo"><div className="flow-shell">
+      <FlowLabel number="03" tone="is-light">Live material composer</FlowLabel>
+      <VunComposer/>
     </div></section>
 
-    <section id="live-demo" className="showcase-section muon-demo-section"><div className="page-shell">
-      <ShowcaseLead label="Live identity composer" title="Change the object. Keep the rule." copy="Switch the family and format to test one identity across many shared things."/>
-      <MuonComposer/>
+    <section className="vun-space-frame">
+      <Visual src={vunSpace} alt="VỤN material exhibition with modular signage, product plinths and a vermilion visitor path"/>
+      <div className="vun-space-caption"><span>04</span><strong>Temporary gallery</strong><small>Signage / display / wayfinding</small></div>
+    </section>
+
+    <section className="flow-section vun-campaign"><div className="flow-shell">
+      <FlowLabel number="05">Campaign + catalogue</FlowLabel>
+      <Visual src={vunCampaign} alt="VỤN campaign posters, street banner, catalogue and tote installed in an urban setting"/>
+      <Visual src={vunDigital} alt="VỤN responsive product catalogue and circularity view across laptop, tablet and phone" className="vun-digital-visual"/>
     </div></section>
 
-    <section className="showcase-section muon-environment"><div className="page-shell">
-      <ShowcaseLead title="A neighborhood service, not a showroom." copy="The system moves from facade to locker to handoff without changing its visual grammar."/>
-      <div className="muon-environment-gallery">
-        <figure><img src={muonSpace} alt="MƯỢN community lending lockers, kiosk, signage and reusable bags in a neighborhood pickup space" width="1536" height="1024" loading="lazy"/><figcaption>Locker hub · Bình Thạnh</figcaption></figure>
-        <figure><img src={muonStreetApplications} alt="MƯỢN street facade, blade sign, pickup window, wayfinding, return tote and staff apron" width="1536" height="1024" loading="lazy"/><figcaption>Street pickup · Ho Chi Minh City</figcaption></figure>
-      </div>
-    </div></section>
-
-    <section className="showcase-section muon-digital"><div className="page-shell">
-      <ShowcaseLead title="Availability before brand theatre." copy="Search, condition, pickup and return timing stay visible across every screen."/>
-      <figure className="muon-digital-figure"><img src={muonDigitalDevices} alt="MƯỢN laptop search interface, tablet locker pickup flow and mobile membership pass" width="1536" height="1024" loading="lazy"/><figcaption><span>Responsive service UI</span><strong>Search · reserve · collect · return</strong></figcaption></figure>
-    </div></section>
-
-    <section className="showcase-section muon-motion"><div className="page-shell">
-      <ShowcaseLead title="Store. Pass. Return." copy="Motion turns the bracket into a handoff, not a decorative flourish."/>
-      <MuonMotionStudy/>
-      <p className="muon-closing-note"><strong>Prototype boundary:</strong> print, responsive and reduced-motion states were checked. Service outcomes require a live borrowing network.</p>
-    </div></section>
+    <section className="vun-close"><VunMotionBand/><div className="flow-shell vun-close-copy"><strong>VỤN</strong><dl><div><dt>Identity</dt><dd>Mark / wordmark / palette / type</dd></div><div><dt>Applications</dt><dd>Samples / tags / packaging / space</dd></div><div><dt>Digital</dt><dd>Catalogue / material trace / mobile</dd></div></dl></div></section>
   </article>;
 }
 
-const readerPaths = {
-  company: {
-    label: 'Company profile',
-    vi: { title: 'Hồ sơ doanh nghiệp', summary: 'Tổng quan pháp lý, phạm vi thị trường, cơ cấu đầu mối và nguyên tắc quản lý hồ sơ.', facts: [['Phạm vi','Nước cấp, nước thải, tái sử dụng'],['Vai trò','Tư vấn đến chạy thử'],['Thị trường','Nhà máy công nghiệp tại Việt Nam']], records: ['Thông tin doanh nghiệp và đầu mối liên hệ','Sơ đồ tổ chức theo trách nhiệm','Ngành phục vụ và phạm vi địa lý'] },
-    en: { title: 'Company profile', summary: 'Legal overview, market scope, accountable contacts and document-control principles.', facts: [['Scope','Water, wastewater and reuse'],['Role','Consulting through commissioning'],['Market','Industrial facilities in Vietnam']], records: ['Company information and accountable contacts','Responsibility-led organization chart','Sector and geographic coverage'] },
-  },
-  capability: {
-    label: 'Technical capability',
-    vi: { title: 'Năng lực kỹ thuật', summary: 'Mỗi năng lực gắn với một bộ đầu ra có thể kiểm tra và người chịu trách nhiệm.', facts: [['Công nghệ','Khảo sát, cân bằng dòng, thiết kế cơ sở'],['Tích hợp','Cơ khí, điện và điều khiển'],['Bàn giao','FAT, SAT, đào tạo vận hành']], records: ['Cơ sở thiết kế, PFD và cân bằng vật chất','P&ID, danh mục thiết bị và triết lý điều khiển','Hồ sơ chạy thử, hướng dẫn và as-built'] },
-    en: { title: 'Technical capability', summary: 'Each capability connects to a reviewable deliverable set and a named owner.', facts: [['Process','Audit, mass balance and design basis'],['Integration','Mechanical, electrical and controls'],['Handover','FAT, SAT and operator training']], records: ['Design basis, PFD and mass balance','P&ID, equipment schedule and control narrative','Commissioning records, manuals and as-built set'] },
-  },
-  projects: {
-    label: 'Project evidence',
-    vi: { title: 'Hồ sơ dự án', summary: 'Project sheet tách rõ bối cảnh, công suất, phạm vi HỢP LƯU và bằng chứng bàn giao.', facts: [['Bối cảnh','Điều kiện vận hành thực tế'],['Trách nhiệm','Ranh giới theo discipline'],['Bằng chứng','Bản vẽ, biên bản, nhật ký']], records: ['Mục tiêu và dữ liệu đầu vào','Phạm vi cung cấp và giao diện','Mốc nghiệm thu và tài liệu tham chiếu'] },
-    en: { title: 'Project evidence', summary: 'Each project sheet separates context, capacity, responsibility and handover evidence.', facts: [['Context','Real operating conditions'],['Responsibility','Discipline boundaries'],['Evidence','Drawings, records and logs']], records: ['Objective and design inputs','Supply scope and interfaces','Acceptance milestones and references'] },
-  },
-  assurance: {
-    label: 'QA, HSE and control',
-    vi: { title: 'Bảo đảm thực hiện', summary: 'Chất lượng, an toàn và kiểm soát tài liệu được trình bày như một phần của năng lực.', facts: [['QA-QC','ITP, inspection và NCR'],['HSE','JSA, permit và toolbox talk'],['Tài liệu','Revision, transmittal và register']], records: ['Kế hoạch kiểm tra và nghiệm thu','Ma trận rủi ro và trách nhiệm an toàn','Quy tắc mã hóa, phát hành và lưu trữ'] },
-    en: { title: 'Delivery assurance', summary: 'Quality, safety and document control are presented as operating capability.', facts: [['QA-QC','ITP, inspection and NCR'],['HSE','JSA, permits and toolbox talks'],['Documents','Revision, transmittal and register']], records: ['Inspection and acceptance plan','Risk matrix and safety responsibilities','Coding, issue and retention rules'] },
-  },
+const profileChapters = [
+  ['01','Company overview','04–15'],['02','Context + position','16–25'],['03','Capabilities','26–43'],['04','Sectors','44–53'],
+  ['05','Delivery model','54–67'],['06','Project records','68–95'],['07','People + ESG + HSE','96–105'],['08','Governance + contact','106–112'],
+];
+
+const readerViews = {
+  overview: { label: 'Overview', image: trucOverview, pages: '04–43', facts: ['18-year timeline','4 capability groups','Market and company structure'] },
+  projects: { label: 'Projects', image: trucProjects, pages: '68–95', facts: ['Flood control','Transit foundation','Water reuse'] },
+  governance: { label: 'Governance', image: trucGovernance, pages: '96–105', facts: ['People and safety','Climate data','Responsibility map'] },
+  digital: { label: 'Digital reader', image: trucDigital, pages: 'Responsive', facts: ['Search and bookmarks','Linked evidence','Field-ready views'] },
 };
 
-const profileChapters = [
-  ['01','Tổng quan doanh nghiệp','Company overview'],['02','Năng lực kỹ thuật','Technical capabilities'],['03','Ngành và ứng dụng','Sectors and applications'],['04','Quản lý thực hiện','Delivery management'],
-  ['05','Dự án tiêu biểu','Representative projects'],['06','QA-QC và HSE','Quality and safety'],['07','Đối tác và chuỗi cung ứng','Partners and supply chain'],['08','Hồ sơ pháp lý','Legal and contact'],
-];
-
-const capabilityRows = [
-  { code:'A', title:'Process', output:'Design basis / PFD / hydraulic profile' },
-  { code:'B', title:'Mechanical', output:'P&ID / equipment list / I-O schedule' },
-  { code:'C', title:'Supply', output:'Datasheets / FAT / material records' },
-  { code:'D', title:'Commissioning', output:'SAT / manuals / as-built' },
-];
-
-const sectors = ['Food and beverage','Electronics','Textile and dyeing','Industrial parks','Water reuse','Utilities'];
-
-const projectRecords = [
-  { code:'HL-24-07', title:'Beverage rinse-water recovery', location:'Long An', year:'2024', capacity:'480 m³/day' },
-  { code:'HL-23-11', title:'Electronics wastewater polishing', location:'Bắc Ninh', year:'2023', capacity:'315 m³/day' },
-  { code:'HL-22-04', title:'Textile equalization upgrade', location:'Bình Dương', year:'2022', capacity:'620 m³/day' },
-];
-
-const assuranceAreas = [
-  { title:'QA-QC', copy:'ITP / hold points / NCR' },
-  { title:'HSE', copy:'JSA / permits / toolbox' },
-  { title:'Document control', copy:'Revision / transmittal / register' },
-];
-
-function HopLuuReader() {
-  const [path, setPath] = useState('company');
-  const [language, setLanguage] = useState('vi');
-  const [layer, setLayer] = useState('system');
-  const content = readerPaths[path];
-  return <div className="hop-reader" aria-label="Interactive HỢP LƯU capability profile reader">
-    <header><strong>HỢP LƯU</strong><div role="group" aria-label="Document language"><button type="button" aria-pressed={language === 'vi'} onClick={() => setLanguage('vi')}>VI</button><button type="button" aria-pressed={language === 'en'} onClick={() => setLanguage('en')}>EN</button></div></header>
-    <div className="hop-reader-layout">
-      <nav aria-label="Reader purpose">{Object.entries(readerPaths).map(([key,value]) => <button type="button" key={key} aria-current={path === key ? 'page' : undefined} onClick={() => setPath(key)}><span>{value.label}</span><CaretRight/></button>)}</nav>
-      <section className="hop-reader-page" aria-live="polite">
-        <div className="hop-page-heading"><small>{language === 'vi' ? 'HỒ SƠ NĂNG LỰC' : 'CAPABILITY PROFILE'}</small><h3>{withoutTrailingPeriod(content[language].title)}</h3><p>{content[language].summary}</p></div>
-        <dl className="hop-reader-facts">{content[language].facts.map(([label,value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-        <div className="hop-layer-switch" role="group" aria-label="Process diagram layer">{['system','delivery','evidence'].map((value) => <button type="button" key={value} aria-pressed={layer === value} onClick={() => setLayer(value)}>{value[0].toUpperCase()+value.slice(1)}</button>)}</div>
-        <div className={`hop-process hop-process-${layer}`} role="img" aria-label={`Process diagram showing ${layer} layer`}>
-          {['Audit','Sample','Design','Integrate','Commission','Return'].map((step,index) => <React.Fragment key={step}><span><i>{index+1}</i>{step}</span>{index < 5 && <b/>}</React.Fragment>)}
-        </div>
-        <ol>{content[language].records.map((item,index) => <li key={item}><span>0{index+1}</span>{item}</li>)}</ol>
-      </section>
+function TrucReader() {
+  const [view, setView] = useState('overview');
+  const active = readerViews[view];
+  return <div className="truc-reader">
+    <nav aria-label="TRỤC profile preview">{Object.entries(readerViews).map(([key, item]) => <button type="button" key={key} aria-pressed={view === key} onClick={() => setView(key)}><span>{item.label}</span><small>{item.pages}</small></button>)}</nav>
+    <div className="truc-reader-stage" aria-live="polite">
+      <img src={active.image} alt={`TRỤC ${active.label.toLowerCase()} profile preview`}/>
+      <i aria-hidden="true"/>
+      <div><span>{active.pages}</span>{active.facts.map((fact) => <strong key={fact}>{fact}</strong>)}</div>
     </div>
   </div>;
 }
 
-function HopLuuCaseStudy({ work }) {
-  const facts = [
-    { label: 'Role', value: 'Editorial direction and information design' },
-    { label: 'Format', value: '96 pages / VI-EN' },
-    { label: 'System', value: 'Print / project sheets / reader' },
-  ];
-  return <article className="showcase-case case-hop-luu">
-    <ShowcaseHero work={work} theme="hop" label="Corporate profile · Industrial engineering, 2026" summary="Bilingual corporate profile for industrial water engineering" facts={facts} image={hopLuuCover} imageAlt="HỢP LƯU corporate profile, technical project sheets and digital reader arranged at an industrial water facility" demoLabel="Open reader" disclosure={<><strong>Self-initiated concept</strong> / no client engagement implied</>}/>
+function TrucAxisBand() {
+  return <div className="truc-axis-band" aria-hidden="true"><span/><span/><span/><span/><i/></div>;
+}
 
-    <section className="showcase-section hop-overview"><div className="page-shell">
-      <h2 className="hop-section-title">Company profile</h2>
-      <div className="hop-company-snapshot">
-        <div className="hop-company-intro"><span>HỢP LƯU</span><h3>Industrial water systems</h3><p>Process design, equipment integration, commissioning and handover</p><dl><div><dt>Market</dt><dd>Industrial facilities</dd></div><div><dt>Delivery</dt><dd>Design to commissioning</dd></div><div><dt>Languages</dt><dd>Vietnamese / English</dd></div></dl></div>
-        <ol className="hop-profile-index">{profileChapters.map(([number,vi,en]) => <li key={number}><span>{number}</span><strong>{vi}</strong><small>{en}</small></li>)}</ol>
+function TrucCaseStudy({ work }) {
+  const facts = [['Role','Editorial direction · Information design'],['Format','112 pages · VI / EN'],['Outputs','Book · project sheets · reader'],['Duration','8-week concept sprint']];
+  return <article className="flow-case case-truc">
+    <CaseHeader work={work} variant="truc" kicker="Corporate profile · Climate infrastructure · 2026" intro="A complete capability profile built around scope, evidence and field use" facts={facts} image={trucCover} imageAlt="TRỤC corporate profile, open project spread, digital map and field tools at a flood-control facility" action="Open profile reader"/>
+
+    <section className="flow-section truc-architecture"><div className="flow-shell">
+      <FlowLabel number="01" tone="is-light">Profile architecture / 112 pages</FlowLabel>
+      <ol>{profileChapters.map(([number, title, pages]) => <li key={number}><span>{number}</span><strong>{title}</strong><small>{pages}</small></li>)}</ol>
+      <Visual src={trucOverview} alt="TRỤC profile cover, contents, company overview, timeline and capability spreads"/>
+    </div></section>
+
+    <section id="live-demo" className="flow-section truc-demo"><div className="flow-shell">
+      <FlowLabel number="02">Profile reader</FlowLabel>
+      <TrucReader/>
+    </div></section>
+
+    <section className="truc-project-frame">
+      <TrucAxisBand/>
+      <div className="flow-shell"><FlowLabel number="03" tone="is-light">Project evidence</FlowLabel><Visual src={trucProjects} alt="TRỤC project record spreads for flood control, elevated transit and industrial water reuse"/></div>
+    </section>
+
+    <section className="flow-section truc-governance"><div className="flow-shell">
+      <FlowLabel number="04">People + safety + climate governance</FlowLabel>
+      <Visual src={trucGovernance} alt="TRỤC people, safety, climate governance and field-control chapter with removable documents"/>
+      <div className="truc-evidence-strip"><span>LTIFR history</span><span>Carbon data</span><span>Safety controls</span><span>Team directory</span><span>Board oversight</span></div>
+    </div></section>
+
+    <section className="flow-section truc-production"><div className="flow-shell">
+      <FlowLabel number="05">Production + handover</FlowLabel>
+      <div className="flow-pair">
+        <Visual src={trucProduction} alt="TRỤC navy cloth binding, orange foil, sewn spine, tabs, map overlay and paper details" number="05A" label="Print master"/>
+        <Visual src={trucReview} alt="TRỤC profile and project sheets used by engineers during a bid review" number="05B" label="Review room"/>
       </div>
-      <figure className="hop-visual-figure hop-overview-figure"><img src={hopLuuProfileSpreads} alt="HỢP LƯU profile cover, contents, company overview, capability matrix, scope and delivery-process spreads" width="1536" height="1024" loading="lazy"/></figure>
+      <Visual src={trucDigital} alt="TRỤC responsive company profile reader on laptop, tablet and phone" className="truc-digital-visual"/>
+      <dl className="truc-manifest"><div><dt>Print master</dt><dd>A4 / 112 pp / CMYK</dd></div><div><dt>Digital profile</dt><dd>Tagged PDF / responsive reader</dd></div><div><dt>Project records</dt><dd>12-page modular template</dd></div><div><dt>Handover</dt><dd>Sources / links / content register</dd></div></dl>
     </div></section>
 
-    <section className="showcase-section hop-capabilities"><div className="page-shell">
-      <h2 className="hop-section-title">Technical capability</h2>
-      <figure className="hop-visual-figure"><img src={hopLuuCapabilitySpread} alt="Open HỢP LƯU profile showing the technical capability matrix and engineering scope spread" width="1536" height="1024" loading="lazy"/></figure>
-      <div className="hop-capability-strip">{capabilityRows.map((item) => <article key={item.code}><b>{item.code}</b><h3>{withoutTrailingPeriod(item.title)}</h3><p>{item.output}</p></article>)}</div>
-      <div className="hop-sector-band"><span>Sector coverage</span>{sectors.map((sector) => <strong key={sector}>{sector}</strong>)}</div>
-    </div></section>
-
-    <section id="live-demo" className="showcase-section hop-demo-section"><div className="page-shell">
-      <h2 className="hop-section-title">Digital reader</h2>
-      <HopLuuReader/>
-      <figure className="hop-visual-figure hop-reader-device"><img src={hopLuuDigitalReader} alt="HỢP LƯU responsive profile reader on laptop, tablet and phone" width="1536" height="1024" loading="lazy"/></figure>
-    </div></section>
-
-    <section className="showcase-section hop-projects"><div className="page-shell">
-      <h2 className="hop-section-title">Project sheets</h2>
-      <div className="hop-project-gallery"><figure className="hop-visual-figure"><img src={hopLuuProjectSheets} alt="HỢP LƯU project sheets with process diagrams, scope matrices and commissioning evidence" width="1536" height="1024" loading="lazy"/></figure><figure className="hop-visual-figure"><img src={hopLuuFieldHandover} alt="Engineers using the HỢP LƯU profile, project binder and tablet during a site handover review" width="1536" height="1024" loading="lazy"/></figure></div>
-      <div className="hop-project-index">{projectRecords.map((project) => <article key={project.code}><span>{project.code}</span><h3>{withoutTrailingPeriod(project.title)}</h3><dl><div><dt>Location</dt><dd>{project.location}</dd></div><div><dt>Year</dt><dd>{project.year}</dd></div><div><dt>Capacity</dt><dd>{project.capacity}</dd></div></dl></article>)}</div>
-    </div></section>
-
-    <section className="showcase-section hop-assurance"><div className="page-shell">
-      <h2 className="hop-section-title">QA-QC and HSE</h2>
-      <div className="hop-assurance-layout"><div className="hop-assurance-list">{assuranceAreas.map((area) => <article key={area.title}><Check size={19}/><div><h3>{withoutTrailingPeriod(area.title)}</h3><p>{area.copy}</p></div></article>)}</div><div className="hop-responsibility-map"><span>Project director</span><i/><span>Project manager</span><div><strong>Process</strong><strong>Mechanical</strong><strong>Electrical</strong><strong>Commissioning</strong></div><i/><span>Document control</span></div></div>
-      <figure className="hop-visual-figure hop-governance-figure"><img src={hopLuuGovernanceKit} alt="HỢP LƯU governance kit with QA-QC checklist, HSE plan, document register and approved drawing" width="1536" height="1024" loading="lazy"/></figure>
-    </div></section>
-
-    <section className="showcase-section hop-delivery"><div className="page-shell">
-      <h2 className="hop-section-title">Production files</h2>
-      <div className="hop-production-gallery"><figure className="hop-visual-figure"><img src={hopLuuProductionDetail} alt="HỢP LƯU hardbound profile, chapter tabs, paper stock and binding detail" width="1536" height="1024" loading="lazy"/></figure><figure className="hop-visual-figure"><img src={hopLuuReview} alt="Engineers reviewing the HỢP LƯU profile and digital reference in a plant control room" width="1536" height="1024" loading="lazy"/></figure></div>
-      <dl className="hop-production-manifest"><div><dt>Print master</dt><dd>A4 / 96 pages / CMYK</dd></div><div><dt>Accessible PDF</dt><dd>Tagged / bookmarked / selectable</dd></div><div><dt>Project sheets</dt><dd>A3 / A4 / editable templates</dd></div><div><dt>Content register</dt><dd>Owner / revision / approval</dd></div></dl>
-    </div></section>
+    <section className="truc-close"><div className="flow-shell"><span>10.8231° N / 106.6297° E</span><strong>TRỤC</strong><i/></div></section>
   </article>;
 }
 
 export function ShowcaseCaseStudy({ work }) {
-  if (work.slug === 'folded-matter') return <MuonCaseStudy work={work}/>;
-  if (work.slug === 'still-moving') return <HopLuuCaseStudy work={work}/>;
+  if (work.slug === 'folded-matter') return <VunCaseStudy work={work}/>;
+  if (work.slug === 'still-moving') return <TrucCaseStudy work={work}/>;
   return null;
 }

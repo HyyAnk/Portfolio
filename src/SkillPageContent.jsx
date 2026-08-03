@@ -11,17 +11,17 @@ import {
 } from '@phosphor-icons/react';
 
 import videoSequence from './assets/skills/video-sequence.webp';
-import muonObjects from './assets/case-studies/muon-object-applications.webp';
-import muonStreet from './assets/case-studies/muon-street-applications.webp';
-import muonDigital from './assets/case-studies/muon-digital-devices.webp';
+import vunPackaging from './assets/case-studies/vun-packaging.webp';
+import vunSpace from './assets/case-studies/vun-space.webp';
+import vunDigital from './assets/case-studies/vun-digital.webp';
 import matCover from './assets/case-studies/mat-cover.webp';
 import kitepayStateFlow from './assets/case-studies/kitepay-state-flow.svg';
-import hopLuuSpread from './assets/case-studies/hop-luu-capability-spread-v2.webp';
-import hopLuuDetail from './assets/case-studies/hop-luu-production-detail-v2.webp';
-import hopLuuCover from './assets/case-studies/hop-luu-cover.webp';
-import hopLuuProjectSheets from './assets/case-studies/hop-luu-project-sheets.webp';
-import hopLuuReview from './assets/case-studies/hop-luu-review.webp';
-import hopLuuFieldHandover from './assets/case-studies/hop-luu-field-handover-v2.webp';
+import trucOverview from './assets/case-studies/truc-overview.webp';
+import trucProduction from './assets/case-studies/truc-production.webp';
+import trucCover from './assets/case-studies/truc-cover.webp';
+import trucProjects from './assets/case-studies/truc-projects.webp';
+import trucReview from './assets/case-studies/truc-review.webp';
+import trucDigital from './assets/case-studies/truc-digital.webp';
 import { MatRouteComparisonMap, MatStreetMap, matModes } from './MatProductMap.jsx';
 import { withoutTrailingPeriod } from './text.js';
 import './skill-showcase.css';
@@ -34,32 +34,32 @@ function ArrowLink({ children, to = '#contact' }) {
 }
 
 const graphicIdentityEvidenceV2 = [
-  { image: muonStreet, alt: 'MƯỢN storefront, service counter, lockers, uniform and wayfinding operating on a city street', context: 'Public space', outcome: 'Recognisable from street distance', rule: 'Bracket mark, navy field and red directional cues', className: 'is-wide' },
-  { image: muonObjects, alt: 'MƯỢN identity applied to tools, containers, item tags, QR labels and service materials', context: 'Service objects', outcome: 'Every item stays traceable', rule: 'Category code, item ID and QR hierarchy' },
-  { image: muonDigital, alt: 'MƯỢN product interface across desktop, tablet and membership phone view', context: 'Digital service', outcome: 'Browse, pickup and membership stay coherent', rule: 'The same navigation, status and red action language' },
+  { image: vunSpace, alt: 'VỤN identity applied to a material exhibition, product plinths and wayfinding', context: 'Spatial', outcome: 'Gallery and wayfinding', rule: 'V fragment, vermilion path and material display', className: 'is-wide' },
+  { image: vunPackaging, alt: 'VỤN identity applied to product packaging, tags and recovered-material objects', context: 'Physical', outcome: 'Packaging and object tags', rule: 'Four colours, fitted structures and numbered samples' },
+  { image: vunDigital, alt: 'VỤN catalogue across laptop, tablet and mobile', context: 'Digital', outcome: 'Responsive catalogue', rule: 'Product view, material filter and circularity trace' },
 ];
 
 const evidenceSpecimens = {
-  display: { label: 'Cover', text: 'HỢP LƯU', size: 'clamp(3.3rem, 8vw, 8.4rem)', width: '8ch', role: 'Primary identification', setting: '64-104 px / 0.88 leading' },
+  display: { label: 'Cover', text: 'TRỤC', size: 'clamp(3.3rem, 8vw, 8.4rem)', width: '8ch', role: 'Primary identification', setting: '64-104 px / 0.88 leading' },
   editorial: { label: 'Section', text: 'Technical capabilities', size: 'clamp(2.25rem, 5vw, 5.2rem)', width: '13ch', role: 'Chapter navigation', setting: '36-64 px / 0.96 leading' },
 };
 
 const graphicProductionEvidenceV2 = [
-  { image: hopLuuReview, alt: 'HỢP LƯU capability profile reviewed beside a tablet and original engineering drawing inside the plant', title: 'Content review', copy: 'P&ID, field photography and scope text are checked together' },
-  { image: hopLuuDetail, alt: 'HỢP LƯU hardcover profile showing section tabs, binding, bilingual contents and production materials', title: 'Production detail', copy: 'Hardcover, section tabs and bilingual pagination are resolved before handoff' },
-  { image: hopLuuFieldHandover, alt: 'Printed profile, project sheets, binder and tablet version aligned for HỢP LƯU field handover', title: 'Field handover', copy: 'Book, project sheets, binder and tablet version carry the same evidence structure' },
+  { image: trucReview, alt: 'TRỤC profile reviewed with maps, project sheets and a field tablet', title: 'Content review', copy: 'Scope matrix, drawings and project evidence' },
+  { image: trucProduction, alt: 'TRỤC cloth cover, sewn binding, orange tabs and print proof', title: 'Production detail', copy: 'Cloth, foil, tabs, paper and proofing' },
+  { image: trucDigital, alt: 'TRỤC field profile across laptop, tablet and mobile', title: 'Digital handover', copy: 'Reader, bookmarks and linked evidence' },
 ];
 
 function GraphicHeroV2({ Reveal }) {
-  return <section className="gd-hero gd-hero-v2"><div className="page-shell gd-hero-grid"><Reveal className="gd-hero-copy"><span className="gd-kicker">Graphic design</span><h1>Systems built for use</h1><p>Identity and information design proven across public space, technical documents and product interfaces</p><ArrowLink to="#identity-evidence">See the evidence</ArrowLink><dl className="gd-hero-facts"><div><dt>Scope</dt><dd>Identity + information</dd></div><div><dt>Formats</dt><dd>Print + field + digital</dd></div><div><dt>Working set</dt><dd>VI / EN + production files</dd></div></dl></Reveal><Reveal className="gd-hero-art gd-hero-evidence" delay={0.08}><figure><img src={hopLuuCover} alt="HỢP LƯU technical capability profile, project sheets and digital reader shown inside an industrial facility" /></figure><figcaption>HỢP LƯU capability system photographed in the environment it documents</figcaption></Reveal></div></section>;
+  return <section className="gd-hero gd-hero-v2"><div className="page-shell gd-hero-grid"><Reveal className="gd-hero-copy"><span className="gd-kicker">Graphic design</span><h1>Identity + editorial</h1><p>Two complete systems across material, print, space and screen</p><ArrowLink to="#identity-evidence">View the work</ArrowLink><dl className="gd-hero-facts"><div><dt>Scope</dt><dd>Identity + information</dd></div><div><dt>Formats</dt><dd>Print + field + digital</dd></div><div><dt>Working set</dt><dd>VI / EN + production files</dd></div></dl></Reveal><Reveal className="gd-hero-art gd-hero-evidence" delay={0.08}><figure><img src={trucCover} alt="TRỤC technical corporate profile and digital field reader inside an infrastructure facility" /></figure><figcaption>TRỤC / 112-page profile system</figcaption></Reveal></div></section>;
 }
 
 function GraphicSystemV2({ Reveal }) {
-  return <section id="identity-evidence" className="gd-section gd-system-section"><div className="page-shell"><Reveal className="gd-heading"><h2>One identity, three contexts</h2><p>MƯỢN keeps the same recognition logic from the street to each object and service screen</p></Reveal><div className="gd-evidence-grid">{graphicIdentityEvidenceV2.map((item, index) => <Reveal className={`gd-evidence-card ${item.className || ''}`} key={item.context} delay={index * .05}><a href="/work/folded-matter" aria-label={`View MƯỢN case study from ${item.context}`}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><span>{item.context}</span><strong>{item.outcome}</strong><p>{item.rule}</p><ArrowUpRight size={17} aria-hidden="true" /></figcaption></figure></a></Reveal>)}</div></div></section>;
+  return <section id="identity-evidence" className="gd-section gd-system-section"><div className="page-shell"><Reveal className="gd-heading"><h2>VỤN across three formats</h2><p>One fragment system for product, space and catalogue</p></Reveal><div className="gd-evidence-grid">{graphicIdentityEvidenceV2.map((item, index) => <Reveal className={`gd-evidence-card ${item.className || ''}`} key={item.context} delay={index * .05}><a href="/work/folded-matter" aria-label={`View VỤN case study from ${item.context}`}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><span>{item.context}</span><strong>{item.outcome}</strong><p>{item.rule}</p><ArrowUpRight size={17} aria-hidden="true" /></figcaption></figure></a></Reveal>)}</div></div></section>;
 }
 
 function GraphicInformationV2({ Reveal }) {
-  return <section className="gd-section gd-information-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Complex content, visible hierarchy</h2><p>HỢP LƯU turns engineering evidence into a bilingual capability profile that can be reviewed, printed and reused</p></Reveal><div className="gd-information-layout"><Reveal className="gd-information-main"><figure><img src={hopLuuSpread} alt="Bilingual HỢP LƯU spread combining a capability matrix, process diagram, work scope and evidence links" loading="lazy" /><figcaption>Capability matrix + process flow + linked evidence</figcaption></figure></Reveal><div className="gd-information-side"><Reveal><figure><img src={hopLuuProjectSheets} alt="HỢP LƯU project sheets combining plant photography, technical diagrams, scope tables and delivery milestones" loading="lazy" /><figcaption>Project proof follows one repeatable evidence template</figcaption></figure></Reveal><Reveal className="gd-information-facts" delay={0.06}><dl><div><dt>Structure</dt><dd>8 chapters / 96 pages</dd></div><div><dt>Language</dt><dd>Vietnamese + English</dd></div><div><dt>Evidence</dt><dd>P&amp;ID + field photography + scope</dd></div><div><dt>Outputs</dt><dd>Hardcover + loose sheets + digital reader</dd></div></dl><a href="/work/still-moving">View HỢP LƯU case study <ArrowUpRight size={17} /></a></Reveal></div></div></div></section>;
+  return <section className="gd-section gd-information-section"><div className="page-shell"><Reveal className="gd-heading"><h2>TRỤC / profile architecture</h2><p>Company facts, capability, project evidence and governance in one 112-page system</p></Reveal><div className="gd-information-layout"><Reveal className="gd-information-main"><figure><img src={trucOverview} alt="TRỤC contents, company overview, timeline and capability spreads" loading="lazy" /><figcaption>Overview + timeline + capability matrix</figcaption></figure></Reveal><div className="gd-information-side"><Reveal><figure><img src={trucProjects} alt="TRỤC infrastructure project records with maps, drawings and scope matrices" loading="lazy" /><figcaption>Three project records / one evidence structure</figcaption></figure></Reveal><Reveal className="gd-information-facts" delay={0.06}><dl><div><dt>Structure</dt><dd>8 chapters / 112 pages</dd></div><div><dt>Language</dt><dd>Vietnamese + English</dd></div><div><dt>Evidence</dt><dd>Maps + drawings + scope</dd></div><div><dt>Outputs</dt><dd>Hardcover + sheets + reader</dd></div></dl><a href="/work/still-moving">View TRỤC case study <ArrowUpRight size={17} /></a></Reveal></div></div></div></section>;
 }
 
 function GraphicTypeLabV2({ Reveal }) {
@@ -71,7 +71,7 @@ function GraphicTypeLabV2({ Reveal }) {
 }
 
 function GraphicProductionV2({ Reveal }) {
-  return <section className="gd-section gd-production-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Review continues through handover</h2><p>The design is checked against source evidence, physical production and the final working environment</p></Reveal><div className="gd-production-grid">{graphicProductionEvidenceV2.map((item, index) => <Reveal className={`gd-production-card is-${index + 1}`} key={item.title} delay={index * .05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><strong>{item.title}</strong><p>{item.copy}</p></figcaption></figure></Reveal>)}</div><Reveal className="gd-deliverables"><h3>Concrete deliverables</h3><dl><div><dt>Identity</dt><dd>Mark system, signage, uniforms, object labels</dd></div><div><dt>Editorial</dt><dd>96-page bilingual profile and project sheets</dd></div><div><dt>Digital</dt><dd>Service UI, membership card and QR asset system</dd></div><div><dt>Handoff</dt><dd>Print specifications, source files and layout rules</dd></div></dl><nav aria-label="Graphic design case studies"><a href="/work/folded-matter">MƯỢN case study <ArrowUpRight size={17} /></a><a href="/work/still-moving">HỢP LƯU case study <ArrowUpRight size={17} /></a></nav></Reveal></div></section>;
+  return <section className="gd-section gd-production-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Production + handover</h2><p>Print, modular records and the field reader use the same evidence structure</p></Reveal><div className="gd-production-grid">{graphicProductionEvidenceV2.map((item, index) => <Reveal className={`gd-production-card is-${index + 1}`} key={item.title} delay={index * .05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><strong>{item.title}</strong><p>{item.copy}</p></figcaption></figure></Reveal>)}</div><Reveal className="gd-deliverables"><h3>Deliverables</h3><dl><div><dt>Identity</dt><dd>Mark, palette, samples, packaging and space</dd></div><div><dt>Editorial</dt><dd>112-page bilingual profile and project records</dd></div><div><dt>Digital</dt><dd>Catalogue and responsive profile reader</dd></div><div><dt>Handoff</dt><dd>Print masters, sources and content register</dd></div></dl><nav aria-label="Graphic design case studies"><a href="/work/folded-matter">VỤN case study <ArrowUpRight size={17} /></a><a href="/work/still-moving">TRỤC case study <ArrowUpRight size={17} /></a></nav></Reveal></div></section>;
 }
 
 function GraphicDesignShowcase({ Reveal }) {

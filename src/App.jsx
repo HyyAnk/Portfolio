@@ -23,13 +23,13 @@ import aiMediaStudioShowcase from './assets/experiments/ai-media-studio.webp';
 import portraitImage from './assets/generated/portrait.webp';
 import matCover from './assets/case-studies/mat-cover.webp';
 import kitepayCover from './assets/case-studies/kitepay-cover.webp';
-import muonCover from './assets/case-studies/muon-cover.webp';
-import hopLuuCover from './assets/case-studies/hop-luu-cover.webp';
+import vunCover from './assets/case-studies/vun-cover.webp';
+import trucCover from './assets/case-studies/truc-cover.webp';
 import { notFoundSeo, seoByPath, siteIdentity } from './seo.js';
 import { withoutTrailingPeriod } from './text.js';
 
 const DeepCaseStudy = lazy(() => import('./caseStudies.jsx').then((module) => ({ default: module.DeepCaseStudy })));
-const ShowcaseCaseStudy = lazy(() => import('./showcaseCases.jsx?rev=hop-luu-v3').then((module) => ({ default: module.ShowcaseCaseStudy })));
+const ShowcaseCaseStudy = lazy(() => import('./showcaseCases.jsx?rev=visual-flow-v1').then((module) => ({ default: module.ShowcaseCaseStudy })));
 const SkillPageContent = lazy(() => import('./SkillPageContent.jsx'));
 
 const person = siteIdentity.name;
@@ -250,8 +250,8 @@ function SkillToolMotion({ skill }) {
 
 const works = [
   { slug: 'mat', title: 'MÁT', type: 'Web product · PWA', year: '2026', role: 'Product strategy · UX/UI · React', description: 'A heat-aware route planner that helps people choose a kinder path through hot, dense cities.', challenge: 'Most route planners optimize only time and distance, leaving heat exposure and recovery needs invisible.', outcome: 'A responsive routing concept that makes shade, heat, air quality and route trade-offs understandable.', tags: ['Product design', 'Web development'], image: matCover, deep: true },
-  { slug: 'folded-matter', title: 'MƯỢN', type: 'Brand identity · Community service', year: '2026', role: 'Strategy · Naming · Identity · Motion', description: 'A sharing identity that makes borrowing useful objects feel ordinary, local and worth repeating.', challenge: 'Shared tools need trust, clarity and a recognizable handoff across labels, lockers, spaces and screens.', outcome: 'A practical identity system spanning naming, object tags, spatial service, digital borrowing and motion.', tags: ['Brand identity', 'Art direction'], image: muonCover, deep: true },
-  { slug: 'still-moving', title: 'HỢP LƯU', type: 'Corporate profile · Editorial', year: '2026', role: 'Editorial direction · Information design', description: 'A bilingual capability profile that makes industrial water engineering clear, verifiable and ready for review.', challenge: 'Technical evidence was scattered across tender files, drawings, site photography and inconsistent sales decks.', outcome: 'A modular print and digital credential system organized around decisions, scope and proof.', tags: ['Editorial design', 'Information design'], image: hopLuuCover, deep: true },
+  { slug: 'folded-matter', title: 'VỤN', type: 'Brand identity · Circular materials', year: '2026', role: 'Strategy · Identity · Art direction', description: 'Identity for a studio that turns construction offcuts into useful objects.', challenge: 'A material-led studio needed one recognisable system across samples, products, packaging, space and catalogue.', outcome: 'A fragment-based identity built from four colours, three material families and one modular V mark.', tags: ['Brand identity', 'Art direction'], image: vunCover, deep: true },
+  { slug: 'still-moving', title: 'TRỤC', type: 'Corporate profile · Infrastructure', year: '2026', role: 'Editorial direction · Information design', description: 'A 112-page capability profile built around scope, evidence and field use.', challenge: 'Infrastructure experience had to become reviewable without reducing complex delivery records to sales claims.', outcome: 'A bilingual print and digital system connecting company facts, capability, projects, governance and handover.', tags: ['Editorial design', 'Information design'], image: trucCover, deep: true },
   { slug: 'kitepay', title: 'KitePay', type: 'BSC application', year: '2026', role: 'Product design · Web3 integration', description: 'A milestone escrow that makes scope, payment state and on-chain evidence clear to both sides.', challenge: 'Freelancers and clients need a shared payment state without turning every agreement into a crypto puzzle.', outcome: 'A testnet-ready product concept pairing explicit escrow states with human-readable transaction receipts.', tags: ['Blockchain', 'React'], image: kitepayCover, deep: true },
 ];
 
@@ -305,8 +305,8 @@ const experiments = [
 
 const heroCarouselImages = [
   { image: matCover, alt: 'MÁT heat-aware route planning concept' },
-  { image: muonCover, alt: 'MƯỢN community lending identity system' },
-  { image: hopLuuCover, alt: 'HỢP LƯU corporate capability profile' },
+  { image: vunCover, alt: 'VỤN circular-material studio identity system' },
+  { image: trucCover, alt: 'TRỤC climate infrastructure corporate profile' },
   { image: kitepayCover, alt: 'KitePay BSC milestone escrow concept' },
   { image: uiImage, alt: 'Responsive interface design study' },
   { image: graphicImage, alt: 'Graphic identity system study' },
