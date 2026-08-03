@@ -833,16 +833,16 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .skill-flow-visual { height: 286px; min-height: 0; margin: 0 -8px; }
   .skill-flow-canvas { min-height: 0; }
   .experiments-section { padding-block: 82px 88px; }
-  .experiments-heading { align-items: flex-end; gap: 20px; margin-bottom: 32px; }
+  .experiments-heading { align-items: center; gap: 20px; margin-bottom: 28px; }
   .experiments-heading h2 { font-size: clamp(2.55rem, 12vw, 3.4rem); }
-  .experiments-heading p { max-width: 26ch; font-size: .78rem; }
-  .experiments-github { min-height: 32px; }
+  .experiments-heading p { display: none; }
+  .experiments-github { min-height: 0; flex: 0 0 auto; }
   .experiments-stage { gap: 34px; }
   .experiments-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .experiment-selector { min-height: 148px; padding: 15px 12px 14px 0; border-radius: 0; }
+  .experiment-selector { min-height: 108px; padding: 14px 12px 13px 0; border-radius: 0; }
   .experiment-card:nth-child(even) .experiment-selector { padding-left: 15px; }
-  .experiment-selector h3 { margin-top: 16px; font-size: clamp(1.06rem, 5vw, 1.28rem); }
-  .experiment-selector p { display: -webkit-box; margin-top: 8px; overflow: hidden; font-size: .66rem; line-height: 1.42; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+  .experiment-selector h3 { margin-top: 13px; font-size: clamp(1.06rem, 5vw, 1.28rem); }
+  .experiment-selector p { display: none; }
   .experiment-card-label { font-size: .54rem; }
   .experiments-stack { height: 390px; }
   .experiment-preview-frame { border-radius: 7px; }
