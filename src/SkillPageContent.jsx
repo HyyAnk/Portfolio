@@ -4,13 +4,19 @@ import {
   ArrowsLeftRight, ArrowUpRight, Browser, CaretDown, CheckCircle,
   Code, Cube, CursorClick, Devices, Fingerprint,
   FlowArrow, FrameCorners, LinkSimple,
-  LockKey, Play, PlugsConnected,
+  LockKey, PlugsConnected,
   Scissors, SlidersHorizontal, SpeakerHigh,
   TerminalWindow, TextAa, TextAlignCenter, TextAlignLeft, Wallet, Warning,
   WarningCircle, Waveform, WifiSlash, XCircle,
 } from '@phosphor-icons/react';
 
 import videoSequence from './assets/skills/video-sequence.webp';
+import graphicKeyVisual from './assets/skills/graphic-keyvisual.webp';
+import videoKeyVisual from './assets/skills/video-keyvisual.webp';
+import webKeyVisual from './assets/skills/web-keyvisual.webp';
+import automationKeyVisual from './assets/skills/automation-keyvisual.webp';
+import automationWorkflowVisual from './assets/generated/work-automation.webp';
+import blockchainKeyVisual from './assets/skills/blockchain-keyvisual.webp';
 import vunPackaging from './assets/case-studies/vun-packaging.webp';
 import vunSpace from './assets/case-studies/vun-space.webp';
 import vunDigital from './assets/case-studies/vun-digital.webp';
@@ -19,12 +25,15 @@ import dauScreens from './assets/case-studies/dau-screens.webp';
 import dauScan from './assets/case-studies/dau-scan.webp';
 import dauDesktop from './assets/case-studies/dau-desktop.webp';
 import dauStates from './assets/case-studies/dau-states.webp';
-import hxsCover from './assets/case-studies/hxs-01.webp';
+import dauMuseum from './assets/case-studies/dau-museum.webp';
 import hxsContents from './assets/case-studies/hxs-02.webp';
 import hxsProduct from './assets/case-studies/hxs-05.webp';
 import hxsEngineering from './assets/case-studies/hxs-07.webp';
 import hxsProjects from './assets/case-studies/hxs-12.webp';
+import relayCover from './assets/case-studies/relay-cover.webp';
 import relayEntry from './assets/case-studies/relay-entry.webp';
+import relayKit from './assets/case-studies/relay-kit.webp';
+import relaySpace from './assets/case-studies/relay-space.webp';
 import { withoutTrailingPeriod } from './text.js';
 import './skill-showcase.css';
 import './ui-showcase-v2.css';
@@ -53,15 +62,15 @@ const graphicProductionEvidenceV2 = [
 ];
 
 function GraphicHeroV2({ Reveal }) {
-  return <section className="gd-hero gd-hero-v2"><div className="page-shell gd-hero-grid"><Reveal className="gd-hero-copy"><span className="gd-kicker">Graphic design</span><h1>Identity + editorial</h1><p>Two complete systems across material, print, space and screen</p><ArrowLink to="#identity-evidence">View the work</ArrowLink><dl className="gd-hero-facts"><div><dt>Scope</dt><dd>Identity + information</dd></div><div><dt>Formats</dt><dd>Print + field + digital</dd></div><div><dt>Working set</dt><dd>Vietnamese + production files</dd></div></dl></Reveal><Reveal className="gd-hero-art gd-hero-evidence" delay={0.08}><figure><img src={hxsCover} alt="HUAXINSHENG industrial catalogue front and back cover" /></figure><figcaption>HUAXINSHENG / 12 A3 spreads</figcaption></Reveal></div></section>;
+  return <section className="gd-hero gd-hero-v2"><div className="page-shell gd-hero-grid"><Reveal className="gd-hero-copy"><span className="gd-kicker">Graphic design</span><h1>Identity + editorial</h1><p>Brand systems made tangible across material, print, space and screen</p><ArrowLink to="#identity-evidence">View the work</ArrowLink></Reveal><Reveal className="gd-hero-art gd-hero-evidence" delay={0.08}><figure><img src={graphicKeyVisual} alt="VỤN material identity and HUAXINSHENG catalogue arranged as an editorial studio still life" /></figure></Reveal></div></section>;
 }
 
 function GraphicSystemV2({ Reveal }) {
-  return <section id="identity-evidence" className="gd-section gd-system-section"><div className="page-shell"><Reveal className="gd-heading"><h2>VỤN across three formats</h2><p>One fragment system for product, space and catalogue</p></Reveal><div className="gd-evidence-grid">{graphicIdentityEvidenceV2.map((item, index) => <Reveal className={`gd-evidence-card ${item.className || ''}`} key={item.context} delay={index * .05}><a href="/work/portfolio-2" aria-label={`View VỤN case study from ${item.context}`}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><span>{item.context}</span><strong>{item.outcome}</strong><p>{item.rule}</p><ArrowUpRight size={17} aria-hidden="true" /></figcaption></figure></a></Reveal>)}</div></div></section>;
+  return <section id="identity-evidence" className="gd-section gd-system-section"><div className="page-shell"><Reveal className="gd-heading"><h2>VỤN across three formats</h2><p>One fragment system for product, space and catalogue</p></Reveal><div className="gd-evidence-grid">{graphicIdentityEvidenceV2.map((item, index) => <Reveal className={`gd-evidence-card ${item.className || ''}`} key={item.context} delay={index * .05}><a href="/work/portfolio-2" aria-label={`View VỤN case study from ${item.context}`}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><span>{item.context}</span><strong>{item.outcome}</strong><ArrowUpRight size={17} aria-hidden="true" /></figcaption></figure></a></Reveal>)}</div></div></section>;
 }
 
 function GraphicInformationV2({ Reveal }) {
-  return <section className="gd-section gd-information-section"><div className="page-shell"><Reveal className="gd-heading"><h2>HUAXINSHENG / catalogue architecture</h2><p>Company, product, engineering and application in one compact sequence</p></Reveal><div className="gd-information-layout"><Reveal className="gd-information-main"><figure><img src={hxsContents} alt="HUAXINSHENG contents and product ecosystem spread" loading="lazy" /><figcaption>Contents + product ecosystem</figcaption></figure></Reveal><div className="gd-information-side"><Reveal><figure><img src={hxsProduct} alt="HUAXINSHENG production and product construction spread" loading="lazy" /><figcaption>Production + product proof</figcaption></figure></Reveal><Reveal className="gd-information-facts" delay={0.06}><dl><div><dt>Structure</dt><dd>4 chapters / 12 spreads</dd></div><div><dt>Format</dt><dd>A3 landscape / 24 A4 pages</dd></div><div><dt>Typeface</dt><dd>Inter variable family</dd></div><div><dt>Language</dt><dd>Vietnamese</dd></div></dl><a href="/work/portfolio-3">View HUAXINSHENG case study <ArrowUpRight size={17} /></a></Reveal></div></div></div></section>;
+  return <section className="gd-section gd-information-section"><div className="page-shell"><Reveal className="gd-heading"><h2>HUAXINSHENG catalogue</h2><p>Company, production, engineering and application across 24 pages</p></Reveal><div className="gd-information-layout"><Reveal className="gd-information-main"><figure><img src={hxsContents} alt="HUAXINSHENG contents and product ecosystem spread" loading="lazy" /><figcaption>Contents + product ecosystem</figcaption></figure></Reveal><div className="gd-information-side"><Reveal><figure><img src={hxsProduct} alt="HUAXINSHENG production and product construction spread" loading="lazy" /><figcaption>Production + product proof</figcaption></figure></Reveal><Reveal delay={0.06}><figure><img src={hxsProjects} alt="HUAXINSHENG featured project spread" loading="lazy" /><figcaption>Application + project evidence</figcaption></figure></Reveal></div></div><Reveal className="gd-information-link"><a href="/work/portfolio-3">View the complete catalogue <ArrowUpRight size={17} /></a></Reveal></div></section>;
 }
 
 function GraphicTypeLabV2({ Reveal }) {
@@ -69,11 +78,11 @@ function GraphicTypeLabV2({ Reveal }) {
   const [alignment, setAlignment] = useState('left');
   const reduceMotion = useReducedMotion();
   const specimen = evidenceSpecimens[scale];
-  return <section className="gd-section gd-type-section"><div className="page-shell gd-type-layout"><Reveal className="gd-type-copy"><TextAa size={34} weight="duotone" aria-hidden="true" /><h2>Scale is assigned by job</h2><p>The specimen compares the cover voice with the denser chapter hierarchy used inside the same document</p><div className="gd-type-controls" aria-label="Typography specimen controls"><fieldset><legend>Hierarchy</legend>{Object.entries(evidenceSpecimens).map(([key, value]) => <button key={key} type="button" aria-pressed={scale === key} onClick={() => setScale(key)}>{value.label}</button>)}</fieldset><fieldset><legend>Alignment</legend><button type="button" aria-label="Align specimen left" aria-pressed={alignment === 'left'} onClick={() => setAlignment('left')}><TextAlignLeft size={18} /></button><button type="button" aria-label="Center specimen" aria-pressed={alignment === 'center'} onClick={() => setAlignment('center')}><TextAlignCenter size={18} /></button></fieldset></div></Reveal><Reveal className="gd-type-stage" delay={0.08}><div className="gd-type-grid" aria-hidden="true" /><motion.p key={`${scale}-${alignment}`} className={`gd-type-specimen is-${alignment}`} initial={reduceMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .35, ease: [0.16, 1, 0.3, 1] }} style={{ '--specimen-size': specimen.size, '--specimen-width': specimen.width }}>{specimen.text}</motion.p><dl className="gd-type-metrics"><div><dt>Role</dt><dd>{specimen.role}</dd></div><div><dt>Setting</dt><dd>{specimen.setting}</dd></div><div><dt>Grid</dt><dd>7 columns / 12 mm margin</dd></div></dl></Reveal></div></section>;
+  return <section className="gd-section gd-type-section"><div className="page-shell gd-type-layout"><Reveal className="gd-type-copy"><TextAa size={34} weight="duotone" aria-hidden="true" /><h2>Typography in use</h2><p>Switch between the cover voice and the product chapter hierarchy</p><div className="gd-type-controls" aria-label="Typography specimen controls"><fieldset><legend>Hierarchy</legend>{Object.entries(evidenceSpecimens).map(([key, value]) => <button key={key} type="button" aria-pressed={scale === key} onClick={() => setScale(key)}>{value.label}</button>)}</fieldset><fieldset><legend>Alignment</legend><button type="button" aria-label="Align specimen left" aria-pressed={alignment === 'left'} onClick={() => setAlignment('left')}><TextAlignLeft size={18} /></button><button type="button" aria-label="Center specimen" aria-pressed={alignment === 'center'} onClick={() => setAlignment('center')}><TextAlignCenter size={18} /></button></fieldset></div></Reveal><Reveal className="gd-type-stage" delay={0.08}><div className="gd-type-grid" aria-hidden="true" /><motion.p key={`${scale}-${alignment}`} className={`gd-type-specimen is-${alignment}`} initial={reduceMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .35, ease: [0.16, 1, 0.3, 1] }} style={{ '--specimen-size': specimen.size, '--specimen-width': specimen.width }}>{specimen.text}</motion.p><dl className="gd-type-metrics"><div><dt>Typeface</dt><dd>Inter Variable</dd></div><div><dt>Setting</dt><dd>{specimen.setting}</dd></div><div><dt>Grid</dt><dd>7 columns / 12 mm</dd></div></dl><div className="gd-type-palette" aria-label="HUAXINSHENG colour palette"><span style={{ '--swatch': '#0b4b83' }}>#0B4B83</span><span style={{ '--swatch': '#168bc5' }}>#168BC5</span><span style={{ '--swatch': '#dceaf3' }}>#DCEAF3</span><span style={{ '--swatch': '#f7f9fa' }}>#F7F9FA</span></div></Reveal></div></section>;
 }
 
 function GraphicProductionV2({ Reveal }) {
-  return <section className="gd-section gd-production-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Production + handover</h2><p>Print-ready pages keep commercial and technical evidence in one visual system</p></Reveal><div className="gd-production-grid">{graphicProductionEvidenceV2.map((item, index) => <Reveal className={`gd-production-card is-${index + 1}`} key={item.title} delay={index * .05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><strong>{item.title}</strong><p>{item.copy}</p></figcaption></figure></Reveal>)}</div><Reveal className="gd-deliverables"><h3>Deliverables</h3><dl><div><dt>Identity</dt><dd>VỤN mark, palette, samples, packaging and space</dd></div><div><dt>Editorial</dt><dd>HUAXINSHENG 12-spread A3 catalogue</dd></div><div><dt>Content</dt><dd>Company, product, standards and projects</dd></div><div><dt>Handoff</dt><dd>Print-ready artwork and digital PDF</dd></div></dl><nav aria-label="Graphic design case studies"><a href="/work/portfolio-2">VỤN case study <ArrowUpRight size={17} /></a><a href="/work/portfolio-3">HUAXINSHENG case study <ArrowUpRight size={17} /></a></nav></Reveal></div></section>;
+  return <section className="gd-section gd-production-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Production proof</h2><p>Product, engineering and project pages shown at final density</p></Reveal><div className="gd-production-grid">{graphicProductionEvidenceV2.map((item, index) => <Reveal className={`gd-production-card is-${index + 1}`} key={item.title} delay={index * .05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><strong>{item.title}</strong></figcaption></figure></Reveal>)}</div><Reveal className="gd-project-links"><a href="/work/portfolio-2"><img src={vunPackaging} alt="VỤN packaging and recovered-material products" loading="lazy" /><span>VỤN identity <ArrowUpRight size={17} /></span></a><a href="/work/portfolio-3"><img src={hxsProjects} alt="HUAXINSHENG industrial project catalogue spread" loading="lazy" /><span>HUAXINSHENG catalogue <ArrowUpRight size={17} /></span></a></Reveal></div></section>;
 }
 
 function GraphicDesignShowcase({ Reveal }) {
@@ -92,16 +101,11 @@ function VideoHero({ Reveal }) {
       <Reveal className="ve-hero-copy">
         <span className="ve-kicker">Video editor</span>
         <h1>Every cut matters</h1>
-        <p>A 12.6-second cyclist sequence used to show shot logic, continuity, sound and delivery decisions</p>
+        <p>Picture, rhythm, colour and sound shaped into one cinematic sequence</p>
         <ArrowLink to="#edit-rhythm">Enter the timeline</ArrowLink>
-        <dl className="ve-hero-facts"><div><dt>Sequence</dt><dd>4 shots / 12.6 sec</dd></div><div><dt>Master</dt><dd>16:9 / 24 fps</dd></div><div><dt>Focus</dt><dd>Motion + atmosphere</dd></div></dl>
       </Reveal>
       <Reveal className="ve-hero-screen" delay={0.08}>
-        <figure><img src={videoSequence} alt="Four cinematic shots following a cyclist through a rain-darkened underpass" /></figure>
-        <div className="ve-hero-monitor" aria-hidden="true">
-          <span><Play size={15} weight="fill" /> Edit preview</span>
-          <b>4 SHOTS / 16:9</b>
-        </div>
+        <figure><img src={videoKeyVisual} alt="Colour-grading studio showing four cinematic cyclist shots on a wide monitor" /></figure>
       </Reveal>
     </div>
   </section>;
@@ -123,7 +127,7 @@ function VideoRhythm({ Reveal }) {
     <div className="page-shell">
       <Reveal className="ve-heading"><Scissors size={30} weight="duotone" aria-hidden="true" /><h2>The cut has a reason</h2><p>Select a shot to inspect its duration, framing, transition, sound cue and narrative purpose</p></Reveal>
       <div className="ve-cut-layout">
-        <Reveal className="ve-cut-viewer"><div className="ve-cut-frame"><div className={`ve-sequence-crop ve-sequence-crop-${activeIndex}`}><img src={videoSequence} alt={`${active.label} shot from the cyclist sequence`} loading="lazy" /></div><span>{active.time}</span></div><motion.dl key={active.id} initial={reduceMotion ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .28 }} aria-live="polite"><div><dt>Duration</dt><dd>{active.duration}</dd></div><div><dt>Frame</dt><dd>{active.frame}</dd></div><div><dt>Cut</dt><dd>{active.cut}</dd></div><div><dt>Sound</dt><dd>{active.audio}</dd></div><div className="is-purpose"><dt>Purpose</dt><dd>{active.purpose}</dd></div></motion.dl></Reveal>
+        <Reveal className="ve-cut-viewer"><div className="ve-cut-frame"><div className={`ve-sequence-crop ve-sequence-crop-${activeIndex}`}><img src={videoSequence} alt={`${active.label} shot from the cyclist sequence`} loading="lazy" /></div><span>{active.time}</span></div><motion.dl key={active.id} initial={reduceMotion ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .28 }} aria-live="polite"><div><dt>Duration</dt><dd>{active.duration}</dd></div><div><dt>Frame</dt><dd>{active.frame}</dd></div><div><dt>Sound</dt><dd>{active.audio}</dd></div></motion.dl></Reveal>
         <Reveal className="ve-cut-list" delay={0.08} role="group" aria-label="Cut plan">{timelineClips.map((clip, index) => <button type="button" key={clip.id} aria-pressed={activeClip === clip.id} onClick={() => setActiveClip(clip.id)}><span>{String(index + 1).padStart(2, '0')} / {clip.label}</span><strong>{clip.duration}</strong><small>{clip.time}</small></button>)}</Reveal>
       </div>
     </div>
@@ -143,7 +147,7 @@ function VideoSequence({ Reveal }) {
       <Reveal className="ve-heading ve-heading-wide"><h2>Continuity without repetition</h2><p>Each frame changes scale while preserving direction, weather and intent</p></Reveal>
       <div className="ve-sequence-grid">
         {sequenceNotes.map((item, index) => <Reveal className="ve-sequence-frame" key={item.title} delay={index * 0.05}>
-          <figure><div className={`ve-sequence-crop ve-sequence-crop-${index + 1}`}><img src={videoSequence} alt={`${item.title}: cyclist sequence frame ${index + 1}`} loading="lazy" /></div><figcaption><strong>{item.title}</strong><span>{item.copy}</span><dl><div><dt>Shot</dt><dd>{item.shot}</dd></div><div><dt>Duration</dt><dd>{item.duration}</dd></div><div><dt>Continuity</dt><dd>{item.continuity}</dd></div></dl></figcaption></figure>
+          <figure><div className={`ve-sequence-crop ve-sequence-crop-${index + 1}`}><img src={videoSequence} alt={`${item.title}: cyclist sequence frame ${index + 1}`} loading="lazy" /></div><figcaption><strong>{item.title}</strong><span>{item.duration} / {item.shot}</span></figcaption></figure>
         </Reveal>)}
       </div>
     </div>
@@ -159,7 +163,6 @@ function VideoGrade({ Reveal }) {
         <SlidersHorizontal size={32} weight="duotone" aria-hidden="true" />
         <h2>Color supports the story</h2>
         <p>The grade separates the cold environment from the warm practical light without crushing detail</p>
-        <dl className="ve-grade-targets"><div><dt>Neutralise</dt><dd>Rain-blue cast in concrete</dd></div><div><dt>Protect</dt><dd>Wet-road highlight detail</dd></div><div><dt>Separate</dt><dd>Amber practicals from cool exterior</dd></div></dl>
         <div className="ve-grade-controls" role="group" aria-label="Color grading view">
           <button type="button" aria-pressed={grade === 'source'} onClick={() => setGrade('source')}>Neutral pass</button>
           <button type="button" aria-pressed={grade === 'final'} onClick={() => setGrade('final')}>Story grade</button>
@@ -195,9 +198,9 @@ function VideoSound({ Reveal }) {
       <Reveal className="ve-sound-copy">
         <SpeakerHigh size={32} weight="duotone" aria-hidden="true" />
         <h2>Sound is mapped to picture</h2>
-        <p>Every cue has a timestamp, source, editorial function and mix target</p>
+        <p>Atmosphere, motion and impact cues align directly with the cut</p>
       </Reveal>
-      <Reveal className="ve-cue-sheet" delay={0.08}><div className="ve-cue-head"><span>Time</span><span>Source</span><span>Function</span><span>Mix target</span></div>{soundCues.map((cue) => <div className="ve-cue-row" key={cue.time}><time>{cue.time}</time><strong>{cue.source}</strong><span>{cue.function}</span><span>{cue.mix}</span><i style={{ '--cue-width': cue.width }} aria-hidden="true" /></div>)}<p>Atmosphere runs continuously beneath the edit. Accents only enter where picture movement needs support</p></Reveal>
+      <Reveal className="ve-sound-stage" delay={0.08}><div className="ve-sound-picture"><img src={videoSequence} alt="Cyclist sequence aligned above four sound tracks" loading="lazy" /></div><div className="ve-wave-stack">{soundCues.map((cue, index) => <div className="ve-wave-track" key={cue.time} style={{ '--cue-width': cue.width, '--wave-offset': `${index * -14}px` }}><time>{cue.time}</time><strong>{cue.source}</strong><i aria-hidden="true" /></div>)}</div></Reveal>
     </div>
   </section>;
 }
@@ -215,10 +218,10 @@ function VideoDelivery({ Reveal }) {
       <div className="ve-delivery-grid">
         {deliveryFormats.map((format, index) => <Reveal className={`ve-delivery-card ${format.className}`} key={format.title} delay={index * 0.06}>
           <div className="ve-delivery-frame"><img src={videoSequence} alt={`${format.title} preview of the cyclist story in ${format.ratio} format`} loading="lazy" /><i aria-hidden="true" /></div>
-          <div className="ve-delivery-info"><strong>{format.title}</strong><span>{format.ratio}</span><dl><div><dt>Frame</dt><dd>{format.size}</dd></div><div><dt>Crop</dt><dd>{format.crop}</dd></div><div><dt>Package</dt><dd>{format.output}</dd></div></dl></div>
+          <div className="ve-delivery-info"><strong>{format.title}</strong><span>{format.ratio}</span></div>
         </Reveal>)}
       </div>
-      <Reveal className="ve-delivery-footer"><dl><div><dt>Picture</dt><dd>Master + review encodes</dd></div><div><dt>Sound</dt><dd>Stereo mix + stems</dd></div><div><dt>Access</dt><dd>SRT captions + safe-area check</dd></div><div><dt>Archive</dt><dd>Project + linked media + grade</dd></div></dl><a href="#contact">Shape the next cut <ArrowUpRight size={18} /></a></Reveal>
+      <Reveal className="ve-delivery-footer ve-delivery-action"><a href="#contact">Shape the next cut <ArrowUpRight size={18} /></a></Reveal>
     </div>
   </section>;
 }
@@ -340,14 +343,95 @@ function UiBuildProof({ Reveal }) {
   </section>;
 }
 
+function UiHeroV3({ Reveal }) {
+  return <section className="ui3-hero">
+    <div className="page-shell ui3-hero-layout">
+      <Reveal className="ui3-hero-copy">
+        <span className="ui3-kicker">Web design</span>
+        <h1>From object to interface</h1>
+        <p>Product thinking, interaction and responsive craft through one cultural archive</p>
+        <ArrowLink to="#ui3-journey">Enter DẤU</ArrowLink>
+      </Reveal>
+      <Reveal className="ui3-hero-visual" delay={0.08}>
+        <figure><img src={webKeyVisual} alt="DẤU cultural archive interface system across desktop, tablet and phone with lacquer artifact and design documentation" /></figure>
+      </Reveal>
+    </div>
+  </section>;
+}
+
+const uiJourneyEvidenceV3 = [
+  { image: dauDesktop, label: '01 / Discover', title: 'Browse the archive', alt: 'DẤU desktop archive and tablet artifact detail', className: 'is-primary' },
+  { image: dauScan, label: '02 / Recognise', title: 'Scan to context', alt: 'DẤU motif recognition and artifact story across phone and tablet' },
+  { image: dauStates, label: '03 / Continue', title: 'Fallback, access + offline', alt: 'DẤU permission, no-match, accessibility and offline states' },
+];
+
+function UiJourneyV3({ Reveal }) {
+  return <section id="ui3-journey" className="ui3-section ui3-journey">
+    <div className="page-shell">
+      <Reveal className="ui3-heading"><h2>The visit becomes a product flow</h2><p>Browse, recognise, listen and keep the record</p></Reveal>
+      <div className="ui3-journey-grid">
+        {uiJourneyEvidenceV3.map((item, index) => <Reveal className={`ui3-journey-card ${item.className || ''}`} key={item.label} delay={index * 0.05}>
+          <figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><span>{item.label}</span><strong>{item.title}</strong></figcaption></figure>
+        </Reveal>)}
+      </div>
+    </div>
+  </section>;
+}
+
+function UiSystemV3({ Reveal }) {
+  return <section className="ui3-section ui3-system">
+    <div className="page-shell">
+      <Reveal className="ui3-heading ui3-heading-light"><h2>A quiet system for dense content</h2><p>One archive across discovery, map, filter, collection and audio</p></Reveal>
+      <Reveal className="ui3-screen-wall" delay={0.06}><figure><img src={dauScreens} alt="DẤU mobile and tablet screen family for archive discovery, map, filters, collections, audio and artifact detail" loading="lazy" /></figure></Reveal>
+      <Reveal className="ui3-identity-board" delay={0.08}>
+        <div className="ui3-palette" aria-label="DẤU colour palette">
+          <span style={{ '--swatch': '#2545C6' }}><b>Cobalt</b><small>#2545C6</small></span>
+          <span style={{ '--swatch': '#16191C' }}><b>Archive ink</b><small>#16191C</small></span>
+          <span style={{ '--swatch': '#E6E7E4' }}><b>Museum grey</b><small>#E6E7E4</small></span>
+          <span style={{ '--swatch': '#D7CA9F' }}><b>Artifact gold</b><small>#D7CA9F</small></span>
+        </div>
+        <div className="ui3-type-specimen"><span>Playfair Display + Manrope</span><strong>Dấu tích</strong><p>Ă Â Ê Ô Ơ Ư Đ</p><small>Sơn mài · Gốm · Dệt</small></div>
+      </Reveal>
+    </div>
+  </section>;
+}
+
+const uiModesV3 = {
+  browse: { label: 'Browse', title: 'Visual discovery', meta: 'Material · region · collection', image: dauScreens, alt: 'DẤU archive browsing screens' },
+  scan: { label: 'Scan', title: 'Motif recognition', meta: 'Camera · match · maker audio', image: dauScan, alt: 'DẤU motif recognition flow' },
+  access: { label: 'Access', title: 'Inclusive states', meta: 'Fallback · offline · accessibility', image: dauStates, alt: 'DẤU access and offline states' },
+};
+
+function UiPrototypeV3({ Reveal }) {
+  const [mode, setMode] = useState('scan');
+  const reduceMotion = useReducedMotion();
+  const active = uiModesV3[mode];
+  return <section className="ui3-section ui3-prototype">
+    <div className="page-shell ui3-prototype-layout">
+      <Reveal className="ui3-prototype-copy"><CursorClick size={32} weight="duotone" aria-hidden="true" /><h2>Three states, one product</h2><p>Switch between the visual proof</p><div className="ui3-mode-controls" role="group" aria-label="DẤU product state preview">{Object.entries(uiModesV3).map(([key, item]) => <button type="button" key={key} aria-pressed={mode === key} onClick={() => setMode(key)}>{item.label}</button>)}</div></Reveal>
+      <Reveal className="ui3-prototype-stage" delay={0.08}>
+        <motion.figure key={mode} initial={reduceMotion ? false : { opacity: 0.25, scale: 0.985 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: reduceMotion ? 0 : 0.38, ease: [0.16, 1, 0.3, 1] }}><img src={active.image} alt={active.alt} /><figcaption><strong>{active.title}</strong><span>{active.meta}</span></figcaption></motion.figure>
+      </Reveal>
+    </div>
+  </section>;
+}
+
+function UiFieldV3({ Reveal }) {
+  return <section className="ui3-section ui3-field">
+    <div className="page-shell">
+      <Reveal className="ui3-heading ui3-heading-light"><h2>Designed for the gallery floor</h2><p>Scan, map and maker audio in the place they are used</p></Reveal>
+      <Reveal className="ui3-field-visual" delay={0.06}><figure><img src={dauMuseum} alt="Visitors using DẤU scan, map and maker audio inside a Vietnamese craft exhibition" loading="lazy" /><figcaption><span>Field encounter</span><a href="/work/portfolio-1">View the complete DẤU case study <ArrowUpRight size={18} /></a></figcaption></figure></Reveal>
+    </div>
+  </section>;
+}
+
 function UiWebShowcase({ Reveal }) {
   return <article className="skill-showcase skill-showcase-ui">
-    <UiHero Reveal={Reveal} />
-    <UiProductCase Reveal={Reveal} />
-    <UiFlow Reveal={Reveal} />
-    <UiResponsive Reveal={Reveal} />
-    <UiSandbox Reveal={Reveal} />
-    <UiBuildProof Reveal={Reveal} />
+    <UiHeroV3 Reveal={Reveal} />
+    <UiJourneyV3 Reveal={Reveal} />
+    <UiSystemV3 Reveal={Reveal} />
+    <UiPrototypeV3 Reveal={Reveal} />
+    <UiFieldV3 Reveal={Reveal} />
   </article>;
 }
 
@@ -459,14 +543,101 @@ function AutomationSummary({ Reveal }) {
   return <section id="run-artifacts" className="au-section au-summary-section"><div className="page-shell"><Reveal className="au-heading"><CheckCircle size={34} weight="duotone" aria-hidden="true" /><h2>The run ends with evidence</h2><p>Artifacts make success, retry and failure independently reviewable</p></Reveal><div className="au-summary-layout"><Reveal className="au-artifact-manifest"><header><span>Artifact manifest</span><strong>4 files</strong></header><div className="au-artifact-head"><span>File</span><span>Produced by</span><span>Purpose</span><span>Status</span></div>{outputs.map((item) => <article key={item.file}><code>{item.file}</code><span>{item.source}</span><p>{item.purpose}</p><strong>{item.status}</strong></article>)}</Reveal><Reveal className="au-final-summary" delay={0.08}><header><TerminalWindow size={22} weight="duotone" aria-hidden="true" /><span>FINAL SUMMARY</span></header><dl><div><dt>Total</dt><dd>3</dd></div><div><dt>Success</dt><dd>2</dd></div><div><dt>Failed</dt><dd>0</dd></div><div><dt>Skipped</dt><dd>0</dd></div><div><dt>Retries</dt><dd>1</dd></div><div><dt>Elapsed</dt><dd>00:41</dd></div></dl><p><CheckCircle size={18} weight="fill" aria-hidden="true" />All terminal states recorded and no OS-level input used</p><a href="#contact">Plan an automation <ArrowUpRight size={18} /></a></Reveal></div></div></section>;
 }
 
+function AutomationHeroV3({ Reveal }) {
+  return <section className="au3-hero">
+    <div className="page-shell au3-hero-layout">
+      <Reveal className="au3-hero-copy"><span className="au3-kicker">Automation</span><h1>Every run leaves evidence</h1><p>Concurrent browser work controlled through APIs and protocol sessions</p><ArrowLink to="#au3-pipeline">Inspect the run</ArrowLink></Reveal>
+      <Reveal className="au3-hero-visual" delay={0.08}><figure><img src={automationKeyVisual} alt="Protocol automation control room with three colour-coded browser profiles, workers, wallets and evidence report" /></figure></Reveal>
+    </div>
+  </section>;
+}
+
+function AutomationPipelineV3({ Reveal }) {
+  return <section id="au3-pipeline" className="au3-section au3-pipeline">
+    <div className="page-shell">
+      <Reveal className="au3-heading"><h2>Seven verified steps</h2><p>Config to evidence without desktop input</p></Reveal>
+      <Reveal className="au3-pipeline-image" delay={0.05}><figure><img src={automationWorkflowVisual} alt="Physical branching workflow model showing validated automation paths and guarded decisions" loading="lazy" /></figure></Reveal>
+      <div className="au3-stage-rail" aria-label="Protocol automation pipeline">{workflowStages.map((stage, index) => <Reveal className="au3-stage" key={stage.id} delay={index * 0.035}><span>{stage.index}</span><strong>{stage.title}</strong><small>{stage.output}</small></Reveal>)}</div>
+    </div>
+  </section>;
+}
+
+const operationProfilesV3 = [
+  { profile: 'Atlas 07', wallet: '0x72A4...91C2', worker: 'worker-1', color: 'cyan', state: 'Running', steps: ['done', 'done', 'live', 'wait', 'wait'] },
+  { profile: 'Cinder 12', wallet: '0x18F9...4B70', worker: 'worker-2', color: 'magenta', state: 'Retry 01', steps: ['done', 'done', 'done', 'retry', 'wait'] },
+  { profile: 'Moss 03', wallet: '0xA631...0D55', worker: 'worker-3', color: 'amber', state: 'Done', steps: ['done', 'done', 'done', 'done', 'done'] },
+];
+
+const operationStepLabelsV3 = ['Config', 'GPM API', 'CDP', 'Action', 'Evidence'];
+
+function AutomationOperationsV3({ Reveal }) {
+  return <section className="au3-section au3-operations">
+    <div className="page-shell">
+      <Reveal className="au3-heading au3-heading-light"><TerminalWindow size={32} weight="duotone" aria-hidden="true" /><h2>Three profiles, one readable run</h2><p>Colour stays attached to profile, wallet and worker</p></Reveal>
+      <Reveal className="au3-ops-board" delay={0.06}>
+        <header><span><i />RUN ops-2408</span><strong>GPM API + Chromium CDP</strong><b>3 profiles</b></header>
+        <div className="au3-step-labels" aria-hidden="true"><span /><span />{operationStepLabelsV3.map((label) => <small key={label}>{label}</small>)}<span /></div>
+        <div className="au3-profile-lanes">{operationProfilesV3.map((profile) => <article className={`is-${profile.color}`} key={profile.profile}><div className="au3-profile-id"><i /><strong>{profile.profile}</strong><span>{profile.wallet}</span></div><code>{profile.worker}</code><div className="au3-lane-steps">{profile.steps.map((state, index) => <i className={`is-${state}`} key={`${profile.profile}-${operationStepLabelsV3[index]}`} title={`${operationStepLabelsV3[index]}: ${state}`} />)}</div><b>{profile.state}</b></article>)}</div>
+        <footer><span>Total 3</span><span>Success 1</span><span>Running 1</span><span>Retrying 1</span><span>Failed 0</span><span>Elapsed 00:26</span></footer>
+      </Reveal>
+    </div>
+  </section>;
+}
+
+function AutomationRecoveryV3({ Reveal }) {
+  const [mode, setMode] = useState('retry');
+  const reduceMotion = useReducedMotion();
+  const active = recoveryModes[mode];
+  return <section className="au3-section au3-recovery">
+    <div className="page-shell">
+      <Reveal className="au3-heading"><Warning size={32} weight="duotone" aria-hidden="true" /><h2>Recovery has a visible rule</h2><p>Retry, skip or stop from the state that actually failed</p></Reveal>
+      <div className="au3-recovery-grid" role="group" aria-label="Recovery decision cases">{Object.entries(recoveryModes).map(([key, item], index) => <Reveal key={key} delay={index * 0.05}><button className={`au3-recovery-card is-${key}`} type="button" aria-pressed={mode === key} onClick={() => setMode(key)}><span>{String(index + 1).padStart(2, '0')}</span><strong>{item.label}</strong><b>{item.decision}</b></button></Reveal>)}</div>
+      <Reveal className="au3-recovery-detail-wrap" delay={0.08}><motion.div className={`au3-recovery-detail is-${mode}`} key={mode} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .28 }} aria-live="polite"><div><span>Signal</span><strong>{active.label}</strong></div><i aria-hidden="true" /><div><span>Safety check</span><strong>{active.safe === 'Yes' ? 'State safe' : 'Unsafe state'}</strong></div><i aria-hidden="true" /><div><span>Outcome</span><strong>{active.decision}</strong></div><footer><span>{active.limit}</span><p>{active.next}</p></footer></motion.div></Reveal>
+    </div>
+  </section>;
+}
+
+const protocolNodesV3 = [
+  ['01', 'GPM API', 'profile_id → debuggerAddress'],
+  ['02', 'CDP / WebDriver', 'isolated browser session'],
+  ['03', 'Page protocol', 'DOM · network · download'],
+  ['04', 'Evidence store', 'screenshot · JSON · log'],
+];
+
+function AutomationBoundaryV3({ Reveal }) {
+  return <section className="au3-section au3-boundary">
+    <div className="page-shell">
+      <Reveal className="au3-heading au3-heading-light"><Browser size={34} weight="duotone" aria-hidden="true" /><h2>Control stays inside the browser</h2><p>A protocol path with a hard desktop boundary</p></Reveal>
+      <Reveal className="au3-protocol-board" delay={0.06}><div className="au3-protocol-path">{protocolNodesV3.map(([index, title, detail], itemIndex) => <React.Fragment key={title}><article><span>{index}</span><strong>{title}</strong><small>{detail}</small></article>{itemIndex < protocolNodesV3.length - 1 && <i aria-hidden="true" />}</React.Fragment>)}</div><div className="au3-desktop-boundary"><XCircle size={24} weight="fill" aria-hidden="true" /><strong>No OS-level input</strong><span>Mouse</span><span>Keyboard</span><span>Clipboard</span><span>Focus</span></div></Reveal>
+    </div>
+  </section>;
+}
+
+const automationArtifactsV3 = [
+  ['LOG', 'run.log', 'Serialized worker events'],
+  ['PNG', 'atlas-07.png', 'Verified browser state'],
+  ['JSON', 'cinder-12.error.json', 'Retry context'],
+  ['JSON', 'summary.json', 'Totals and elapsed time'],
+];
+
+function AutomationEvidenceV3({ Reveal }) {
+  return <section className="au3-section au3-evidence">
+    <div className="page-shell">
+      <Reveal className="au3-heading"><CheckCircle size={34} weight="duotone" aria-hidden="true" /><h2>The run ends as a reviewable package</h2><p>Success, retry and failure leave separate artifacts</p></Reveal>
+      <div className="au3-evidence-grid">{automationArtifactsV3.map(([type, file, purpose], index) => <Reveal className="au3-artifact-card" key={file} delay={index * 0.05}><span>{type}</span><div className="au3-artifact-preview"><i /><i /><i /><i /><i /></div><code>{file}</code><small>{purpose}</small><b>Written</b></Reveal>)}</div>
+      <Reveal className="au3-final" delay={0.08}><div><span>FINAL SUMMARY</span><strong>3 profiles / 1 retry / 00:41</strong></div><dl><div><dt>Success</dt><dd>2</dd></div><div><dt>Failed</dt><dd>0</dd></div><div><dt>Skipped</dt><dd>0</dd></div><div><dt>OS input</dt><dd>0</dd></div></dl><a href="#contact">Plan an automation <ArrowUpRight size={18} /></a></Reveal>
+    </div>
+  </section>;
+}
+
 function AutomationShowcase({ Reveal }) {
   return <article className="skill-showcase skill-showcase-automation">
-    <AutomationHero Reveal={Reveal} />
-    <AutomationAnatomy Reveal={Reveal} />
-    <AutomationOperations Reveal={Reveal} />
-    <AutomationRecovery Reveal={Reveal} />
-    <AutomationBoundary Reveal={Reveal} />
-    <AutomationSummary Reveal={Reveal} />
+    <AutomationHeroV3 Reveal={Reveal} />
+    <AutomationPipelineV3 Reveal={Reveal} />
+    <AutomationOperationsV3 Reveal={Reveal} />
+    <AutomationRecoveryV3 Reveal={Reveal} />
+    <AutomationBoundaryV3 Reveal={Reveal} />
+    <AutomationEvidenceV3 Reveal={Reveal} />
   </article>;
 }
 
@@ -561,14 +732,67 @@ function BlockchainTools({ Reveal }) {
   return <section id="integration-architecture" className="bc-section bc-tools-section"><div className="page-shell"><Reveal className="bc-heading"><ArrowsLeftRight size={34} weight="duotone" aria-hidden="true" /><h2>Integration has explicit boundaries</h2><p>Resolver, client, registry, events and interface form one inspectable path</p></Reveal><div className="bc-architecture-layout"><Reveal className="bc-architecture-flow">{layers.map((layer, index) => <React.Fragment key={layer.name}><article><span>{layer.index}</span><div><strong>{layer.name}</strong><p>{layer.implementation}</p><small>{layer.boundary}</small></div></article>{index < layers.length - 1 && <i aria-hidden="true" />}</React.Fragment>)}</Reveal><Reveal className="bc-architecture-proof" delay={0.08}><header><span>Implementation boundary</span><strong>EVM ticket demo</strong></header><dl><div><dt>Read path</dt><dd>Event, ticket, holder, price cap and entry state</dd></div><div><dt>Write path</dt><dd>Simulate, request signature, submit, confirm</dd></div><div><dt>Error path</dt><dd>Reject, wrong registry, cap breach and finality delay</dd></div><div><dt>Before production</dt><dd>Audit, organizer governance, monitoring and load testing</dd></div></dl><a href="#contact">Plan an integration <ArrowUpRight size={18} /></a></Reveal></div></div></section>;
 }
 
+function BlockchainHeroV3({ Reveal }) {
+  return <section className="bc3-hero">
+    <div className="page-shell bc3-hero-layout">
+      <Reveal className="bc3-hero-copy"><span className="bc3-kicker">Blockchain integration</span><h1>A ticket people can trust</h1><p>Issue, transfer, capped resale and one-time entry through one event pass</p><ArrowLink to="#bc3-ecosystem">Follow RELAY</ArrowLink></Reveal>
+      <Reveal className="bc3-hero-visual" delay={0.08}><figure><img src={blockchainKeyVisual} alt="RELAY event access ecosystem with digital ticket, ticket history, gate scanner, wristband and provenance receipt" /></figure></Reveal>
+    </div>
+  </section>;
+}
+
+const relayEcosystemV3 = [
+  { image: relayCover, label: '01 / Access', title: 'Ticket + rotating code', alt: 'RELAY digital tickets, handheld scanner, wristband and backup ticket', className: 'is-primary' },
+  { image: relayKit, label: '02 / Operations', title: 'Gate kit', alt: 'RELAY gate operations kit with scanner, passes, wristbands and backup tickets' },
+  { image: relayEntry, label: '03 / Entry', title: 'One-time scan', alt: 'Venue staff scanning a RELAY digital ticket at entry' },
+];
+
+function BlockchainEcosystemV3({ Reveal }) {
+  return <section id="bc3-ecosystem" className="bc3-section bc3-ecosystem">
+    <div className="page-shell"><Reveal className="bc3-heading"><h2>One system from wallet to gate</h2><p>Digital proof, staff hardware and a physical fallback</p></Reveal><div className="bc3-ecosystem-grid">{relayEcosystemV3.map((item, index) => <Reveal className={`bc3-ecosystem-card ${item.className || ''}`} key={item.label} delay={index * 0.05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><span>{item.label}</span><strong>{item.title}</strong></figcaption></figure></Reveal>)}</div></div>
+  </section>;
+}
+
+function BlockchainWalletV3({ Reveal }) {
+  const [state, setState] = useState('connect');
+  const reduceMotion = useReducedMotion();
+  const active = walletStates[state];
+  const ActiveIcon = active.icon;
+  const activeIndex = walletStateOrder.indexOf(state);
+  return <section className="bc3-section bc3-wallet">
+    <div className="page-shell bc3-wallet-layout">
+      <Reveal className="bc3-wallet-copy"><Wallet size={34} weight="duotone" aria-hidden="true" /><h2>Transfer without losing the ticket</h2><p>Advance the same action from connection to confirmation</p><div className="bc3-wallet-controls" role="group" aria-label="RELAY ticket transfer states">{walletStateOrder.map((key) => <button type="button" key={key} aria-pressed={state === key} onClick={() => setState(key)}>{walletStates[key].label}</button>)}</div></Reveal>
+      <Reveal className="bc3-wallet-device" delay={0.08}><div className="bc3-wallet-shell"><header><span>RELAY</span><b>HAZE / 04</b><small>RL-26-0421</small></header><div className="bc3-wallet-progress">{walletStateOrder.map((key, index) => <i className={index < activeIndex ? 'is-done' : index === activeIndex ? 'is-current' : ''} key={key}><span>{String(index + 1).padStart(2, '0')}</span><small>{walletStates[key].label}</small></i>)}</div><motion.div className={`bc3-wallet-state is-${state}`} key={state} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .28 }} aria-live="polite"><ActiveIcon size={34} weight="duotone" /><span>{active.label}</span><strong>{active.heading}</strong><dl>{active.facts.map(([term, value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl><button type="button" onClick={() => setState(active.next)}>{active.button}</button></motion.div></div></Reveal>
+    </div>
+  </section>;
+}
+
+function BlockchainEventsV3({ Reveal }) {
+  return <section className="bc3-section bc3-events">
+    <div className="page-shell"><Reveal className="bc3-heading bc3-heading-light"><LinkSimple size={32} weight="duotone" aria-hidden="true" /><h2>Blockchain stays in the receipt</h2><p>Each event becomes one visible product state</p></Reveal><Reveal className="bc3-event-strip" delay={0.06}>{eventMappings.map((item, index) => <React.Fragment key={item.event}><article><span>{String(index + 1).padStart(2, '0')}</span><code>{item.event}</code><strong>{item.message}</strong><small>{item.state}</small></article>{index < eventMappings.length - 1 && <i aria-hidden="true" />}</React.Fragment>)}</Reveal></div>
+  </section>;
+}
+
+function BlockchainTrustV3({ Reveal }) {
+  return <section className="bc3-section bc3-trust">
+    <div className="page-shell"><Reveal className="bc3-heading"><LockKey size={32} weight="duotone" aria-hidden="true" /><h2>The difficult states stay visible</h2><p>Mismatch, rejection, cap breach and successful entry</p></Reveal><div className="bc3-trust-grid">{trustStates.map((item, index) => { const Icon = item.icon; return <Reveal className={`bc3-trust-card ${item.className}`} key={item.title} delay={index * 0.05}><Icon size={36} weight="duotone" aria-hidden="true" /><span>{String(index + 1).padStart(2, '0')}</span><h3>{item.title}</h3><strong>{item.resultLabel}</strong></Reveal>; })}</div></div>
+  </section>;
+}
+
+function BlockchainFieldV3({ Reveal }) {
+  return <section className="bc3-section bc3-field">
+    <div className="page-shell"><Reveal className="bc3-heading bc3-heading-light"><h2>Built for a crowded entrance</h2><p>The integration resolves as a fast, ordinary scan</p></Reveal><Reveal className="bc3-field-visual" delay={0.06}><figure><img src={relaySpace} alt="RELAY event entrance with orange wayfinding, staffed check-in and scanner gates" loading="lazy" /><figcaption><span>Venue system</span><a href="/work/portfolio-4">View the complete RELAY case study <ArrowUpRight size={18} /></a></figcaption></figure></Reveal></div>
+  </section>;
+}
+
 function BlockchainShowcase({ Reveal }) {
   return <article className="skill-showcase skill-showcase-blockchain">
-    <BlockchainHero Reveal={Reveal} />
-    <BlockchainWalletFlow Reveal={Reveal} />
-    <BlockchainEscrow Reveal={Reveal} />
-    <BlockchainMapping Reveal={Reveal} />
-    <BlockchainTrustStates Reveal={Reveal} />
-    <BlockchainTools Reveal={Reveal} />
+    <BlockchainHeroV3 Reveal={Reveal} />
+    <BlockchainEcosystemV3 Reveal={Reveal} />
+    <BlockchainWalletV3 Reveal={Reveal} />
+    <BlockchainEventsV3 Reveal={Reveal} />
+    <BlockchainTrustV3 Reveal={Reveal} />
+    <BlockchainFieldV3 Reveal={Reveal} />
   </article>;
 }
 

@@ -228,19 +228,13 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .work-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 58px 24px; align-items: start; }
 .work-card-link { display: block; }
 .work-card-image { position: relative; aspect-ratio: 16 / 9; margin: 0; overflow: hidden; border-radius: var(--radius-card); background: var(--soft); }
-.work-card-image::after { position: absolute; inset: 0; content: ''; background: linear-gradient(180deg, transparent 58%, rgba(11,13,12,.2)); opacity: 0; transition: opacity .35s ease; }
 .work-card-image img { transition: transform .7s cubic-bezier(.16,1,.3,1), filter .35s ease; }
-.work-card-image figcaption { position: absolute; right: 14px; bottom: 14px; z-index: 1; display: inline-flex; align-items: center; gap: 7px; padding: 9px 11px; border-radius: 999px; background: rgba(250,249,245,.92); color: #111211; font-size: .68rem; font-weight: 750; opacity: 0; transform: translateY(8px); backdrop-filter: blur(10px); transition: opacity .3s ease, transform .3s cubic-bezier(.16,1,.3,1); }
 .work-card-link:hover .work-card-image img { transform: scale(1.025); }
-.work-card-link:hover .work-card-image::after, .work-card-link:hover .work-card-image figcaption { opacity: 1; }
-.work-card-link:hover .work-card-image figcaption { transform: translateY(0); }
 .work-card-kicker { display: flex; justify-content: space-between; gap: 16px; margin-top: 15px; padding-bottom: 11px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .work-card-copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; padding-top: 14px; }
 .work-card-copy h3 { margin-bottom: 9px; font-size: clamp(1.8rem, 2.5vw, 2.55rem); }
 .work-card-copy p { max-width: 460px; font-size: .84rem; line-height: 1.6; }
 .work-card-meta { min-width: 110px; display: grid; justify-items: end; align-content: start; gap: 4px; color: var(--muted); font-size: .7rem; text-align: right; }
-.work-card-meta svg { margin-top: 10px; color: var(--ink); transition: transform .25s ease; }
-.work-card-link:hover .work-card-meta svg { transform: translate(3px, -3px); }
 
 .about-section { background: var(--paper); }
 .about-grid { display: grid; grid-template-columns: .45fr 1.1fr 1fr; gap: clamp(28px, 5vw, 70px); align-items: start; }
@@ -333,8 +327,9 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .experiment-selector:active { transform: translateY(0) scale(.99); }
 .experiment-selector:focus-visible { outline: 2px solid color-mix(in srgb, var(--accent) 72%, var(--ink)); outline-offset: -2px; }
 .experiment-card-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-.experiment-mark { width: 29px; height: 29px; flex: 0 0 auto; color: var(--ink); transition: color .25s ease, transform .25s cubic-bezier(.16,1,.3,1); }
-.experiment-selector.is-active .experiment-mark { color: var(--accent); transform: rotate(-3deg); }
+.experiment-mark { width: 29px; height: 29px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 8px; transition: background .25s ease, transform .25s cubic-bezier(.16,1,.3,1); }
+.experiment-mark img { width: 25px; height: 25px; object-fit: contain; }
+.experiment-selector.is-active .experiment-mark { background: color-mix(in srgb, var(--accent) 16%, transparent); transform: rotate(-3deg); }
 .experiment-card-label { display: block; color: var(--accent); font-size: .61rem; font-weight: 760; letter-spacing: .1em; text-transform: uppercase; }
 .experiment-selector h3 { margin-top: 18px; font-size: clamp(1.25rem, 1.8vw, 1.62rem); line-height: 1.04; letter-spacing: -.05em; }
 .experiment-selector p { max-width: 30ch; margin-top: 11px; font-size: .73rem; line-height: 1.5; }
@@ -355,7 +350,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .experiments-preview-caption.is-ai-studio { --typing-width: 15ch; --typing-steps: 15; }
 .experiments-preview-progress { position: absolute; inset: 0; z-index: -1; background: color-mix(in srgb, var(--accent) 15%, var(--paper-elevated)); transform: scaleX(0); transform-origin: left; animation: experiment-progress 6.8s linear forwards; }
 .experiments-preview-identity { min-width: 0; display: flex; align-items: center; gap: 11px; }
-.experiments-preview-identity .experiment-mark { width: 29px; height: 29px; color: var(--accent); }
+.experiments-preview-identity .experiment-mark { width: 29px; height: 29px; background: color-mix(in srgb, var(--accent) 14%, transparent); }
 .experiments-preview-copy { min-width: 0; display: grid; gap: 3px; }
 .experiments-preview-caption strong { width: 0; max-width: var(--typing-width); overflow: hidden; border-right: 1px solid var(--accent); font-size: .88rem; line-height: 1.15; white-space: nowrap; animation: experiment-caption-type 1.15s steps(var(--typing-steps), end) .18s forwards, experiment-caption-caret .72s step-end .18s 4; }
 .experiments-preview-caption small { color: var(--muted); font-size: .62rem; opacity: 0; animation: experiment-caption-subtitle .35s ease 1.15s forwards; }
@@ -825,10 +820,8 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .works-section { padding-top: 96px; }
   .work-gallery { gap: 48px; }
   .work-card-image { aspect-ratio: 4 / 3; }
-  .work-card-image figcaption { display: none; }
   .work-card-copy { grid-template-columns: 1fr; gap: 16px; }
   .work-card-meta { grid-template-columns: auto auto 1fr; justify-items: start; gap: 12px; text-align: left; }
-  .work-card-meta svg { margin: 0 0 0 auto; }
   .about-grid { grid-template-columns: 1fr; gap: 23px; }
   .about-copy, .about-notes { grid-column: auto; }
   .about-image { height: 420px; }
