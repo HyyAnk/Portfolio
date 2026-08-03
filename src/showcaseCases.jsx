@@ -10,13 +10,12 @@ import vunPackaging from './assets/case-studies/vun-packaging.webp';
 import vunSpace from './assets/case-studies/vun-space.webp';
 import vunCampaign from './assets/case-studies/vun-campaign.webp';
 import vunDigital from './assets/case-studies/vun-digital.webp';
-import trucCover from './assets/case-studies/truc-cover.webp';
-import trucOverview from './assets/case-studies/truc-overview.webp';
-import trucProjects from './assets/case-studies/truc-projects.webp';
-import trucGovernance from './assets/case-studies/truc-governance.webp';
-import trucProduction from './assets/case-studies/truc-production.webp';
-import trucDigital from './assets/case-studies/truc-digital.webp';
-import trucReview from './assets/case-studies/truc-review.webp';
+import lamCover from './assets/case-studies/lam-cover.webp';
+import lamOverview from './assets/case-studies/lam-overview.webp';
+import lamScience from './assets/case-studies/lam-science.webp';
+import lamMaterials from './assets/case-studies/lam-materials.webp';
+import lamImpact from './assets/case-studies/lam-impact.webp';
+import lamDigital from './assets/case-studies/lam-digital.webp';
 import { withoutTrailingPeriod } from './text.js';
 
 function CaseHeader({ work, variant, kicker, intro, facts, image, imageAlt, action }) {
@@ -127,78 +126,77 @@ function VunCaseStudy({ work }) {
   </article>;
 }
 
-const profileChapters = [
-  ['01','Company overview','04–15'],['02','Context + position','16–25'],['03','Capabilities','26–43'],['04','Sectors','44–53'],
-  ['05','Delivery model','54–67'],['06','Project records','68–95'],['07','People + ESG + HSE','96–105'],['08','Governance + contact','106–112'],
+const lamChapters = [
+  ['01','Origin','04-11'],['02','Cultivation','12-25'],['03','Science','26-43'],['04','Materials','44-63'],
+  ['05','Applications','64-77'],['06','Impact','78-89'],['07','Partners','90-99'],['08','Data room','100-104'],
 ];
 
-const readerViews = {
-  overview: { label: 'Overview', image: trucOverview, pages: '04–43', facts: ['18-year timeline','4 capability groups','Market and company structure'] },
-  projects: { label: 'Projects', image: trucProjects, pages: '68–95', facts: ['Flood control','Transit foundation','Water reuse'] },
-  governance: { label: 'Governance', image: trucGovernance, pages: '96–105', facts: ['People and safety','Climate data','Responsibility map'] },
-  digital: { label: 'Digital reader', image: trucDigital, pages: 'Responsive', facts: ['Search and bookmarks','Linked evidence','Field-ready views'] },
+const lamReaderViews = {
+  company: { label: 'Company', image: lamOverview, pages: '04-25', facts: ['Coastal origin','Cultivation network','Company model'] },
+  science: { label: 'Science', image: lamScience, pages: '26-43', facts: ['Biopolymer extraction','Barrier testing','Pilot protocols'] },
+  materials: { label: 'Materials', image: lamMaterials, pages: '44-77', facts: ['Film','Molded form','Coating'] },
+  field: { label: 'Field data', image: lamDigital, pages: 'Live', facts: ['Farm map','Batch records','Material library'] },
 };
 
-function TrucReader() {
-  const [view, setView] = useState('overview');
-  const active = readerViews[view];
-  return <div className="truc-reader">
-    <nav aria-label="TRỤC profile preview">{Object.entries(readerViews).map(([key, item]) => <button type="button" key={key} aria-pressed={view === key} onClick={() => setView(key)}><span>{item.label}</span><small>{item.pages}</small></button>)}</nav>
-    <div className="truc-reader-stage" aria-live="polite">
-      <img src={active.image} alt={`TRỤC ${active.label.toLowerCase()} profile preview`}/>
-      <i aria-hidden="true"/>
+function LamReader() {
+  const [view, setView] = useState('company');
+  const active = lamReaderViews[view];
+  return <div className="lam-reader">
+    <nav aria-label="LAM profile preview">{Object.entries(lamReaderViews).map(([key, item]) => <button type="button" key={key} aria-pressed={view === key} onClick={() => setView(key)}><span>{item.label}</span><small>{item.pages}</small></button>)}</nav>
+    <div className="lam-reader-stage" aria-live="polite">
+      <img src={active.image} alt={`LAM ${active.label.toLowerCase()} profile preview`}/>
       <div><span>{active.pages}</span>{active.facts.map((fact) => <strong key={fact}>{fact}</strong>)}</div>
     </div>
   </div>;
 }
 
-function TrucAxisBand() {
-  return <div className="truc-axis-band" aria-hidden="true"><span/><span/><span/><span/><i/></div>;
+function LamCells() {
+  return <div className="lam-cells" role="img" aria-label="Animated seaweed cell pattern">
+    {Array.from({ length: 8 }, (_, index) => <svg key={index} viewBox="0 0 120 120" aria-hidden="true"><path d="M15 66C32 20 53 25 60 57c7 31 27 36 45-3M17 84c24-17 36-13 46 4 9 16 23 14 40-8"/></svg>)}
+  </div>;
 }
 
-function TrucCaseStudy({ work }) {
-  const facts = [['Role','Editorial direction · Information design'],['Format','112 pages · VI / EN'],['Outputs','Book · project sheets · reader'],['Duration','8-week concept sprint']];
-  return <article className="flow-case case-truc">
-    <CaseHeader work={work} variant="truc" kicker="Corporate profile · Climate infrastructure · 2026" intro="A complete capability profile built around scope, evidence and field use" facts={facts} image={trucCover} imageAlt="TRỤC corporate profile, open project spread, digital map and field tools at a flood-control facility" action="Open profile reader"/>
+function LamCaseStudy({ work }) {
+  const facts = [['Role','Editorial direction · Information design'],['Format','104 pages · VI / EN'],['Outputs','Profile · samples · data room'],['Duration','8-week concept sprint']];
+  return <article className="flow-case case-lam">
+    <CaseHeader work={work} variant="lam" kicker="Corporate profile · Marine biomaterials · 2026" intro="Company profile for a coastal lab growing seaweed into next-generation materials" facts={facts} image={lamCover} imageAlt="LAM marine biomaterials profile, seaweed samples and translucent material sheets in a coastal laboratory" action="Open profile reader"/>
 
-    <section className="flow-section truc-architecture"><div className="flow-shell">
-      <FlowLabel number="01" tone="is-light">Profile architecture / 112 pages</FlowLabel>
-      <ol>{profileChapters.map(([number, title, pages]) => <li key={number}><span>{number}</span><strong>{title}</strong><small>{pages}</small></li>)}</ol>
-      <Visual src={trucOverview} alt="TRỤC profile cover, contents, company overview, timeline and capability spreads"/>
+    <section className="flow-section lam-architecture"><div className="flow-shell">
+      <FlowLabel number="01">Profile system / 104 pages</FlowLabel>
+      <Visual src={lamOverview} alt="LAM company profile cover, contents, company story and cultivation network spreads"/>
+      <ol>{lamChapters.map(([number, title, pages]) => <li key={number}><span>{number}</span><strong>{title}</strong><small>{pages}</small></li>)}</ol>
     </div></section>
 
-    <section id="live-demo" className="flow-section truc-demo"><div className="flow-shell">
-      <FlowLabel number="02">Profile reader</FlowLabel>
-      <TrucReader/>
-    </div></section>
-
-    <section className="truc-project-frame">
-      <TrucAxisBand/>
-      <div className="flow-shell"><FlowLabel number="03" tone="is-light">Project evidence</FlowLabel><Visual src={trucProjects} alt="TRỤC project record spreads for flood control, elevated transit and industrial water reuse"/></div>
+    <section className="lam-science-frame">
+      <Visual src={lamScience} alt="LAM science chapter showing seaweed microscopy, extraction stages and barrier testing"/>
+      <div className="lam-science-tag"><span>02</span><strong>Science library</strong><small>Species / process / performance</small></div>
     </section>
 
-    <section className="flow-section truc-governance"><div className="flow-shell">
-      <FlowLabel number="04">People + safety + climate governance</FlowLabel>
-      <Visual src={trucGovernance} alt="TRỤC people, safety, climate governance and field-control chapter with removable documents"/>
-      <div className="truc-evidence-strip"><span>LTIFR history</span><span>Carbon data</span><span>Safety controls</span><span>Team directory</span><span>Board oversight</span></div>
+    <section id="live-demo" className="flow-section lam-demo"><div className="flow-shell">
+      <FlowLabel number="03" tone="is-light">Profile reader</FlowLabel>
+      <LamReader/>
     </div></section>
 
-    <section className="flow-section truc-production"><div className="flow-shell">
-      <FlowLabel number="05">Production + handover</FlowLabel>
-      <div className="flow-pair">
-        <Visual src={trucProduction} alt="TRỤC navy cloth binding, orange foil, sewn spine, tabs, map overlay and paper details" number="05A" label="Print master"/>
-        <Visual src={trucReview} alt="TRỤC profile and project sheets used by engineers during a bid review" number="05B" label="Review room"/>
+    <section className="flow-section lam-materials"><div className="flow-shell">
+      <FlowLabel number="04">Material portfolio</FlowLabel>
+      <div className="flow-pair lam-material-grid">
+        <Visual src={lamMaterials} alt="LAM seaweed films, molded trays, coated papers and agricultural material samples" number="04A" label="Material families"/>
+        <Visual src={lamImpact} alt="LAM impact report spreads with farm data, lifecycle diagrams and coastal field documentation" number="04B" label="Impact record"/>
       </div>
-      <Visual src={trucDigital} alt="TRỤC responsive company profile reader on laptop, tablet and phone" className="truc-digital-visual"/>
-      <dl className="truc-manifest"><div><dt>Print master</dt><dd>A4 / 112 pp / CMYK</dd></div><div><dt>Digital profile</dt><dd>Tagged PDF / responsive reader</dd></div><div><dt>Project records</dt><dd>12-page modular template</dd></div><div><dt>Handover</dt><dd>Sources / links / content register</dd></div></dl>
     </div></section>
 
-    <section className="truc-close"><div className="flow-shell"><span>10.8231° N / 106.6297° E</span><strong>TRỤC</strong><i/></div></section>
+    <section className="flow-section lam-handover"><div className="flow-shell">
+      <FlowLabel number="05" tone="is-light">Lab to partner</FlowLabel>
+      <Visual src={lamDigital} alt="LAM printed profile, material samples, cultivation map and responsive digital library in a coastal lab"/>
+      <dl className="lam-manifest"><div><dt>Profile</dt><dd>104 pp / VI + EN</dd></div><div><dt>Material library</dt><dd>12 sample records</dd></div><div><dt>Impact data</dt><dd>Farm to end use</dd></div><div><dt>Digital room</dt><dd>Map / batches / tests</dd></div></dl>
+    </div></section>
+
+    <section className="lam-close"><LamCells/><div className="flow-shell"><span>Marine material lab / Vietnam</span><strong>LAM</strong><small>Seaweed / science / scale</small></div></section>
   </article>;
 }
 
 export function ShowcaseCaseStudy({ work }) {
   if (work.slug === 'folded-matter') return <VunCaseStudy work={work}/>;
-  if (work.slug === 'still-moving') return <TrucCaseStudy work={work}/>;
+  if (work.slug === 'still-moving') return <LamCaseStudy work={work}/>;
   return null;
 }

@@ -785,12 +785,16 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 
 @media (max-width: 640px) {
   .page-shell { width: calc(100% - 32px); }
-  .nav-inner { width: calc(100% - 24px); }
+  .nav-inner { width: calc(100% - 24px); gap: 6px; }
   .site-nav { padding-top: 12px; }
-  .wordmark { padding: 8px; }
-  .wordmark-divider, .wordmark-fullname { display: none; }
-  .nav-actions { padding: 5px 6px 5px 8px; }
-  .nav-link { min-height: 34px; padding-inline: 8px; font-size: .76rem; }
+  .wordmark { min-height: 42px; gap: 7px; padding: 5px 9px 5px 5px; font-size: .72rem; }
+  .wordmark-copy { gap: 4px; }
+  .wordmark-mark { width: 28px; height: 28px; border-radius: 9px; }
+  .wordmark-mark img { width: 22px; height: 22px; }
+  .wordmark-divider { font-size: .66rem; }
+  .wordmark-fullname { font-size: .61rem; letter-spacing: -.025em; }
+  .nav-actions { gap: 1px; padding: 4px 5px; }
+  .nav-link { min-height: 32px; padding-inline: 6px; font-size: .7rem; }
   .theme-toggle-track { width: 31px; height: 31px; justify-content: center; padding: 0; }
   .theme-toggle-track > svg { display: none; }
   .theme-toggle-thumb { position: static; width: 31px; height: 31px; background: transparent; color: var(--ink); box-shadow: none; transform: none; }
@@ -894,6 +898,16 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .capability-item { min-height: 74px; padding-block: 20px; }
   .skill-gallery { grid-template-columns: 1fr; grid-template-rows: 300px 250px 250px; gap: 24px; }
   .gallery-1 { grid-row: auto; }
+}
+
+@media (max-width: 360px) {
+  .nav-inner { width: calc(100% - 16px); gap: 4px; }
+  .wordmark { gap: 5px; padding-right: 7px; }
+  .wordmark-copy { gap: 3px; }
+  .wordmark-fullname { font-size: .53rem; }
+  .nav-actions { padding-inline: 3px; }
+  .nav-menu-wrap > .nav-link { width: 28px; padding: 0; justify-content: center; font-size: 0; }
+  .nav-menu-wrap > .nav-link svg { width: 14px; height: 14px; }
 }
 
 @media (max-width: 400px) {

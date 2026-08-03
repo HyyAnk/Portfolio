@@ -21,15 +21,15 @@ import photoIdShowcase from './assets/experiments/photo-id-studio.webp';
 import pdfBusinessCardShowcase from './assets/experiments/pdf-business-card.webp';
 import aiMediaStudioShowcase from './assets/experiments/ai-media-studio.webp';
 import portraitImage from './assets/generated/portrait.webp';
-import matCover from './assets/case-studies/mat-cover.webp';
-import kitepayCover from './assets/case-studies/kitepay-cover.webp';
+import dauCover from './assets/case-studies/dau-cover.webp';
+import vetCover from './assets/case-studies/vet-cover.webp';
 import vunCover from './assets/case-studies/vun-cover.webp';
-import trucCover from './assets/case-studies/truc-cover.webp';
+import lamCover from './assets/case-studies/lam-cover.webp';
 import { notFoundSeo, seoByPath, siteIdentity } from './seo.js';
 import { withoutTrailingPeriod } from './text.js';
 
 const DeepCaseStudy = lazy(() => import('./caseStudies.jsx').then((module) => ({ default: module.DeepCaseStudy })));
-const ShowcaseCaseStudy = lazy(() => import('./showcaseCases.jsx?rev=visual-flow-v1').then((module) => ({ default: module.ShowcaseCaseStudy })));
+const ShowcaseCaseStudy = lazy(() => import('./showcaseCases.jsx?rev=visual-flow-v2').then((module) => ({ default: module.ShowcaseCaseStudy })));
 const SkillPageContent = lazy(() => import('./SkillPageContent.jsx'));
 
 const person = siteIdentity.name;
@@ -249,10 +249,10 @@ function SkillToolMotion({ skill }) {
 }
 
 const works = [
-  { slug: 'mat', title: 'MÁT', type: 'Web product · PWA', year: '2026', role: 'Product strategy · UX/UI · React', description: 'A heat-aware route planner that helps people choose a kinder path through hot, dense cities.', challenge: 'Most route planners optimize only time and distance, leaving heat exposure and recovery needs invisible.', outcome: 'A responsive routing concept that makes shade, heat, air quality and route trade-offs understandable.', tags: ['Product design', 'Web development'], image: matCover, deep: true },
+  { slug: 'mat', title: 'DẤU', type: 'Cultural archive · Web app', year: '2026', role: 'Product strategy · UX/UI', description: 'A visual archive for scanning Vietnamese craft motifs and finding the people, places and techniques behind them.', challenge: 'Cultural records are often detached from the object and difficult to explore during a real museum or workshop visit.', outcome: 'A responsive archive connecting recognition, artifact context, maker audio, collections and offline access.', tags: ['Product design', 'Cultural archive'], image: dauCover, deep: true },
   { slug: 'folded-matter', title: 'VỤN', type: 'Brand identity · Circular materials', year: '2026', role: 'Strategy · Identity · Art direction', description: 'Identity for a studio that turns construction offcuts into useful objects.', challenge: 'A material-led studio needed one recognisable system across samples, products, packaging, space and catalogue.', outcome: 'A fragment-based identity built from four colours, three material families and one modular V mark.', tags: ['Brand identity', 'Art direction'], image: vunCover, deep: true },
-  { slug: 'still-moving', title: 'TRỤC', type: 'Corporate profile · Infrastructure', year: '2026', role: 'Editorial direction · Information design', description: 'A 112-page capability profile built around scope, evidence and field use.', challenge: 'Infrastructure experience had to become reviewable without reducing complex delivery records to sales claims.', outcome: 'A bilingual print and digital system connecting company facts, capability, projects, governance and handover.', tags: ['Editorial design', 'Information design'], image: trucCover, deep: true },
-  { slug: 'kitepay', title: 'KitePay', type: 'BSC application', year: '2026', role: 'Product design · Web3 integration', description: 'A milestone escrow that makes scope, payment state and on-chain evidence clear to both sides.', challenge: 'Freelancers and clients need a shared payment state without turning every agreement into a crypto puzzle.', outcome: 'A testnet-ready product concept pairing explicit escrow states with human-readable transaction receipts.', tags: ['Blockchain', 'React'], image: kitepayCover, deep: true },
+  { slug: 'still-moving', title: 'LAM', type: 'Corporate profile · Marine biomaterials', year: '2026', role: 'Editorial direction · Information design', description: 'A complete company profile for a coastal laboratory growing seaweed into next-generation materials.', challenge: 'Scientific process, material performance and coastal impact had to remain credible to both partners and researchers.', outcome: 'A bilingual profile system connecting cultivation, science, applications, samples, impact and a digital data room.', tags: ['Editorial design', 'Information design'], image: lamCover, deep: true },
+  { slug: 'kitepay', title: 'VẾT', type: 'Blockchain product · Digital passport', year: '2026', role: 'Product strategy · UX/UI · Web3', description: 'A garment passport that keeps origin, material, repair and ownership history available throughout its life.', challenge: 'Independent fashion needs verifiable lifecycle data without making customers navigate blockchain mechanics.', outcome: 'A physical and digital system connecting NFC access, brand issuance, repair, transfer, recovery and verified resale.', tags: ['Blockchain', 'Product design'], image: vetCover, deep: true },
 ];
 
 const experiments = [
@@ -304,10 +304,10 @@ const experiments = [
 ];
 
 const heroCarouselImages = [
-  { image: matCover, alt: 'MÁT heat-aware route planning concept' },
+  { image: dauCover, alt: 'DẤU Vietnamese craft archive across web and mobile' },
   { image: vunCover, alt: 'VỤN circular-material studio identity system' },
-  { image: trucCover, alt: 'TRỤC climate infrastructure corporate profile' },
-  { image: kitepayCover, alt: 'KitePay BSC milestone escrow concept' },
+  { image: lamCover, alt: 'LAM marine biomaterials corporate profile' },
+  { image: vetCover, alt: 'VẾT blockchain garment passport' },
   { image: uiImage, alt: 'Responsive interface design study' },
   { image: graphicImage, alt: 'Graphic identity system study' },
   { image: videoImage, alt: 'Video editing and title design study' },

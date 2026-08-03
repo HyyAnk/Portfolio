@@ -1,364 +1,187 @@
-import React, { useId, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, CaretRight, Check } from '@phosphor-icons/react';
+import {
+  ArrowLeft, ArrowUpRight, ArrowsLeftRight, BookmarkSimple, CaretRight,
+  Headphones, LinkSimple, MapPin, Needle, Recycle, Scan, ShieldCheck,
+} from '@phosphor-icons/react';
 import './case-studies.css';
 
-import kitepayStateFlow from './assets/case-studies/kitepay-state-flow.svg';
-import { MatMapBase, MatStreetMap, matMapPaths, matModes } from './MatProductMap.jsx';
+import dauCover from './assets/case-studies/dau-cover.webp';
+import dauScreens from './assets/case-studies/dau-screens.webp';
+import dauScan from './assets/case-studies/dau-scan.webp';
+import dauDesktop from './assets/case-studies/dau-desktop.webp';
+import dauMuseum from './assets/case-studies/dau-museum.webp';
+import dauStates from './assets/case-studies/dau-states.webp';
+import vetCover from './assets/case-studies/vet-cover.webp';
+import vetPhysical from './assets/case-studies/vet-physical.webp';
+import vetMobile from './assets/case-studies/vet-mobile.webp';
+import vetConsole from './assets/case-studies/vet-console.webp';
+import vetScan from './assets/case-studies/vet-scan.webp';
+import vetLifecycle from './assets/case-studies/vet-lifecycle.webp';
 import { withoutTrailingPeriod } from './text.js';
 
-const kiteSteps = [
-  { name: 'Draft', copy: 'Milestone terms are agreed off-chain.' },
-  { name: 'Funded', copy: 'Client deposits 250 USDT into escrow.' },
-  { name: 'Submitted', copy: 'Freelancer attaches delivery proof.' },
-  { name: 'Review', copy: 'A 24-hour review window begins.' },
-  { name: 'Released', copy: 'Contract releases funds to the freelancer.' },
-];
-
-function CaseEyebrow({ children }) {
-  return <span className="case-eyebrow">{children}</span>;
-}
-
-function CaseLead({ index, eyebrow, title, copy }) {
-  return <header className="case-section-lead">
-    <span className="case-section-index">{index}</span>
-    <div><CaseEyebrow>{eyebrow}</CaseEyebrow><h2>{withoutTrailingPeriod(title)}</h2>{copy && <p>{copy}</p>}</div>
-  </header>;
-}
-
-function CaseHero({ work, theme, label, summary, facts, demoLabel }) {
-  return <section className={`deep-case-hero case-theme-${theme}`}>
-    <div className="page-shell">
-      <Link className="deep-case-back" to="/#portfolio"><ArrowLeft size={16} /> Portfolio</Link>
-      <div className="deep-case-heading">
-        <div>
-          <CaseEyebrow>{label}</CaseEyebrow>
-          <h1>{withoutTrailingPeriod(work.title)}</h1>
-        </div>
-        <div className="deep-case-summary">
-          <p>{summary}</p>
-          <a className="case-jump-link" href="#live-demo">{demoLabel}<ArrowUpRight size={17} /></a>
-        </div>
+function ProductHero({ work, variant, label, summary, facts, image, imageAlt, action }) {
+  return <section className={`product-hero product-hero-${variant}`}>
+    <div className="product-shell">
+      <Link className="product-back" to="/#portfolio"><ArrowLeft size={16}/> Portfolio</Link>
+      <header className="product-heading">
+        <span>{label}</span>
+        <h1>{withoutTrailingPeriod(work.title)}</h1>
+        <p>{summary}</p>
+        <a href="#live-demo">{action}<ArrowUpRight size={17}/></a>
+      </header>
+      <figure className="product-cover"><img src={image} alt={imageAlt}/></figure>
+      <div className="product-meta">
+        <dl>{facts.map(([term, value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl>
+        <p>Self-initiated fictional brief. Original product design, art direction and prototype.</p>
       </div>
-      <figure className="deep-case-cover">
-        <img src={work.image} alt={`${work.title} project art direction`} />
-        <figcaption><span>Self-initiated concept</span><span>Art direction + product prototype</span></figcaption>
-      </figure>
-      <dl className="case-facts">
-        {facts.map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}
-      </dl>
-      <p className="case-honesty-note"><strong>Project status:</strong> This is a self-initiated concept case study. The interface, architecture and interactive prototype were created for demonstration; no client engagement or production deployment is implied.</p>
     </div>
   </section>;
 }
 
-function InsightList({ items }) {
-  return <div className="case-insight-list">{items.map((item, index) => <article key={item.title}>
-    <span>{String(index + 1).padStart(2, '0')}</span>
-    <h3>{withoutTrailingPeriod(item.title)}</h3>
-    <p>{item.copy}</p>
-  </article>)}</div>;
+function FlowHeading({ title, copy }) {
+  return <header className="product-section-heading"><h2>{withoutTrailingPeriod(title)}</h2>{copy && <p>{copy}</p>}</header>;
 }
 
-function MatRouteDemo() {
-  const [mode, setMode] = useState('cool');
-  const [directionsOpen, setDirectionsOpen] = useState(false);
-  const route = matModes[mode];
-  return <div className="mat-live-demo" aria-label="Interactive MÁT route comparison prototype">
-    <div className="mat-demo-toolbar">
-      <div><span className="mat-mark">MÁT</span><span className="demo-caption">Riverside Market → Hill Garden</span></div>
-      <div className="mat-mode-switch" role="group" aria-label="Route strategy">
-        {Object.entries(matModes).map(([key, value]) => <button key={key} type="button" aria-pressed={mode === key} onClick={() => setMode(key)}>{value.label}</button>)}
-      </div>
-    </div>
-    <div className="mat-demo-grid">
-      <div className="mat-map" aria-hidden="true">
-        <MatStreetMap mode={mode} fit="slice"/>
-        <span className="mat-map-legend"><i /> shaded streets</span>
-      </div>
-      <aside className="mat-route-panel" aria-live="polite">
-        <CaseEyebrow>Recommended route</CaseEyebrow>
-        <h3>{withoutTrailingPeriod(route.label)}</h3>
-        <p>{route.note}</p>
-        <div className="mat-route-stats"><div><span>Time</span><strong>{route.time}</strong></div><div><span>Distance</span><strong>{route.distance}</strong></div><div><span>Shade</span><strong>{route.shade}</strong></div><div><span>Heat score</span><strong>{route.heat}</strong></div></div>
-        {directionsOpen && <ol className="mat-directions-preview">{route.directions.map((direction, index) => <li key={direction}><span>{String(index + 1).padStart(2, '0')}</span>{direction}</li>)}</ol>}
-        <button className="mat-route-action" type="button" aria-expanded={directionsOpen} onClick={() => setDirectionsOpen((value) => !value)}>{directionsOpen ? 'Hide directions' : 'Preview directions'} <CaretRight size={16} /></button>
+function ProductVisual({ src, alt, caption, className = '' }) {
+  return <figure className={`product-visual ${className}`}><img src={src} alt={alt} width="1536" height="1024" loading="lazy"/>{caption && <figcaption>{caption}</figcaption>}</figure>;
+}
+
+const archiveRecords = {
+  lacquer: {
+    label: 'Sơn mài', title: 'Khảm hoa mai', region: 'Miền Bắc', material: 'Sơn ta và xà cừ', note: 'Motif record with macro detail and maker audio', variant: 'lacquer', code: 'HV-014', period: 'Early 20th century',
+  },
+  ceramic: {
+    label: 'Gốm', title: 'Hoa lam', region: 'Đồng bằng Bắc Bộ', material: 'Đồ gốm tráng men', note: 'Object view with material and production context', variant: 'ceramic', code: 'GM-028', period: '15th century reference',
+  },
+  textile: {
+    label: 'Dệt', title: 'Hình trám chàm', region: 'Trung du phía Bắc', material: 'Sợi bông và chàm', note: 'Pattern record with regional and technique links', variant: 'textile', code: 'DT-041', period: 'Contemporary field record',
+  },
+};
+
+function DauArtifactVisual({ record, audioPlaying }) {
+  return <div className={`dau-artifact is-${record.variant} ${audioPlaying ? 'is-audio-playing' : ''}`}>
+    <svg viewBox="0 0 900 620" role="img" aria-label={`${record.title}, ${record.material}`}>
+      {record.variant === 'lacquer' && <>
+        <rect width="900" height="620" className="dau-artifact-ground"/>
+        <path className="dau-branch" d="M-30 520C150 410 218 352 338 247S590 124 930 80"/>
+        <path className="dau-branch is-thin" d="M228 350c-4-93 35-166 111-218M460 199c58 13 118 5 183-32M579 145c-5-58 15-101 63-134"/>
+        {[[170,410],[260,319],[342,245],[447,204],[558,157],[676,118],[335,137],[638,35]].map(([cx,cy], index) => <g className="dau-pearl-flower" transform={`translate(${cx} ${cy}) rotate(${index * 19})`} key={`${cx}-${cy}`}><ellipse cx="0" cy="-26" rx="13" ry="28"/><ellipse cx="25" cy="-5" rx="13" ry="28" transform="rotate(72)"/><ellipse cx="15" cy="23" rx="13" ry="28" transform="rotate(144)"/><ellipse cx="-15" cy="23" rx="13" ry="28" transform="rotate(216)"/><ellipse cx="-25" cy="-5" rx="13" ry="28" transform="rotate(288)"/><circle r="8"/></g>)}
+      </>}
+      {record.variant === 'ceramic' && <>
+        <rect width="900" height="620" className="dau-artifact-ground"/>
+        <circle cx="450" cy="310" r="248" className="dau-ceramic-rim"/>
+        <circle cx="450" cy="310" r="205" className="dau-ceramic-ring"/>
+        <g className="dau-ceramic-flower" transform="translate(450 310)">{Array.from({ length: 8 }, (_, index) => <ellipse key={index} cx="0" cy="-82" rx="29" ry="88" transform={`rotate(${index * 45})`}/>)}</g>
+        <circle cx="450" cy="310" r="38" className="dau-ceramic-core"/>
+        <g className="dau-ceramic-leaves">{Array.from({ length: 12 }, (_, index) => <path key={index} d="M450 96c29 36 34 71 4 101-31-28-33-63-4-101Z" transform={`rotate(${index * 30} 450 310)`}/>)}</g>
+      </>}
+      {record.variant === 'textile' && <>
+        <defs><pattern id="dau-weave" width="132" height="132" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="132" height="132" className="dau-artifact-ground"/><rect x="16" y="16" width="100" height="100" className="dau-textile-diamond"/><rect x="42" y="42" width="48" height="48" className="dau-textile-core"/><path d="M0 8h132M0 124h132M8 0v132M124 0v132" className="dau-textile-thread"/></pattern></defs>
+        <rect width="900" height="620" fill="url(#dau-weave)"/>
+        <path className="dau-textile-band" d="M0 220h900v180H0z"/>
+        <path className="dau-textile-stitch" d="M0 310h900M64 220l90 90-90 90m180-180 90 90-90 90m180-180 90 90-90 90m180-180 90 90-90 90m180-180 90 90-90 90"/>
+      </>}
+    </svg>
+    <div className="dau-artifact-index"><span>{record.code}</span><strong>{record.label}</strong><small>{record.period}</small></div>
+    <div className="dau-artifact-wave" aria-hidden="true">{Array.from({ length: 18 }, (_, index) => <i key={index}/>)}</div>
+  </div>;
+}
+
+function DauArchiveDemo() {
+  const [recordKey, setRecordKey] = useState('lacquer');
+  const [saved, setSaved] = useState(false);
+  const [audioPlaying, setAudioPlaying] = useState(false);
+  const record = archiveRecords[recordKey];
+  const chooseRecord = (key) => { setRecordKey(key); setSaved(false); setAudioPlaying(false); };
+  return <div className="dau-demo">
+    <nav aria-label="Archive material sample">{Object.entries(archiveRecords).map(([key, item]) => <button key={key} type="button" aria-pressed={recordKey === key} onClick={() => chooseRecord(key)}>{item.label}</button>)}</nav>
+    <div className="dau-demo-stage">
+      <div className="dau-demo-art"><DauArtifactVisual record={record} audioPlaying={audioPlaying}/><span><Scan size={18}/> Recognition preview</span></div>
+      <aside aria-live="polite">
+        <span>Sample archive record</span>
+        <h3>{record.title}</h3>
+        <dl><div><dt><MapPin size={16}/> Region</dt><dd>{record.region}</dd></div><div><dt><LinkSimple size={16}/> Material</dt><dd>{record.material}</dd></div></dl>
+        <p>{record.note}</p>
+        <div className="dau-demo-actions"><button type="button" aria-pressed={audioPlaying} onClick={() => setAudioPlaying((value) => !value)}><Headphones size={17} weight={audioPlaying ? 'fill' : 'regular'}/>{audioPlaying ? 'Audio preview on' : 'Maker audio'}</button><button type="button" aria-pressed={saved} onClick={() => setSaved((value) => !value)}><BookmarkSimple size={17} weight={saved ? 'fill' : 'regular'}/>{saved ? 'Saved' : 'Save'}</button></div>
       </aside>
     </div>
   </div>;
 }
 
-function MatDeviceStudy() {
-  return <div className="mat-device-stage">
-    <div className="mat-browser-mockup">
-      <div className="mockup-browser-bar"><span/><span/><span/><small>mat.city/route</small></div>
-      <div className="mat-browser-content">
-        <aside><strong>MÁT</strong><span>Plan a route</span><span>Saved places</span><span>Live conditions</span><div className="mat-weather-chip">32° · AQI 74</div></aside>
-        <div className="mat-browser-map"><MatStreetMap mode="cool"/><span className="mat-map-label label-one">71% shade</span><span className="mat-map-label label-two">refill</span></div>
-      </div>
-    </div>
-    <div className="mat-phone-mockup">
-      <div className="phone-status"><span>9:41</span><span>•••</span></div>
-      <div className="phone-map"><MatStreetMap mode="cool"/><span>12 min cooler</span></div>
-      <div className="phone-sheet"><small>ON ROUTE</small><strong>Turn right in 80 m</strong><p>Shade continues for 420 m</p><span className="phone-route-cta">Route details</span></div>
-    </div>
-  </div>;
-}
+function DauCaseStudy({ work }) {
+  const facts = [['Role','Product strategy, UX/UI'],['Platform','Responsive web and mobile'],['Core flows','Explore, scan, listen, save'],['Prototype','Interactive archive finder']];
+  return <article className="product-case case-dau">
+    <ProductHero work={work} variant="dau" label="Cultural archive / web app / 2026" summary="Scan a craft motif, find its context, and keep the maker's voice attached" facts={facts} image={dauCover} imageAlt="DẤU cultural archive across laptop and phone beside lacquer, textile and ceramic objects" action="Try archive finder"/>
 
-function MatMotionStudy() {
-  const buildingMaskId = useId().replace(/:/g, '');
-  return <figure className="case-motion-frame mat-motion-frame">
-    <div id="motion-map-board" className="mat-motion-board" role="img" aria-label="Animated MÁT route comparison showing route candidates, environmental evidence and the cooler recommendation">
-      <div className="mat-motion-stage" aria-hidden="true">
-        <span className="mat-motion-phase"><b>01</b> Compare routes</span>
-        <svg viewBox="0 -60 760 480" preserveAspectRatio="xMidYMid slice">
-          <MatMapBase buildingMaskId={buildingMaskId} motion/>
-          <path className="mat-motion-route mat-motion-route-fast" d={matMapPaths.fast}/>
-          <path className="mat-motion-route mat-motion-route-cool" d={matMapPaths.cool}/>
-          <circle className="mat-motion-traveler" r="8"><animateMotion dur="7s" begin="1.15s" repeatCount="indefinite" path={matMapPaths.cool}/></circle>
-          <g className="mat-motion-intersections"><circle cx="45" cy="280" r="4"/><circle cx="45" cy="185" r="4"/><circle cx="130" cy="155" r="4"/><circle cx="230" cy="140" r="4"/><circle cx="315" cy="100" r="4"/><circle cx="430" cy="105" r="4"/><circle cx="550" cy="70" r="4"/></g>
-          <circle className="mat-motion-point" cx="72" cy="306" r="11"/><circle className="mat-motion-point" cx="688" cy="58" r="11"/>
-        </svg>
-        <span className="mat-motion-map-key"><i/> shaded streets</span>
-        <span className="mat-motion-route-legend"><b><i/> Cooler</b><b><i/> Faster</b></span>
-      </div>
-      <aside className="mat-motion-analysis">
-        <span className="mat-motion-phase mat-motion-phase-light"><b>02</b> Explain evidence</span>
-        <div className="mat-motion-analysis-head"><small>Route comparison</small><strong>Why this route?</strong><p>Live conditions are translated into visible trade-offs.</p></div>
-        <div className="mat-motion-score-list">
-          <div className="mat-motion-score mat-motion-score-shade"><span>Shade coverage</span><i/><strong>71%</strong></div>
-          <div className="mat-motion-score mat-motion-score-heat"><span>Heat exposure</span><i/><strong>2.8 / 5</strong></div>
-          <div className="mat-motion-score mat-motion-score-air"><span>Air quality</span><i/><strong>Moderate</strong></div>
-        </div>
-        <div className="mat-motion-result"><small>03 · Recommendation</small><strong>Cooler route</strong><p>12 minutes longer · two refill points</p><span><Check size={17} weight="bold"/> Route ready</span></div>
-      </aside>
-    </div>
-    <figcaption><span>Motion prototype · route → evidence → recommendation</span><span>7 second sequence · loops</span></figcaption>
-  </figure>;
-}
+    <section className="product-section dau-screen-run"><div className="product-shell"><FlowHeading title="One archive across every visit" copy="Discovery, map, material filters, saved records and maker audio"/><ProductVisual src={dauScreens} alt="DẤU mobile and tablet screen family for discovery, map, filtering, collections, audio and artifact detail"/></div></section>
 
-function MatScenarioStudy() {
-  const buildingMaskId = useId().replace(/:/g, '');
-  return <div className="mat-scenario-study">
-    <figure className="mat-scenario-visual">
-      <header><span><i/>12:40 PM · Riverside Market</span><strong>33°C</strong></header>
-      <div className="mat-scenario-map" aria-label="Fastest and cooler route comparison on the same street network">
-        <svg viewBox="0 -60 760 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <MatMapBase buildingMaskId={buildingMaskId}/>
-          <path className="mat-scenario-route mat-scenario-route-fast" d={matMapPaths.fast}/>
-          <path className="mat-scenario-route mat-scenario-route-cool" d={matMapPaths.cool}/>
-          <circle className="mat-scenario-point" cx="72" cy="306" r="9"/><circle className="mat-scenario-point" cx="688" cy="58" r="9"/>
-        </svg>
-        <span className="mat-scenario-heat">High solar exposure</span>
-      </div>
-      <figcaption className="mat-scenario-compare">
-        <div><span><i/>Fastest</span><strong>20 min</strong><small>29% shade</small></div>
-        <div className="is-recommended"><span><i/>MÁT recommends</span><strong>32 min</strong><small>71% shade</small></div>
-      </figcaption>
-    </figure>
-    <aside className="mat-scenario-notes">
-      <CaseEyebrow>Decision in context</CaseEyebrow>
-      <h3>12 minutes buys 42% more shade</h3>
-      <p>The product makes that trade-off visible before the walk begins, not after the user is already exposed.</p>
-      <div className="mat-scenario-evidence">
-        <article><i className="evidence-sun"/><div><strong>Midday changes the answer</strong><span>Sun angle increases exposure on River Walk.</span></div></article>
-        <article><i className="evidence-tree"/><div><strong>Comfort becomes measurable</strong><span>Canopy coverage and refill access explain the detour.</span></div></article>
-        <article><i className="evidence-signal"/><div><strong>Conditions remain visible</strong><span>Freshness and confidence travel with every score.</span></div></article>
-      </div>
-    </aside>
-  </div>;
-}
+    <section id="live-demo" className="product-section dau-live"><div className="product-shell"><FlowHeading title="Explore the sample archive" copy="Switch material families and save a record"/><DauArchiveDemo/></div></section>
 
-function MatScoreStudio() {
-  const factors = [
-    { label: 'Shade coverage', value: '35%', className: 'factor-shade' },
-    { label: 'Heat exposure', value: '30%', className: 'factor-heat' },
-    { label: 'Air quality', value: '20%', className: 'factor-air' },
-    { label: 'Surface temperature', value: '15%', className: 'factor-surface' },
-  ];
-  return <div className="mat-score-studio">
-    <div className="mat-score-dial-panel">
-      <header><span>Walking · hot midday</span><strong>Balanced mode</strong></header>
-      <div className="mat-score-dial">
-        <svg viewBox="0 0 220 220" aria-hidden="true">
-          <circle className="mat-score-ring-track" cx="110" cy="110" r="84"/>
-          <circle className="mat-score-ring-value" cx="110" cy="110" r="84"/>
-          <circle className="mat-score-ring-marker" cx="110" cy="26" r="7"/>
-        </svg>
-        <div><small>Comfort score</small><strong>82</strong><span>/ 100</span></div>
-      </div>
-      <div className="mat-score-verdict"><span>Recommended</span><strong>Cooler by design</strong><small>High confidence · updated 2 min ago</small></div>
-    </div>
-    <div className="mat-score-factors">
-      <header><span>Score composition</span><strong>Every factor stays inspectable</strong></header>
-      <div className="mat-factor-list">
-        {factors.map((factor) => <div className={`mat-factor-row ${factor.className}`} key={factor.label}>
-          <span>{factor.label}</span><strong>{factor.value}</strong><i><b/></i>
-        </div>)}
-      </div>
-      <p><strong>Prototype weighting.</strong> Values respond to route mode, departure time and data confidence; they are not presented as validated production weights.</p>
-    </div>
-  </div>;
-}
+    <section className="product-section dau-scan-flow"><div className="product-shell"><FlowHeading title="Recognition stays connected to context"/><ProductVisual src={dauScan} alt="DẤU motif recognition on a lacquer cabinet with object story and maker audio on tablet"/></div></section>
 
-function MatResilienceStudy() {
-  return <>
-    <div className="mat-resilience-study">
-      <div className="mat-resilience-product">
-        <header><span>MÁT · Active route</span><strong>14:24</strong></header>
-        <div className="mat-resilience-map"><MatStreetMap mode="cool"/><span><i/>Connection lost</span></div>
-        <div className="mat-resilience-guidance"><small>NEXT TURN · 80 M</small><strong>Continue along Canopy Way</strong><p>Route geometry and the next three instructions are available offline.</p></div>
-      </div>
-      <div className="mat-resilience-states">
-        <header><CaseEyebrow>Live system state</CaseEyebrow><h3>Degrade clearly, never silently</h3></header>
-        <article className="state-warning"><i/><div><strong>Environment feed</strong><p>Keep the last reading and show its age.</p></div><span>7 min old</span></article>
-        <article className="state-ready"><i/><div><strong>Route geometry</strong><p>Cache the active path and safety details.</p></div><span>Available</span></article>
-        <article className="state-ready"><i/><div><strong>Turn guidance</strong><p>Preserve the immediate decision offline.</p></div><span>Available</span></article>
-        <article className="state-contrast"><i/><div><strong>Accessible meaning</strong><p>Pair every color with labels and patterns.</p></div><span>AA target</span></article>
-        <footer><span>Proposed production path</span><strong>React · MapLibre · scoring service · service-worker cache</strong></footer>
-      </div>
-    </div>
-    <p className="mat-validation-note"><strong>Next validation:</strong> moderated route comparisons, outdoor legibility checks and data-source reliability testing before any production claim.</p>
-  </>;
-}
+    <section className="product-section dau-desktop-flow"><div className="product-shell"><FlowHeading title="Large collections remain visual"/><ProductVisual src={dauDesktop} alt="DẤU desktop archive grid and tablet artifact detail with zoom, provenance and audio"/></div></section>
 
-function MatCaseStudy({ work }) {
-  const facts = [
-    { label: 'Project frame', value: '6-week concept sprint' },
-    { label: 'Role', value: 'Strategy · UX/UI · React' },
-    { label: 'Platform', value: 'Responsive web · PWA' },
-    { label: 'Prototype scope', value: 'Routing · conditions · offline states' },
-  ];
-  return <article className="deep-case case-mat">
-    <CaseHero work={work} theme="mat" label="Web product · PWA · 2026" summary="A route planner that treats heat exposure as part of the journey, not a cost discovered after choosing the shortest path." facts={facts} demoLabel="Try the route prototype" />
+    <section className="product-section dau-use"><div className="product-shell"><FlowHeading title="Designed for the gallery floor"/><div className="product-pair"><ProductVisual src={dauMuseum} alt="Visitors using DẤU scan, audio and archive map inside a craft exhibition" caption="Museum mode"/><ProductVisual src={dauStates} alt="DẤU permission, no-match, offline and accessibility interface states" caption="Product states"/></div></div></section>
 
-    <section id="mat-premise" className="case-section case-mat-premise"><div className="page-shell">
-      <CaseLead index="01" eyebrow="Route in context" title="A cooler route earns its extra twelve minutes." copy="The decision is shown on the street network, with the environmental cost attached to each option." />
-      <MatScenarioStudy />
-    </div></section>
-
-    <section id="route-model" className="case-section mat-score-section"><div className="page-shell">
-      <CaseLead index="02" eyebrow="Scoring engine" title="The recommendation shows its work." copy="A single score summarizes the route; its contributing signals remain visible and comparable." />
-      <MatScoreStudio />
-    </div></section>
-
-    <section id="live-demo" className="case-section case-live-section"><div className="page-shell">
-      <CaseLead index="03" eyebrow="Live prototype" title="Compare the trade-off yourself." copy="Switch between the coolest, balanced and fastest strategy. The prototype recalculates the route story, not just the line on the map." />
-      <MatRouteDemo />
-    </div></section>
-
-    <section id="responsive-system" className="case-section case-device-section"><div className="page-shell">
-      <CaseLead index="04" eyebrow="Responsive system" title="Planning on desktop. Guidance in your hand." copy="Desktop favors comparison and context; the mobile state removes everything that does not help the next decision." />
-      <MatDeviceStudy />
-    </div></section>
-
-    <section id="motion-study" className="case-section case-motion-section"><div className="page-shell">
-      <CaseLead index="05" eyebrow="Motion study" title="Let the recommendation reveal its reasoning." copy="The route draws first, then environmental evidence and the recommendation settle into place. Reduced-motion users receive the complete final state without animation." />
-      <MatMotionStudy />
-    </div></section>
-
-    <section id="delivery-thinking" className="case-section case-system-section"><div className="page-shell">
-      <CaseLead index="06" eyebrow="Resilient states" title="The route stays useful when live data does not." copy="The interface exposes stale inputs, preserves the active journey and keeps immediate guidance available offline." />
-      <MatResilienceStudy />
-    </div></section>
+    <section className="dau-close"><div className="product-shell"><strong>DẤU</strong><dl><div><dt>Discovery</dt><dd>Image archive, map and material filters</dd></div><div><dt>Visit</dt><dd>Motif scan, object context and maker audio</dd></div><div><dt>Access</dt><dd>Offline records, text scale and audio controls</dd></div></dl></div></section>
   </article>;
 }
 
-function KitePayDemo() {
-  const [active, setActive] = useState(0);
-  const current = kiteSteps[active];
-  const advance = () => setActive((value) => Math.min(value + 1, kiteSteps.length - 1));
-  const reset = () => setActive(0);
-  return <div className="kite-live-demo" aria-label="Interactive KitePay escrow state prototype">
-    <div className="kite-demo-topbar"><div><span className="kite-wordmark">KITE/PAY</span><span className="kite-network"><i/> BSC simulation</span></div><span className="kite-wallet">0x71A9…A92f</span></div>
-    <div className="kite-demo-layout">
-      <aside className="kite-demo-sidebar"><span>Overview</span><span className="is-active">Milestones</span><span>Activity</span><span>Contract</span><small>Prototype only<br/>No wallet connection</small></aside>
-      <div className="kite-demo-main">
-        <header><div><CaseEyebrow>Website delivery · milestone 02</CaseEyebrow><h3>{withoutTrailingPeriod(current.name)}</h3><p aria-live="polite">{current.copy}</p></div><strong>250.00 <small>USDT</small></strong></header>
-        <ol className="kite-state-track">{kiteSteps.map((step,index) => <li key={step.name} className={index < active ? 'is-done' : index === active ? 'is-current' : ''}><i>{index < active ? <Check size={13} weight="bold"/> : index + 1}</i><span>{step.name}</span></li>)}</ol>
-        <div className="kite-demo-cards">
-          <article><span>Recipient</span><strong>hyank.studio</strong><code>0x71A9…A92f</code></article>
-          <article><span>Review window</span><strong>24 hours</strong><small>Release requires client confirmation</small></article>
-          <article><span>Escrow balance</span><strong>{active === 4 ? '0.00' : active === 0 ? '-' : '250.00'} USDT</strong><small>{active === 4 ? 'Released to recipient' : 'Held by milestone contract'}</small></article>
-        </div>
-        <div className="kite-demo-actions"><button type="button" onClick={reset} disabled={active === 0}>Reset</button><button type="button" onClick={advance} disabled={active === kiteSteps.length - 1}>{active === kiteSteps.length - 1 ? 'Flow complete' : `Simulate ${kiteSteps[active + 1].name}`} <CaretRight size={16}/></button></div>
-      </div>
+const passportEvents = [
+  { key:'issued', label:'Issued', icon:ShieldCheck, event:'PassportIssued', actor:'Studio administrator', record:'Fiber declaration and maker certificate', result:'Passport active' },
+  { key:'repair', label:'Repair', icon:Needle, event:'RepairAdded', actor:'Repair partner', record:'Work note and component update', result:'History updated' },
+  { key:'transfer', label:'Transfer', icon:ArrowsLeftRight, event:'OwnershipTransferred', actor:'Current and next owner', record:'Signed transfer approval', result:'Ownership moved' },
+  { key:'recover', label:'Recovery', icon:Recycle, event:'RecoveryRouteAdded', actor:'Material recovery partner', record:'End-of-life routing note', result:'Next use recorded' },
+];
+
+function VetPassportDemo() {
+  const [activeKey, setActiveKey] = useState('issued');
+  const [confirmed, setConfirmed] = useState(false);
+  const active = passportEvents.find((item) => item.key === activeKey);
+  const ActiveIcon = active.icon;
+  const choose = (key) => { setActiveKey(key); setConfirmed(false); };
+  return <div className="vet-demo">
+    <header><strong>VẾT</strong><span>EVM testnet simulation</span></header>
+    <div className="vet-demo-grid">
+      <nav aria-label="Passport event preview">{passportEvents.map((item) => { const Icon = item.icon; return <button type="button" key={item.key} aria-pressed={activeKey === item.key} onClick={() => choose(item.key)}><Icon size={19}/><span>{item.label}</span></button>; })}</nav>
+      <section aria-live="polite">
+        <div className="vet-event-title"><ActiveIcon size={29}/><div><span>Contract event</span><h3>{active.event}</h3></div></div>
+        <dl><div><dt>Actor</dt><dd>{active.actor}</dd></div><div><dt>Record</dt><dd>{active.record}</dd></div><div><dt>Result</dt><dd>{confirmed ? active.result : 'Ready to simulate'}</dd></div></dl>
+        <button type="button" className="vet-confirm" onClick={() => setConfirmed(true)} disabled={confirmed}>{confirmed ? 'Event recorded' : 'Simulate event'}<CaretRight size={17}/></button>
+      </section>
+      <aside><span>Garment passport</span><strong>24-SS-B07-0007</strong><small>{confirmed ? active.result : 'Local prototype only'}</small><div className={`vet-passport-visual is-${activeKey} ${confirmed ? 'is-confirmed' : ''}`}>
+        <svg viewBox="0 0 180 220" role="img" aria-label="Utility Jacket 07 passport preview"><path d="M62 25 33 48 18 102l27 10 8-31v117h74V81l8 31 27-10-15-54-29-23-15 15H77L62 25Z"/><path d="M76 40v30h28V40M54 91h28v38H54m44-38h28v38H98M90 70v128"/></svg>
+        <div>{passportEvents.map((item) => <i className={item.key === activeKey ? 'is-current' : ''} key={item.key}/>)}</div>
+        <b>{active.label}</b>
+      </div></aside>
     </div>
   </div>;
 }
 
-function KiteArchitecture() {
-  return <div className="kite-architecture" aria-label="KitePay proposed smart contract architecture">
-    <div className="kite-actor actor-client"><small>ROLE</small><strong>Client</strong><span>Funds · reviews</span></div>
-    <div className="kite-contract-core"><small>FACTORY → ESCROW</small><strong>MilestoneEscrow</strong><code>SafeERC20 · roles · events</code><span>One agreement, isolated balance</span></div>
-    <div className="kite-actor actor-maker"><small>ROLE</small><strong>Freelancer</strong><span>Submits · receives</span></div>
-    <div className="kite-actor actor-arbiter"><small>OPTIONAL</small><strong>Arbiter</strong><span>Resolves disputes</span></div>
-    <i className="architecture-line line-one"/><i className="architecture-line line-two"/><i className="architecture-line line-three"/>
-  </div>;
-}
+function VetCaseStudy({ work }) {
+  const facts = [['Role','Product strategy, UX/UI'],['System','Product passport and event registry'],['Interfaces','Brand console, item view, resale'],['Prototype','Local EVM event simulation']];
+  return <article className="product-case case-vet">
+    <ProductHero work={work} variant="vet" label="Blockchain product / digital passport / 2026" summary="A garment record for origin, repair and resale, with verification kept behind the interface" facts={facts} image={vetCover} imageAlt="VẾT garment passport across NFC tag, phone and batch console beside a black jacket" action="Try passport events"/>
 
-function KitePayCaseStudy({ work }) {
-  const facts = [
-    { label: 'Project frame', value: '5-week product + protocol sprint' },
-    { label: 'Role', value: 'Product design · Web3 integration' },
-    { label: 'Network', value: 'BSC · BEP-20 escrow' },
-    { label: 'Prototype scope', value: 'Milestones · receipts · disputes' },
-  ];
-  return <article className="deep-case case-kite">
-    <CaseHero work={work} theme="kite" label="BSC application · Escrow UX · 2026" summary="A milestone escrow that gives clients and independent teams one shared source of truth, from agreed scope to on-chain release." facts={facts} demoLabel="Run the escrow simulation" />
+    <section className="product-section vet-physical"><div className="product-shell"><FlowHeading title="The passport starts on the garment" copy="NFC label, serial tag, care card and repair sample"/><ProductVisual src={vetPhysical} alt="VẾT physical product passport kit with NFC labels, metal tags, care cards and repair samples"/></div></section>
 
-    <section className="case-section kite-premise"><div className="page-shell">
-      <CaseLead index="01" eyebrow="The trust gap" title="Payment uncertainty is a product problem before it is a contract problem." copy="Freelancers worry about getting paid. Clients worry about releasing funds too early. KitePay turns the agreement into explicit states that both sides can read before they sign." />
-      <InsightList items={[
-        { title: 'A signature needs context', copy: 'The interface names the action, amount, recipient and consequence before the wallet opens.' },
-        { title: 'On-chain does not mean understandable', copy: 'Transaction hashes become receipts with human-readable events and recovery guidance.' },
-        { title: 'Disputes are part of the system', copy: 'Review windows, deadlines and an optional arbiter are visible before funds are deposited.' },
-      ]}/>
-    </div></section>
+    <section className="product-section vet-mobile"><div className="product-shell"><FlowHeading title="Product information before chain data"/><ProductVisual src={vetMobile} alt="VẾT mobile screens for garment overview, materials, batch, repair and ownership transfer"/></div></section>
 
-    <section className="case-section kite-architecture-section"><div className="page-shell">
-      <CaseLead index="02" eyebrow="Contract architecture" title="Isolate value. Make every transition observable." copy="A factory creates one escrow per agreement. Roles, deadlines and token addresses are immutable for that escrow; every meaningful transition emits an event the interface can explain." />
-      <KiteArchitecture />
-      <p className="kite-architecture-note"><strong>Technical status:</strong> architecture proposal for a BSC testnet implementation. The contract is not presented as audited or deployed.</p>
-    </div></section>
+    <section id="live-demo" className="product-section vet-live"><div className="product-shell"><FlowHeading title="Preview the event registry" copy="A local simulation of four lifecycle events"/><VetPassportDemo/></div></section>
 
-    <section id="live-demo" className="case-section kite-demo-section"><div className="page-shell">
-      <CaseLead index="03" eyebrow="Live prototype" title="Follow a milestone from draft to release." copy="The demo simulates product states without connecting a wallet or submitting a transaction. It is intentionally safe to explore inside the portfolio." />
-      <KitePayDemo />
-    </div></section>
+    <section className="product-section vet-console"><div className="product-shell"><FlowHeading title="Brands register the batch once"/><ProductVisual src={vetConsole} alt="VẾT batch registration console and item verification tablet inside a fashion production studio"/></div></section>
 
-    <section className="case-section kite-motion-section"><div className="page-shell">
-      <CaseLead index="04" eyebrow="Transaction narrative" title="Show state, proof and consequence in one motion system." copy="The value packet moves only after the corresponding state is confirmed. Event receipts appear at release, preserving the chain of evidence." />
-      <figure className="case-motion-frame kite-motion-frame"><img src={kitepayStateFlow} alt="Animated KitePay milestone moving through funded, submitted, review and released states" loading="lazy"/><figcaption>SVG state machine · milestone 02 · 250 USDT</figcaption></figure>
-    </div></section>
+    <section className="product-section vet-use"><div className="product-shell"><FlowHeading title="Verification works at the point of use"/><ProductVisual src={vetScan} alt="Customer scanning a VẾT NFC label and reviewing repair and ownership history in a boutique"/></div></section>
 
-    <section className="case-section kite-risk-section"><div className="page-shell">
-      <CaseLead index="05" eyebrow="Failure-first UX" title="The transaction is not the only thing that can fail." copy="Wallet and contract states are translated into next actions instead of generic red banners." />
-      <div className="kite-risk-list">
-        <article><span>Wrong network</span><strong>Switch to BSC before continuing</strong><p>The CTA explains the network change before requesting it.</p></article>
-        <article><span>Allowance required</span><strong>Two signatures, clearly separated</strong><p>Approval and funding never masquerade as a single action.</p></article>
-        <article><span>Signature rejected</span><strong>No funds moved</strong><p>The state stays intact and the user can retry without rebuilding terms.</p></article>
-        <article><span>Dispute opened</span><strong>Release is paused</strong><p>Evidence, deadline and arbiter status become the primary interface.</p></article>
-      </div>
-    </div></section>
+    <section className="product-section vet-lifecycle"><div className="product-shell"><FlowHeading title="History follows repair and resale"/><ProductVisual src={vetLifecycle} alt="VẾT ownership transfer, lifecycle events and verified resale listing across devices"/></div></section>
 
-    <section className="case-section kite-system-section"><div className="page-shell">
-      <CaseLead index="06" eyebrow="Production checklist" title="A credible Web3 interface starts with what it refuses to hide." copy="The product specification pairs interface decisions with contract and infrastructure requirements." />
-      <div className="kite-spec-table">
-        <div><span>Token handling</span><strong>SafeERC20 · decimal-safe amounts · explicit address</strong></div>
-        <div><span>Contract safety</span><strong>Checks-effects-interactions · reentrancy guard · role checks</strong></div>
-        <div><span>Indexing</span><strong>Event-based activity feed with RPC fallback</strong></div>
-        <div><span>Wallet UX</span><strong>Chain guard · simulation copy · pending and replaced transactions</strong></div>
-        <div><span>Disputes</span><strong>Deadline rules · evidence URI · optional arbiter role</strong></div>
-        <div><span>Before mainnet</span><strong>Unit tests · fork tests · external audit · monitored pause plan</strong></div>
-      </div>
-      <div className="case-outcome kite-outcome"><CaseEyebrow>Prototype definition</CaseEyebrow><div>{[['5','contract states'],['4','failure flows'],['3','explicit roles'],['1','shared receipt']].map(([value,label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div><p>Next validation: testnet contract implementation, adversarial contract tests and moderated wallet-signing sessions before any production deployment.</p></div>
-    </div></section>
+    <section className="vet-close"><div className="product-shell"><strong>VẾT</strong><div className="vet-event-rail">{passportEvents.map((item) => <span key={item.key}>{item.event}</span>)}</div><p>Interface prototype only. No production chain or commercial deployment is implied.</p></div></section>
   </article>;
 }
 
 export function DeepCaseStudy({ work }) {
-  if (work.slug === 'mat') return <MatCaseStudy work={work} />;
-  if (work.slug === 'kitepay') return <KitePayCaseStudy work={work} />;
+  if (work.slug === 'mat') return <DauCaseStudy work={work}/>;
+  if (work.slug === 'kitepay') return <VetCaseStudy work={work}/>;
   return null;
 }

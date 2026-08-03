@@ -14,15 +14,18 @@ import videoSequence from './assets/skills/video-sequence.webp';
 import vunPackaging from './assets/case-studies/vun-packaging.webp';
 import vunSpace from './assets/case-studies/vun-space.webp';
 import vunDigital from './assets/case-studies/vun-digital.webp';
-import matCover from './assets/case-studies/mat-cover.webp';
-import kitepayStateFlow from './assets/case-studies/kitepay-state-flow.svg';
-import trucOverview from './assets/case-studies/truc-overview.webp';
-import trucProduction from './assets/case-studies/truc-production.webp';
-import trucCover from './assets/case-studies/truc-cover.webp';
-import trucProjects from './assets/case-studies/truc-projects.webp';
-import trucReview from './assets/case-studies/truc-review.webp';
-import trucDigital from './assets/case-studies/truc-digital.webp';
-import { MatRouteComparisonMap, MatStreetMap, matModes } from './MatProductMap.jsx';
+import dauCover from './assets/case-studies/dau-cover.webp';
+import dauScreens from './assets/case-studies/dau-screens.webp';
+import dauScan from './assets/case-studies/dau-scan.webp';
+import dauDesktop from './assets/case-studies/dau-desktop.webp';
+import dauStates from './assets/case-studies/dau-states.webp';
+import lamCover from './assets/case-studies/lam-cover.webp';
+import lamOverview from './assets/case-studies/lam-overview.webp';
+import lamScience from './assets/case-studies/lam-science.webp';
+import lamMaterials from './assets/case-studies/lam-materials.webp';
+import lamImpact from './assets/case-studies/lam-impact.webp';
+import lamDigital from './assets/case-studies/lam-digital.webp';
+import vetLifecycle from './assets/case-studies/vet-lifecycle.webp';
 import { withoutTrailingPeriod } from './text.js';
 import './skill-showcase.css';
 import './ui-showcase-v2.css';
@@ -40,18 +43,18 @@ const graphicIdentityEvidenceV2 = [
 ];
 
 const evidenceSpecimens = {
-  display: { label: 'Cover', text: 'TRỤC', size: 'clamp(3.3rem, 8vw, 8.4rem)', width: '8ch', role: 'Primary identification', setting: '64-104 px / 0.88 leading' },
-  editorial: { label: 'Section', text: 'Technical capabilities', size: 'clamp(2.25rem, 5vw, 5.2rem)', width: '13ch', role: 'Chapter navigation', setting: '36-64 px / 0.96 leading' },
+  display: { label: 'Cover', text: 'LAM', size: 'clamp(3.3rem, 8vw, 8.4rem)', width: '8ch', role: 'Primary identification', setting: '64-104 px / 0.88 leading' },
+  editorial: { label: 'Section', text: 'Marine materials', size: 'clamp(2.25rem, 5vw, 5.2rem)', width: '13ch', role: 'Chapter navigation', setting: '36-64 px / 0.96 leading' },
 };
 
 const graphicProductionEvidenceV2 = [
-  { image: trucReview, alt: 'TRỤC profile reviewed with maps, project sheets and a field tablet', title: 'Content review', copy: 'Scope matrix, drawings and project evidence' },
-  { image: trucProduction, alt: 'TRỤC cloth cover, sewn binding, orange tabs and print proof', title: 'Production detail', copy: 'Cloth, foil, tabs, paper and proofing' },
-  { image: trucDigital, alt: 'TRỤC field profile across laptop, tablet and mobile', title: 'Digital handover', copy: 'Reader, bookmarks and linked evidence' },
+  { image: lamScience, alt: 'LAM profile science spreads with microscopy, extraction and material testing', title: 'Science chapter', copy: 'Species, process and performance records' },
+  { image: lamMaterials, alt: 'LAM profile and translucent seaweed-based material samples', title: 'Material library', copy: 'Film, molded form, coating and sample data' },
+  { image: lamDigital, alt: 'LAM profile, cultivation map and digital material library in a coastal laboratory', title: 'Digital handover', copy: 'Farm map, batches and partner data room' },
 ];
 
 function GraphicHeroV2({ Reveal }) {
-  return <section className="gd-hero gd-hero-v2"><div className="page-shell gd-hero-grid"><Reveal className="gd-hero-copy"><span className="gd-kicker">Graphic design</span><h1>Identity + editorial</h1><p>Two complete systems across material, print, space and screen</p><ArrowLink to="#identity-evidence">View the work</ArrowLink><dl className="gd-hero-facts"><div><dt>Scope</dt><dd>Identity + information</dd></div><div><dt>Formats</dt><dd>Print + field + digital</dd></div><div><dt>Working set</dt><dd>VI / EN + production files</dd></div></dl></Reveal><Reveal className="gd-hero-art gd-hero-evidence" delay={0.08}><figure><img src={trucCover} alt="TRỤC technical corporate profile and digital field reader inside an infrastructure facility" /></figure><figcaption>TRỤC / 112-page profile system</figcaption></Reveal></div></section>;
+  return <section className="gd-hero gd-hero-v2"><div className="page-shell gd-hero-grid"><Reveal className="gd-hero-copy"><span className="gd-kicker">Graphic design</span><h1>Identity + editorial</h1><p>Two complete systems across material, print, space and screen</p><ArrowLink to="#identity-evidence">View the work</ArrowLink><dl className="gd-hero-facts"><div><dt>Scope</dt><dd>Identity + information</dd></div><div><dt>Formats</dt><dd>Print + field + digital</dd></div><div><dt>Working set</dt><dd>VI / EN + production files</dd></div></dl></Reveal><Reveal className="gd-hero-art gd-hero-evidence" delay={0.08}><figure><img src={lamCover} alt="LAM marine biomaterials profile, seaweed samples and translucent sheets in a coastal lab" /></figure><figcaption>LAM / 104-page profile system</figcaption></Reveal></div></section>;
 }
 
 function GraphicSystemV2({ Reveal }) {
@@ -59,7 +62,7 @@ function GraphicSystemV2({ Reveal }) {
 }
 
 function GraphicInformationV2({ Reveal }) {
-  return <section className="gd-section gd-information-section"><div className="page-shell"><Reveal className="gd-heading"><h2>TRỤC / profile architecture</h2><p>Company facts, capability, project evidence and governance in one 112-page system</p></Reveal><div className="gd-information-layout"><Reveal className="gd-information-main"><figure><img src={trucOverview} alt="TRỤC contents, company overview, timeline and capability spreads" loading="lazy" /><figcaption>Overview + timeline + capability matrix</figcaption></figure></Reveal><div className="gd-information-side"><Reveal><figure><img src={trucProjects} alt="TRỤC infrastructure project records with maps, drawings and scope matrices" loading="lazy" /><figcaption>Three project records / one evidence structure</figcaption></figure></Reveal><Reveal className="gd-information-facts" delay={0.06}><dl><div><dt>Structure</dt><dd>8 chapters / 112 pages</dd></div><div><dt>Language</dt><dd>Vietnamese + English</dd></div><div><dt>Evidence</dt><dd>Maps + drawings + scope</dd></div><div><dt>Outputs</dt><dd>Hardcover + sheets + reader</dd></div></dl><a href="/work/still-moving">View TRỤC case study <ArrowUpRight size={17} /></a></Reveal></div></div></div></section>;
+  return <section className="gd-section gd-information-section"><div className="page-shell"><Reveal className="gd-heading"><h2>LAM / profile architecture</h2><p>Cultivation, science, materials and impact in one 104-page system</p></Reveal><div className="gd-information-layout"><Reveal className="gd-information-main"><figure><img src={lamOverview} alt="LAM contents, company overview and cultivation network spreads" loading="lazy" /><figcaption>Origin + network + company model</figcaption></figure></Reveal><div className="gd-information-side"><Reveal><figure><img src={lamImpact} alt="LAM impact records with coastal farm data and lifecycle diagrams" loading="lazy" /><figcaption>Impact records / field evidence</figcaption></figure></Reveal><Reveal className="gd-information-facts" delay={0.06}><dl><div><dt>Structure</dt><dd>8 chapters / 104 pages</dd></div><div><dt>Language</dt><dd>Vietnamese + English</dd></div><div><dt>Evidence</dt><dd>Tests + samples + field data</dd></div><div><dt>Outputs</dt><dd>Profile + library + data room</dd></div></dl><a href="/work/still-moving">View LAM case study <ArrowUpRight size={17} /></a></Reveal></div></div></div></section>;
 }
 
 function GraphicTypeLabV2({ Reveal }) {
@@ -71,7 +74,7 @@ function GraphicTypeLabV2({ Reveal }) {
 }
 
 function GraphicProductionV2({ Reveal }) {
-  return <section className="gd-section gd-production-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Production + handover</h2><p>Print, modular records and the field reader use the same evidence structure</p></Reveal><div className="gd-production-grid">{graphicProductionEvidenceV2.map((item, index) => <Reveal className={`gd-production-card is-${index + 1}`} key={item.title} delay={index * .05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><strong>{item.title}</strong><p>{item.copy}</p></figcaption></figure></Reveal>)}</div><Reveal className="gd-deliverables"><h3>Deliverables</h3><dl><div><dt>Identity</dt><dd>Mark, palette, samples, packaging and space</dd></div><div><dt>Editorial</dt><dd>112-page bilingual profile and project records</dd></div><div><dt>Digital</dt><dd>Catalogue and responsive profile reader</dd></div><div><dt>Handoff</dt><dd>Print masters, sources and content register</dd></div></dl><nav aria-label="Graphic design case studies"><a href="/work/folded-matter">VỤN case study <ArrowUpRight size={17} /></a><a href="/work/still-moving">TRỤC case study <ArrowUpRight size={17} /></a></nav></Reveal></div></section>;
+  return <section className="gd-section gd-production-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Production + handover</h2><p>Print, samples and the partner data room use the same evidence structure</p></Reveal><div className="gd-production-grid">{graphicProductionEvidenceV2.map((item, index) => <Reveal className={`gd-production-card is-${index + 1}`} key={item.title} delay={index * .05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><strong>{item.title}</strong><p>{item.copy}</p></figcaption></figure></Reveal>)}</div><Reveal className="gd-deliverables"><h3>Deliverables</h3><dl><div><dt>Identity</dt><dd>Mark, palette, samples, packaging and space</dd></div><div><dt>Editorial</dt><dd>104-page bilingual profile and material records</dd></div><div><dt>Digital</dt><dd>Catalogue and responsive profile reader</dd></div><div><dt>Handoff</dt><dd>Print masters, sources and content register</dd></div></dl><nav aria-label="Graphic design case studies"><a href="/work/folded-matter">VỤN case study <ArrowUpRight size={17} /></a><a href="/work/still-moving">LAM case study <ArrowUpRight size={17} /></a></nav></Reveal></div></section>;
 }
 
 function GraphicDesignShowcase({ Reveal }) {
@@ -238,36 +241,36 @@ function UiHero({ Reveal }) {
       <Reveal className="ui-hero-copy">
         <span className="ui-kicker">Web design</span>
         <h1>Decisions made visible</h1>
-        <p>Product strategy, interface states and front-end implementation shown through one route-planning prototype</p>
+        <p>Product strategy, visual discovery and responsive implementation shown through one cultural archive</p>
         <ArrowLink to="#product-thinking">Inspect the product</ArrowLink>
-        <dl className="ui-hero-facts"><div><dt>Case</dt><dd>MÁT route planner</dd></div><div><dt>Model</dt><dd>3 route strategies</dd></div><div><dt>Signals</dt><dd>Shade + heat + AQI</dd></div></dl>
+        <dl className="ui-hero-facts"><div><dt>Case</dt><dd>DẤU cultural archive</dd></div><div><dt>Flows</dt><dd>Explore + scan + listen</dd></div><div><dt>Access</dt><dd>Responsive + offline</dd></div></dl>
       </Reveal>
       <Reveal className="ui-hero-media" delay={0.08}>
-        <figure><img src={matCover} alt="MÁT city route model showing a heat-aware path across exposed and shaded districts" /><figcaption><span>Prototype case</span><strong>Heat-aware route planning</strong><p>Environmental evidence becomes a route a person can compare and act on</p></figcaption></figure>
+        <figure><img src={dauCover} alt="DẤU cultural archive across laptop and phone beside Vietnamese craft objects" /><figcaption><span>Prototype case</span><strong>Visual cultural archive</strong><p>Recognition, artifact context and maker voices stay connected in one visit</p></figcaption></figure>
       </Reveal>
     </div>
   </section>;
 }
 
 const productDecisions = [
-  { title: 'Compare before choosing', context: 'Route choice', question: 'What changes if I avoid exposure', output: 'Time, distance, shade and heat stay visible together', visual: 'compare' },
-  { title: 'Explain the score', context: 'Risk evidence', question: 'Why is this route cooler', output: 'Canopy, sun angle, surface and AQI support the recommendation', visual: 'evidence' },
-  { title: 'Confirm the next state', context: 'Route handoff', question: 'What is ready after selection', output: 'Choice, directions and refill points remain available', visual: 'confirm' },
+  { title: 'Browse before searching', context: 'Discovery', question: 'What can I recognise visually', output: 'Object, motif, region and material remain visible together', visual: 'compare' },
+  { title: 'Attach the context', context: 'Artifact record', question: 'Why does this motif matter', output: 'Technique, provenance and maker audio support the image', visual: 'evidence' },
+  { title: 'Keep the visit available', context: 'Save and access', question: 'What remains after leaving', output: 'Saved records and audio remain available offline', visual: 'confirm' },
 ];
 
 function DecisionVisual({ type }) {
-  if (type === 'compare') return <div className="ui-decision-visual ui-compare-visual"><div><span>Fastest</span><strong>20 min</strong><small>29% shade</small></div><div className="is-selected"><span>Coolest</span><strong>32 min</strong><small>71% shade</small></div></div>;
-  if (type === 'evidence') return <div className="ui-decision-visual ui-evidence-visual"><div><span>Shade coverage</span><strong>71%</strong><i style={{ '--value': '71%' }} /></div><div><span>Heat score</span><strong>2.8 / 5</strong><i style={{ '--value': '56%' }} /></div><div><span>Air quality</span><strong>Moderate</strong><i style={{ '--value': '62%' }} /></div></div>;
-  return <div className="ui-decision-visual ui-confirm-visual"><CheckCircle size={22} weight="fill" aria-hidden="true" /><div><span>Route ready</span><strong>Cooler route</strong><small>2 refill points saved</small></div></div>;
+  if (type === 'compare') return <div className="ui-decision-visual ui-compare-visual"><div><span>Material</span><strong>Sơn mài</strong><small>42 records</small></div><div className="is-selected"><span>Region</span><strong>Miền Bắc</strong><small>18 collections</small></div></div>;
+  if (type === 'evidence') return <div className="ui-decision-visual ui-evidence-visual"><div><span>Image detail</span><strong>Macro</strong><i style={{ '--value': '82%' }} /></div><div><span>Provenance</span><strong>Linked</strong><i style={{ '--value': '68%' }} /></div><div><span>Maker audio</span><strong>Available</strong><i style={{ '--value': '74%' }} /></div></div>;
+  return <div className="ui-decision-visual ui-confirm-visual"><CheckCircle size={22} weight="fill" aria-hidden="true" /><div><span>Record saved</span><strong>Khảm hoa mai</strong><small>Available offline</small></div></div>;
 }
 
 function UiProductCase({ Reveal }) {
   return <section id="product-thinking" className="ui-section ui-product-section">
     <div className="page-shell">
-      <Reveal className="ui-heading"><h2>The recommendation shows its work</h2><p>MÁT keeps the faster and cooler routes comparable before asking for commitment</p></Reveal>
+      <Reveal className="ui-heading"><h2>The object stays at the centre</h2><p>DẤU keeps the image, artifact record and maker context visible together</p></Reveal>
       <Reveal className="ui-product-visual" delay={0.06}>
-        <div className="ui-product-map"><MatRouteComparisonMap fit="slice" label="MÁT street network comparing the faster and cooler routes from Riverside Market to Hill Garden" /><span className="ui-route-legend"><b><i /> Cooler</b><b><i /> Faster</b></span><span className="ui-map-place ui-map-place-start">Riverside Market</span><span className="ui-map-place ui-map-place-end">Hill Garden</span></div>
-        <aside className="ui-product-analysis"><span>Midday comparison <time dateTime="12:40">12:40 PM</time></span><h3>A cooler trade-off</h3><div className="ui-route-deltas" role="group" aria-label="Difference from the fastest route to the coolest route"><div><span>Extra time</span><strong>+12</strong><small>min</small></div><div><span>Shade gained</span><strong>+42</strong><small>pts</small></div></div><p>Canopy Way raises estimated shade coverage from 29% to 71%</p><dl><div><dt>Fastest</dt><dd><strong>20 min</strong><span>29% shade</span></dd></div><div className="is-recommended"><dt>MÁT recommends</dt><dd><strong>32 min</strong><span>71% shade</span></dd></div></dl><a href="/work/mat">View MÁT case study <ArrowUpRight size={17} /></a></aside>
+        <div className="ui-product-map"><img src={dauDesktop} alt="DẤU desktop archive grid and tablet artifact record" loading="lazy" /></div>
+        <aside className="ui-product-analysis"><span>Archive record</span><h3>Khảm hoa mai</h3><div className="ui-route-deltas" role="group" aria-label="Archive record summary"><div><span>Region</span><strong>01</strong><small>linked</small></div><div><span>Media</span><strong>04</strong><small>types</small></div></div><p>Macro image, material, maker story and audio remain in one record</p><dl><div><dt>Material</dt><dd><strong>Sơn ta</strong><span>Xà cừ</span></dd></div><div className="is-recommended"><dt>Access</dt><dd><strong>Saved</strong><span>Offline ready</span></dd></div></dl><a href="/work/mat">View DẤU case study <ArrowUpRight size={17} /></a></aside>
       </Reveal>
       <div className="ui-decision-grid">
         {productDecisions.map((item, index) => <Reveal className="ui-decision-card" key={item.title} delay={index * 0.05}>
@@ -280,39 +283,45 @@ function UiProductCase({ Reveal }) {
 }
 
 const uiFlowSteps = [
-  { index: '01', screen: 'Set intent', question: 'Where and when are you travelling', input: 'Origin + destination + departure', output: 'A route request with time context' },
-  { index: '02', screen: 'Compare routes', question: 'Which trade-off fits the journey', input: 'Fastest + balanced + coolest', output: 'Time and exposure stay comparable' },
-  { index: '03', screen: 'Review evidence', question: 'Why is one route recommended', input: 'Shade + heat + AQI + refill', output: 'A readable recommendation' },
-  { index: '04', screen: 'Confirm journey', question: 'What remains available next', input: 'Selected route + directions', output: 'Cached guidance and recovery points' },
+  { index: '01', screen: 'Explore', question: 'What catches the eye', input: 'Image + region + material', output: 'A visual collection' },
+  { index: '02', screen: 'Scan', question: 'Can this motif be recognised', input: 'Camera + crop + fallback code', output: 'A matched artifact or manual search' },
+  { index: '03', screen: 'Understand', question: 'What is attached to the object', input: 'Story + provenance + audio', output: 'A contextual record' },
+  { index: '04', screen: 'Keep', question: 'What remains available later', input: 'Save + download', output: 'An offline visit collection' },
 ];
 
 function UiFlow({ Reveal }) {
   return <section id="task-flow" className="ui-section ui-flow-section">
-    <div className="page-shell"><Reveal className="ui-heading"><FlowArrow size={32} weight="duotone" aria-hidden="true" /><h2>One question per state</h2><p>The flow keeps the decision legible from route request to cached guidance</p></Reveal><div className="ui-flow-board" aria-label="MÁT route selection flow">{uiFlowSteps.map((step, index) => <Reveal className="ui-flow-step" key={step.index} delay={index * .05}><header><span>{step.index}</span><strong>{step.screen}</strong></header><p>{step.question}</p><dl><div><dt>Input</dt><dd>{step.input}</dd></div><div><dt>Output</dt><dd>{step.output}</dd></div></dl></Reveal>)}</div></div>
+    <div className="page-shell"><Reveal className="ui-heading"><FlowArrow size={32} weight="duotone" aria-hidden="true" /><h2>One question per state</h2><p>The flow stays legible from visual discovery to an offline collection</p></Reveal><div className="ui-flow-board" aria-label="DẤU archive journey">{uiFlowSteps.map((step, index) => <Reveal className="ui-flow-step" key={step.index} delay={index * .05}><header><span>{step.index}</span><strong>{step.screen}</strong></header><p>{step.question}</p><dl><div><dt>Input</dt><dd>{step.input}</dd></div><div><dt>Output</dt><dd>{step.output}</dd></div></dl></Reveal>)}</div></div>
   </section>;
 }
 
 function UiResponsive({ Reveal }) {
   return <section id="responsive-system" className="ui-section ui-responsive-section">
     <div className="page-shell">
-      <Reveal className="ui-heading"><Devices size={32} weight="duotone" aria-hidden="true" /><h2>Responsive means reprioritised</h2><p>The interface changes order and control density instead of shrinking the desktop layout</p></Reveal>
-      <div className="ui-responsive-grid"><Reveal className="ui-desktop-proof"><header><span>MÁT</span><nav aria-label="Desktop product preview"><b>Plan route</b><i>Saved</i><i>Conditions</i></nav><small>1440 px</small></header><div className="ui-desktop-body"><div className="ui-proof-map"><MatStreetMap mode="cool" fit="slice" label="Desktop MÁT map with the cooler route and two refill points" /><span className="ui-proof-map-key"><i /> 71% shaded</span></div><aside><span>Recommended</span><strong>Cooler route</strong><dl><div><dt>Time</dt><dd>32 min</dd></div><div><dt>Shade</dt><dd>71%</dd></div><div><dt>Heat</dt><dd>2.8 / 5</dd></div></dl><button type="button" tabIndex="-1">View directions</button></aside></div></Reveal><Reveal className="ui-mobile-proof" delay={0.06}><header><span>MÁT</span><small>390 px</small></header><div className="ui-proof-map"><MatStreetMap mode="cool" fit="slice" label="Mobile MÁT map preserving street, canopy and heat evidence" /><span className="ui-proof-map-key"><i /> 71% shaded</span></div><div className="ui-mobile-result"><span>Recommended</span><strong>Cooler route</strong><p>32 min · 71% shade</p><button type="button" tabIndex="-1">View directions</button></div><nav aria-label="Mobile product preview"><b>Route</b><i>Saved</i><i>Conditions</i></nav></Reveal></div>
-      <Reveal className="ui-responsive-rules"><dl><div><dt>Navigation</dt><dd>Top navigation becomes a three-item bottom bar</dd></div><div><dt>Map</dt><dd>Context remains visible while the result moves below it</dd></div><div><dt>Evidence</dt><dd>Primary metrics stay inline, secondary detail opens on demand</dd></div><div><dt>Action</dt><dd>The route action keeps full width and thumb reach</dd></div></dl></Reveal>
+      <Reveal className="ui-heading"><Devices size={32} weight="duotone" aria-hidden="true" /><h2>Responsive means reprioritised</h2><p>Collection density changes while the artifact remains visually recognisable</p></Reveal>
+      <div className="ui-responsive-grid"><Reveal className="ui-desktop-proof"><header><span>DẤU</span><nav aria-label="Desktop product preview"><b>Archive</b><i>Map</i><i>Saved</i></nav><small>1440 px</small></header><div className="ui-desktop-body"><div className="ui-proof-map"><img src={dauDesktop} alt="DẤU desktop archive and tablet artifact view" loading="lazy" /></div><aside><span>Collection</span><strong>Sơn mài</strong><dl><div><dt>Records</dt><dd>42</dd></div><div><dt>Regions</dt><dd>6</dd></div><div><dt>Audio</dt><dd>18</dd></div></dl><button type="button" tabIndex="-1">Open collection</button></aside></div></Reveal><Reveal className="ui-mobile-proof" delay={0.06}><header><span>DẤU</span><small>390 px</small></header><div className="ui-proof-map"><img src={dauScreens} alt="DẤU mobile archive screen family" loading="lazy" /></div><div className="ui-mobile-result"><span>Saved record</span><strong>Khảm hoa mai</strong><p>Sơn mài · Miền Bắc</p><button type="button" tabIndex="-1">Open record</button></div><nav aria-label="Mobile product preview"><b>Explore</b><i>Scan</i><i>Saved</i></nav></Reveal></div>
+      <Reveal className="ui-responsive-rules"><dl><div><dt>Navigation</dt><dd>Desktop archive tools become a focused bottom bar</dd></div><div><dt>Collection</dt><dd>Dense grids become swipeable visual groups</dd></div><div><dt>Context</dt><dd>Primary provenance stays visible, long records open on demand</dd></div><div><dt>Action</dt><dd>Scan and save stay within thumb reach</dd></div></dl></Reveal>
     </div>
   </section>;
 }
 
+const dauModes = {
+  browse: { label: 'Browse', heading: 'Visual archive', note: 'Move through objects by material and region', confirmed: 'Collection saved for offline use', image: dauScreens, facts: [['Records','128'],['Regions','09'],['Audio','42'],['Offline','Ready']] },
+  scan: { label: 'Scan', heading: 'Motif recognition', note: 'Match a detail, then keep the original object in view', confirmed: 'Artifact record added to the visit', image: dauScan, facts: [['Input','Camera'],['Fallback','Code'],['Match','Visual'],['Context','Linked']] },
+  access: { label: 'Access', heading: 'Inclusive states', note: 'Permissions, no-match, contrast and offline states remain explicit', confirmed: 'Accessible mode applied', image: dauStates, facts: [['Text','Large'],['Contrast','High'],['Audio','On'],['Offline','Ready']] },
+};
+
 function UiSandbox({ Reveal }) {
-  const [mode, setMode] = useState('cool');
+  const [mode, setMode] = useState('browse');
   const [selected, setSelected] = useState(false);
   const reduceMotion = useReducedMotion();
-  const active = matModes[mode];
+  const active = dauModes[mode];
   return <section id="state-prototype" className="ui-section ui-sandbox-section">
     <div className="page-shell ui-sandbox-layout">
-      <Reveal className="ui-sandbox-copy"><CursorClick size={32} weight="duotone" aria-hidden="true" /><h2>State changes stay inspectable</h2><p>Switch route strategy to compare the path, metrics, recommendation and confirmation state</p><div className="ui-mode-controls" role="group" aria-label="Route preference">{Object.entries(matModes).map(([key, item]) => <button type="button" key={key} aria-pressed={mode === key} onClick={() => { setMode(key); setSelected(false); }}>{item.label}</button>)}</div><dl className="ui-sandbox-boundary"><div><dt>Status</dt><dd>Interactive concept</dd></div><div><dt>Not claimed</dt><dd>Live routing service</dd></div><div><dt>Next validation</dt><dd>Outdoor legibility + data reliability</dd></div></dl></Reveal>
+      <Reveal className="ui-sandbox-copy"><CursorClick size={32} weight="duotone" aria-hidden="true" /><h2>State changes stay inspectable</h2><p>Switch between discovery, recognition and access states</p><div className="ui-mode-controls" role="group" aria-label="Archive preview mode">{Object.entries(dauModes).map(([key, item]) => <button type="button" key={key} aria-pressed={mode === key} onClick={() => { setMode(key); setSelected(false); }}>{item.label}</button>)}</div><dl className="ui-sandbox-boundary"><div><dt>Status</dt><dd>Interactive concept</dd></div><div><dt>Not claimed</dt><dd>Production archive</dd></div><div><dt>Next validation</dt><dd>Museum visits + recognition accuracy</dd></div></dl></Reveal>
       <Reveal className="ui-sandbox" delay={0.08}>
-        <div className="ui-sandbox-map"><MatStreetMap mode={mode} fit="slice" label={`${active.heading} on the MÁT street network from Riverside Market to Hill Garden`} /><span className="ui-map-key"><i /> Canopy and refill evidence</span></div>
-        <motion.div className={`ui-sandbox-result ${selected ? 'is-selected' : ''}`} key={`${mode}-${selected}`} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.3 }} aria-live="polite"><span>{selected && <CheckCircle size={15} weight="fill" aria-hidden="true" />}{selected ? 'Route confirmed' : 'Route comparison'}</span><strong>{active.heading}</strong><p>{selected ? active.confirmed : active.note}</p><dl><div><dt>Time</dt><dd>{active.time}</dd></div><div><dt>Distance</dt><dd>{active.distance}</dd></div><div><dt>Shade</dt><dd>{active.shade}</dd></div><div><dt>Heat</dt><dd>{active.heat}</dd></div></dl><button type="button" aria-pressed={selected} onClick={() => setSelected((value) => !value)}>{selected ? 'Change choice' : 'Select route'}</button></motion.div>
+        <div className="ui-sandbox-map"><img src={active.image} alt={`${active.heading} preview in DẤU`} /><span className="ui-map-key"><i /> Artifact and interface evidence</span></div>
+        <motion.div className={`ui-sandbox-result ${selected ? 'is-selected' : ''}`} key={`${mode}-${selected}`} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.3 }} aria-live="polite"><span>{selected && <CheckCircle size={15} weight="fill" aria-hidden="true" />}{selected ? 'State confirmed' : 'Product state'}</span><strong>{active.heading}</strong><p>{selected ? active.confirmed : active.note}</p><dl>{active.facts.map(([term,value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl><button type="button" aria-pressed={selected} onClick={() => setSelected((value) => !value)}>{selected ? 'Reset state' : 'Confirm state'}</button></motion.div>
       </Reveal>
     </div>
   </section>;
@@ -328,7 +337,7 @@ const buildChecks = [
 
 function UiBuildProof({ Reveal }) {
   return <section id="build-proof" className="ui-section ui-build-section">
-    <div className="page-shell"><Reveal className="ui-heading"><Code size={34} weight="duotone" aria-hidden="true" /><h2>Implementation keeps the decision intact</h2><p>The handoff connects route data, scoring, component state and accessible feedback</p></Reveal><div className="ui-build-layout"><Reveal className="ui-build-pipeline"><div><span>01</span><strong>Route request</strong><small>Origin + destination + time</small></div><i aria-hidden="true" /><div><span>02</span><strong>Scoring model</strong><small>Shade + heat + AQI + refill</small></div><i aria-hidden="true" /><div><span>03</span><strong>UI state</strong><small>Compare + select + recover</small></div><i aria-hidden="true" /><div><span>04</span><strong>User feedback</strong><small>Metrics + route + directions</small></div></Reveal><Reveal className="ui-build-report" delay={0.08}><header><span>Verification report</span><strong>5 / 5 passed</strong></header><div>{buildChecks.map((item) => <article key={item.check}><CheckCircle size={17} weight="fill" aria-hidden="true" /><strong>{item.check}</strong><span>{item.method}</span><b>{item.result}</b></article>)}</div><footer><WarningCircle size={18} weight="fill" aria-hidden="true" /><p><strong>Prototype boundary</strong>Production still requires routing data validation, moderated comparisons and outdoor legibility testing</p></footer></Reveal></div><Reveal className="ui-build-actions"><a href="/work/mat">Read the full MÁT case study <ArrowUpRight size={18} /></a><a href="#contact">Build a useful interface <ArrowUpRight size={18} /></a></Reveal></div>
+    <div className="page-shell"><Reveal className="ui-heading"><Code size={34} weight="duotone" aria-hidden="true" /><h2>Implementation keeps the archive intact</h2><p>The handoff connects media records, recognition, component state and accessible feedback</p></Reveal><div className="ui-build-layout"><Reveal className="ui-build-pipeline"><div><span>01</span><strong>Archive query</strong><small>Image + region + material</small></div><i aria-hidden="true" /><div><span>02</span><strong>Record model</strong><small>Object + maker + provenance</small></div><i aria-hidden="true" /><div><span>03</span><strong>UI state</strong><small>Explore + scan + save</small></div><i aria-hidden="true" /><div><span>04</span><strong>User feedback</strong><small>Match + fallback + offline</small></div></Reveal><Reveal className="ui-build-report" delay={0.08}><header><span>Verification report</span><strong>5 / 5 passed</strong></header><div>{buildChecks.map((item) => <article key={item.check}><CheckCircle size={17} weight="fill" aria-hidden="true" /><strong>{item.check}</strong><span>{item.method}</span><b>{item.result}</b></article>)}</div><footer><WarningCircle size={18} weight="fill" aria-hidden="true" /><p><strong>Prototype boundary</strong>Production still requires archive partnerships, recognition validation and museum testing</p></footer></Reveal></div><Reveal className="ui-build-actions"><a href="/work/mat">Read the full DẤU case study <ArrowUpRight size={18} /></a><a href="#contact">Build a useful interface <ArrowUpRight size={18} /></a></Reveal></div>
   </section>;
 }
 
@@ -465,32 +474,32 @@ function AutomationShowcase({ Reveal }) {
 function BlockchainHero({ Reveal }) {
   return <section className="bc-hero">
     <div className="page-shell bc-hero-layout">
-      <Reveal className="bc-hero-copy"><span className="bc-kicker">Blockchain integration</span><h1>From signature to receipt</h1><p>Wallet permissions, contract state, finality and recovery translated into product feedback</p><ArrowLink to="#wallet-flow">Follow the transaction</ArrowLink><dl className="bc-hero-facts"><div><dt>Case</dt><dd>KitePay escrow</dd></div><div><dt>Milestone</dt><dd>02 · 250 USDT</dd></div><div><dt>Network</dt><dd>BNB Testnet</dd></div><div><dt>Contract</dt><dd>0x84C2...11F0</dd></div></dl></Reveal>
-      <Reveal className="bc-hero-product" delay={0.08}><div className="bc-product-shell" aria-label="KitePay milestone escrow product proof"><header><div><span>KITEPAY</span><strong>Milestone escrow</strong></div><b>BNB TESTNET</b></header><div className="bc-product-overview"><article><span>Escrow balance</span><strong>250.00 USDT</strong><small>Contract 0x84C2...11F0</small></article><article><span>Current milestone</span><strong>02 · Product delivery</strong><small>Client review closes in 18h 42m</small></article></div><div className="bc-product-progress"><div className="is-done"><span>01</span><strong>Funded</strong><small>250 USDT locked</small></div><div className="is-done"><span>02</span><strong>Submitted</strong><small>3 files attached</small></div><div className="is-current"><span>03</span><strong>Review</strong><small>24-hour window</small></div><div><span>04</span><strong>Release</strong><small>Waiting for approval</small></div></div><footer><div><span>Latest receipt</span><code>0x9F31...A8E4</code></div><strong><i />REVIEW ACTIVE</strong></footer></div></Reveal>
+      <Reveal className="bc-hero-copy"><span className="bc-kicker">Blockchain integration</span><h1>From garment to next owner</h1><p>Origin, repair, ownership and recovery translated into a product passport people can actually use</p><ArrowLink to="#wallet-flow">Follow the lifecycle</ArrowLink><dl className="bc-hero-facts"><div><dt>Case</dt><dd>VẾT digital passport</dd></div><div><dt>Item</dt><dd>Utility Jacket 07</dd></div><div><dt>Registry</dt><dd>EVM testnet</dd></div><div><dt>Passport</dt><dd>24-SS-B07-0007</dd></div></dl></Reveal>
+      <Reveal className="bc-hero-product" delay={0.08}><div className="bc-product-shell" aria-label="VẾT garment passport product proof"><header><div><span>VẾT</span><strong>Digital product passport</strong></div><b>VERIFIED</b></header><div className="bc-product-overview"><article><span>Garment</span><strong>UTILITY JACKET 07</strong><small>Passport 24-SS-B07-0007</small></article><article><span>Current state</span><strong>Active ownership</strong><small>Repair history available</small></article></div><div className="bc-product-progress"><div className="is-done"><span>01</span><strong>Issued</strong><small>Origin recorded</small></div><div className="is-done"><span>02</span><strong>Repaired</strong><small>Care event added</small></div><div className="is-current"><span>03</span><strong>Resold</strong><small>Ownership verified</small></div><div><span>04</span><strong>Recover</strong><small>Future routing</small></div></div><footer><div><span>Latest event</span><code>OwnershipTransferred</code></div><strong><i />PASSPORT ACTIVE</strong></footer></div></Reveal>
     </div>
   </section>;
 }
 
 const walletStates = {
   connect: {
-    label: 'Connection', icon: PlugsConnected, heading: 'Choose the right account',
-    copy: 'Confirm the account and target network before requesting any permission', button: 'Review connection', next: 'review',
-    facts: [['Network', 'BNB Smart Chain Testnet'], ['Demo account', '0x72A4...91C2'], ['Access', 'Public address only']],
+    label: 'Scan', icon: PlugsConnected, heading: 'Open the garment record',
+    copy: 'NFC or QR resolves the public passport before any wallet action', button: 'Review passport', next: 'review',
+    facts: [['Item', 'Utility Jacket 07'], ['Passport', '24-SS-B07-0007'], ['Access', 'Public product data']],
   },
   review: {
-    label: 'Permission', icon: Fingerprint, heading: 'Explain the signature scope',
-    copy: 'Sign one typed-data permit. No transaction or gas is sent yet', button: 'Approve permit', next: 'pending',
-    facts: [['Scope', 'Fund milestone 02'], ['Spend limit', '250 USDT'], ['Verifying contract', '0x84C2...11F0']],
+    label: 'Review', icon: Fingerprint, heading: 'Review the transfer scope',
+    copy: 'Show the garment, history and next owner before requesting a signature', button: 'Approve transfer', next: 'pending',
+    facts: [['Scope', 'Transfer item ownership'], ['History', 'Origin + one repair'], ['Registry', '0x84C2...11F0']],
   },
   pending: {
-    label: 'Transaction', icon: Cube, heading: 'Pending is not final',
-    copy: 'The permit is submitted to escrow. Keep the action visible until finality', button: 'Advance finality', next: 'confirmed',
-    facts: [['Status', 'Included in block'], ['Finality', 'Awaiting finality'], ['Transaction', '0x9F31...A8E4']],
+    label: 'Registry', icon: Cube, heading: 'Pending is not transferred',
+    copy: 'Keep both owners and the garment state visible until finality', button: 'Advance finality', next: 'confirmed',
+    facts: [['Status', 'Included in block'], ['Finality', 'Awaiting finality'], ['Event', '0x9F31...A8E4']],
   },
   confirmed: {
-    label: 'Confirmed', icon: CheckCircle, heading: 'Return a readable receipt',
-    copy: 'State what changed and keep the onchain reference available', button: 'Restart demo', next: 'connect',
-    facts: [['Result', 'Milestone 02 funded'], ['Finality', 'Finality reached'], ['Receipt', '0x9F31...A8E4']],
+    label: 'Confirmed', icon: CheckCircle, heading: 'Return the updated passport',
+    copy: 'State who owns the item now and preserve its complete history', button: 'Restart demo', next: 'connect',
+    facts: [['Result', 'Ownership transferred'], ['Finality', 'Finality reached'], ['Receipt', '0x9F31...A8E4']],
   },
 };
 
@@ -504,9 +513,9 @@ function BlockchainWalletFlow({ Reveal }) {
   const activeIndex = walletStateOrder.indexOf(state);
   return <section id="wallet-flow" className="bc-section bc-wallet-section">
     <div className="page-shell bc-wallet-layout">
-      <Reveal className="bc-wallet-copy"><Wallet size={34} weight="duotone" aria-hidden="true" /><h2>Wallet states stay separate</h2><p>Connection, permission, submission and confirmation never collapse into one vague loading state</p><div className="bc-wallet-steps" aria-label="Wallet flow steps">{Object.entries(walletStates).map(([key, item]) => <button type="button" key={key} aria-pressed={state === key} onClick={() => setState(key)}>{item.label}</button>)}</div></Reveal>
+      <Reveal className="bc-wallet-copy"><Wallet size={34} weight="duotone" aria-hidden="true" /><h2>Transfer states stay separate</h2><p>Public record, signature scope, registry state and confirmation never collapse into one loading state</p><div className="bc-wallet-steps" aria-label="Ownership transfer steps">{Object.entries(walletStates).map(([key, item]) => <button type="button" key={key} aria-pressed={state === key} onClick={() => setState(key)}>{item.label}</button>)}</div></Reveal>
       <Reveal className="bc-wallet-demo" delay={0.08}>
-        <header className="bc-wallet-context"><div><span>Escrow action</span><strong>Fund milestone 02</strong></div><dl><div><dt>Account</dt><dd>0x72A4...91C2</dd></div><div><dt>Target</dt><dd>BNB Testnet</dd></div><div><dt>Amount</dt><dd>250 USDT</dd></div></dl></header>
+        <header className="bc-wallet-context"><div><span>Passport action</span><strong>Transfer Utility Jacket 07</strong></div><dl><div><dt>From</dt><dd>0x72A4...91C2</dd></div><div><dt>Registry</dt><dd>EVM testnet</dd></div><div><dt>Item</dt><dd>24-SS-B07-0007</dd></div></dl></header>
         <div className="bc-wallet-progress" aria-label="Transaction progress">{walletStateOrder.map((key, index) => <div className={index < activeIndex ? 'is-done' : index === activeIndex ? 'is-current' : ''} key={key}><span>{String(index + 1).padStart(2, '0')}</span><strong>{walletStates[key].label}</strong><i /></div>)}</div>
         <motion.div className={`bc-wallet-card is-${state}`} key={state} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .3 }} aria-live="polite"><ActiveIcon size={32} weight="duotone" /><span>{active.label}</span><strong>{active.heading}</strong><p>{active.copy}</p><dl className="bc-state-facts">{active.facts.map(([term, value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl><button type="button" onClick={() => setState(active.next)}>{active.button}</button></motion.div>
       </Reveal>
@@ -515,14 +524,14 @@ function BlockchainWalletFlow({ Reveal }) {
 }
 
 function BlockchainEscrow({ Reveal }) {
-  return <section id="escrow-state" className="bc-section bc-escrow-section"><div className="page-shell"><Reveal className="bc-heading"><h2>Escrow state both sides can read</h2><p>KitePay keeps funding, delivery, review and release explicit throughout one milestone</p></Reveal><div className="bc-escrow-grid"><Reveal className="bc-escrow-flow"><img src={kitepayStateFlow} alt="KitePay milestone 02 moving through funded, submitted, review and released contract states" loading="lazy" /></Reveal><Reveal className="bc-escrow-evidence" delay={0.08}><span>Milestone 02</span><h3>250 USDT under explicit rules</h3><dl><div><dt>Funded</dt><dd>Client deposits to escrow contract</dd></div><div><dt>Submitted</dt><dd>Freelancer attaches delivery proof</dd></div><div><dt>Review</dt><dd>24-hour client review window</dd></div><div><dt>Released</dt><dd>Receipt and updated balance returned</dd></div></dl><div className="bc-escrow-boundary"><WarningCircle size={18} weight="fill" aria-hidden="true" /><p><strong>Prototype boundary</strong>Production requires contract audit, live network testing and dispute-policy validation</p></div><a href="/work/kitepay">View KitePay case study <ArrowUpRight size={17} /></a></Reveal></div></div></section>;
+  return <section id="escrow-state" className="bc-section bc-escrow-section"><div className="page-shell"><Reveal className="bc-heading"><h2>The lifecycle stays readable</h2><p>VẾT keeps origin, repair, transfer and recovery explicit throughout one garment history</p></Reveal><div className="bc-escrow-grid"><Reveal className="bc-escrow-flow"><img src={vetLifecycle} alt="VẾT ownership transfer, lifecycle timeline and verified resale listing" loading="lazy" /></Reveal><Reveal className="bc-escrow-evidence" delay={0.08}><span>Passport 24-SS-B07-0007</span><h3>One item under explicit records</h3><dl><div><dt>Issued</dt><dd>Studio registers origin, materials and batch</dd></div><div><dt>Repaired</dt><dd>Certified partner adds component and care notes</dd></div><div><dt>Transferred</dt><dd>Both owners approve the handover</dd></div><div><dt>Recovered</dt><dd>End-of-life partner records the next material route</dd></div></dl><div className="bc-escrow-boundary"><WarningCircle size={18} weight="fill" aria-hidden="true" /><p><strong>Prototype boundary</strong>Production requires contract audit, partner governance and consumer testing</p></div><a href="/work/kitepay">View VẾT case study <ArrowUpRight size={17} /></a></Reveal></div></div></section>;
 }
 
 const eventMappings = [
-  { event: 'wallet_chainChanged', parsed: 'chainId 0x61', state: 'networkMismatch = false', message: 'BNB Testnet selected', recovery: 'Enable transaction review' },
-  { event: 'Permit signed', parsed: 'owner + spender + 250 USDT', state: 'permission = approved', message: 'Permit approved, no gas sent yet', recovery: 'Allow transaction submission' },
-  { event: 'MilestoneFunded', parsed: 'id 02 + amount 250 USDT', state: 'tx = pendingFinality', message: 'Funding included, awaiting finality', recovery: 'Keep receipt action disabled' },
-  { event: 'Finality reached', parsed: 'receipt 0x9F31...A8E4', state: 'milestone = funded', message: 'Milestone 02 funded', recovery: 'Expose receipt and new balance' },
+  { event: 'PassportIssued', parsed: 'item + batch + material set', state: 'passport = active', message: 'Garment passport verified', recovery: 'Expose origin and care data' },
+  { event: 'RepairAdded', parsed: 'partner + component + note', state: 'history = updated', message: 'Repair added to item history', recovery: 'Refresh care recommendations' },
+  { event: 'OwnershipTransferred', parsed: 'item + from + to', state: 'transfer = pendingFinality', message: 'Transfer included, awaiting finality', recovery: 'Keep both owners visible' },
+  { event: 'RecoveryRouteAdded', parsed: 'partner + material route', state: 'lifecycle = recovered', message: 'Next material route recorded', recovery: 'Close ownership actions' },
 ];
 
 function BlockchainMapping({ Reveal }) {
@@ -530,10 +539,10 @@ function BlockchainMapping({ Reveal }) {
 }
 
 const trustStates = [
-  { title: 'Wrong network', copy: 'Connected to BNB Smart Chain Mainnet. This demo expects its testnet', action: 'Prepare switch', resultLabel: 'Target selected', result: 'BNB Smart Chain Testnet. Continue after the wallet confirms the switch', icon: WifiSlash, className: 'is-warning' },
-  { title: 'Request rejected', copy: 'No signature was created and no transaction was submitted', action: 'Review request', resultLabel: 'No state change', result: 'The permission details remain available to review before trying again', icon: XCircle, className: 'is-error' },
-  { title: 'Transaction failed', copy: 'The contract reverted before escrow state changed', action: 'Decode reason', resultLabel: 'Decoded revert', result: 'Milestone 02 is already funded. Change the milestone or stop the flow', icon: WarningCircle, className: 'is-error' },
-  { title: 'Transaction confirmed', copy: 'Milestone 02 now holds 250 USDT with a verifiable receipt', action: 'Inspect receipt', resultLabel: 'Receipt verified', result: 'Finality reached. The receipt and updated escrow balance are available', icon: CheckCircle, className: 'is-success' },
+  { title: 'Wrong registry', copy: 'The connected network does not contain this garment passport', action: 'Prepare switch', resultLabel: 'Registry selected', result: 'The target test registry is ready for wallet confirmation', icon: WifiSlash, className: 'is-warning' },
+  { title: 'Transfer rejected', copy: 'No signature was created and ownership did not change', action: 'Review request', resultLabel: 'No state change', result: 'The garment and transfer scope remain available before trying again', icon: XCircle, className: 'is-error' },
+  { title: 'Event failed', copy: 'The contract reverted before the passport history changed', action: 'Decode reason', resultLabel: 'Decoded revert', result: 'The current owner no longer matches the transfer request', icon: WarningCircle, className: 'is-error' },
+  { title: 'Transfer confirmed', copy: 'The new owner and complete garment history are now verifiable', action: 'Inspect passport', resultLabel: 'Passport verified', result: 'Finality reached and the updated ownership record is available', icon: CheckCircle, className: 'is-success' },
 ];
 
 function BlockchainTrustStates({ Reveal }) {
@@ -544,13 +553,13 @@ function BlockchainTrustStates({ Reveal }) {
 
 function BlockchainTools({ Reveal }) {
   const layers = [
-    { index: '01', name: 'Wallet adapter', implementation: 'WalletConnect + injected provider', boundary: 'Account and network only' },
+    { index: '01', name: 'Passport resolver', implementation: 'NFC + QR + public item route', boundary: 'Public product data first' },
     { index: '02', name: 'Typed client', implementation: 'viem reads, simulation and write request', boundary: 'No write before simulation' },
-    { index: '03', name: 'Escrow contract', implementation: 'Solidity milestone state machine', boundary: 'Fund, submit, approve, release' },
+    { index: '03', name: 'Passport registry', implementation: 'Solidity lifecycle event model', boundary: 'Issue, repair, transfer, recover' },
     { index: '04', name: 'Event parser', implementation: 'Decoded logs + receipt status', boundary: 'Typed data into UI state' },
     { index: '05', name: 'Product feedback', implementation: 'React states + recovery actions', boundary: 'Plain language and next step' },
   ];
-  return <section id="integration-architecture" className="bc-section bc-tools-section"><div className="page-shell"><Reveal className="bc-heading"><ArrowsLeftRight size={34} weight="duotone" aria-hidden="true" /><h2>Integration has explicit boundaries</h2><p>Wallet, client, contract, events and interface form one inspectable path</p></Reveal><div className="bc-architecture-layout"><Reveal className="bc-architecture-flow">{layers.map((layer, index) => <React.Fragment key={layer.name}><article><span>{layer.index}</span><div><strong>{layer.name}</strong><p>{layer.implementation}</p><small>{layer.boundary}</small></div></article>{index < layers.length - 1 && <i aria-hidden="true" />}</React.Fragment>)}</Reveal><Reveal className="bc-architecture-proof" delay={0.08}><header><span>Implementation boundary</span><strong>EVM escrow demo</strong></header><dl><div><dt>Read path</dt><dd>Account, network, allowance, milestone and receipt</dd></div><div><dt>Write path</dt><dd>Simulate, request signature, submit, confirm</dd></div><div><dt>Error path</dt><dd>Reject, wrong network, revert and finality delay</dd></div><div><dt>Before production</dt><dd>Audit, RPC resilience, monitoring and dispute policy</dd></div></dl><a href="#contact">Plan an integration <ArrowUpRight size={18} /></a></Reveal></div></div></section>;
+  return <section id="integration-architecture" className="bc-section bc-tools-section"><div className="page-shell"><Reveal className="bc-heading"><ArrowsLeftRight size={34} weight="duotone" aria-hidden="true" /><h2>Integration has explicit boundaries</h2><p>Resolver, client, registry, events and interface form one inspectable path</p></Reveal><div className="bc-architecture-layout"><Reveal className="bc-architecture-flow">{layers.map((layer, index) => <React.Fragment key={layer.name}><article><span>{layer.index}</span><div><strong>{layer.name}</strong><p>{layer.implementation}</p><small>{layer.boundary}</small></div></article>{index < layers.length - 1 && <i aria-hidden="true" />}</React.Fragment>)}</Reveal><Reveal className="bc-architecture-proof" delay={0.08}><header><span>Implementation boundary</span><strong>EVM passport demo</strong></header><dl><div><dt>Read path</dt><dd>Item, batch, materials, repairs and current owner</dd></div><div><dt>Write path</dt><dd>Simulate, request signature, submit, confirm</dd></div><div><dt>Error path</dt><dd>Reject, wrong registry, revert and finality delay</dd></div><div><dt>Before production</dt><dd>Audit, partner governance, monitoring and privacy policy</dd></div></dl><a href="#contact">Plan an integration <ArrowUpRight size={18} /></a></Reveal></div></div></section>;
 }
 
 function BlockchainShowcase({ Reveal }) {
