@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
 import {
   ArrowDownRight, ArrowLeft, ArrowUpRight, CaretDown, Check,
@@ -24,7 +24,7 @@ import portraitImage from './assets/generated/portrait.webp';
 import dauCover from './assets/case-studies/dau-cover.webp';
 import relayCover from './assets/case-studies/relay-cover.webp';
 import vunCover from './assets/case-studies/vun-cover.webp';
-import hxsCover from './assets/case-studies/hxs-01.webp';
+import hxsCover from './assets/case-studies/hxs-home-cover.webp';
 import { notFoundSeo, seoByPath, siteIdentity } from './seo.js';
 import { withoutTrailingPeriod } from './text.js';
 
@@ -249,10 +249,17 @@ function SkillToolMotion({ skill }) {
 }
 
 const works = [
-  { slug: 'mat', title: 'DẤU', type: 'Cultural archive · Web app', year: '2026', role: 'Product strategy · UX/UI', description: 'A visual archive for scanning Vietnamese craft motifs and finding the people, places and techniques behind them.', challenge: 'Cultural records are often detached from the object and difficult to explore during a real museum or workshop visit.', outcome: 'A responsive archive connecting recognition, artifact context, maker audio, collections and offline access.', tags: ['Product design', 'Cultural archive'], image: dauCover, deep: true },
-  { slug: 'folded-matter', title: 'VỤN', type: 'Brand identity · Circular materials', year: '2026', role: 'Strategy · Identity · Art direction', description: 'Identity for a studio that turns construction offcuts into useful objects.', challenge: 'A material-led studio needed one recognisable system across samples, products, packaging, space and catalogue.', outcome: 'A fragment-based identity built from four colours, three material families and one modular V mark.', tags: ['Brand identity', 'Art direction'], image: vunCover, deep: true },
-  { slug: 'still-moving', title: 'HUAXINSHENG', type: 'Company catalogue · Industrial materials', year: '2026', role: 'Catalogue design · Art direction', description: 'A 24-page Vietnamese sales catalogue for welded steel mesh, from company capability to technical application.', challenge: 'Company scale, product proof, engineering detail and real applications had to remain easy to scan in one compact document.', outcome: 'An A3 spread system built around a clear Inter hierarchy, industrial blue palette and evidence-led page sequence.', tags: ['Editorial design', 'Catalogue'], image: hxsCover, deep: true },
-  { slug: 'kitepay', title: 'RELAY', type: 'Blockchain product · Event ticketing', year: '2026', role: 'Product strategy · UX/UI · Web3', description: 'Verified event tickets with simple transfer, capped resale and fraud-resistant entry.', challenge: 'Ticket ownership needed to stay trustworthy without exposing customers or gate staff to blockchain mechanics.', outcome: 'One access system across mobile tickets, resale, scanners, wristbands and organizer operations.', tags: ['Blockchain', 'Product design'], image: relayCover, deep: true },
+  { slug: 'portfolio-1', caseKey: 'mat', title: 'DẤU', type: 'Cultural archive · Web app', year: '2026', role: 'Product strategy · UX/UI', description: 'A visual archive for scanning Vietnamese craft motifs and finding the people, places and techniques behind them.', challenge: 'Cultural records are often detached from the object and difficult to explore during a real museum or workshop visit.', outcome: 'A responsive archive connecting recognition, artifact context, maker audio, collections and offline access.', tags: ['Product design', 'Cultural archive'], image: dauCover, deep: true },
+  { slug: 'portfolio-2', caseKey: 'folded-matter', title: 'VỤN', type: 'Brand identity · Circular materials', year: '2026', role: 'Strategy · Identity · Art direction', description: 'Identity for a studio that turns construction offcuts into useful objects.', challenge: 'A material-led studio needed one recognisable system across samples, products, packaging, space and catalogue.', outcome: 'A fragment-based identity built from four colours, three material families and one modular V mark.', tags: ['Brand identity', 'Art direction'], image: vunCover, deep: true },
+  { slug: 'portfolio-3', caseKey: 'still-moving', title: 'HUAXINSHENG', type: 'Company catalogue · Industrial materials', year: '2026', role: 'Catalogue design · Art direction', description: 'A 24-page Vietnamese sales catalogue for welded steel mesh, from company capability to technical application.', challenge: 'Company scale, product proof, engineering detail and real applications had to remain easy to scan in one compact document.', outcome: 'An A3 spread system built around a clear Inter hierarchy, industrial blue palette and evidence-led page sequence.', tags: ['Editorial design', 'Catalogue'], image: hxsCover, deep: true },
+  { slug: 'portfolio-4', caseKey: 'kitepay', title: 'RELAY', type: 'Blockchain product · Event ticketing', year: '2026', role: 'Product strategy · UX/UI · Web3', description: 'Verified event tickets with simple transfer, capped resale and fraud-resistant entry.', challenge: 'Ticket ownership needed to stay trustworthy without exposing customers or gate staff to blockchain mechanics.', outcome: 'One access system across mobile tickets, resale, scanners, wristbands and organizer operations.', tags: ['Blockchain', 'Product design'], image: relayCover, deep: true },
+];
+
+const legacyWorkRoutes = [
+  { from: 'mat', to: 'portfolio-1' },
+  { from: 'folded-matter', to: 'portfolio-2' },
+  { from: 'still-moving', to: 'portfolio-3' },
+  { from: 'kitepay', to: 'portfolio-4' },
 ];
 
 const experiments = [
@@ -1281,8 +1288,8 @@ function Home() {
 function ProjectPage({ work }) {
   usePageMeta(seoByPath[`/work/${work.slug}`]);
   if (work.deep) {
-    const isShowcaseCase = work.slug === 'folded-matter' || work.slug === 'still-moving';
-    return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className={`project-page-deep project-page-${work.slug}`}><Suspense fallback={<RouteLoading label={`Loading ${work.title}`} />}>{isShowcaseCase ? <ShowcaseCaseStudy work={work}/> : <DeepCaseStudy work={work} />}</Suspense><Contact /></main><Footer /></>;
+    const isShowcaseCase = work.caseKey === 'folded-matter' || work.caseKey === 'still-moving';
+    return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className={`project-page-deep project-page-${work.caseKey}`}><Suspense fallback={<RouteLoading label={`Loading ${work.title}`} />}>{isShowcaseCase ? <ShowcaseCaseStudy work={work}/> : <DeepCaseStudy work={work} />}</Suspense><Contact /></main><Footer /></>;
   }
   return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="project-page">
     <section className="project-hero section-pad">
@@ -1291,6 +1298,11 @@ function ProjectPage({ work }) {
     <section className="project-story section-pad"><div className="page-shell project-story-grid"><Reveal><span className="eyebrow">Role</span><p className="project-role">{work.role}</p><div className="tag-row">{work.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></Reveal><Reveal className="project-narrative" delay={.08}><article><span className="eyebrow">The challenge</span><h2>{withoutTrailingPeriod(work.challenge)}</h2></article><article><span className="eyebrow">The direction</span><p className="large-copy">{work.outcome}</p></article><p className="project-disclosure">This is a self-initiated portfolio study. The imagery was art-directed for this website to communicate the intended system and craft.</p></Reveal></div></section>
     <Contact />
   </main><Footer /></>;
+}
+
+function LegacyWorkRedirect({ to }) {
+  const location = useLocation();
+  return <Navigate to={{ pathname: `/work/${to}`, search: location.search, hash: location.hash }} replace />;
 }
 
 function SkillPage({ skill }) {
@@ -1307,7 +1319,7 @@ function NotFound() {
 }
 
 function App() {
-  return <><RouteScrollManager /><Routes><Route path="/" element={<Home />} />{works.map((work) => <Route key={work.slug} path={`/work/${work.slug}`} element={<ProjectPage work={work} />} />)}{skills.map((skill) => <Route key={skill.slug} path={`/skills/${skill.slug}`} element={<SkillPage skill={skill} />} />)}<Route path="*" element={<NotFound />} /></Routes></>;
+  return <><RouteScrollManager /><Routes><Route path="/" element={<Home />} />{works.map((work) => <Route key={work.slug} path={`/work/${work.slug}`} element={<ProjectPage work={work} />} />)}{legacyWorkRoutes.map((route) => <Route key={route.from} path={`/work/${route.from}`} element={<LegacyWorkRedirect to={route.to} />} />)}{skills.map((skill) => <Route key={skill.slug} path={`/skills/${skill.slug}`} element={<SkillPage skill={skill} />} />)}<Route path="*" element={<NotFound />} /></Routes></>;
 }
 
 export default App;

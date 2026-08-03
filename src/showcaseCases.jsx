@@ -208,7 +208,7 @@ function HxsCaseStudy({ work }) {
 }
 
 export function ShowcaseCaseStudy({ work }) {
-  if (work.slug === 'folded-matter') return <VunCaseStudy work={work}/>;
-  if (work.slug === 'still-moving') return <HxsCaseStudy work={work}/>;
+  if (work.caseKey === 'folded-matter') return <VunCaseStudy work={work}/>;
+  if (work.caseKey === 'still-moving') return <HxsCaseStudy work={work}/>;
   return null;
 }

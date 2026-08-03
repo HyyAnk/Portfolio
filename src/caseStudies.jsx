@@ -197,7 +197,7 @@ function RelayCaseStudy({ work }) {
 }
 
 export function DeepCaseStudy({ work }) {
-  if (work.slug === 'mat') return <DauCaseStudy work={work}/>;
-  if (work.slug === 'kitepay') return <RelayCaseStudy work={work}/>;
+  if (work.caseKey === 'mat') return <DauCaseStudy work={work}/>;
+  if (work.caseKey === 'kitepay') return <RelayCaseStudy work={work}/>;
   return null;
 }
