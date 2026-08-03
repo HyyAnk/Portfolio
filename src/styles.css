@@ -117,8 +117,22 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .contact-trigger-icons svg { flex: none; }
 .zalo-mark { display: inline-grid; width: 17px; height: 17px; place-items: center; border: 1.5px solid currentColor; border-radius: 5px; font-size: .58rem; font-weight: 800; line-height: 1; }
 .dropdown { position: absolute; top: calc(100% + 12px); right: 0; min-width: 224px; padding: 16px; display: grid; gap: 4px; border: 1px solid color-mix(in srgb, var(--ink) 13%, transparent); border-radius: 15px; background: color-mix(in srgb, var(--paper-elevated) 97%, transparent); box-shadow: 0 18px 40px color-mix(in srgb, var(--ink) 18%, transparent); animation: dropdown-in .22s cubic-bezier(.16,1,.3,1) both; }
-.skills-dropdown a, .contact-dropdown a, .contact-dropdown button { display: flex; align-items: center; gap: 9px; padding: 8px 5px; font-size: .84rem; }
-.skills-dropdown a:hover, .contact-dropdown a:hover, .contact-dropdown button:hover { color: var(--accent); }
+.skills-dropdown { min-width: 266px; padding: 12px; gap: 8px; }
+.skills-dropdown-label { padding: 3px 6px 1px; color: var(--muted); font-size: .57rem; font-weight: 750; letter-spacing: .12em; line-height: 1.2; text-transform: uppercase; }
+.skills-dropdown-primary { overflow: hidden; border: 1px solid color-mix(in srgb, var(--skill-core-ink) 10%, transparent); border-radius: 11px; background: var(--skill-core); color: var(--skill-core-ink); }
+.skills-dropdown-primary-link { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 12px; font-size: .86rem; font-weight: 680; letter-spacing: -.025em; transition: background .22s ease, color .22s ease; }
+.skills-dropdown-primary-link + .skills-dropdown-primary-link { border-top: 1px solid color-mix(in srgb, var(--skill-core-ink) 12%, transparent); }
+.skills-dropdown-primary-link svg { flex: none; color: var(--accent); opacity: .78; transition: opacity .22s ease, transform .22s cubic-bezier(.16,1,.3,1); }
+.skills-dropdown-primary-link:hover, .skills-dropdown-primary-link:focus-visible { background: color-mix(in srgb, var(--skill-core-ink) 8%, transparent); }
+.skills-dropdown-primary-link:focus-visible { outline-offset: -3px; }
+.skills-dropdown-primary-link:hover svg, .skills-dropdown-primary-link:focus-visible svg { opacity: 1; transform: translate(2px, -2px); }
+.skills-dropdown-support { display: grid; gap: 1px; padding: 3px 5px 1px 12px; }
+.skills-dropdown-support .skills-dropdown-label { padding: 4px 0 3px; }
+.skills-dropdown-support-link { min-height: 31px; display: flex; align-items: center; padding: 0; color: var(--muted); font-size: .75rem; font-weight: 560; letter-spacing: -.015em; transition: color .2s ease, transform .22s cubic-bezier(.16,1,.3,1); }
+.skills-dropdown-support-link:hover, .skills-dropdown-support-link:focus-visible { color: var(--ink); transform: translateX(3px); }
+.skills-dropdown-support-link:focus-visible { border-radius: 4px; outline-offset: 2px; }
+.contact-dropdown a, .contact-dropdown button { display: flex; align-items: center; gap: 9px; padding: 8px 5px; font-size: .84rem; }
+.contact-dropdown a:hover, .contact-dropdown button:hover { color: var(--accent); }
 .dropdown-label { padding: 0 5px 8px; font-size: .6rem; }
 .contact-dropdown { min-width: 258px; padding: 12px; gap: 1px; }
 .contact-dropdown a, .contact-dropdown button { min-height: 34px; gap: 9px; padding: 5px; border-radius: 9px; transition: background .2s ease, color .2s ease, transform .2s ease; }
@@ -780,10 +794,13 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .wordmark-divider, .wordmark-fullname { display: none; }
   .nav-actions { padding: 5px 6px 5px 8px; }
   .nav-link { min-height: 34px; padding-inline: 8px; font-size: .76rem; }
-  .contact-trigger { min-width: 86px; height: 31px; padding-inline: 8px; }
-  .contact-trigger-icons { gap: 4px; }
-  .contact-trigger-icons svg { width: 12px; height: 12px; }
-  .contact-trigger-icons .zalo-mark { width: 14px; height: 14px; border-radius: 4px; font-size: .49rem; }
+  .theme-toggle-track { width: 31px; height: 31px; justify-content: center; padding: 0; }
+  .theme-toggle-track > svg { display: none; }
+  .theme-toggle-thumb { position: static; width: 31px; height: 31px; background: transparent; color: var(--ink); box-shadow: none; transform: none; }
+  .theme-toggle.is-dark .theme-toggle-thumb { transform: none; }
+  .contact-trigger { width: 31px; min-width: 31px; height: 31px; margin-left: 2px; padding: 0; }
+  .contact-trigger-icons > :not(:first-child) { display: none; }
+  .contact-trigger-icons svg { width: 15px; height: 15px; }
   .dropdown { top: calc(100% + 9px); }
   .contact-dropdown { right: -2px; min-width: min(258px, calc(100vw - 32px)); }
   .section-pad { padding: 104px 0 116px; }
@@ -883,6 +900,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 }
 
 @media (max-width: 400px) {
+  .skills-dropdown { right: clamp(-70px, calc(100vw - 390px), 10px); width: min(266px, calc(100vw - 32px)); min-width: 0; }
   .contact-directory { grid-template-columns: 1fr; }
   .contact-channel { min-height: 84px; padding: 11px 12px; }
   .contact-channel-primary { grid-column: auto; min-height: 100px; }
@@ -892,10 +910,6 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .nav-inner { gap: 8px; }
   .nav-actions { padding-inline: 5px; }
   .nav-link { padding-inline: 6px; }
-  .theme-toggle-track { width: 50px; padding-inline: 6px; }
-  .theme-toggle.is-dark .theme-toggle-thumb { transform: translateX(23px); }
-  .contact-trigger { min-width: 72px; margin-left: 2px; padding-inline: 5px; }
-  .contact-trigger-icons { gap: 3px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

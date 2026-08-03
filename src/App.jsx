@@ -437,7 +437,19 @@ function Nav() {
         <a className="nav-link nav-link-simple" href="/#about">About</a>
         <div className="nav-menu-wrap">
           <button className="nav-link" type="button" aria-expanded={skillsOpen} onClick={() => { setSkillsOpen((value) => !value); setContactOpen(false); }}>Skills <CaretDown size={15} weight="bold" /></button>
-          {skillsOpen && <nav className="dropdown skills-dropdown" aria-label="Skills navigation">{skills.map((skill) => <Link key={skill.slug} to={`/skills/${skill.slug}`} onClick={() => setSkillsOpen(false)}>{skill.title}</Link>)}</nav>}
+          {skillsOpen && <nav className="dropdown skills-dropdown" aria-label="Skills navigation">
+            <span className="skills-dropdown-label">Core skills</span>
+            <div className="skills-dropdown-primary">
+              {primarySkills.map((skill) => <Link className="skills-dropdown-primary-link" key={skill.slug} to={`/skills/${skill.slug}`} onClick={() => setSkillsOpen(false)}>
+                <span>{skill.title}</span>
+                <ArrowUpRight size={14} weight="bold" aria-hidden="true" />
+              </Link>)}
+            </div>
+            <div className="skills-dropdown-support">
+              <span className="skills-dropdown-label">Supporting</span>
+              {supportingSkills.map((skill) => <Link className="skills-dropdown-support-link" key={skill.slug} to={`/skills/${skill.slug}`} onClick={() => setSkillsOpen(false)}>{skill.title}</Link>)}
+            </div>
+          </nav>}
         </div>
         <button className={`theme-toggle ${theme === 'dark' ? 'is-dark' : ''}`} type="button" role="switch" aria-checked={theme === 'dark'} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} onClick={() => setTheme((value) => value === 'dark' ? 'light' : 'dark')}>
           <span className="theme-toggle-track" aria-hidden="true"><Sun size={12} weight="fill" /><Moon size={12} weight="fill" /><span className="theme-toggle-thumb">{theme === 'dark' ? <Moon size={11} weight="fill" /> : <Sun size={11} weight="fill" />}</span></span>
