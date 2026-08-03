@@ -433,7 +433,7 @@ function Nav() {
     <div className="nav-inner">
       <Link className="wordmark" to="/" aria-label={`${person} | ${fullName}, back to home`} onClick={() => { setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-mark" aria-hidden="true"><img className="brand-logo-light" src="/deer-logo.svg" alt="" /><img className="brand-logo-dark" src="/deer-logo-white.svg" alt="" /></span><span className="wordmark-copy"><strong className="wordmark-alias">{person}</strong><span className="wordmark-divider" aria-hidden="true">|</span><span className="wordmark-fullname">{fullName}</span></span></Link>
       <div className="nav-actions">
-        <a className="nav-link nav-link-simple" href="/#selected-works">Work</a>
+        <a className="nav-link nav-link-simple" href="/#portfolio">Portfolio</a>
         <a className="nav-link nav-link-simple" href="/#about">About</a>
         <div className="nav-menu-wrap">
           <button className="nav-link" type="button" aria-expanded={skillsOpen} onClick={() => { setSkillsOpen((value) => !value); setContactOpen(false); }}>Skills <CaretDown size={15} weight="bold" /></button>
@@ -788,7 +788,7 @@ function Hero() {
         <p className="hero-serif">Designer and developer for thoughtful digital work.</p>
         <p className="hero-accent">Clarity first. Character always.</p>
         <p className="hero-lede">I turn complex products, stories and workflows into clear experiences people can understand and use.</p>
-        <div className="hero-actions"><a className="button button-dark" href="#selected-works">View selected work <ArrowDownRight size={18} /></a><ReadyProjectButton /></div>
+        <div className="hero-actions"><a className="button button-dark" href="#portfolio">View portfolio <ArrowDownRight size={18} /></a><ReadyProjectButton /></div>
       </div>
       <Reveal className="hero-composition-shell">
         <HeroComposition />
@@ -798,7 +798,7 @@ function Hero() {
 }
 
 function WorkCarousel() {
-  return <section id="selected-works" className="section-pad works-section"><div className="page-shell"><Reveal><div className="section-heading section-heading-stacked"><h2>Selected work</h2><p>Four self-initiated case studies across product, identity, editorial and systems.</p></div></Reveal><div className="work-gallery">{works.map((work, index) => <Reveal className={`work-card work-card-${index + 1}`} key={work.slug} delay={index * .05}><Link to={`/work/${work.slug}`} className="work-card-link" aria-label={`View ${work.title} project`}><figure className="work-card-image"><img src={work.image} alt={`${work.title} project visual`} loading={index > 1 ? 'lazy' : 'eager'} decoding="async" /><figcaption>View project <ArrowUpRight size={16} /></figcaption></figure><div className="work-card-kicker"><span>{String(index + 1).padStart(2, '0')} / 04</span><span>{work.deep ? 'Full case study' : 'Project study'}</span></div><div className="work-card-copy"><div><h3>{withoutTrailingPeriod(work.title)}</h3><p>{work.description}</p></div><div className="work-card-meta"><span>{work.type}</span><span>{work.year}</span><ArrowUpRight size={20} /></div></div></Link></Reveal>)}</div></div></section>;
+  return <section id="portfolio" className="section-pad works-section"><div className="page-shell"><Reveal><div className="section-heading section-heading-stacked"><h2>Portfolio</h2><p>Four self-initiated case studies across product, identity, editorial and systems.</p></div></Reveal><div className="work-gallery">{works.map((work, index) => <Reveal className={`work-card work-card-${index + 1}`} key={work.slug} delay={index * .05}><Link to={`/work/${work.slug}`} className="work-card-link" aria-label={`View ${work.title} project`}><figure className="work-card-image"><img src={work.image} alt={`${work.title} project visual`} loading={index > 1 ? 'lazy' : 'eager'} decoding="async" /><figcaption>View project <ArrowUpRight size={16} /></figcaption></figure><div className="work-card-kicker"><span>{String(index + 1).padStart(2, '0')} / 04</span><span>{work.deep ? 'Full case study' : 'Project study'}</span></div><div className="work-card-copy"><div><h3>{withoutTrailingPeriod(work.title)}</h3><p>{work.description}</p></div><div className="work-card-meta"><span>{work.type}</span><span>{work.year}</span><ArrowUpRight size={20} /></div></div></Link></Reveal>)}</div></div></section>;
 }
 
 function About() {
@@ -1286,7 +1286,7 @@ function ProjectPage({ work }) {
   }
   return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="project-page">
     <section className="project-hero section-pad">
-      <div className="page-shell"><Reveal><Link className="project-back" to="/#selected-works"><ArrowLeft size={16} /> Selected works</Link><div className="project-heading"><div><span className="eyebrow">{work.type} · {work.year}</span><h1>{withoutTrailingPeriod(work.title)}</h1></div><p>{work.description}</p></div></Reveal><Reveal className="project-cover" delay={.08}><img src={work.image} alt={`${work.title} case study cover`} /></Reveal></div>
+      <div className="page-shell"><Reveal><Link className="project-back" to="/#portfolio"><ArrowLeft size={16} /> Portfolio</Link><div className="project-heading"><div><span className="eyebrow">{work.type} · {work.year}</span><h1>{withoutTrailingPeriod(work.title)}</h1></div><p>{work.description}</p></div></Reveal><Reveal className="project-cover" delay={.08}><img src={work.image} alt={`${work.title} case study cover`} /></Reveal></div>
     </section>
     <section className="project-story section-pad"><div className="page-shell project-story-grid"><Reveal><span className="eyebrow">Role</span><p className="project-role">{work.role}</p><div className="tag-row">{work.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></Reveal><Reveal className="project-narrative" delay={.08}><article><span className="eyebrow">The challenge</span><h2>{withoutTrailingPeriod(work.challenge)}</h2></article><article><span className="eyebrow">The direction</span><p className="large-copy">{work.outcome}</p></article><p className="project-disclosure">This is a self-initiated portfolio study. The imagery was art-directed for this website to communicate the intended system and craft.</p></Reveal></div></section>
     <Contact />
@@ -1303,7 +1303,7 @@ function SkillPage({ skill }) {
 function NotFound() {
   const location = useLocation();
   usePageMeta({ ...notFoundSeo, path: location.pathname });
-  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="not-found-page"><section className="not-found section-pad"><div className="page-shell not-found-grid"><div><span className="eyebrow">Error / 404</span><h1>Lost path</h1></div><div className="not-found-copy"><p className="large-copy">This page is not part of the current portfolio. The selected work is still close by.</p><Link className="button button-dark" to="/#selected-works">Return to selected work <ArrowUpRight size={18} /></Link></div></div></section></main><Footer /></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="not-found-page"><section className="not-found section-pad"><div className="page-shell not-found-grid"><div><span className="eyebrow">Error / 404</span><h1>Lost path</h1></div><div className="not-found-copy"><p className="large-copy">This page is not part of the current portfolio. The portfolio is still close by.</p><Link className="button button-dark" to="/#portfolio">Return to portfolio <ArrowUpRight size={18} /></Link></div></div></section></main><Footer /></>;
 }
 
 function App() {

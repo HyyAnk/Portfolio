@@ -27,7 +27,7 @@ function ShowcaseEyebrow({ children }) {
 function ShowcaseHero({ work, theme, label, summary, facts, image, imageAlt, demoLabel, disclosure }) {
   return <section className={`showcase-hero showcase-theme-${theme}`}>
     <div className="page-shell">
-      <Link className="showcase-back" to="/#selected-works"><ArrowLeft size={16}/> Selected work</Link>
+      <Link className="showcase-back" to="/#portfolio"><ArrowLeft size={16}/> Portfolio</Link>
       <div className="showcase-heading">
         <div><ShowcaseEyebrow>{label}</ShowcaseEyebrow><h1>{withoutTrailingPeriod(work.title)}</h1></div>
         <div className="showcase-summary"><p>{summary}</p><a href="#live-demo">{demoLabel}<ArrowUpRight size={17}/></a></div>

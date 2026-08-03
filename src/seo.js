@@ -38,7 +38,7 @@ export const seoByPath = Object.fromEntries(seoRoutes.map((entry) => [entry.path
 export const notFoundSeo = {
   path: '/404',
   title: 'Page not found - HyyAnk',
-  description: 'The page you requested could not be found. Return to HyyAnk’s selected work and capabilities.',
+  description: 'The page you requested could not be found. Return to HyyAnk’s portfolio and capabilities.',
   kind: 'website',
   noindex: true,
 };

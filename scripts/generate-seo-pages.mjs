@@ -148,7 +148,7 @@ function renderNotFoundHtml(siteUrl) {
       :root{font-family:Arial,sans-serif;color:#111211;background:#f2f0ed}*{box-sizing:border-box}body{min-width:320px;margin:0}main{width:min(1120px,calc(100% - 40px));min-height:100dvh;margin:auto;display:grid;align-content:center;padding:64px 0}.mark{width:52px;height:52px;margin-bottom:64px}.code{color:#b94200;font-size:.72rem;font-weight:800;letter-spacing:.16em}.grid{display:grid;grid-template-columns:minmax(0,.65fr) minmax(300px,1fr);gap:64px;align-items:end}h1{max-width:7ch;margin:14px 0 0;font-size:clamp(4.8rem,13vw,10rem);line-height:.82;letter-spacing:-.075em}p{max-width:34ch;margin:0 0 28px;color:#686764;font-size:clamp(1.2rem,2.4vw,2rem);line-height:1.32}a{display:inline-flex;padding:14px 18px;border-radius:12px;background:#111211;color:#f2f0ed;font-size:.88rem;font-weight:700;text-decoration:none}@media(max-width:700px){main{align-content:start;padding-top:32px}.mark{margin-bottom:96px}.grid{grid-template-columns:1fr;gap:44px}h1{font-size:clamp(4.6rem,25vw,7rem)}}
     </style>
   </head>
-  <body><main><img class="mark" src="/deer-logo.svg" alt="" /><div class="grid"><div><span class="code">ERROR / 404</span><h1>Lost path.</h1></div><div><p>This page is not part of the current portfolio. The selected work is still close by.</p><a href="/">Return to selected work&nbsp; ↗</a></div></div></main></body>
+  <body><main><img class="mark" src="/deer-logo.svg" alt="" /><div class="grid"><div><span class="code">ERROR / 404</span><h1>Lost path.</h1></div><div><p>This page is not part of the current portfolio. The portfolio is still close by.</p><a href="/#portfolio">Return to portfolio&nbsp; ↗</a></div></div></main></body>
 </html>`;
 }
 

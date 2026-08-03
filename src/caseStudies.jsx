@@ -29,7 +29,7 @@ function CaseLead({ index, eyebrow, title, copy }) {
 function CaseHero({ work, theme, label, summary, facts, demoLabel }) {
   return <section className={`deep-case-hero case-theme-${theme}`}>
     <div className="page-shell">
-      <Link className="deep-case-back" to="/#selected-works"><ArrowLeft size={16} /> Selected work</Link>
+      <Link className="deep-case-back" to="/#portfolio"><ArrowLeft size={16} /> Portfolio</Link>
       <div className="deep-case-heading">
         <div>
           <CaseEyebrow>{label}</CaseEyebrow>
