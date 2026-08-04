@@ -363,6 +363,18 @@ function ClientLogo({ client }) {
   </span>;
 }
 
+function ClientConveyorTrack({ variant }) {
+  return <div className={`client-conveyor-layer client-conveyor-layer-${variant}`} aria-hidden="true">
+    <div className="client-conveyor-track">
+      {[0, 1].map((copy) => <div className="client-conveyor-sequence" key={`${variant}-${copy}`}>
+        {clients.map((client) => <div className={`client-logo-card client-logo-card-${client.key}`} key={`${client.key}-${copy}`}>
+          <ClientLogo client={client} />
+        </div>)}
+      </div>)}
+    </div>
+  </div>;
+}
+
 const reveal = { hidden: { opacity: 0, y: 22 }, visible: { opacity: 1, y: 0 } };
 const revealTransition = { duration: 0.65, ease: [0.16, 1, 0.3, 1] };
 
@@ -834,24 +846,20 @@ function WorkCarousel() {
 }
 
 function ClientsPanel() {
-  const reduceMotion = useReducedMotion();
-
   return <section id="about" className="section-pad clients-section" aria-labelledby="clients-title"><div className="page-shell">
     <Reveal className="clients-heading"><h2 id="clients-title">Clients</h2></Reveal>
-    <ul className="clients-logo-wall">
-      {clients.map((client, index) => <motion.li
-        className={`client-logo-tile client-logo-tile-${client.key}`}
-        key={client.key}
-        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: .18 }}
-        transition={{ duration: .58, delay: index * .055, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div role="img" aria-label={`${client.name}${client.placeholder ? ' temporary logo placeholder' : ' logo'}`}>
-          <ClientLogo client={client} />
+    <Reveal delay={.06}>
+      <div className="client-conveyor" role="img" aria-label={`Client logos: ${clients.map((client) => client.name).join(', ')}`}>
+        <div className="client-conveyor-belt" aria-hidden="true" />
+        <ClientConveyorTrack variant="mono" />
+        <ClientConveyorTrack variant="color" />
+        <div className="client-scanner" aria-hidden="true">
+          <span className="client-scanner-head"><i /></span>
+          <span className="client-scanner-frame" />
+          <span className="client-scanner-beam"><i /></span>
         </div>
-      </motion.li>)}
-    </ul>
+      </div>
+    </Reveal>
   </div></section>;
 }
 

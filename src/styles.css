@@ -241,72 +241,93 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .work-card-copy p { max-width: 42ch; display: -webkit-box; overflow: hidden; font-size: .84rem; line-height: 1.55; text-wrap: pretty; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 .work-card-meta { min-width: 110px; display: grid; justify-items: end; align-content: start; gap: 4px; color: var(--muted); font-size: .7rem; text-align: right; }
 
-.clients-heading { margin-bottom: clamp(24px, 3vw, 38px); }
+.clients-section { padding-block: clamp(70px, 6.5vw, 92px); }
+.clients-heading { margin-bottom: 18px; }
 .clients-heading h2 { color: var(--muted); font-size: .72rem; font-weight: 720; line-height: 1; letter-spacing: .12em; text-transform: uppercase; }
-.clients-logo-wall { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-flow: dense; gap: 12px; margin: 0; padding: 0; list-style: none; }
-.client-logo-tile { position: relative; min-width: 0; min-height: 232px; overflow: hidden; border-radius: var(--radius-card); transform: translateZ(0); transition: transform .45s cubic-bezier(.16,1,.3,1), filter .35s ease; }
-.client-logo-tile > div { width: 100%; height: 100%; display: grid; place-items: center; padding: clamp(28px, 3.8vw, 58px); }
-.client-logo-tile-hailong { grid-column: span 7; grid-row: span 2; min-height: 476px; background: #173b31; color: #f4f0e6; }
-.client-logo-tile-taiyo { grid-column: span 5; background: #dce8ed; color: #142f48; }
-.client-logo-tile-huaxinsheng { grid-column: span 5; background: #e6e2d9; color: #183d60; }
-.client-logo-tile-viettravel { grid-column: span 4; background: #12689c; color: #f5f1e9; }
-.client-logo-tile-mori { grid-column: span 4; background: #cec8b9; color: #20201e; }
-.client-logo-tile-northline { grid-column: span 4; background: #292a28; color: #f2eee5; }
+.client-conveyor { --scanner-aperture: 204px; --scanner-half: 102px; --scanner-line-travel: 116px; position: relative; height: 286px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-card); background: color-mix(in srgb, var(--paper-elevated) 82%, var(--soft)); contain: layout paint; isolation: isolate; }
+.client-conveyor::before { position: absolute; inset: 0; z-index: 1; content: ''; pointer-events: none; background-image: linear-gradient(90deg, color-mix(in srgb, var(--paper) 94%, transparent), transparent 12%, transparent 88%, color-mix(in srgb, var(--paper) 94%, transparent)); }
+.client-conveyor-belt { position: absolute; right: 0; bottom: 0; left: 0; z-index: 1; height: 82px; border-top: 7px solid #353633; border-bottom: 10px solid #353633; background: repeating-linear-gradient(90deg, #565752 0 3px, #3d3e3a 3px 34px, #282a28 34px 36px); box-shadow: inset 0 7px 0 rgba(244,241,233,.08); }
+.client-conveyor-belt::after { position: absolute; right: 0; bottom: 14px; left: 0; height: 2px; content: ''; background: color-mix(in srgb, var(--accent) 62%, #353633); opacity: .74; }
+.client-conveyor-layer { position: absolute; inset: 48px 0 66px; z-index: 2; display: flex; align-items: center; overflow: hidden; }
+.client-conveyor-layer-color { z-index: 3; clip-path: inset(0 calc(50% - var(--scanner-half))); }
+.client-conveyor-track { width: max-content; display: flex; flex: none; will-change: transform; animation: client-conveyor-loop 26s linear infinite; }
+.client-conveyor-sequence { display: flex; flex: none; gap: 16px; padding-right: 16px; }
+.client-logo-card { width: 218px; height: 128px; flex: none; display: grid; place-items: center; padding: 18px; overflow: hidden; border: 1px solid color-mix(in srgb, #2c2d2b 15%, transparent); border-radius: 14px; background: #ebe9e2; box-shadow: 0 14px 26px -24px rgba(35,36,33,.55); }
 .client-logo { max-width: 100%; display: flex; align-items: center; justify-content: center; }
 .client-logo strong, .client-logo small { display: block; color: inherit; }
-.client-logo-tile:hover { z-index: 1; transform: translateY(-5px); filter: saturate(1.08); }
-.client-logo-tile:hover .client-logo { transform: scale(1.025); }
-.client-logo { transition: transform .55s cubic-bezier(.16,1,.3,1); }
 
-.client-logo-hailong { gap: clamp(22px, 3vw, 42px); }
-.hailong-mark { width: clamp(82px, 9vw, 132px); aspect-ratio: 1; display: flex; align-items: flex-end; justify-content: center; gap: 7%; transform: skewY(-8deg); }
+.client-logo-hailong { gap: 13px; }
+.hailong-mark { width: 48px; aspect-ratio: 1; display: flex; align-items: flex-end; justify-content: center; gap: 7%; transform: skewY(-8deg); }
 .hailong-mark i { width: 27%; border-radius: 2px 2px 0 0; background: #e4744b; }
 .hailong-mark i:nth-child(1) { height: 54%; }
 .hailong-mark i:nth-child(2) { height: 100%; }
 .hailong-mark i:nth-child(3) { height: 72%; }
-.hailong-wordmark { display: grid; gap: 8px; }
-.hailong-wordmark strong { font-family: 'Space Grotesk Variable', sans-serif; font-size: clamp(2.2rem, 5vw, 5.35rem); font-weight: 680; line-height: .82; letter-spacing: -.075em; }
-.hailong-wordmark small { color: #c9d4ce; font-size: clamp(.56rem, .8vw, .75rem); font-weight: 700; letter-spacing: .34em; }
+.hailong-wordmark { display: grid; gap: 5px; }
+.hailong-wordmark strong { font-family: 'Space Grotesk Variable', sans-serif; font-size: 1.4rem; font-weight: 680; line-height: .82; letter-spacing: -.075em; }
+.hailong-wordmark small { color: #567267; font-size: .42rem; font-weight: 700; letter-spacing: .26em; }
 
-.client-logo-taiyo { gap: clamp(17px, 2vw, 28px); }
-.taiyo-mark { position: relative; width: clamp(54px, 6vw, 76px); aspect-ratio: 1; display: grid; place-items: center; border: 2px solid currentColor; border-radius: 50%; }
+.client-logo-taiyo { gap: 14px; }
+.taiyo-mark { position: relative; width: 43px; aspect-ratio: 1; display: grid; place-items: center; border: 2px solid currentColor; border-radius: 50%; }
 .taiyo-mark::before, .taiyo-mark::after { position: absolute; width: 132%; height: 2px; content: ''; background: #d65345; transform: rotate(34deg); }
 .taiyo-mark::after { transform: rotate(-34deg); }
 .taiyo-mark i { width: 31%; aspect-ratio: 1; border-radius: 50%; background: #d65345; }
 .taiyo-wordmark { display: grid; gap: 4px; }
-.taiyo-wordmark strong { font-size: clamp(2rem, 3.3vw, 3.45rem); font-weight: 760; line-height: .82; letter-spacing: -.06em; }
+.taiyo-wordmark strong { font-size: 1.45rem; font-weight: 760; line-height: .82; letter-spacing: -.06em; }
 .taiyo-wordmark small { color: #496277; font-size: .56rem; font-weight: 750; letter-spacing: .42em; }
 
-.client-logo-huaxinsheng { gap: clamp(18px, 2.2vw, 32px); }
-.huaxinsheng-mark { width: clamp(58px, 6vw, 82px); aspect-ratio: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8%; transform: rotate(45deg); }
+.client-logo-huaxinsheng { gap: 15px; }
+.huaxinsheng-mark { width: 43px; aspect-ratio: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8%; transform: rotate(45deg); }
 .huaxinsheng-mark i { border-radius: 3px; background: currentColor; }
 .huaxinsheng-mark i:nth-child(2) { transform: translateY(22%); background: #d65d43; }
 .huaxinsheng-mark i:nth-child(3) { transform: translateY(-22%); }
 .huaxinsheng-wordmark { display: grid; gap: 3px; }
-.huaxinsheng-wordmark strong { font-size: clamp(2.25rem, 3.6vw, 3.7rem); font-weight: 790; line-height: .8; letter-spacing: -.08em; }
-.huaxinsheng-wordmark small { color: #4d6680; font-size: clamp(.48rem, .65vw, .62rem); font-weight: 700; letter-spacing: .23em; }
+.huaxinsheng-wordmark strong { font-size: 1.55rem; font-weight: 790; line-height: .8; letter-spacing: -.08em; }
+.huaxinsheng-wordmark small { color: #4d6680; font-size: .43rem; font-weight: 700; letter-spacing: .2em; }
 
-.client-logo-viettravel { gap: clamp(14px, 2vw, 24px); }
-.viettravel-mark { position: relative; width: clamp(48px, 5vw, 68px); height: clamp(56px, 6vw, 78px); }
+.client-logo-viettravel { gap: 14px; }
+.viettravel-mark { position: relative; width: 34px; height: 44px; }
 .viettravel-mark i { position: absolute; inset-block: 0; width: 50%; background: #f4efe3; clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%); }
 .viettravel-mark i:first-child { left: 0; transform: rotate(-12deg); transform-origin: bottom right; }
 .viettravel-mark i:last-child { right: 0; background: #ef7d4e; transform: rotate(12deg); transform-origin: bottom left; }
-.client-logo-viettravel strong { font-family: 'Playfair Display Variable', Georgia, serif; font-size: clamp(1.8rem, 3.1vw, 3.15rem); font-weight: 650; line-height: 1; letter-spacing: -.055em; }
-.client-logo-viettravel strong span { color: #f2b164; }
+.client-logo-viettravel strong { font-family: 'Playfair Display Variable', Georgia, serif; font-size: 1.35rem; font-weight: 650; line-height: 1; letter-spacing: -.055em; }
+.client-logo-viettravel strong span { color: #e6774a; }
 
-.client-logo-mori { gap: clamp(15px, 2vw, 25px); }
-.mori-mark { width: clamp(58px, 6vw, 80px); aspect-ratio: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; transform: rotate(-8deg); }
+.client-logo-mori { gap: 14px; }
+.mori-mark { width: 44px; aspect-ratio: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; transform: rotate(-8deg); }
 .mori-mark i { border: 2px solid currentColor; border-radius: 50% 50% 8% 50%; }
 .mori-mark i:nth-child(2) { border-radius: 50% 50% 50% 8%; }
 .mori-mark i:nth-child(3) { grid-column: 1 / -1; width: 46%; justify-self: center; border-radius: 8% 50% 50%; }
 .client-logo-mori > span:last-child { display: grid; gap: 4px; }
-.client-logo-mori strong { font-size: clamp(1.9rem, 3.2vw, 3.25rem); font-weight: 760; line-height: .84; letter-spacing: .02em; }
+.client-logo-mori strong { font-size: 1.45rem; font-weight: 760; line-height: .84; letter-spacing: .02em; }
 .client-logo-mori small { font-size: .52rem; font-weight: 750; letter-spacing: .42em; }
 
 .client-logo-northline { display: grid; justify-items: start; gap: 12px; }
-.northline-mark { font-size: clamp(3.3rem, 5.8vw, 5.6rem); font-weight: 300; line-height: .7; letter-spacing: -.13em; }
+.northline-mark { font-size: 2.7rem; font-weight: 300; line-height: .7; letter-spacing: -.13em; }
 .northline-mark span { color: #e4744b; font-weight: 650; }
-.client-logo-northline strong { font-size: clamp(.75rem, 1.15vw, 1.05rem); font-weight: 650; letter-spacing: .22em; }
+.client-logo-northline strong { font-size: .68rem; font-weight: 650; letter-spacing: .22em; }
+
+.client-conveyor-layer-mono .client-logo-card { color: #777972; }
+.client-conveyor-layer-mono .client-logo small, .client-conveyor-layer-mono .client-logo-viettravel strong span, .client-conveyor-layer-mono .northline-mark span { color: inherit; }
+.client-conveyor-layer-mono .hailong-mark i, .client-conveyor-layer-mono .taiyo-mark::before, .client-conveyor-layer-mono .taiyo-mark::after, .client-conveyor-layer-mono .taiyo-mark i, .client-conveyor-layer-mono .huaxinsheng-mark i, .client-conveyor-layer-mono .huaxinsheng-mark i:nth-child(2), .client-conveyor-layer-mono .viettravel-mark i { background: currentColor; }
+.client-conveyor-layer-color .client-logo-card-hailong { color: #173b31; }
+.client-conveyor-layer-color .client-logo-card-taiyo { color: #143752; }
+.client-conveyor-layer-color .client-logo-card-huaxinsheng { color: #173f64; }
+.client-conveyor-layer-color .client-logo-card-viettravel { color: #176c9c; }
+.client-conveyor-layer-color .client-logo-card-mori { color: #34322d; }
+.client-conveyor-layer-color .client-logo-card-northline { color: #242525; }
+.client-conveyor-layer-color .viettravel-mark i:first-child { background: #176c9c; }
+
+.client-scanner { position: absolute; top: 16px; bottom: 16px; left: 50%; z-index: 5; width: 230px; pointer-events: none; transform: translateX(-50%); }
+.client-scanner-head { position: absolute; top: 0; right: -2px; left: -2px; z-index: 3; height: 43px; border: 1px solid rgba(244,241,233,.12); border-radius: 10px 10px 5px 5px; background: #2f302e; box-shadow: inset 0 1px 0 rgba(244,241,233,.1), 0 12px 18px -17px rgba(35,36,33,.76); }
+.client-scanner-head::before { position: absolute; top: 10px; left: 50%; width: 74px; height: 4px; border-radius: 2px; content: ''; background: #161715; transform: translateX(-50%); }
+.client-scanner-head i { position: absolute; top: 11px; left: 50%; width: 28px; height: 2px; border-radius: 2px; background: var(--accent); opacity: .88; transform: translateX(-50%); }
+.client-scanner-frame { position: absolute; inset: 38px 2px 38px; z-index: 2; border-right: 7px solid #30312f; border-left: 7px solid #30312f; border-radius: 4px; box-shadow: inset 5px 0 0 rgba(244,241,233,.05), inset -5px 0 0 rgba(244,241,233,.05); }
+.client-scanner-beam { position: absolute; top: 45px; right: 13px; bottom: 46px; left: 13px; z-index: 1; overflow: hidden; border-right: 1px solid color-mix(in srgb, var(--accent) 46%, transparent); border-left: 1px solid color-mix(in srgb, var(--accent) 46%, transparent); background: color-mix(in srgb, var(--accent) 5%, transparent); }
+.client-scanner-beam i { position: absolute; top: 18px; right: 8px; left: 8px; height: 2px; background: color-mix(in srgb, var(--accent) 74%, #f2eee5); opacity: .78; box-shadow: 0 6px 15px color-mix(in srgb, var(--accent) 18%, transparent); animation: client-scanner-line 2.3s cubic-bezier(.45,0,.55,1) infinite alternate; }
+.client-conveyor:is(:hover, :focus-within) .client-conveyor-track { animation-play-state: paused; }
+
+@keyframes client-conveyor-loop { to { transform: translate3d(-50%, 0, 0); } }
+@keyframes client-scanner-line { to { transform: translate3d(0, var(--scanner-line-travel), 0); } }
 
 .skill-blocks { position: relative; isolation: isolate; overflow: hidden; border-top: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 93%, var(--accent) 7%); transition: background .35s ease; }
 .skill-blocks::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='460' viewBox='0 0 520 460'%3E%3Cpath d='M-30 92C70 24 130 25 213 87s131 66 242-22' fill='none' stroke='%23111211' stroke-opacity='.06' stroke-width='1'/%3E%3Cpath d='M-30 124C70 56 130 57 213 119s131 66 242-22' fill='none' stroke='%23111211' stroke-opacity='.04' stroke-width='1'/%3E%3Cpath d='M60 440c42-74 46-125 2-185S12 137 75 0' fill='none' stroke='%23c9573e' stroke-opacity='.08' stroke-width='1'/%3E%3C/svg%3E"); background-size: 520px 460px; }
@@ -791,10 +812,6 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .nav-link-simple { display: none; }
   .hero { min-height: auto; padding-top: 128px; }
   .skill-page-hero-grid { grid-template-columns: 1fr; gap: 52px; }
-  .clients-logo-wall { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-  .client-logo-tile-hailong { grid-column: span 6; grid-row: auto; min-height: 360px; }
-  .client-logo-tile-taiyo, .client-logo-tile-huaxinsheng { grid-column: span 3; }
-  .client-logo-tile-viettravel, .client-logo-tile-mori, .client-logo-tile-northline { grid-column: span 2; }
   .work-gallery { grid-template-columns: 1fr; gap: 54px; }
   .work-card-image { aspect-ratio: 16 / 9; }
   .skill-compact-core-link { min-height: 150px; grid-template-columns: minmax(210px, .8fr) minmax(0, 1.2fr); gap: 24px; }
@@ -811,9 +828,17 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 }
 
 @media (max-width: 760px) {
-  .clients-logo-wall { grid-template-columns: 1fr; gap: 10px; }
-  .client-logo-tile, .client-logo-tile-hailong, .client-logo-tile-taiyo, .client-logo-tile-huaxinsheng, .client-logo-tile-viettravel, .client-logo-tile-mori, .client-logo-tile-northline { grid-column: auto; grid-row: auto; min-height: 196px; }
-  .client-logo-tile-hailong { min-height: 310px; }
+  .client-conveyor { --scanner-aperture: 166px; --scanner-half: 83px; --scanner-line-travel: 96px; height: 252px; }
+  .client-conveyor-layer { inset: 40px 0 58px; }
+  .client-conveyor-track { animation-duration: 22s; }
+  .client-conveyor-sequence { gap: 12px; padding-right: 12px; }
+  .client-logo-card { width: 188px; height: 112px; padding: 12px; }
+  .client-logo-card .client-logo { transform: scale(.9); }
+  .client-conveyor-belt { height: 72px; }
+  .client-scanner { top: 13px; bottom: 13px; width: 188px; }
+  .client-scanner-head { height: 39px; }
+  .client-scanner-frame { inset: 34px 2px 34px; }
+  .client-scanner-beam { top: 41px; bottom: 42px; }
 }
 
 @media (max-width: 640px) {
@@ -863,10 +888,8 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .work-card-image { aspect-ratio: 4 / 3; }
   .work-card-copy { grid-template-columns: 1fr; gap: 16px; }
   .work-card-meta { grid-template-columns: 1fr; justify-items: start; text-align: left; }
-  .clients-heading { margin-bottom: 20px; }
-  .client-logo-tile > div { padding: 28px 24px; }
-  .client-logo-hailong { flex-direction: column; gap: 24px; text-align: center; }
-  .hailong-wordmark small { letter-spacing: .25em; }
+  .clients-section { padding: 68px 0 74px; }
+  .clients-heading { margin-bottom: 16px; }
   .skills-compact-board { gap: 8px; }
   .skills-compact-core { gap: 10px; }
   .skill-compact-core-link { height: 150px; min-height: 0; grid-template-columns: 1fr; grid-template-rows: auto 56px; gap: 4px; padding: 17px 46px 9px 18px; border-radius: 12px; }
@@ -958,6 +981,8 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .hero-mobile-flow { animation: none !important; transform: none; }
+  .client-conveyor-track { animation: none !important; transform: none; will-change: auto; }
+  .client-scanner-beam i { display: none; }
   .identity-terminal-line { width: auto; border-right: 0; animation: none !important; }
   .ready-type span { opacity: 1; animation: none !important; transform: none; }
   .ready-fx { display: none; }
