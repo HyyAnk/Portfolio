@@ -1,2 +1,14 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Keep source files consistent across Windows and CI.
+* text=auto eol=lf
+
+# Binary assets must never receive line-ending conversion.
+*.avif binary
+*.gif binary
+*.ico binary
+*.jpeg binary
+*.jpg binary
+*.png binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.pdf binary

@@ -301,9 +301,9 @@ const heroCarouselImages = [
   { image: videoImage, alt: 'Video editing and title design study' },
 ];
 
-const carouselFolderAssets = import.meta.glob('./assets/Carousel/*.{png,jpg,jpeg,jpb,gif,webp,avif,svg}', { eager: true, import: 'default', query: '?url' });
+const carouselFolderAssets = import.meta.glob('./assets/Carousel/*.{png,jpg,jpeg,gif,webp,avif,svg}', { eager: true, import: 'default', query: '?url' });
 const customCarouselByIndex = Object.entries(carouselFolderAssets).reduce((result, [filePath, imageUrl]) => {
-  const match = filePath.match(/(?:^|[\\/])([1-7])\.(?:png|jpe?g|jpb|gif|webp|avif|svg)$/i);
+  const match = filePath.match(/(?:^|[\\/])([1-7])\.(?:png|jpe?g|gif|webp|avif|svg)$/i);
   if (match) result[Number(match[1])] = imageUrl;
   return result;
 }, {});

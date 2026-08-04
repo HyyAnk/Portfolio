@@ -1,11 +1,22 @@
 {
-  "name": "direction-c-portfolio",
+  "name": "hyyank-portfolio",
   "private": true,
   "version": "1.0.0",
+  "description": "HyyAnk's multidisciplinary design and development portfolio.",
+  "license": "UNLICENSED",
+  "homepage": "https://portfolio-navy-iota-86.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HyyAnk/Portfolio.git"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/generate-seo-pages.mjs",
+    "check": "npm run build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -17,7 +28,7 @@
     "motion": "^12.23.12",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.7.1",
+    "react-router-dom": "7.18.2",
     "simple-icons": "^16.27.1",
     "three": "^0.185.1"
   },

@@ -14,4 +14,4 @@ Thư mục này chỉ chứa 7 ảnh WebP đang được website sử dụng:
 
 Website tự động nhận diện asset từ `1` đến `7`. Mỗi basename chỉ được giữ một file để tránh lựa chọn không xác định trong quá trình build.
 
-Các định dạng được loader hỗ trợ: SVG, PNG, JPG, JPEG, JPB, GIF, WebP và AVIF.
+Các định dạng được loader hỗ trợ: SVG, PNG, JPG, JPEG, GIF, WebP và AVIF.
