@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, Pause, Play } from '@phosphor-icons/react';
+import { AirplaneTilt, ArrowLeft, ArrowUpRight, Pause, Play } from '@phosphor-icons/react';
 import './showcase-cases.css';
 
 import vunCover from './assets/case-studies/vun-cover.webp';
@@ -322,29 +322,85 @@ function TaiyoFormatPreview() {
 }
 
 function TaiyoEnvelopeMotion() {
-  return <div className="taiyo-motion-reel" role="group" aria-label="Taiyo Tourist envelope production story from original artwork to travel document handover">
-    <div className="taiyo-motion-viewport" aria-hidden="true">
-      <div className="taiyo-motion-scene is-artwork">
-        <figure className="taiyo-motion-artboard"><img src={taiyoArtboard02} alt=""/></figure>
-        <span className="taiyo-motion-paper-edge"/>
-      </div>
-      <div className="taiyo-motion-scene is-details">
-        <figure className="taiyo-motion-fragment is-plane"><img src={taiyoPlaneDetail} alt=""/></figure>
-        <figure className="taiyo-motion-fragment is-address"><img src={taiyoAddressDetail} alt=""/></figure>
-        <figure className="taiyo-motion-fragment is-wave"><img src={taiyoWaveDetail} alt=""/></figure>
-      </div>
-      <div className="taiyo-motion-scene is-handover"><img src={taiyoHandover} alt=""/></div>
-      <div className="taiyo-motion-wipe"><i/><i/><i/></div>
+  return <div className="taiyo-route-reel" role="group" aria-label="Taiyo Tourist travel document route from confirmed itinerary to passenger handover">
+    <div className="taiyo-route-heading">
+      <span>Travel document journey</span>
+      <strong>Ready for departure</strong>
     </div>
-    <div className="taiyo-motion-rail">
-      <span>Envelope application</span>
-      <strong>From artwork to handover</strong>
-      <div className="taiyo-motion-chapters">
-        <article className="is-artwork"><b>Artwork</b><small>Vector layout / three formats</small></article>
-        <article className="is-production"><b>Production</b><small>Scored / folded / packed</small></article>
-        <article className="is-handover"><b>Handover</b><small>Itinerary / ticket / passport</small></article>
-      </div>
+
+    <figure className="taiyo-route-handover" aria-hidden="true">
+      <img src={taiyoHandover} alt=""/>
+      <figcaption><span>Taiyo Tourist</span><b>Travel pack handover</b></figcaption>
+    </figure>
+
+    <svg className="taiyo-route-map is-desktop" viewBox="0 0 1400 720" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <defs>
+        <linearGradient id="taiyo-route-fade" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#69c9ed"/>
+          <stop offset="0.72" stopColor="#f8fbfd"/>
+          <stop offset="1" stopColor="#f2c84b"/>
+        </linearGradient>
+        <path id="taiyo-flight-route" pathLength="1" d="M 105 520 C 275 558 328 424 456 397 C 592 368 632 463 724 425 C 858 370 874 274 1036 245 C 1156 223 1218 295 1314 202"/>
+      </defs>
+
+      <path className="taiyo-route-echo" d="M 52 575 C 240 610 332 494 468 466 C 612 437 665 526 780 474 C 914 414 950 332 1082 310"/>
+      <use className="taiyo-route-guide" href="#taiyo-flight-route"/>
+      <use className="taiyo-route-progress" href="#taiyo-flight-route" pathLength="1"/>
+      <use className="taiyo-route-signal" href="#taiyo-flight-route" pathLength="1"/>
+
+      <g className="taiyo-route-node is-booking" transform="translate(105 520)">
+        <circle className="taiyo-route-node-ring" r="18"/>
+        <circle className="taiyo-route-node-core" r="5"/>
+      </g>
+      <g className="taiyo-route-node is-documents" transform="translate(724 425)">
+        <circle className="taiyo-route-node-ring" r="18"/>
+        <circle className="taiyo-route-node-core" r="5"/>
+      </g>
+      <g className="taiyo-route-node is-handover" transform="translate(1314 202)">
+        <circle className="taiyo-route-node-ring" r="20"/>
+        <circle className="taiyo-route-node-core" r="6"/>
+      </g>
+
+      <g className="taiyo-route-aircraft">
+        <circle className="taiyo-route-aircraft-halo" r="34"/>
+        <foreignObject x="-27" y="-27" width="54" height="54">
+          <AirplaneTilt className="taiyo-route-aircraft-icon" size={54} weight="fill"/>
+        </foreignObject>
+        <animateMotion dur="14s" repeatCount="indefinite" rotate="auto" keyPoints="0;0;0.48;0.48;1;1" keyTimes="0;0.08;0.34;0.43;0.77;1" calcMode="linear">
+          <mpath href="#taiyo-flight-route"/>
+        </animateMotion>
+      </g>
+      <g className="taiyo-route-aircraft-static" transform="translate(1314 202) rotate(-16)">
+        <foreignObject x="-24" y="-24" width="48" height="48">
+          <AirplaneTilt size={48} weight="fill"/>
+        </foreignObject>
+      </g>
+    </svg>
+
+    <svg className="taiyo-route-map is-mobile" viewBox="0 0 420 720" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <defs><path id="taiyo-flight-route-mobile" pathLength="1" d="M 36 480 C 126 524 174 411 228 368 C 287 321 314 222 382 166"/></defs>
+      <path className="taiyo-route-echo" d="M 12 536 C 122 570 185 474 246 428 C 306 384 347 292 410 244"/>
+      <use className="taiyo-route-guide" href="#taiyo-flight-route-mobile"/>
+      <use className="taiyo-route-progress" href="#taiyo-flight-route-mobile"/>
+      <use className="taiyo-route-signal" href="#taiyo-flight-route-mobile"/>
+      <g className="taiyo-route-node is-booking" transform="translate(36 480)"><circle className="taiyo-route-node-ring" r="15"/><circle className="taiyo-route-node-core" r="5"/></g>
+      <g className="taiyo-route-node is-documents" transform="translate(228 368)"><circle className="taiyo-route-node-ring" r="15"/><circle className="taiyo-route-node-core" r="5"/></g>
+      <g className="taiyo-route-node is-handover" transform="translate(382 166)"><circle className="taiyo-route-node-ring" r="17"/><circle className="taiyo-route-node-core" r="6"/></g>
+      <g className="taiyo-route-aircraft">
+        <circle className="taiyo-route-aircraft-halo" r="28"/>
+        <foreignObject x="-23" y="-23" width="46" height="46"><AirplaneTilt className="taiyo-route-aircraft-icon" size={46} weight="fill"/></foreignObject>
+        <animateMotion dur="14s" repeatCount="indefinite" rotate="auto" keyPoints="0;0;0.55;0.55;1;1" keyTimes="0;0.08;0.34;0.43;0.77;1" calcMode="linear"><mpath href="#taiyo-flight-route-mobile"/></animateMotion>
+      </g>
+      <g className="taiyo-route-aircraft-static" transform="translate(382 166) rotate(-28)"><foreignObject x="-21" y="-21" width="42" height="42"><AirplaneTilt size={42} weight="fill"/></foreignObject></g>
+    </svg>
+
+    <div className="taiyo-route-stops">
+      <article className="is-booking"><span>Booking</span><b>Itinerary confirmed</b></article>
+      <article className="is-documents"><span>Travel documents</span><b>Ticket and passport packed</b></article>
+      <article className="is-handover"><span>Departure</span><b>Envelope handed over</b></article>
     </div>
+
+    <div className="taiyo-route-footer"><span>One journey</span><i/><span>One document system</span></div>
   </div>;
 }
 
