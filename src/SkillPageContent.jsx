@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import {
-  ArrowsLeftRight, ArrowUpRight, Browser, CaretDown, CheckCircle,
+  ArrowUpRight, Browser, CheckCircle,
   Code, Cube, CursorClick, Devices, Fingerprint,
   FlowArrow, FrameCorners, LinkSimple,
-  LockKey, PlugsConnected,
+  PlugsConnected,
   Scissors, SlidersHorizontal, SpeakerHigh,
   TerminalWindow, TextAa, TextAlignCenter, TextAlignLeft, Wallet, Warning,
-  WarningCircle, Waveform, WifiSlash, XCircle,
+  WarningCircle, Waveform, XCircle,
 } from '@phosphor-icons/react';
 
 import videoSequence from './assets/skills/video-sequence.webp';
@@ -16,7 +16,6 @@ import videoKeyVisual from './assets/skills/video-keyvisual.webp';
 import webKeyVisual from './assets/skills/web-keyvisual.webp';
 import automationKeyVisual from './assets/skills/automation-keyvisual.webp';
 import automationWorkflowVisual from './assets/generated/work-automation.webp';
-import blockchainKeyVisual from './assets/skills/blockchain-keyvisual.webp';
 import vunPackaging from './assets/case-studies/vun-packaging.webp';
 import vunSpace from './assets/case-studies/vun-space.webp';
 import vunDigital from './assets/case-studies/vun-digital.webp';
@@ -30,10 +29,11 @@ import hxsContents from './assets/case-studies/hxs-02.webp';
 import hxsProduct from './assets/case-studies/hxs-05.webp';
 import hxsEngineering from './assets/case-studies/hxs-07.webp';
 import hxsProjects from './assets/case-studies/hxs-12.webp';
-import relayCover from './assets/case-studies/relay-cover.webp';
-import relayEntry from './assets/case-studies/relay-entry.webp';
-import relayKit from './assets/case-studies/relay-kit.webp';
-import relaySpace from './assets/case-studies/relay-space.webp';
+import attestCover from './assets/case-studies/attest-cover.webp';
+import attestKit from './assets/case-studies/attest-kit.webp';
+import attestMaker from './assets/case-studies/attest-maker.webp';
+import attestScan from './assets/case-studies/attest-scan.webp';
+import attestTransfer from './assets/case-studies/attest-transfer.webp';
 import { withoutTrailingPeriod } from './text.js';
 import './skill-showcase.css';
 import './ui-showcase-v2.css';
@@ -641,158 +641,164 @@ function AutomationShowcase({ Reveal }) {
   </article>;
 }
 
-function BlockchainHero({ Reveal }) {
-  return <section className="bc-hero">
-    <div className="page-shell bc-hero-layout">
-      <Reveal className="bc-hero-copy"><span className="bc-kicker">Blockchain integration</span><h1>From ticket to gate</h1><p>Verified ownership, transfer and capped resale translated into event access people can use</p><ArrowLink to="#wallet-flow">Follow the ticket</ArrowLink><dl className="bc-hero-facts"><div><dt>Case</dt><dd>RELAY event ticket</dd></div><div><dt>Event</dt><dd>HAZE / 04</dd></div><div><dt>Registry</dt><dd>EVM testnet</dd></div><div><dt>Ticket</dt><dd>RL-26-0421</dd></div></dl></Reveal>
-      <Reveal className="bc-hero-product" delay={0.08}><div className="bc-product-shell" aria-label="RELAY verified event ticket proof"><header><div><span>RELAY</span><strong>Verified event ticket</strong></div><b>READY</b></header><div className="bc-product-overview"><article><span>Event</span><strong>HAZE / 04</strong><small>Ticket RL-26-0421</small></article><article><span>Current state</span><strong>Ready for entry</strong><small>Resale cap enforced</small></article></div><div className="bc-product-progress"><div className="is-done"><span>01</span><strong>Issued</strong><small>Face value recorded</small></div><div className="is-done"><span>02</span><strong>Transferred</strong><small>Holder verified</small></div><div className="is-current"><span>03</span><strong>Resold</strong><small>Cap enforced</small></div><div><span>04</span><strong>Entry</strong><small>One-time scan</small></div></div><footer><div><span>Latest event</span><code>ResaleSettled</code></div><strong><i />TICKET ACTIVE</strong></footer></div></Reveal>
-    </div>
-  </section>;
-}
+const blockchainLayers = [
+  { icon: Fingerprint, label: 'Physical anchor', value: 'NFC UID' },
+  { icon: PlugsConnected, label: 'Typed consent', value: 'EIP-712' },
+  { icon: Cube, label: 'Ownership', value: 'ERC-721' },
+  { icon: LinkSimple, label: 'Metadata', value: 'IPFS CID' },
+  { icon: Wallet, label: 'Controller', value: 'Owner wallet' },
+];
 
-const walletStates = {
+const blockchainSurfaces = [
+  { image: attestMaker, label: '01 / Bind', title: 'Object + NFC anchor', alt: 'Maker attaching an NFC anchor to a collectible chair in the studio', className: 'is-wide' },
+  { image: attestKit, label: '02 / Carry', title: 'Authentication kit', alt: 'ATTEST authentication kit with NFC cards, packaging and a mobile device' },
+  { image: attestScan, label: '03 / Verify', title: 'Tap at the object', alt: 'Collector scanning an NFC anchor beside a collectible chair in a gallery' },
+];
+
+const blockchainTransferStates = {
   connect: {
-    label: 'Open', icon: PlugsConnected, heading: 'Open the verified ticket',
-    copy: 'The public ticket resolves before any transfer or resale action', button: 'Review ticket', next: 'review',
-    facts: [['Event', 'HAZE / 04'], ['Ticket', 'RL-26-0421'], ['Access', 'Gate 02']],
+    label: 'Anchor',
+    icon: Fingerprint,
+    eyebrow: 'NFC read',
+    heading: 'Resolve the object',
+    action: 'Verify signature',
+    next: 'sign',
+    facts: [['UID', '04:A7:91:2C'], ['Token', '#204'], ['Status', 'Bound']],
   },
-  review: {
-    label: 'Review', icon: Fingerprint, heading: 'Review holder and price',
-    copy: 'Show the recipient, ticket and price cap before requesting approval', button: 'Approve transfer', next: 'pending',
-    facts: [['Recipient', 'Mina Lee'], ['Price cap', '748,000 ₫'], ['Registry', '0x84C2...11F0']],
+  sign: {
+    label: 'Sign',
+    icon: PlugsConnected,
+    eyebrow: 'EIP-712',
+    heading: 'Read the consent',
+    action: 'Submit contract call',
+    next: 'contract',
+    facts: [['Domain', 'ATTEST'], ['Chain', 'Sepolia'], ['Intent', 'Transfer']],
   },
-  pending: {
-    label: 'Registry', icon: Cube, heading: 'Pending is not complete',
-    copy: 'Keep both holders and the ticket state visible until finality', button: 'Advance finality', next: 'confirmed',
-    facts: [['Status', 'Included in block'], ['Entry code', 'Still locked'], ['Event', '0x9F31...A8E4']],
+  contract: {
+    label: 'Contract',
+    icon: Cube,
+    eyebrow: 'ERC-721',
+    heading: 'Commit one state change',
+    action: 'Index receipt',
+    next: 'receipt',
+    facts: [['Method', 'safeTransferFrom'], ['Simulation', 'Passed'], ['Event', 'Pending']],
   },
-  confirmed: {
-    label: 'Confirmed', icon: CheckCircle, heading: 'Return the updated ticket',
-    copy: 'State who holds the ticket now and issue a new rotating entry code', button: 'Restart demo', next: 'connect',
-    facts: [['Result', 'Holder updated'], ['Entry code', 'Ready'], ['Receipt', '0x9F31...A8E4']],
+  receipt: {
+    label: 'Receipt',
+    icon: CheckCircle,
+    eyebrow: 'Confirmed',
+    heading: 'Return visible proof',
+    action: 'Restart flow',
+    next: 'connect',
+    facts: [['Event', 'Transfer'], ['Block', '6,184,210'], ['Hash', '0xa91f...0de4']],
   },
 };
 
-const walletStateOrder = ['connect', 'review', 'pending', 'confirmed'];
+const blockchainTransferOrder = ['connect', 'sign', 'contract', 'receipt'];
 
-function BlockchainWalletFlow({ Reveal }) {
-  const [state, setState] = useState('connect');
-  const reduceMotion = useReducedMotion();
-  const active = walletStates[state];
-  const ActiveIcon = active.icon;
-  const activeIndex = walletStateOrder.indexOf(state);
-  return <section id="wallet-flow" className="bc-section bc-wallet-section">
-    <div className="page-shell bc-wallet-layout">
-      <Reveal className="bc-wallet-copy"><Wallet size={34} weight="duotone" aria-hidden="true" /><h2>Transfer states stay separate</h2><p>Ticket, recipient, registry state and confirmation remain visible throughout the flow</p><div className="bc-wallet-steps" aria-label="Ticket transfer steps">{Object.entries(walletStates).map(([key, item]) => <button type="button" key={key} aria-pressed={state === key} onClick={() => setState(key)}>{item.label}</button>)}</div></Reveal>
-      <Reveal className="bc-wallet-demo" delay={0.08}>
-        <header className="bc-wallet-context"><div><span>Ticket action</span><strong>Transfer HAZE / 04</strong></div><dl><div><dt>From</dt><dd>0x72A4...91C2</dd></div><div><dt>Registry</dt><dd>EVM testnet</dd></div><div><dt>Ticket</dt><dd>RL-26-0421</dd></div></dl></header>
-        <div className="bc-wallet-progress" aria-label="Transaction progress">{walletStateOrder.map((key, index) => <div className={index < activeIndex ? 'is-done' : index === activeIndex ? 'is-current' : ''} key={key}><span>{String(index + 1).padStart(2, '0')}</span><strong>{walletStates[key].label}</strong><i /></div>)}</div>
-        <motion.div className={`bc-wallet-card is-${state}`} key={state} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .3 }} aria-live="polite"><ActiveIcon size={32} weight="duotone" /><span>{active.label}</span><strong>{active.heading}</strong><p>{active.copy}</p><dl className="bc-state-facts">{active.facts.map(([term, value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl><button type="button" onClick={() => setState(active.next)}>{active.button}</button></motion.div>
+function BlockchainSkillHero({ Reveal }) {
+  return <section className="bc4-hero">
+    <div className="page-shell bc4-hero-grid">
+      <Reveal className="bc4-hero-copy">
+        <span className="bc4-kicker">Blockchain integration</span>
+        <h1>Proof you can touch</h1>
+        <p>Physical objects connected to signatures, ownership and on-chain receipts</p>
+        <ArrowLink to="#bc4-bridge">See the integration</ArrowLink>
+      </Reveal>
+      <Reveal className="bc4-hero-visual" delay={0.08}>
+        <figure>
+          <img src={attestCover} alt="ATTEST collectible chair with an embedded NFC anchor and mobile product passport" />
+          <div className="bc4-passport-chip"><Fingerprint size={24} weight="duotone" /><span>ARC-01</span><strong>Anchor verified</strong><small>Token #204</small></div>
+        </figure>
       </Reveal>
     </div>
+    <div className="bc4-hero-rail">{blockchainLayers.map((item) => <span key={item.label}><b>{item.value}</b>{item.label}</span>)}</div>
   </section>;
 }
 
-function BlockchainEscrow({ Reveal }) {
-  return <section id="escrow-state" className="bc-section bc-escrow-section"><div className="page-shell"><Reveal className="bc-heading"><h2>The ticket stays readable</h2><p>RELAY keeps issue, transfer, resale and entry explicit throughout one ticket history</p></Reveal><div className="bc-escrow-grid"><Reveal className="bc-escrow-flow"><img src={relayEntry} alt="Venue staff scanning a RELAY digital ticket at entry" loading="lazy" /></Reveal><Reveal className="bc-escrow-evidence" delay={0.08}><span>Ticket RL-26-0421</span><h3>One ticket under explicit records</h3><dl><div><dt>Issued</dt><dd>Organizer records event, access tier and face value</dd></div><div><dt>Transferred</dt><dd>Holder approves the recipient and expiry</dd></div><div><dt>Resold</dt><dd>Marketplace enforces price cap and royalty</dd></div><div><dt>Admitted</dt><dd>Gate scanner confirms one-time entry</dd></div></dl><div className="bc-escrow-boundary"><WarningCircle size={18} weight="fill" aria-hidden="true" /><p><strong>Prototype boundary</strong>Production requires contract audit, organizer governance and load testing</p></div><a href="/work/portfolio-6">View RELAY case study <ArrowUpRight size={17} /></a></Reveal></div></div></section>;
-}
-
-const eventMappings = [
-  { event: 'TicketIssued', parsed: 'event + tier + face value', state: 'ticket = active', message: 'Ticket ready', recovery: 'Expose event and access data' },
-  { event: 'TicketTransferred', parsed: 'ticket + from + to', state: 'holder = updated', message: 'Ticket holder updated', recovery: 'Rotate the entry code' },
-  { event: 'ResaleSettled', parsed: 'price + cap + royalty', state: 'resale = settled', message: 'Verified resale completed', recovery: 'Show price and new holder' },
-  { event: 'EntryConfirmed', parsed: 'ticket + gate + time', state: 'entry = used', message: 'Entry confirmed', recovery: 'Lock the rotating code' },
-];
-
-function BlockchainMapping({ Reveal }) {
-  return <section id="event-mapping" className="bc-section bc-mapping-section"><div className="page-shell"><Reveal className="bc-heading"><LinkSimple size={32} weight="duotone" aria-hidden="true" /><h2>Events become product feedback</h2><p>Each protocol event maps to parsed data, UI state, user language and a recovery rule</p></Reveal><Reveal className="bc-event-table"><header><span>Event</span><span>Parsed data</span><span>UI state</span><span>User message</span><span>Recovery action</span></header>{eventMappings.map((item) => <article key={item.event}><code>{item.event}</code><span>{item.parsed}</span><strong>{item.state}</strong><p>{item.message}</p><b>{item.recovery}</b></article>)}</Reveal></div></section>;
-}
-
-const trustStates = [
-  { title: 'Wrong registry', copy: 'The connected network does not contain this event ticket', action: 'Prepare switch', resultLabel: 'Registry selected', result: 'The target test registry is ready for confirmation', icon: WifiSlash, className: 'is-warning' },
-  { title: 'Transfer rejected', copy: 'No signature was created and the holder did not change', action: 'Review request', resultLabel: 'No state change', result: 'The ticket and recipient remain available before trying again', icon: XCircle, className: 'is-error' },
-  { title: 'Price cap failed', copy: 'The resale request exceeds the organizer limit', action: 'Review cap', resultLabel: 'Price corrected', result: 'The listing now matches the allowed resale range', icon: WarningCircle, className: 'is-error' },
-  { title: 'Entry confirmed', copy: 'The ticket is valid and has not been used at another gate', action: 'Inspect ticket', resultLabel: 'Ticket admitted', result: 'The rotating code is locked after successful entry', icon: CheckCircle, className: 'is-success' },
-];
-
-function BlockchainTrustStates({ Reveal }) {
-  const [expandedState, setExpandedState] = useState(null);
-  const reduceMotion = useReducedMotion();
-  return <section id="trust-states" className="bc-section bc-trust-section"><div className="page-shell"><Reveal className="bc-heading"><LockKey size={32} weight="duotone" aria-hidden="true" /><h2>Trust includes the difficult states</h2><p>Rejection, network mismatch and failure deserve the same care as success</p></Reveal><div className="bc-trust-grid">{trustStates.map((item, index) => { const Icon = item.icon; const isExpanded = expandedState === item.title; return <Reveal className={`bc-trust-card ${item.className}`} key={item.title} delay={index * .05}><div className="bc-trust-icon"><Icon size={34} weight="duotone" aria-hidden="true" /></div><h3>{item.title}</h3><p>{item.copy}</p><button type="button" aria-expanded={isExpanded} onClick={() => setExpandedState(isExpanded ? null : item.title)}>{isExpanded ? 'Close detail' : item.action}<CaretDown size={16} aria-hidden="true" /></button>{isExpanded && <motion.div className="bc-trust-response" initial={reduceMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .25 }} aria-live="polite"><strong>{item.resultLabel}</strong><span>{item.result}</span></motion.div>}</Reveal>; })}</div></div></section>;
-}
-
-function BlockchainTools({ Reveal }) {
-  const layers = [
-    { index: '01', name: 'Ticket resolver', implementation: 'Rotating QR + public ticket route', boundary: 'Public event data first' },
-    { index: '02', name: 'Typed client', implementation: 'viem reads, simulation and write request', boundary: 'No write before simulation' },
-    { index: '03', name: 'Ticket registry', implementation: 'Solidity event access model', boundary: 'Issue, transfer, resale, entry' },
-    { index: '04', name: 'Event parser', implementation: 'Decoded logs + receipt status', boundary: 'Typed data into UI state' },
-    { index: '05', name: 'Product feedback', implementation: 'React states + recovery actions', boundary: 'Plain language and next step' },
-  ];
-  return <section id="integration-architecture" className="bc-section bc-tools-section"><div className="page-shell"><Reveal className="bc-heading"><ArrowsLeftRight size={34} weight="duotone" aria-hidden="true" /><h2>Integration has explicit boundaries</h2><p>Resolver, client, registry, events and interface form one inspectable path</p></Reveal><div className="bc-architecture-layout"><Reveal className="bc-architecture-flow">{layers.map((layer, index) => <React.Fragment key={layer.name}><article><span>{layer.index}</span><div><strong>{layer.name}</strong><p>{layer.implementation}</p><small>{layer.boundary}</small></div></article>{index < layers.length - 1 && <i aria-hidden="true" />}</React.Fragment>)}</Reveal><Reveal className="bc-architecture-proof" delay={0.08}><header><span>Implementation boundary</span><strong>EVM ticket demo</strong></header><dl><div><dt>Read path</dt><dd>Event, ticket, holder, price cap and entry state</dd></div><div><dt>Write path</dt><dd>Simulate, request signature, submit, confirm</dd></div><div><dt>Error path</dt><dd>Reject, wrong registry, cap breach and finality delay</dd></div><div><dt>Before production</dt><dd>Audit, organizer governance, monitoring and load testing</dd></div></dl><a href="#contact">Plan an integration <ArrowUpRight size={18} /></a></Reveal></div></div></section>;
-}
-
-function BlockchainHeroV3({ Reveal }) {
-  return <section className="bc3-hero">
-    <div className="page-shell bc3-hero-layout">
-      <Reveal className="bc3-hero-copy"><span className="bc3-kicker">Blockchain integration</span><h1>A ticket people can trust</h1><p>Issue, transfer, capped resale and one-time entry through one event pass</p><ArrowLink to="#bc3-ecosystem">Follow RELAY</ArrowLink></Reveal>
-      <Reveal className="bc3-hero-visual" delay={0.08}><figure><img src={blockchainKeyVisual} alt="RELAY event access ecosystem with digital ticket, ticket history, gate scanner, wristband and provenance receipt" /></figure></Reveal>
+function BlockchainBridge({ Reveal }) {
+  return <section id="bc4-bridge" className="bc4-section bc4-bridge">
+    <div className="page-shell">
+      <Reveal className="bc4-heading"><h2>Physical proof enters the chain</h2><p>Five visible layers, one object record</p></Reveal>
+      <div className="bc4-bridge-stage">
+        <Reveal className="bc4-bridge-image"><figure><img src={attestMaker} alt="Maker binding a metal NFC anchor to the collectible object" loading="lazy" /><figcaption><span>Studio bind</span><strong>ARC-01 / TOKEN 204</strong></figcaption></figure></Reveal>
+        <Reveal className="bc4-layer-stack" delay={0.08}>
+          {blockchainLayers.map((item, index) => { const Icon = item.icon; return <article className={'bc4-layer-node is-' + (index + 1)} key={item.label}><Icon size={25} weight="duotone" aria-hidden="true" /><span>{String(index + 1).padStart(2, '0')}</span><strong>{item.label}</strong><code>{item.value}</code></article>; })}
+        </Reveal>
+      </div>
     </div>
   </section>;
 }
 
-const relayEcosystemV3 = [
-  { image: relayCover, label: '01 / Access', title: 'Ticket + rotating code', alt: 'RELAY digital tickets, handheld scanner, wristband and backup ticket', className: 'is-primary' },
-  { image: relayKit, label: '02 / Operations', title: 'Gate kit', alt: 'RELAY gate operations kit with scanner, passes, wristbands and backup tickets' },
-  { image: relayEntry, label: '03 / Entry', title: 'One-time scan', alt: 'Venue staff scanning a RELAY digital ticket at entry' },
-];
-
-function BlockchainEcosystemV3({ Reveal }) {
-  return <section id="bc3-ecosystem" className="bc3-section bc3-ecosystem">
-    <div className="page-shell"><Reveal className="bc3-heading"><h2>One system from wallet to gate</h2><p>Digital proof, staff hardware and a physical fallback</p></Reveal><div className="bc3-ecosystem-grid">{relayEcosystemV3.map((item, index) => <Reveal className={`bc3-ecosystem-card ${item.className || ''}`} key={item.label} delay={index * 0.05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><span>{item.label}</span><strong>{item.title}</strong></figcaption></figure></Reveal>)}</div></div>
+function BlockchainSurfaces({ Reveal }) {
+  return <section className="bc4-section bc4-surfaces">
+    <div className="page-shell">
+      <Reveal className="bc4-heading"><h2>One record, many surfaces</h2><p>Studio, packaging and point-of-contact proof</p></Reveal>
+      <div className="bc4-surface-grid">
+        {blockchainSurfaces.map((item, index) => <Reveal className={'bc4-surface-card ' + (item.className || '')} key={item.label} delay={index * 0.05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><span>{item.label}</span><strong>{item.title}</strong></figcaption></figure></Reveal>)}
+      </div>
+    </div>
   </section>;
 }
 
-function BlockchainWalletV3({ Reveal }) {
+function BlockchainTransferLab({ Reveal }) {
   const [state, setState] = useState('connect');
   const reduceMotion = useReducedMotion();
-  const active = walletStates[state];
+  const active = blockchainTransferStates[state];
   const ActiveIcon = active.icon;
-  const activeIndex = walletStateOrder.indexOf(state);
-  return <section className="bc3-section bc3-wallet">
-    <div className="page-shell bc3-wallet-layout">
-      <Reveal className="bc3-wallet-copy"><Wallet size={34} weight="duotone" aria-hidden="true" /><h2>Transfer without losing the ticket</h2><p>Advance the same action from connection to confirmation</p><div className="bc3-wallet-controls" role="group" aria-label="RELAY ticket transfer states">{walletStateOrder.map((key) => <button type="button" key={key} aria-pressed={state === key} onClick={() => setState(key)}>{walletStates[key].label}</button>)}</div></Reveal>
-      <Reveal className="bc3-wallet-device" delay={0.08}><div className="bc3-wallet-shell"><header><span>RELAY</span><b>HAZE / 04</b><small>RL-26-0421</small></header><div className="bc3-wallet-progress">{walletStateOrder.map((key, index) => <i className={index < activeIndex ? 'is-done' : index === activeIndex ? 'is-current' : ''} key={key}><span>{String(index + 1).padStart(2, '0')}</span><small>{walletStates[key].label}</small></i>)}</div><motion.div className={`bc3-wallet-state is-${state}`} key={state} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .28 }} aria-live="polite"><ActiveIcon size={34} weight="duotone" /><span>{active.label}</span><strong>{active.heading}</strong><dl>{active.facts.map(([term, value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl><button type="button" onClick={() => setState(active.next)}>{active.button}</button></motion.div></div></Reveal>
+  const activeIndex = blockchainTransferOrder.indexOf(state);
+  return <section id="bc4-lab" className="bc4-section bc4-lab">
+    <div className="page-shell">
+      <Reveal className="bc4-heading bc4-heading-light"><h2>Run the ownership path</h2><p>Anchor, signature, contract and receipt stay separate</p></Reveal>
+      <div className="bc4-lab-layout">
+        <Reveal className="bc4-lab-image"><figure><img src={attestTransfer} alt="Two collectors completing an ATTEST ownership handover beside a collectible object" loading="lazy" /><figcaption><CheckCircle size={17} weight="fill" /><span>Object present</span><strong>Handover ready</strong></figcaption></figure></Reveal>
+        <Reveal className="bc4-console" delay={0.08}>
+          <nav aria-label="Ownership transfer states">{blockchainTransferOrder.map((key, index) => <button type="button" key={key} aria-pressed={state === key} onClick={() => setState(key)}><span>{String(index + 1).padStart(2, '0')}</span>{blockchainTransferStates[key].label}<i className={index <= activeIndex ? 'is-active' : ''} /></button>)}</nav>
+          <motion.div className={'bc4-console-state is-' + state} key={state} initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .3 }} aria-live="polite">
+            <div className="bc4-state-copy"><ActiveIcon size={32} weight="duotone" /><span>{active.eyebrow}</span><h3>{active.heading}</h3><dl>{active.facts.map(([term, value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl><button type="button" onClick={() => setState(active.next)}>{active.action}<ArrowUpRight size={17} /></button></div>
+            <div className="bc4-receipt-visual">
+              <header><span>ATTEST / Sepolia</span><b>{state === 'receipt' ? 'CONFIRMED' : 'LIVE SIMULATION'}</b></header>
+              <div className="bc4-receipt-mark"><i /><CheckCircle size={42} weight="fill" /></div>
+              <dl><div><dt>Status</dt><dd>{state === 'receipt' ? 'Confirmed' : 'Awaiting receipt'}</dd></div><div><dt>Method</dt><dd>safeTransferFrom</dd></div><div><dt>Event</dt><dd>{state === 'receipt' ? 'Transfer' : 'Pending'}</dd></div><div><dt>Hash</dt><dd>{state === 'receipt' ? '0xa91f...0de4' : 'Not submitted'}</dd></div></dl>
+            </div>
+          </motion.div>
+        </Reveal>
+      </div>
     </div>
   </section>;
 }
 
-function BlockchainEventsV3({ Reveal }) {
-  return <section className="bc3-section bc3-events">
-    <div className="page-shell"><Reveal className="bc3-heading bc3-heading-light"><LinkSimple size={32} weight="duotone" aria-hidden="true" /><h2>Blockchain stays in the receipt</h2><p>Each event becomes one visible product state</p></Reveal><Reveal className="bc3-event-strip" delay={0.06}>{eventMappings.map((item, index) => <React.Fragment key={item.event}><article><span>{String(index + 1).padStart(2, '0')}</span><code>{item.event}</code><strong>{item.message}</strong><small>{item.state}</small></article>{index < eventMappings.length - 1 && <i aria-hidden="true" />}</React.Fragment>)}</Reveal></div>
+function BlockchainReceipt({ Reveal }) {
+  return <section className="bc4-section bc4-receipt">
+    <div className="page-shell">
+      <Reveal className="bc4-heading"><h2>Verification happens at the object</h2><p>A tap resolves provenance without hiding the chain</p></Reveal>
+      <div className="bc4-receipt-stage">
+        <Reveal className="bc4-receipt-image"><figure><img src={attestScan} alt="Collector scanning the ATTEST NFC anchor in a design gallery" loading="lazy" /><div className="bc4-scan-ring"><Fingerprint size={34} weight="duotone" /></div></figure></Reveal>
+        <Reveal className="bc4-proof-panel" delay={0.08}>
+          <header><span>ATTEST explorer</span><strong><CheckCircle size={16} weight="fill" />Verified</strong></header>
+          <div className="bc4-proof-object"><span>ARC-01</span><strong>Lounge object</strong><small>On-chain product passport</small></div>
+          <div className="bc4-proof-path"><article><Fingerprint size={20} /><span>NFC</span><strong>04:A7:91:2C</strong></article><i /><article><Cube size={20} /><span>ERC-721</span><strong>Token #204</strong></article><i /><article><LinkSimple size={20} /><span>IPFS</span><strong>bafy...r7m</strong></article></div>
+          <a href="/work/portfolio-6">Open the ATTEST case study <ArrowUpRight size={18} /></a>
+        </Reveal>
+      </div>
+    </div>
   </section>;
 }
 
-function BlockchainTrustV3({ Reveal }) {
-  return <section className="bc3-section bc3-trust">
-    <div className="page-shell"><Reveal className="bc3-heading"><LockKey size={32} weight="duotone" aria-hidden="true" /><h2>The difficult states stay visible</h2><p>Mismatch, rejection, cap breach and successful entry</p></Reveal><div className="bc3-trust-grid">{trustStates.map((item, index) => { const Icon = item.icon; return <Reveal className={`bc3-trust-card ${item.className}`} key={item.title} delay={index * 0.05}><Icon size={36} weight="duotone" aria-hidden="true" /><span>{String(index + 1).padStart(2, '0')}</span><h3>{item.title}</h3><strong>{item.resultLabel}</strong></Reveal>; })}</div></div>
-  </section>;
-}
-
-function BlockchainFieldV3({ Reveal }) {
-  return <section className="bc3-section bc3-field">
-    <div className="page-shell"><Reveal className="bc3-heading bc3-heading-light"><h2>Built for a crowded entrance</h2><p>The integration resolves as a fast, ordinary scan</p></Reveal><Reveal className="bc3-field-visual" delay={0.06}><figure><img src={relaySpace} alt="RELAY event entrance with orange wayfinding, staffed check-in and scanner gates" loading="lazy" /><figcaption><span>Venue system</span><a href="/work/portfolio-6">View the complete RELAY case study <ArrowUpRight size={18} /></a></figcaption></figure></Reveal></div>
+function BlockchainCaseLink({ Reveal }) {
+  return <section className="bc4-case-link">
+    <Reveal className="bc4-case-visual"><figure><img src={attestKit} alt="Complete ATTEST physical authentication kit and mobile passport" loading="lazy" /><figcaption><span>Portfolio 06</span><h2>ATTEST</h2><a href="/work/portfolio-6">View the complete project <ArrowUpRight size={20} /></a></figcaption></figure></Reveal>
   </section>;
 }
 
 function BlockchainShowcase({ Reveal }) {
   return <article className="skill-showcase skill-showcase-blockchain">
-    <BlockchainHeroV3 Reveal={Reveal} />
-    <BlockchainEcosystemV3 Reveal={Reveal} />
-    <BlockchainWalletV3 Reveal={Reveal} />
-    <BlockchainEventsV3 Reveal={Reveal} />
-    <BlockchainTrustV3 Reveal={Reveal} />
-    <BlockchainFieldV3 Reveal={Reveal} />
+    <BlockchainSkillHero Reveal={Reveal} />
+    <BlockchainBridge Reveal={Reveal} />
+    <BlockchainSurfaces Reveal={Reveal} />
+    <BlockchainTransferLab Reveal={Reveal} />
+    <BlockchainReceipt Reveal={Reveal} />
+    <BlockchainCaseLink Reveal={Reveal} />
   </article>;
 }
 

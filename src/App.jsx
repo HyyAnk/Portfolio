@@ -22,7 +22,7 @@ import pdfBusinessCardShowcase from './assets/experiments/pdf-business-card.webp
 import aiMediaStudioShowcase from './assets/experiments/ai-media-studio.webp';
 import portraitImage from './assets/generated/portrait.webp';
 import dauCover from './assets/case-studies/dau-cover.webp';
-import relayCover from './assets/case-studies/relay-cover.webp';
+import attestCover from './assets/case-studies/attest-cover.webp';
 import vunCover from './assets/case-studies/vun-cover.webp';
 import hxsCover from './assets/case-studies/hxs-home-cover.webp';
 import hailongCover from './assets/case-studies/hailong-cover.webp';
@@ -82,8 +82,8 @@ const skills = [
   { slug: 'graphic-design', title: 'Graphic Design', short: 'Identity systems with a point of view', supportingTools: 'Photoshop · Illustrator', body: 'I build visual systems that make an idea legible before anyone reads the details', image: graphicImage, variant: 'graphic', tools: ['Art direction', 'Identity', 'Editorial'], details: ['Visual identity systems', 'Editorial layout direction', 'Typography and colour systems', 'Campaign art direction'] },
   { slug: 'video-editor', title: 'Video Editor', short: 'Motion with an honest rhythm', body: 'I shape footage, sound and type into clear stories that know when to pause', image: videoImage, variant: 'video', tools: ['Editing', 'Title design', 'Sound'], details: ['Advanced transitions', 'Professional SFX design', 'Special effects and motion effects', 'Cinematic storytelling'] },
   { slug: 'uiux-webdev', title: 'Web Design', short: 'Interfaces that feel considered', body: 'I design and code responsive experiences where the visual idea survives the interaction', image: uiImage, variant: 'ui', tools: ['Product design', 'React', 'Systems'], details: ['UX flows and product structure', 'Responsive design systems', 'React implementation', 'Interaction and interface motion'] },
-  { slug: 'automation', title: 'Automation', short: 'The quiet work behind the work', supportingTools: 'Python · Node JS', body: 'I connect the small steps that slow a team down and turn them into a dependable flow', image: automationImage, variant: 'automation', tools: ['Workflows', 'APIs', 'Operations'], details: ['Workflow architecture', 'API and webhook orchestration', 'Content and task automation', 'Operational clarity'] },
-  { slug: 'blockchain', title: 'Blockchain Integration', short: 'Trust made tangible', supportingTools: 'EVM · Smart Contract', body: 'I help teams use decentralised technology where it creates real ownership, not extra noise', image: blockchainImage, variant: 'blockchain', tools: ['Wallets', 'Onchain UX', 'Contracts'], details: ['Wallet and onboarding UX', 'Smart contract integration', 'Onchain transaction states', 'Trust and ownership design'] },
+  { slug: 'automation', title: 'Automation', short: 'The quiet work behind the work', supportingTools: 'Python · Node\u00A0JS', body: 'I connect the small steps that slow a team down and turn them into a dependable flow', image: automationImage, variant: 'automation', tools: ['Workflows', 'APIs', 'Operations'], details: ['Workflow architecture', 'API and webhook orchestration', 'Content and task automation', 'Operational clarity'] },
+  { slug: 'blockchain', title: 'Blockchain Integration', short: 'Trust made tangible', supportingTools: 'EVM · Smart\u00A0Contract', body: 'I help teams use decentralised technology where it creates real ownership, not extra noise', image: blockchainImage, variant: 'blockchain', tools: ['Wallets', 'Onchain UX', 'Contracts'], details: ['Wallet and onboarding UX', 'Smart contract integration', 'Onchain transaction states', 'Trust and ownership design'] },
 ];
 
 const primarySkills = ['uiux-webdev', 'video-editor'].map((slug) => skills.find((skill) => skill.slug === slug));
@@ -233,7 +233,7 @@ const works = [
   { slug: 'portfolio-3', caseKey: 'folded-matter', title: 'VỤN', type: 'Brand identity · Circular materials', role: 'Strategy · Identity · Art direction', cardDescription: 'Construction offcuts, reshaped into useful objects.', description: 'Identity for a studio that turns construction offcuts into useful objects.', challenge: 'A material-led studio needed one recognisable system across samples, products, packaging, space and catalogue.', outcome: 'A fragment-based identity built from four colours, three material families and one modular V mark.', tags: ['Brand identity', 'Art direction'], image: vunCover, deep: true },
   { slug: 'portfolio-4', caseKey: 'still-moving', title: 'HUAXINSHENG', type: 'Company catalogue · Industrial materials', role: 'Catalogue design · Art direction', cardDescription: 'Steel mesh, explained in one compact sales catalogue.', description: 'A 24-page Vietnamese sales catalogue for welded steel mesh, from company capability to technical application.', challenge: 'Company scale, product proof, engineering detail and real applications had to remain easy to scan in one compact document.', outcome: 'An A3 spread system built around a clear Inter hierarchy, industrial blue palette and evidence-led page sequence.', tags: ['Editorial design', 'Catalogue'], image: hxsCover, deep: true },
   { slug: 'portfolio-5', caseKey: 'taiyo-envelope', title: 'TAIYO TOURIST', type: 'Brand application · Travel packaging', role: 'Packaging design · Artwork', cardDescription: 'Travel documents, organised in three branded envelope formats.', description: 'A three-format envelope system for handing over itineraries, tickets and travel documents with a consistent Taiyo Group signature.', challenge: 'Logo, travel imagery, recipient space and contact details had to remain clear across multiple physical formats.', outcome: 'A print-ready application system connecting aircraft motion, address hierarchy and a recognisable blue-red travel palette.', tags: ['Packaging design', 'Brand application'], image: taiyoCover, deep: true },
-  { slug: 'portfolio-6', caseKey: 'kitepay', title: 'RELAY', type: 'Blockchain product · Event ticketing', role: 'Product strategy · UX/UI · Web3', cardDescription: 'Verified tickets, fair resale and fraud-resistant entry.', description: 'Verified event tickets with simple transfer, capped resale and fraud-resistant entry.', challenge: 'Ticket ownership needed to stay trustworthy without exposing customers or gate staff to blockchain mechanics.', outcome: 'One access system across mobile tickets, resale, scanners, wristbands and organizer operations.', tags: ['Blockchain', 'Product design'], image: relayCover, deep: true },
+  { slug: 'portfolio-6', caseKey: 'attest', title: 'ATTEST', type: 'Blockchain integration · Product passport', year: '2026', role: 'Product strategy · UX/UI · Smart contracts', cardDescription: 'Collectible design objects, connected to visible on-chain ownership.', description: 'An on-chain product passport connecting a physical collectible, its maker, metadata and current owner.', challenge: 'A physical object needed verifiable provenance without reducing the experience to wallet jargon or an invisible database.', outcome: 'One integration across NFC anchors, typed signatures, ERC-721 ownership, IPFS metadata and readable transaction receipts.', tags: ['Blockchain integration', 'Product design'], image: attestCover, deep: true },
 ];
 
 const legacyWorkRoutes = [
@@ -241,6 +241,7 @@ const legacyWorkRoutes = [
   { from: 'folded-matter', to: 'portfolio-3' },
   { from: 'still-moving', to: 'portfolio-4' },
   { from: 'kitepay', to: 'portfolio-6' },
+  { from: 'relay', to: 'portfolio-6' },
 ];
 
 const experiments = [
@@ -295,7 +296,7 @@ const heroCarouselImages = [
   { image: dauCover, alt: 'DẤU Vietnamese craft archive across web and mobile' },
   { image: vunCover, alt: 'VỤN circular-material studio identity system' },
   { image: hxsCover, alt: 'HUAXINSHENG industrial welded mesh company catalogue' },
-  { image: relayCover, alt: 'RELAY verified event ticketing system' },
+  { image: attestCover, alt: 'ATTEST on-chain product passport for collectible design objects' },
   { image: uiImage, alt: 'Responsive interface design study' },
   { image: graphicImage, alt: 'Graphic identity system study' },
   { image: videoImage, alt: 'Video editing and title design study' },
