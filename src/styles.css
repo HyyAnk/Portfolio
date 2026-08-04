@@ -423,6 +423,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .skill-compact-support-link + .skill-compact-support-link { border-top: 1px solid color-mix(in srgb, var(--skill-support) 22%, var(--line)); }
 .skill-compact-support-link:is(:hover, :focus-visible) { transform: translateX(4px); }
 .skill-compact-support-link h4 { color: color-mix(in srgb, var(--skill-support-ink) 88%, var(--ink)); font-size: clamp(1rem, 1.45vw, 1.25rem); font-weight: 620; letter-spacing: -.04em; line-height: 1.05; text-wrap: balance; transition: color .25s ease; }
+.skill-compact-support-meta { flex: none; margin-left: auto; padding-left: 24px; color: color-mix(in srgb, var(--skill-support-ink) 58%, var(--paper)); font-size: .66rem; font-weight: 420; letter-spacing: .025em; line-height: 1; white-space: nowrap; }
 .skill-compact-arrow { position: absolute; top: 50%; right: 22px; opacity: .72; transform: translateY(-50%); transition: opacity .25s ease, transform .3s cubic-bezier(.16,1,.3,1); }
 .skill-compact-core-link .skill-compact-arrow { color: var(--skill-core-ink); opacity: .84; }
 .skill-compact-support-link .skill-compact-arrow { color: var(--skill-support-ink); }
@@ -901,6 +902,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .skills-compact-support-label, .skills-compact-support-list { margin-left: 22px; }
   .skill-compact-support-link { height: 54px; min-height: 0; padding: 9px 38px 9px 0; }
   .skill-compact-support-link h4 { font-size: 1.08rem; }
+  .skill-compact-support-meta { max-width: 88px; padding-left: 10px; font-size: .56rem; letter-spacing: 0; line-height: 1.25; text-align: right; white-space: normal; }
   .skill-compact-arrow, .skill-compact-support-link .skill-compact-arrow { top: 50%; right: 17px; }
   .skill-blocks .section-heading h2 { max-width: none; font-size: clamp(2.7rem, 12.5vw, 4rem); }
   .skill-flow-layout { gap: 26px; margin-bottom: 52px; }
