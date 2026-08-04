@@ -421,7 +421,11 @@ function TaiyoCaseStudy({ work }) {
         <div className="taiyo-palette"><span style={{ '--swatch': '#123B75' }}><b>Journey navy</b><small>#123B75</small></span><span style={{ '--swatch': '#155CAA' }}><b>Taiyo blue</b><small>#155CAA</small></span><span style={{ '--swatch': '#1DB4E6' }}><b>Sky cyan</b><small>#1DB4E6</small></span><span style={{ '--swatch': '#E51E2A' }}><b>Route red</b><small>#E51E2A</small></span><span style={{ '--swatch': '#FFD21A' }}><b>Sun yellow</b><small>#FFD21A</small></span></div>
         <div className="taiyo-type"><span>Logo / custom outlined lettering</span><strong>TAIYO<span>TOURIST</span></strong><p>Geometric sans / contact system</p><small>Uppercase structure with a calligraphic travel accent</small></div>
       </div>
-      <div className="taiyo-detail-strip"><figure><img src={taiyoPlaneDetail} alt="Taiyo Tourist aircraft and route-line graphic detail"/><figcaption>Aircraft / route motion</figcaption></figure><figure><img src={taiyoAddressDetail} alt="Taiyo Tourist recipient field graphic detail"/><figcaption>Recipient / writing field</figcaption></figure><figure><img src={taiyoWaveDetail} alt="Taiyo Tourist navy and cyan address wave detail"/><figcaption>Address / contact band</figcaption></figure></div>
+      <div className="taiyo-detail-strip">
+        <figure className="is-aircraft"><div className="taiyo-detail-media"><img src={taiyoPlaneDetail} alt="Taiyo Tourist aircraft and route-line graphic detail"/></div><figcaption>Aircraft / route motion</figcaption></figure>
+        <figure className="is-recipient"><div className="taiyo-detail-media"><img src={taiyoAddressDetail} alt="Complete Taiyo Tourist recipient writing field"/></div><figcaption>Recipient / writing field</figcaption></figure>
+        <figure className="is-contact"><div className="taiyo-detail-media"><img src={taiyoWaveDetail} alt="Complete Taiyo Tourist address and phone contact band"/></div><figcaption>Address / contact band</figcaption></figure>
+      </div>
     </div></section>
 
     <section className="taiyo-handover"><figure><img src={taiyoHandover} alt="Taiyo Tourist envelope used as a travel document handover kit at a service counter"/></figure><div><span>03</span><strong>Travel document handover</strong><small>Envelope / passport / itinerary / voucher</small></div></section>

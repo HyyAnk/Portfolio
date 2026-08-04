@@ -283,10 +283,20 @@
 .taiyo-type > strong { color: #f9fbfd; font-family: 'Space Grotesk Variable',sans-serif; font-size: clamp(3rem,6vw,6rem); line-height: .8; letter-spacing: -.07em; }
 .taiyo-type > strong span { color: #e51e2a; }
 .taiyo-type > p { margin: 0; color: #53c5ed; font-size: clamp(1.2rem,2.3vw,2.25rem); font-weight: 570; }
-.taiyo-detail-strip { margin-top: 18px; display: grid; grid-template-columns: 1.05fr .95fr 1fr; gap: 12px; align-items: stretch; }
-.taiyo-detail-strip figure { min-height: 270px; margin: 0; display: grid; grid-template-rows: 1fr auto; overflow: hidden; background: #fff; }
-.taiyo-detail-strip img { width: 100%; height: 100%; min-height: 0; display: block; object-fit: cover; }
-.taiyo-detail-strip figcaption { padding: 10px 12px; background: #f9fbfd; color: #123b75; font-size: .55rem; font-weight: 700; text-transform: uppercase; }
+.taiyo-detail-strip { margin-top: 18px; display: grid; grid-template-columns: repeat(12,1fr); gap: 12px; align-items: start; }
+.taiyo-detail-strip figure { min-width: 0; margin: 0; display: grid; grid-template-rows: minmax(0,1fr) auto; overflow: hidden; background: #fff; }
+.taiyo-detail-strip figure.is-aircraft { grid-column: 1 / 8; }
+.taiyo-detail-strip figure.is-recipient { grid-column: 8 / 13; align-self: end; }
+.taiyo-detail-strip figure.is-contact { grid-column: 1 / 13; }
+.taiyo-detail-media { position: relative; min-height: 0; overflow: hidden; background: #fff; }
+.taiyo-detail-media img { display: block; max-width: none; }
+.taiyo-detail-strip .is-aircraft .taiyo-detail-media { aspect-ratio: 2; }
+.taiyo-detail-strip .is-aircraft img { width: 138%; height: auto; transform: translate(-4.5%,-13%); }
+.taiyo-detail-strip .is-recipient .taiyo-detail-media { aspect-ratio: 2.25; }
+.taiyo-detail-strip .is-recipient img { width: 120%; height: auto; transform: translate(-4.6%,-27%); }
+.taiyo-detail-strip .is-contact .taiyo-detail-media { aspect-ratio: 6.18; }
+.taiyo-detail-strip .is-contact img { width: 100%; height: 100%; object-fit: contain; }
+.taiyo-detail-strip figcaption { padding: 12px 14px; background: #f9fbfd; color: #123b75; font-size: .55rem; font-weight: 700; letter-spacing: .025em; text-transform: uppercase; }
 .taiyo-handover { position: relative; background: #d8e8f6; }
 .taiyo-handover figure { margin: 0; }
 .taiyo-handover img { width: 100%; display: block; }
@@ -507,8 +517,9 @@
   .taiyo-palette span { min-height: 145px; }
   .taiyo-palette span:last-child { grid-column: 1 / -1; }
   .taiyo-type { min-height: 310px; padding: 18px; }
-  .taiyo-detail-strip { grid-template-columns: 1fr; }
-  .taiyo-detail-strip figure { min-height: 230px; }
+  .taiyo-detail-strip { grid-template-columns: 1fr; gap: 10px; }
+  .taiyo-detail-strip figure.is-aircraft,.taiyo-detail-strip figure.is-recipient,.taiyo-detail-strip figure.is-contact { grid-column: 1; }
+  .taiyo-detail-strip figure { min-height: 0; }
   .taiyo-handover > div { right: 14px; bottom: 14px; min-width: 230px; padding: 12px 14px; }
   .taiyo-format-preview nav { grid-template-columns: 1fr; }
   .taiyo-format-preview nav button { min-height: 54px; border-right: 0; border-bottom: 1px solid var(--flow-line); }
