@@ -827,9 +827,11 @@ function Hero() {
       <Reveal className="hero-copy" delay={.06}>
         <p className="hero-name">{person} / {fullName}</p>
         <h1 className="hero-headline" aria-label="Design, develop, and deliver">
-          <span className="hero-headline-line">Design,</span>
-          <span className="hero-headline-line">develop,</span>
-          <span className="hero-headline-line hero-headline-line-axis">and <em>deliver</em></span>
+          <span className="hero-headline-design" aria-hidden="true">Design,</span>
+          <span className="hero-headline-prefix" aria-hidden="true">develo</span>
+          <span className="hero-headline-suffix" aria-hidden="true">p,</span>
+          <span className="hero-headline-prefix" aria-hidden="true">and <em>de</em></span>
+          <em className="hero-headline-suffix" aria-hidden="true">liver</em>
         </h1>
         <p className="hero-lede">I am a designer and developer shaping thoughtful digital work from first idea to final build.</p>
         <div className="hero-actions"><a className="button button-dark" href="#portfolio">View portfolio <ArrowDownRight size={18} /></a><ReadyProjectButton /></div>
