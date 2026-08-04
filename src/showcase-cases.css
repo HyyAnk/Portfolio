@@ -338,14 +338,36 @@
 .taiyo-original-grid figcaption { padding: 9px 2px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--flow-line); color: #155caa; font-size: .55rem; text-transform: uppercase; }
 .taiyo-original-grid figcaption span { opacity: .54; }
 .taiyo-close { background: #155caa; color: #fff; }
-.taiyo-flight-loop { overflow: hidden; border-bottom: 1px solid rgba(255,255,255,.22); background: #1db4e6; color: #123b75; }
-.taiyo-flight-loop svg { width: 100%; display: block; }
-.taiyo-flight-path { fill: none; stroke: #f9fbfd; stroke-width: 2; stroke-dasharray: 10 14; }
-.taiyo-flight-path.is-secondary { stroke: #e51e2a; opacity: .8; }
-.taiyo-flight-loop circle { fill: #ffd21a; stroke: #123b75; stroke-width: 2; }
-.taiyo-flight-plane { fill: #123b75; offset-path: path('M-40 246C212 250 228 66 466 83c207 15 211 149 455 123 187-20 221-139 559-119'); animation: taiyo-flight 8s linear infinite; }
-.taiyo-flight-loop > div { min-height: 62px; display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid rgba(18,59,117,.28); }
-.taiyo-flight-loop > div span { padding: 14px 3vw; display: flex; align-items: flex-end; border-right: 1px solid rgba(18,59,117,.28); font-size: .55rem; font-weight: 760; text-transform: uppercase; }
+.taiyo-motion-reel { --taiyo-cycle: 16s; min-height: clamp(620px,59vw,860px); display: grid; grid-template-columns: minmax(0,1.48fr) minmax(300px,.52fr); overflow: hidden; border-bottom: 1px solid rgba(255,255,255,.22); background: #082d5b; }
+.taiyo-motion-viewport { position: relative; min-width: 0; min-height: inherit; overflow: hidden; background: #dcecf8; perspective: 1200px; }
+.taiyo-motion-scene { position: absolute; inset: 0; overflow: hidden; }
+.taiyo-motion-scene.is-artwork { z-index: 1; display: grid; place-items: center; background: #dcecf8; animation: taiyo-scene-artwork var(--taiyo-cycle) cubic-bezier(.65,0,.35,1) infinite; }
+.taiyo-motion-artboard { position: relative; width: min(82%,980px); margin: 0; background: #fff; box-shadow: 0 52px 96px -56px rgba(4,31,64,.7); animation: taiyo-artboard-drift var(--taiyo-cycle) cubic-bezier(.2,.72,.2,1) infinite; }
+.taiyo-motion-artboard::after { content: ''; position: absolute; right: 0; bottom: -13px; left: 0; height: 13px; background: #b8d0e2; transform: skewX(-48deg); transform-origin: top; }
+.taiyo-motion-artboard img { width: 100%; display: block; }
+.taiyo-motion-paper-edge { position: absolute; right: -11%; bottom: 8%; width: 82%; height: 15%; background: #f8fbfd; transform: rotate(-7deg); box-shadow: 0 20px 46px -36px rgba(4,31,64,.58); animation: taiyo-paper-edge var(--taiyo-cycle) cubic-bezier(.2,.72,.2,1) infinite; }
+.taiyo-motion-scene.is-details { z-index: 2; background: #0b376c; opacity: 0; animation: taiyo-scene-details var(--taiyo-cycle) cubic-bezier(.65,0,.35,1) infinite; }
+.taiyo-motion-fragment { position: absolute; margin: 0; overflow: hidden; border: 10px solid #f8fbfd; background: #f8fbfd; box-shadow: 0 34px 76px -48px rgba(0,10,30,.86); }
+.taiyo-motion-fragment img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.taiyo-motion-fragment.is-plane { top: 7%; left: 5%; width: 64%; height: 56%; animation: taiyo-fragment-plane var(--taiyo-cycle) cubic-bezier(.2,.72,.2,1) infinite; }
+.taiyo-motion-fragment.is-address { right: 4%; bottom: 8%; width: 55%; height: 47%; animation: taiyo-fragment-address var(--taiyo-cycle) cubic-bezier(.2,.72,.2,1) infinite; }
+.taiyo-motion-fragment.is-wave { bottom: 6%; left: 6%; width: 38%; height: 27%; border-width: 8px; animation: taiyo-fragment-wave var(--taiyo-cycle) cubic-bezier(.2,.72,.2,1) infinite; }
+.taiyo-motion-scene.is-handover { z-index: 3; opacity: 0; background: #eef5fa; animation: taiyo-scene-handover var(--taiyo-cycle) cubic-bezier(.65,0,.35,1) infinite; }
+.taiyo-motion-scene.is-handover img { width: 100%; height: 100%; display: block; object-fit: cover; animation: taiyo-handover-focus var(--taiyo-cycle) cubic-bezier(.2,.72,.2,1) infinite; }
+.taiyo-motion-wipe { position: absolute; z-index: 4; inset: -18% -50%; display: grid; grid-template-rows: 1fr 1.6fr .42fr; transform: translateX(-105%) rotate(-8deg); pointer-events: none; animation: taiyo-paper-wipe var(--taiyo-cycle) cubic-bezier(.65,0,.35,1) infinite; }
+.taiyo-motion-wipe i:nth-child(1) { background: #f8fbfd; }
+.taiyo-motion-wipe i:nth-child(2) { background: #155caa; }
+.taiyo-motion-wipe i:nth-child(3) { background: #e51e2a; }
+.taiyo-motion-rail { min-height: inherit; padding: clamp(30px,4vw,62px); display: flex; flex-direction: column; background: #082d5b; color: #f8fbfd; }
+.taiyo-motion-rail > span { color: #69c9ed; font-size: .57rem; font-weight: 760; letter-spacing: .09em; text-transform: uppercase; }
+.taiyo-motion-rail > strong { max-width: 7ch; margin-top: 32px; font-family: 'Space Grotesk Variable',sans-serif; font-size: clamp(2.5rem,4vw,4.9rem); font-weight: 600; line-height: .86; letter-spacing: -.065em; }
+.taiyo-motion-chapters { margin-top: auto; display: grid; }
+.taiyo-motion-chapters article { position: relative; min-height: 95px; padding: 17px 0 16px 22px; display: grid; align-content: end; gap: 7px; border-left: 2px solid rgba(248,251,253,.16); color: #f8fbfd; opacity: .34; transform: translateX(0); }
+.taiyo-motion-chapters article b { font-size: .71rem; font-weight: 720; }
+.taiyo-motion-chapters article small { color: #a9c2d8; font-size: .56rem; line-height: 1.4; }
+.taiyo-motion-chapters article.is-artwork { animation: taiyo-chapter-artwork var(--taiyo-cycle) ease infinite; }
+.taiyo-motion-chapters article.is-production { animation: taiyo-chapter-production var(--taiyo-cycle) ease infinite; }
+.taiyo-motion-chapters article.is-handover { animation: taiyo-chapter-handover var(--taiyo-cycle) ease infinite; }
 .taiyo-close > .flow-shell { min-height: 380px; padding-block: 44px; display: flex; flex-direction: column; justify-content: space-between; }
 .taiyo-close .flow-shell span,.taiyo-close .flow-shell small { font-size: .56rem; letter-spacing: .09em; text-transform: uppercase; }
 .taiyo-close .flow-shell strong { align-self: center; color: #fff; font-family: 'Space Grotesk Variable',sans-serif; font-size: clamp(3.3rem,10vw,10rem); line-height: .72; letter-spacing: -.09em; white-space: nowrap; }
@@ -355,7 +377,19 @@
 @keyframes vun-fragment-right { 0%,12%,100%{transform:translate(150px,-70px) rotate(22deg)} 42%,72%{transform:translate(0) rotate(0)} }
 @keyframes vun-fragment-core { 0%,12%,100%{transform:translate(0,190px) rotate(45deg);opacity:.3} 42%,72%{transform:translate(0) rotate(0);opacity:1} }
 @keyframes vun-pulse { 0%,100%{transform:scale(.52) rotate(-12deg)} 48%,66%{transform:scale(1) rotate(0)} }
-@keyframes taiyo-flight { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+@keyframes taiyo-scene-artwork { 0%,27%{opacity:1} 33%,94%{opacity:0} 98%,100%{opacity:1} }
+@keyframes taiyo-scene-details { 0%,27%{opacity:0} 33%,60%{opacity:1} 66%,100%{opacity:0} }
+@keyframes taiyo-scene-handover { 0%,60%{opacity:0} 66%,94%{opacity:1} 99%,100%{opacity:0} }
+@keyframes taiyo-artboard-drift { 0%{transform:translate3d(-4%,8%,0) rotate(-3deg) scale(.92)} 10%,26%{transform:translate3d(0,0,0) rotate(-1deg) scale(1)} 32%,100%{transform:translate3d(5%,-4%,0) rotate(1deg) scale(1.03)} }
+@keyframes taiyo-paper-edge { 0%,5%{transform:translate3d(18%,22%,0) rotate(-7deg)} 16%,27%{transform:translate3d(0,0,0) rotate(-7deg)} 34%,100%{transform:translate3d(-8%,-12%,0) rotate(-7deg)} }
+@keyframes taiyo-fragment-plane { 0%,29%{transform:translate3d(-12%,8%,0) rotate(-3deg) scale(.94)} 38%,59%{transform:translate3d(0,0,0) rotate(-1deg) scale(1)} 66%,100%{transform:translate3d(6%,-4%,0) rotate(0) scale(1.02)} }
+@keyframes taiyo-fragment-address { 0%,31%{transform:translate3d(16%,14%,0) rotate(4deg) scale(.94)} 41%,60%{transform:translate3d(0,0,0) rotate(1.5deg) scale(1)} 67%,100%{transform:translate3d(-5%,-5%,0) rotate(0) scale(1.02)} }
+@keyframes taiyo-fragment-wave { 0%,34%{transform:translate3d(-9%,22%,0) rotate(-5deg);opacity:.45} 44%,60%{transform:translate3d(0,0,0) rotate(-2deg);opacity:1} 67%,100%{transform:translate3d(7%,-8%,0) rotate(0);opacity:.6} }
+@keyframes taiyo-handover-focus { 0%,63%{transform:scale(1.08) translate3d(2%,1%,0)} 74%,93%{transform:scale(1) translate3d(0,0,0)} 100%{transform:scale(1.03) translate3d(-1%,0,0)} }
+@keyframes taiyo-paper-wipe { 0%,27%{transform:translateX(-105%) rotate(-8deg)} 32%{transform:translateX(105%) rotate(-8deg)} 33%,60%{transform:translateX(-105%) rotate(-8deg)} 65%{transform:translateX(105%) rotate(-8deg)} 66%,94%{transform:translateX(-105%) rotate(-8deg)} 99%,100%{transform:translateX(105%) rotate(-8deg)} }
+@keyframes taiyo-chapter-artwork { 0%,27%,98%,100%{opacity:1;border-left-color:#e51e2a;transform:translateX(6px)} 33%,94%{opacity:.34;border-left-color:rgba(248,251,253,.16);transform:translateX(0)} }
+@keyframes taiyo-chapter-production { 0%,27%,66%,100%{opacity:.34;border-left-color:rgba(248,251,253,.16);transform:translateX(0)} 33%,60%{opacity:1;border-left-color:#e51e2a;transform:translateX(6px)} }
+@keyframes taiyo-chapter-handover { 0%,60%,99%,100%{opacity:.34;border-left-color:rgba(248,251,253,.16);transform:translateX(0)} 66%,94%{opacity:1;border-left-color:#e51e2a;transform:translateX(6px)} }
 
 @media (max-width: 1050px) {
   .flow-heading { grid-template-columns: 1fr; gap: 34px; }
@@ -373,6 +407,9 @@
   .taiyo-type { border-top: 1px solid rgba(255,255,255,.24); border-left: 0; }
   .taiyo-production-board { grid-template-columns: 1fr; }
   .taiyo-production-board dl { min-height: 300px; }
+  .taiyo-motion-reel { grid-template-columns: minmax(0,1.2fr) minmax(270px,.8fr); }
+  .taiyo-motion-rail { padding: 34px 28px; }
+  .taiyo-motion-rail > strong { font-size: clamp(2.4rem,5vw,4rem); }
 }
 
 @media (max-width: 720px) {
@@ -478,7 +515,18 @@
   .taiyo-production-board dl div { min-height: 110px; border-left: 0; }
   .taiyo-original-grid { grid-template-columns: 1fr; }
   .taiyo-original-grid figure:nth-child(n) { grid-column: auto; margin-top: 0; }
-  .taiyo-flight-loop svg { width: 190%; margin-left: -38%; }
+  .taiyo-motion-reel { min-height: 0; grid-template-columns: 1fr; }
+  .taiyo-motion-viewport { min-height: 430px; }
+  .taiyo-motion-artboard { width: 92%; }
+  .taiyo-motion-paper-edge { width: 92%; bottom: 5%; }
+  .taiyo-motion-fragment { border-width: 5px; }
+  .taiyo-motion-fragment.is-plane { top: 5%; left: 4%; width: 76%; height: 55%; }
+  .taiyo-motion-fragment.is-address { right: 3%; bottom: 8%; width: 67%; height: 45%; }
+  .taiyo-motion-fragment.is-wave { bottom: 5%; left: 4%; width: 42%; height: 24%; border-width: 4px; }
+  .taiyo-motion-scene.is-handover img { object-position: 34% center; }
+  .taiyo-motion-rail { min-height: 350px; padding: 26px 18px; }
+  .taiyo-motion-rail > strong { max-width: 10ch; margin-top: 22px; font-size: clamp(2.45rem,13vw,3.8rem); }
+  .taiyo-motion-chapters article { min-height: 66px; padding-block: 10px; }
   .taiyo-close > .flow-shell { min-height: 300px; }
   .taiyo-close .flow-shell strong { font-size: clamp(2.5rem,12vw,4rem); white-space: normal; }
 }
@@ -486,5 +534,11 @@
 @media (prefers-reduced-motion: reduce) {
   .vun-fragments path,.vun-motion-band svg path { animation: none !important; }
   .vun-fragments path { transform: none !important; opacity: 1 !important; }
-  .taiyo-flight-plane { animation: none !important; }
+  .taiyo-motion-scene,.taiyo-motion-scene img,.taiyo-motion-artboard,.taiyo-motion-paper-edge,.taiyo-motion-fragment,.taiyo-motion-wipe,.taiyo-motion-chapters article { animation: none !important; }
+  .taiyo-motion-scene.is-artwork,.taiyo-motion-scene.is-details { opacity: 0; }
+  .taiyo-motion-scene.is-handover { opacity: 1; }
+  .taiyo-motion-scene.is-handover img { transform: none; }
+  .taiyo-motion-wipe { display: none; }
+  .taiyo-motion-chapters article { opacity: .42; transform: none; }
+  .taiyo-motion-chapters article.is-handover { border-left-color: #e51e2a; opacity: 1; }
 }

@@ -321,17 +321,30 @@ function TaiyoFormatPreview() {
   </div>;
 }
 
-function TaiyoFlightLoop() {
-  return <div className="taiyo-flight-loop" role="img" aria-label="Animated flight line connecting Taiyo Tourist envelope formats">
-    <svg viewBox="0 0 1440 310" aria-hidden="true">
-      <path className="taiyo-flight-path" d="M-40 246C212 250 228 66 466 83c207 15 211 149 455 123 187-20 221-139 559-119"/>
-      <path className="taiyo-flight-path is-secondary" d="M-30 270C238 286 286 117 502 126c219 9 220 154 458 122 191-26 229-117 520-102"/>
-      <g className="taiyo-flight-plane">
-        <path d="M0 12 43 1l9 5-30 17 27 10-6 5-36-8-17 10-5-3 9-14-12-8 5-4 13 1Z"/>
-      </g>
-      <circle cx="188" cy="150" r="5"/><circle cx="713" cy="171" r="5"/><circle cx="1160" cy="130" r="5"/>
-    </svg>
-    <div><span>01 / Artwork</span><span>02 / Print</span><span>03 / Handover</span></div>
+function TaiyoEnvelopeMotion() {
+  return <div className="taiyo-motion-reel" role="group" aria-label="Taiyo Tourist envelope production story from original artwork to travel document handover">
+    <div className="taiyo-motion-viewport" aria-hidden="true">
+      <div className="taiyo-motion-scene is-artwork">
+        <figure className="taiyo-motion-artboard"><img src={taiyoArtboard02} alt=""/></figure>
+        <span className="taiyo-motion-paper-edge"/>
+      </div>
+      <div className="taiyo-motion-scene is-details">
+        <figure className="taiyo-motion-fragment is-plane"><img src={taiyoPlaneDetail} alt=""/></figure>
+        <figure className="taiyo-motion-fragment is-address"><img src={taiyoAddressDetail} alt=""/></figure>
+        <figure className="taiyo-motion-fragment is-wave"><img src={taiyoWaveDetail} alt=""/></figure>
+      </div>
+      <div className="taiyo-motion-scene is-handover"><img src={taiyoHandover} alt=""/></div>
+      <div className="taiyo-motion-wipe"><i/><i/><i/></div>
+    </div>
+    <div className="taiyo-motion-rail">
+      <span>Envelope application</span>
+      <strong>From artwork to handover</strong>
+      <div className="taiyo-motion-chapters">
+        <article className="is-artwork"><b>Artwork</b><small>Vector layout / three formats</small></article>
+        <article className="is-production"><b>Production</b><small>Scored / folded / packed</small></article>
+        <article className="is-handover"><b>Handover</b><small>Itinerary / ticket / passport</small></article>
+      </div>
+    </div>
   </div>;
 }
 
@@ -383,7 +396,7 @@ function TaiyoCaseStudy({ work }) {
       <div className="taiyo-original-grid">{artboards.map((image, index) => <figure key={image}><img src={image} alt={`Original Taiyo Tourist print artboard ${index + 1}`} loading="lazy"/><figcaption><span>{String(index + 1).padStart(2, '0')}</span><strong>{['Master surface','Wide envelope','Compact envelope'][index]}</strong></figcaption></figure>)}</div>
     </div></section>
 
-    <section className="taiyo-close"><TaiyoFlightLoop/><div className="flow-shell"><span>3 formats / print-ready / physical application</span><strong>TAIYO TOURIST</strong><small>Artwork · Packaging · Handover</small></div></section>
+    <section className="taiyo-close"><TaiyoEnvelopeMotion/><div className="flow-shell"><span>3 formats / print-ready / physical application</span><strong>TAIYO TOURIST</strong><small>Artwork · Packaging · Handover</small></div></section>
   </article>;
 }
 
