@@ -322,6 +322,34 @@ const configuredCarouselImages = Array.from({ length: 7 }, (_, index) => ({
   alt: customCarouselByIndex[index + 1] ? customCarouselAlts[index] : heroCarouselImages[index].alt,
 }));
 
+const clientProjects = [
+  {
+    name: 'Hải Long Construction',
+    discipline: 'Corporate presentation',
+    image: hailongCover,
+    imageAlt: 'Hải Long Construction presentation cover',
+  },
+  {
+    name: 'Taiyo Group',
+    discipline: 'Brand application',
+    image: taiyoCover,
+    imageAlt: 'Taiyo Group travel document system',
+  },
+  {
+    name: 'Huaxinsheng',
+    discipline: 'Company catalogue',
+    image: hxsCover,
+    imageAlt: 'Huaxinsheng company catalogue cover',
+  },
+  {
+    name: 'Viettravel',
+    discipline: 'Travel communication',
+    image: null,
+    imageAlt: '',
+    monogram: 'VT',
+  },
+];
+
 const reveal = { hidden: { opacity: 0, y: 22 }, visible: { opacity: 1, y: 0 } };
 const revealTransition = { duration: 0.65, ease: [0.16, 1, 0.3, 1] };
 
@@ -422,7 +450,7 @@ function Nav() {
       <Link className="wordmark" to="/" aria-label={`${person} | ${fullName}, back to home`} onClick={() => { setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-mark" aria-hidden="true"><img className="brand-logo-light" src="/deer-logo.svg" alt="" /><img className="brand-logo-dark" src="/deer-logo-white.svg" alt="" /></span><span className="wordmark-copy"><strong className="wordmark-alias">{person}</strong><span className="wordmark-divider" aria-hidden="true">|</span><span className="wordmark-fullname">{fullName}</span></span></Link>
       <div className="nav-actions">
         <a className="nav-link nav-link-simple" href="/#portfolio">Portfolio</a>
-        <a className="nav-link nav-link-simple" href="/#about">About</a>
+        <a className="nav-link nav-link-simple" href="/#about">Clients</a>
         <div className="nav-menu-wrap">
           <button className="nav-link" type="button" aria-expanded={skillsOpen} onClick={() => { setSkillsOpen((value) => !value); setContactOpen(false); }}>Skills <CaretDown size={15} weight="bold" /></button>
           {skillsOpen && <nav className="dropdown skills-dropdown" aria-label="Skills navigation">
@@ -632,7 +660,7 @@ function ReadyProjectButton() {
 }
 
 const identityTerminalCopy = {
-  original: ['Artist mode installed', 'but Dư Ngọc Minh Hoàng is my true form....'],
+  original: ['Artist mode installed', 'Dư Ngọc Minh Hoàng is my true form.'],
   install: ['Npx HyyAnk package install', ''],
 };
 
@@ -653,9 +681,9 @@ function IdentityTerminal() {
   const reduceMotion = useReducedMotion();
   const [replayKey, setReplayKey] = useState(0);
   const [variant, setVariant] = useState('original');
-  const [lineOne, setLineOne] = useState('');
-  const [lineTwo, setLineTwo] = useState('');
-  const [activeLine, setActiveLine] = useState(1);
+  const [lineOne, setLineOne] = useState(identityTerminalCopy.original[0]);
+  const [lineTwo, setLineTwo] = useState(identityTerminalCopy.original[1]);
+  const [activeLine, setActiveLine] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -693,14 +721,11 @@ function IdentityTerminal() {
 
     const runLoop = async () => {
       setVariant('original');
-      setLineOne('');
-      setLineTwo('');
-
-      if (!await typeLine(identityTerminalCopy.original[0], setLineOne, 1)) return;
-      if (!await typeLine(identityTerminalCopy.original[1], setLineTwo, 2)) return;
+      setLineOne(identityTerminalCopy.original[0]);
+      setLineTwo(identityTerminalCopy.original[1]);
+      setActiveLine(0);
 
       while (!cancelled) {
-        setActiveLine(0);
         await pause(4000);
         if (cancelled || !await eraseLine(identityTerminalCopy.original[1], setLineTwo, 2)) return;
         if (!await eraseLine(identityTerminalCopy.original[0], setLineOne, 1)) return;
@@ -769,16 +794,18 @@ function IdentityTerminal() {
 function Hero() {
   return <section className="hero section-pad">
     <div className="hero-sentinel" data-nav-sentinel="true" />
-    <div className="page-shell hero-grid">
-      <div className="hero-copy">
-        <h1>{withoutTrailingPeriod(person)}</h1>
-        <IdentityTerminal />
-        <p className="hero-serif">Designer and developer for thoughtful digital work.</p>
-        <p className="hero-accent">Clarity first. Character always.</p>
-        <p className="hero-lede">I turn complex products, stories and workflows into clear experiences people can understand and use.</p>
+    <div className="page-shell hero-identity-grid">
+      <Reveal className="hero-profile-column">
+        <figure className="hero-portrait"><img src={portraitImage} alt={`Portrait of ${person}`} loading="eager" decoding="async" /></figure>
+        <div className="hero-terminal-wrap"><IdentityTerminal /></div>
+      </Reveal>
+      <Reveal className="hero-copy" delay={.06}>
+        <p className="hero-name">{person} / {fullName}</p>
+        <h1>Design, code, and <em>clarity.</em></h1>
+        <p className="hero-lede">I am a designer and developer shaping thoughtful digital work from first idea to final build.</p>
         <div className="hero-actions"><a className="button button-dark" href="#portfolio">View portfolio <ArrowDownRight size={18} /></a><ReadyProjectButton /></div>
-      </div>
-      <Reveal className="hero-composition-shell">
+      </Reveal>
+      <Reveal className="hero-composition-shell" delay={.12}>
         <HeroComposition />
       </Reveal>
     </div>
@@ -789,14 +816,41 @@ function WorkCarousel() {
   return <section id="portfolio" className="section-pad works-section"><div className="page-shell"><Reveal><div className="section-heading"><h2>Portfolio</h2></div></Reveal><div className="work-gallery">{works.map((work, index) => <Reveal className={`work-card work-card-${index + 1}`} key={work.slug} delay={index * .05}><Link to={`/work/${work.slug}`} className="work-card-link" aria-label={`View ${work.title} project`}><figure className="work-card-image"><img src={work.image} alt={`${work.title} project visual`} loading={index > 1 ? 'lazy' : 'eager'} decoding="async" /></figure><div className="work-card-copy"><div><h3>{withoutTrailingPeriod(work.title)}</h3><p>{work.cardDescription}</p></div><div className="work-card-meta"><span>{work.type}</span></div></div></Link></Reveal>)}</div></div></section>;
 }
 
-function About() {
-  const flow = [
-    { index: '01', title: 'Design', caption: 'Make it clear' },
-    { index: '02', title: 'Develop', caption: 'Make it work' },
-    { index: '03', title: 'Deliver', caption: 'Make it matter' },
-  ];
+function ClientsPanel() {
+  const [activeClient, setActiveClient] = useState(0);
+  const active = clientProjects[activeClient];
 
-  return <section id="about" className="section-pad about-section"><div className="page-shell about-grid"><Reveal className="about-title"><h2>About</h2></Reveal><Reveal className="about-image" delay={.06}><img src={portraitImage} alt={`Portrait of ${person}`} loading="lazy" /></Reveal><Reveal className="about-copy" delay={.12}><p className="large-copy">I am a designer and developer. I bridge strategy, design and code to make digital work feel alive.</p><p>I care about the details that shape clarity, usability and emotion. Good work should make the next step feel obvious.</p><a className="about-capability-flow" href="#skills" aria-label="Explore Design, Develop and Deliver capabilities"><span className="about-flow-heading"><span><small>How the work moves</small>Explore the flow</span><ArrowDownRight size={19} weight="bold" /></span><span className="about-flow-chain" aria-hidden="true">{flow.map((step) => <span className="about-flow-step" key={step.title}><span className="about-flow-index">{step.index}</span><strong>{step.title}</strong><span className="about-flow-caption">{step.caption}</span><span className="about-flow-node" /></span>)}</span></a></Reveal></div></section>;
+  return <section id="about" className="section-pad clients-section"><div className="page-shell clients-layout">
+    <Reveal className="clients-intro">
+      <span className="clients-label">Selected collaborations</span>
+      <h2>Different industries. The same attention to detail.</h2>
+      <p>I help teams turn complex information into visual systems people can understand and use.</p>
+    </Reveal>
+    <Reveal className="clients-panel" delay={.08}>
+      <figure className={`client-preview ${active.image ? '' : 'is-placeholder'}`}>
+        <div className="client-preview-frame" key={active.name}>
+          {active.image
+            ? <img src={active.image} alt={active.imageAlt} />
+            : <div className="client-preview-placeholder" role="img" aria-label="Temporary visual placeholder for Viettravel"><span>{active.monogram}</span><small>Visual archive in progress</small></div>}
+        </div>
+        <figcaption><strong>{active.name}</strong><span>{active.discipline}</span></figcaption>
+      </figure>
+      <div className="client-roster" role="group" aria-label="Selected clients">
+        {clientProjects.map((client, index) => <button
+          className={`client-row ${activeClient === index ? 'is-active' : ''}`}
+          key={client.name}
+          type="button"
+          aria-pressed={activeClient === index}
+          onPointerEnter={() => setActiveClient(index)}
+          onFocus={() => setActiveClient(index)}
+          onClick={() => setActiveClient(index)}
+        >
+          <span><strong>{client.name}</strong><small>{client.discipline}</small></span>
+          <ArrowUpRight size={19} weight="bold" aria-hidden="true" />
+        </button>)}
+      </div>
+    </Reveal>
+  </div></section>;
 }
 
 function ThreeSkillFlow() {
@@ -1263,7 +1317,7 @@ function RouteLoading({ label = 'Loading page' }) {
 
 function Home() {
   usePageMeta(seoByPath['/']);
-  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content"><div id="top"><Hero /></div><WorkCarousel /><About /><SkillBlocks /><Experiments /><Contact /></main><Footer /></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content"><div id="top"><Hero /></div><WorkCarousel /><ClientsPanel /><SkillBlocks /><Experiments /><Contact /></main><Footer /></>;
 }
 
 function ProjectPage({ work }) {
