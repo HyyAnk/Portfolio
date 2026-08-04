@@ -821,7 +821,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .work-gallery { gap: 48px; }
   .work-card-image { aspect-ratio: 4 / 3; }
   .work-card-copy { grid-template-columns: 1fr; gap: 16px; }
-  .work-card-meta { grid-template-columns: auto auto 1fr; justify-items: start; gap: 12px; text-align: left; }
+  .work-card-meta { grid-template-columns: 1fr; justify-items: start; text-align: left; }
   .about-grid { grid-template-columns: 1fr; gap: 23px; }
   .about-copy, .about-notes { grid-column: auto; }
   .about-image { height: 420px; }
