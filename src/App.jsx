@@ -846,15 +846,14 @@ function WorkCarousel() {
 }
 
 function ClientsPanel() {
-  return <section id="about" className="section-pad clients-section" aria-labelledby="clients-title"><div className="page-shell">
-    <Reveal className="clients-heading"><h2 id="clients-title">Clients</h2></Reveal>
-    <Reveal delay={.06}>
+  return <section id="about" className="section-pad clients-section" aria-label="Clients"><div className="page-shell">
+    <Reveal>
       <div className="client-conveyor" role="img" aria-label={`Client logos: ${clients.map((client) => client.name).join(', ')}`}>
         <div className="client-conveyor-belt" aria-hidden="true" />
         <ClientConveyorTrack variant="mono" />
         <ClientConveyorTrack variant="color" />
         <div className="client-scanner" aria-hidden="true">
-          <span className="client-scanner-head"><i /></span>
+          <span className="client-scanner-head"><strong>Clients</strong><i /></span>
           <span className="client-scanner-frame" />
           <span className="client-scanner-beam"><i /></span>
         </div>

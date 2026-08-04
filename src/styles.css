@@ -241,18 +241,16 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .work-card-copy p { max-width: 42ch; display: -webkit-box; overflow: hidden; font-size: .84rem; line-height: 1.55; text-wrap: pretty; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 .work-card-meta { min-width: 110px; display: grid; justify-items: end; align-content: start; gap: 4px; color: var(--muted); font-size: .7rem; text-align: right; }
 
-.clients-section { padding-block: clamp(70px, 6.5vw, 92px); }
-.clients-heading { margin-bottom: 18px; }
-.clients-heading h2 { color: var(--muted); font-size: .72rem; font-weight: 720; line-height: 1; letter-spacing: .12em; text-transform: uppercase; }
-.client-conveyor { --scanner-aperture: 204px; --scanner-half: 102px; --scanner-line-travel: 116px; position: relative; height: 286px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-card); background: color-mix(in srgb, var(--paper-elevated) 82%, var(--soft)); contain: layout paint; isolation: isolate; }
-.client-conveyor::before { position: absolute; inset: 0; z-index: 1; content: ''; pointer-events: none; background-image: linear-gradient(90deg, color-mix(in srgb, var(--paper) 94%, transparent), transparent 12%, transparent 88%, color-mix(in srgb, var(--paper) 94%, transparent)); }
-.client-conveyor-belt { position: absolute; right: 0; bottom: 0; left: 0; z-index: 1; height: 82px; border-top: 7px solid #353633; border-bottom: 10px solid #353633; background: repeating-linear-gradient(90deg, #565752 0 3px, #3d3e3a 3px 34px, #282a28 34px 36px); box-shadow: inset 0 7px 0 rgba(244,241,233,.08); }
-.client-conveyor-belt::after { position: absolute; right: 0; bottom: 14px; left: 0; height: 2px; content: ''; background: color-mix(in srgb, var(--accent) 62%, #353633); opacity: .74; }
-.client-conveyor-layer { position: absolute; inset: 48px 0 66px; z-index: 2; display: flex; align-items: center; overflow: hidden; }
+.clients-section { padding-block: clamp(58px, 5vw, 76px); }
+.client-conveyor { --scanner-aperture: 178px; --scanner-half: 89px; --scanner-line-travel: 92px; position: relative; width: 100vw; height: 232px; margin-left: calc(50% - 50vw); overflow: hidden; contain: layout paint; isolation: isolate; }
+.client-conveyor::before { position: absolute; top: 38px; bottom: 52px; left: 50%; z-index: 2; width: var(--scanner-aperture); content: ''; pointer-events: none; background: radial-gradient(ellipse at center, color-mix(in srgb, var(--accent) 7%, transparent), transparent 72%); transform: translateX(-50%); }
+.client-conveyor-belt { position: absolute; right: 0; bottom: 24px; left: 0; z-index: 1; height: 38px; border-top: 3px solid #3b3c39; border-bottom: 4px solid #3b3c39; background: repeating-linear-gradient(90deg, #4d4e49 0 2px, #343532 2px 42px, #252724 42px 44px); opacity: .92; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.client-conveyor-belt::after { position: absolute; right: 0; bottom: 7px; left: 0; height: 1px; content: ''; background: color-mix(in srgb, var(--accent) 56%, #353633); opacity: .62; }
+.client-conveyor-layer { position: absolute; inset: 30px 0 51px; z-index: 2; display: flex; align-items: flex-end; overflow: hidden; padding-bottom: 10px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
 .client-conveyor-layer-color { z-index: 3; clip-path: inset(0 calc(50% - var(--scanner-half))); }
-.client-conveyor-track { width: max-content; display: flex; flex: none; will-change: transform; animation: client-conveyor-loop 26s linear infinite; }
-.client-conveyor-sequence { display: flex; flex: none; gap: 16px; padding-right: 16px; }
-.client-logo-card { width: 218px; height: 128px; flex: none; display: grid; place-items: center; padding: 18px; overflow: hidden; border: 1px solid color-mix(in srgb, #2c2d2b 15%, transparent); border-radius: 14px; background: #ebe9e2; box-shadow: 0 14px 26px -24px rgba(35,36,33,.55); }
+.client-conveyor-track { width: max-content; display: flex; flex: none; will-change: transform; animation: client-conveyor-loop 30s linear infinite; }
+.client-conveyor-sequence { display: flex; flex: none; gap: 68px; padding-right: 68px; }
+.client-logo-card { width: 182px; height: 94px; flex: none; display: grid; place-items: center; padding: 0; overflow: visible; border: 0; background: transparent; }
 .client-logo { max-width: 100%; display: flex; align-items: center; justify-content: center; }
 .client-logo strong, .client-logo small { display: block; color: inherit; }
 
@@ -306,7 +304,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .northline-mark span { color: #e4744b; font-weight: 650; }
 .client-logo-northline strong { font-size: .68rem; font-weight: 650; letter-spacing: .22em; }
 
-.client-conveyor-layer-mono .client-logo-card { color: #777972; }
+.client-conveyor-layer-mono .client-logo-card { color: color-mix(in srgb, var(--ink) 48%, var(--paper)); }
 .client-conveyor-layer-mono .client-logo small, .client-conveyor-layer-mono .client-logo-viettravel strong span, .client-conveyor-layer-mono .northline-mark span { color: inherit; }
 .client-conveyor-layer-mono .hailong-mark i, .client-conveyor-layer-mono .taiyo-mark::before, .client-conveyor-layer-mono .taiyo-mark::after, .client-conveyor-layer-mono .taiyo-mark i, .client-conveyor-layer-mono .huaxinsheng-mark i, .client-conveyor-layer-mono .huaxinsheng-mark i:nth-child(2), .client-conveyor-layer-mono .viettravel-mark i { background: currentColor; }
 .client-conveyor-layer-color .client-logo-card-hailong { color: #173b31; }
@@ -317,13 +315,13 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .client-conveyor-layer-color .client-logo-card-northline { color: #242525; }
 .client-conveyor-layer-color .viettravel-mark i:first-child { background: #176c9c; }
 
-.client-scanner { position: absolute; top: 16px; bottom: 16px; left: 50%; z-index: 5; width: 230px; pointer-events: none; transform: translateX(-50%); }
-.client-scanner-head { position: absolute; top: 0; right: -2px; left: -2px; z-index: 3; height: 43px; border: 1px solid rgba(244,241,233,.12); border-radius: 10px 10px 5px 5px; background: #2f302e; box-shadow: inset 0 1px 0 rgba(244,241,233,.1), 0 12px 18px -17px rgba(35,36,33,.76); }
-.client-scanner-head::before { position: absolute; top: 10px; left: 50%; width: 74px; height: 4px; border-radius: 2px; content: ''; background: #161715; transform: translateX(-50%); }
-.client-scanner-head i { position: absolute; top: 11px; left: 50%; width: 28px; height: 2px; border-radius: 2px; background: var(--accent); opacity: .88; transform: translateX(-50%); }
-.client-scanner-frame { position: absolute; inset: 38px 2px 38px; z-index: 2; border-right: 7px solid #30312f; border-left: 7px solid #30312f; border-radius: 4px; box-shadow: inset 5px 0 0 rgba(244,241,233,.05), inset -5px 0 0 rgba(244,241,233,.05); }
-.client-scanner-beam { position: absolute; top: 45px; right: 13px; bottom: 46px; left: 13px; z-index: 1; overflow: hidden; border-right: 1px solid color-mix(in srgb, var(--accent) 46%, transparent); border-left: 1px solid color-mix(in srgb, var(--accent) 46%, transparent); background: color-mix(in srgb, var(--accent) 5%, transparent); }
-.client-scanner-beam i { position: absolute; top: 18px; right: 8px; left: 8px; height: 2px; background: color-mix(in srgb, var(--accent) 74%, #f2eee5); opacity: .78; box-shadow: 0 6px 15px color-mix(in srgb, var(--accent) 18%, transparent); animation: client-scanner-line 2.3s cubic-bezier(.45,0,.55,1) infinite alternate; }
+.client-scanner { position: absolute; top: 8px; bottom: 20px; left: 50%; z-index: 5; width: 202px; pointer-events: none; transform: translateX(-50%); }
+.client-scanner-head { position: absolute; top: 0; right: 0; left: 0; z-index: 3; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; border: 1px solid rgba(244,241,233,.1); border-radius: 8px 8px 4px 4px; background: #30312f; box-shadow: inset 0 1px 0 rgba(244,241,233,.08), 0 10px 16px -16px rgba(35,36,33,.72); }
+.client-scanner-head strong { color: #d8d6cf; font-size: .56rem; font-weight: 720; letter-spacing: .16em; line-height: 1; text-transform: uppercase; }
+.client-scanner-head i { width: 28px; height: 2px; border-radius: 2px; background: var(--accent); opacity: .82; }
+.client-scanner-frame { position: absolute; inset: 29px 6px 31px; z-index: 2; border-right: 4px solid #30312f; border-left: 4px solid #30312f; box-shadow: inset 2px 0 0 rgba(244,241,233,.04), inset -2px 0 0 rgba(244,241,233,.04); }
+.client-scanner-beam { position: absolute; top: 37px; right: 12px; bottom: 38px; left: 12px; z-index: 1; overflow: hidden; border-right: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-left: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); background: color-mix(in srgb, var(--accent) 3%, transparent); }
+.client-scanner-beam i { position: absolute; top: 15px; right: 8px; left: 8px; height: 1px; background: color-mix(in srgb, var(--accent) 70%, #f2eee5); opacity: .62; animation: client-scanner-line 2.6s cubic-bezier(.45,0,.55,1) infinite alternate; }
 .client-conveyor:is(:hover, :focus-within) .client-conveyor-track { animation-play-state: paused; }
 
 @keyframes client-conveyor-loop { to { transform: translate3d(-50%, 0, 0); } }
@@ -828,17 +826,19 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 }
 
 @media (max-width: 760px) {
-  .client-conveyor { --scanner-aperture: 166px; --scanner-half: 83px; --scanner-line-travel: 96px; height: 252px; }
-  .client-conveyor-layer { inset: 40px 0 58px; }
-  .client-conveyor-track { animation-duration: 22s; }
-  .client-conveyor-sequence { gap: 12px; padding-right: 12px; }
-  .client-logo-card { width: 188px; height: 112px; padding: 12px; }
-  .client-logo-card .client-logo { transform: scale(.9); }
-  .client-conveyor-belt { height: 72px; }
-  .client-scanner { top: 13px; bottom: 13px; width: 188px; }
-  .client-scanner-head { height: 39px; }
-  .client-scanner-frame { inset: 34px 2px 34px; }
-  .client-scanner-beam { top: 41px; bottom: 42px; }
+  .client-conveyor { --scanner-aperture: 148px; --scanner-half: 74px; --scanner-line-travel: 72px; height: 206px; }
+  .client-conveyor::before { top: 32px; bottom: 45px; }
+  .client-conveyor-layer { inset: 24px 0 43px; padding-bottom: 8px; mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent); }
+  .client-conveyor-track { animation-duration: 25s; }
+  .client-conveyor-sequence { gap: 46px; padding-right: 46px; }
+  .client-logo-card { width: 158px; height: 82px; }
+  .client-logo-card .client-logo { transform: scale(.82); }
+  .client-conveyor-belt { bottom: 18px; height: 32px; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+  .client-scanner { top: 5px; bottom: 15px; width: 170px; }
+  .client-scanner-head { height: 30px; padding-inline: 12px; }
+  .client-scanner-head strong { font-size: .5rem; }
+  .client-scanner-frame { inset: 25px 5px 27px; border-right-width: 3px; border-left-width: 3px; }
+  .client-scanner-beam { top: 32px; right: 11px; bottom: 33px; left: 11px; }
 }
 
 @media (max-width: 640px) {
@@ -888,8 +888,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .work-card-image { aspect-ratio: 4 / 3; }
   .work-card-copy { grid-template-columns: 1fr; gap: 16px; }
   .work-card-meta { grid-template-columns: 1fr; justify-items: start; text-align: left; }
-  .clients-section { padding: 68px 0 74px; }
-  .clients-heading { margin-bottom: 16px; }
+  .clients-section { padding: 52px 0 60px; }
   .skills-compact-board { gap: 8px; }
   .skills-compact-core { gap: 10px; }
   .skill-compact-core-link { height: 150px; min-height: 0; grid-template-columns: 1fr; grid-template-rows: auto 56px; gap: 4px; padding: 17px 46px 9px 18px; border-radius: 12px; }
@@ -1001,4 +1000,5 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 :root[data-theme="dark"] .skill-flow-visual { background: radial-gradient(circle at 50% 50%, rgba(239,121,84,.12), transparent 56%); }
 :root[data-theme="dark"] .works-section::before, :root[data-theme="dark"] .skill-blocks::before, :root[data-theme="dark"] .contact-section::before { filter: invert(1) grayscale(1); opacity: .42; }
 :root[data-theme="dark"] .clients-section::before { opacity: .58; }
+:root[data-theme="dark"] .client-conveyor::before { background: radial-gradient(ellipse at center, rgba(244,241,233,.48), rgba(244,241,233,.13) 52%, transparent 76%); }
 :root[data-theme="dark"] .contact-channel-x, :root[data-theme="dark"] .contact-channel-github { --brand-color: #fff; }
