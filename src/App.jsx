@@ -322,33 +322,46 @@ const configuredCarouselImages = Array.from({ length: 7 }, (_, index) => ({
   alt: customCarouselByIndex[index + 1] ? customCarouselAlts[index] : heroCarouselImages[index].alt,
 }));
 
-const clientProjects = [
-  {
-    name: 'Hải Long Construction',
-    discipline: 'Corporate presentation',
-    image: hailongCover,
-    imageAlt: 'Hải Long Construction presentation cover',
-  },
-  {
-    name: 'Taiyo Group',
-    discipline: 'Brand application',
-    image: taiyoCover,
-    imageAlt: 'Taiyo Group travel document system',
-  },
-  {
-    name: 'Huaxinsheng',
-    discipline: 'Company catalogue',
-    image: hxsCover,
-    imageAlt: 'Huaxinsheng company catalogue cover',
-  },
-  {
-    name: 'Viettravel',
-    discipline: 'Travel communication',
-    image: null,
-    imageAlt: '',
-    monogram: 'VT',
-  },
+const clients = [
+  { key: 'hailong', name: 'Hải Long Construction' },
+  { key: 'taiyo', name: 'Taiyo Group' },
+  { key: 'huaxinsheng', name: 'Huaxinsheng' },
+  { key: 'viettravel', name: 'Viettravel' },
+  { key: 'mori', name: 'Mori Studio', placeholder: true },
+  { key: 'northline', name: 'Northline', placeholder: true },
 ];
+
+function ClientLogo({ client }) {
+  if (client.key === 'hailong') return <span className="client-logo client-logo-hailong" aria-hidden="true">
+    <span className="hailong-mark"><i /><i /><i /></span>
+    <span className="hailong-wordmark"><strong>HẢI LONG</strong><small>CONSTRUCTION</small></span>
+  </span>;
+
+  if (client.key === 'taiyo') return <span className="client-logo client-logo-taiyo" aria-hidden="true">
+    <span className="taiyo-mark"><i /></span>
+    <span className="taiyo-wordmark"><strong>TAIYO</strong><small>GROUP</small></span>
+  </span>;
+
+  if (client.key === 'huaxinsheng') return <span className="client-logo client-logo-huaxinsheng" aria-hidden="true">
+    <span className="huaxinsheng-mark"><i /><i /><i /></span>
+    <span className="huaxinsheng-wordmark"><strong>HXS</strong><small>HUAXINSHENG</small></span>
+  </span>;
+
+  if (client.key === 'viettravel') return <span className="client-logo client-logo-viettravel" aria-hidden="true">
+    <span className="viettravel-mark"><i /><i /></span>
+    <strong><span>Viet</span>travel</strong>
+  </span>;
+
+  if (client.key === 'mori') return <span className="client-logo client-logo-mori" aria-hidden="true">
+    <span className="mori-mark"><i /><i /><i /></span>
+    <span><strong>MORI</strong><small>STUDIO</small></span>
+  </span>;
+
+  return <span className="client-logo client-logo-northline" aria-hidden="true">
+    <span className="northline-mark">N<span>/</span></span>
+    <strong>NORTHLINE</strong>
+  </span>;
+}
 
 const reveal = { hidden: { opacity: 0, y: 22 }, visible: { opacity: 1, y: 0 } };
 const revealTransition = { duration: 0.65, ease: [0.16, 1, 0.3, 1] };
@@ -801,7 +814,11 @@ function Hero() {
       </Reveal>
       <Reveal className="hero-copy" delay={.06}>
         <p className="hero-name">{person} / {fullName}</p>
-        <h1>Design, code, and <em>clarity.</em></h1>
+        <h1 className="hero-headline" aria-label="Design, develop, and deliver">
+          <span className="hero-headline-line">Design,</span>
+          <span className="hero-headline-line">develop,</span>
+          <span className="hero-headline-line hero-headline-line-axis">and <em>deliver</em></span>
+        </h1>
         <p className="hero-lede">I am a designer and developer shaping thoughtful digital work from first idea to final build.</p>
         <div className="hero-actions"><a className="button button-dark" href="#portfolio">View portfolio <ArrowDownRight size={18} /></a><ReadyProjectButton /></div>
       </Reveal>
@@ -817,39 +834,24 @@ function WorkCarousel() {
 }
 
 function ClientsPanel() {
-  const [activeClient, setActiveClient] = useState(0);
-  const active = clientProjects[activeClient];
+  const reduceMotion = useReducedMotion();
 
-  return <section id="about" className="section-pad clients-section"><div className="page-shell clients-layout">
-    <Reveal className="clients-intro">
-      <span className="clients-label">Selected collaborations</span>
-      <h2>Different industries. The same attention to detail.</h2>
-      <p>I help teams turn complex information into visual systems people can understand and use.</p>
-    </Reveal>
-    <Reveal className="clients-panel" delay={.08}>
-      <figure className={`client-preview ${active.image ? '' : 'is-placeholder'}`}>
-        <div className="client-preview-frame" key={active.name}>
-          {active.image
-            ? <img src={active.image} alt={active.imageAlt} />
-            : <div className="client-preview-placeholder" role="img" aria-label="Temporary visual placeholder for Viettravel"><span>{active.monogram}</span><small>Visual archive in progress</small></div>}
+  return <section id="about" className="section-pad clients-section" aria-labelledby="clients-title"><div className="page-shell">
+    <Reveal className="clients-heading"><h2 id="clients-title">Clients</h2></Reveal>
+    <ul className="clients-logo-wall">
+      {clients.map((client, index) => <motion.li
+        className={`client-logo-tile client-logo-tile-${client.key}`}
+        key={client.key}
+        initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: .18 }}
+        transition={{ duration: .58, delay: index * .055, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div role="img" aria-label={`${client.name}${client.placeholder ? ' temporary logo placeholder' : ' logo'}`}>
+          <ClientLogo client={client} />
         </div>
-        <figcaption><strong>{active.name}</strong><span>{active.discipline}</span></figcaption>
-      </figure>
-      <div className="client-roster" role="group" aria-label="Selected clients">
-        {clientProjects.map((client, index) => <button
-          className={`client-row ${activeClient === index ? 'is-active' : ''}`}
-          key={client.name}
-          type="button"
-          aria-pressed={activeClient === index}
-          onPointerEnter={() => setActiveClient(index)}
-          onFocus={() => setActiveClient(index)}
-          onClick={() => setActiveClient(index)}
-        >
-          <span><strong>{client.name}</strong><small>{client.discipline}</small></span>
-          <ArrowUpRight size={19} weight="bold" aria-hidden="true" />
-        </button>)}
-      </div>
-    </Reveal>
+      </motion.li>)}
+    </ul>
   </div></section>;
 }
 
