@@ -22,7 +22,25 @@ import hxs09 from './assets/case-studies/hxs-09.webp';
 import hxs10 from './assets/case-studies/hxs-10.webp';
 import hxs11 from './assets/case-studies/hxs-11.webp';
 import hxs12 from './assets/case-studies/hxs-12.webp';
+import hailongCover from './assets/case-studies/hailong-cover.webp';
+import taiyoCover from './assets/case-studies/taiyo-cover.webp';
+import taiyoHandover from './assets/case-studies/taiyo-handover.webp';
+import taiyoArtboard01 from './assets/case-studies/taiyo-artboard-01.webp';
+import taiyoArtboard02 from './assets/case-studies/taiyo-artboard-02.webp';
+import taiyoArtboard03 from './assets/case-studies/taiyo-artboard-03.webp';
+import taiyoPlaneDetail from './assets/case-studies/taiyo-plane-detail.webp';
+import taiyoAddressDetail from './assets/case-studies/taiyo-address-detail.webp';
+import taiyoWaveDetail from './assets/case-studies/taiyo-wave-detail.webp';
 import { withoutTrailingPeriod } from './text.js';
+
+const hailongSlideModules = import.meta.glob('./assets/case-studies/hailong-[0-9][0-9].webp', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+const hailongSlides = Object.entries(hailongSlideModules)
+  .sort(([left], [right]) => left.localeCompare(right))
+  .map(([, source]) => source);
 
 function CaseHeader({ work, variant, kicker, intro, facts, image, imageAlt, action, note = 'Self-initiated fictional brief / original art direction, design system and prototype' }) {
   return <section className={`flow-hero flow-hero-${variant}`}>
@@ -207,8 +225,172 @@ function HxsCaseStudy({ work }) {
   </article>;
 }
 
+const hailongReaderViews = {
+  credentials: { label: 'Credentials', slide: 7, note: 'Certificates and international standards' },
+  capacity: { label: 'Capacity', slide: 18, note: 'People, machinery and factory scale' },
+  production: { label: 'Production', slide: 22, note: 'Smart line and automated fabrication' },
+  projects: { label: 'Projects', slide: 26, note: 'Industrial projects across Vietnam' },
+  hse: { label: 'HSE', slide: 39, note: 'Safety training and site practice' },
+};
+
+function HailongReader() {
+  const [view, setView] = useState('production');
+  const active = hailongReaderViews[view];
+  const pageNumber = String(active.slide + 1).padStart(2, '0');
+  return <div className="hailong-reader">
+    <nav aria-label="Hai Long presentation preview">{Object.entries(hailongReaderViews).map(([key, item]) => <button type="button" key={key} aria-pressed={view === key} onClick={() => setView(key)}><span>{item.label}</span><small>{String(item.slide + 1).padStart(2, '0')}</small></button>)}</nav>
+    <div className="hailong-reader-stage" aria-live="polite">
+      <img src={hailongSlides[active.slide]} alt={`Hai Long presentation slide ${pageNumber}, ${active.note}`}/>
+      <div><span>{pageNumber} / 43</span><strong>{active.note}</strong></div>
+    </div>
+  </div>;
+}
+
+function HailongCaseStudy({ work }) {
+  const facts = [['Role','Presentation design · Art direction'],['Format','43 slides · 16:9'],['Language','English'],['Type','SFU Futura · Inter · Oswald']];
+  const chapterSlides = [1, 3, 10, 17, 25, 39];
+  const capabilitySlides = [17, 19, 22, 24];
+  const projectSlides = [26, 28, 31, 32, 35, 36];
+  return <article className="flow-case case-hailong">
+    <CaseHeader work={work} variant="hailong" kicker="Corporate presentation · Construction · 2026" intro="A 43-slide company presentation built to turn industrial scale into a clear business story" facts={facts} image={hailongCover} imageAlt="Hai Long Construction presentation displayed in a modern executive meeting room" action="Open presentation reader" note="Final presentation artwork shown from the original Hai Long Construction PDF"/>
+
+    <section className="flow-section hailong-architecture"><div className="flow-shell">
+      <FlowLabel number="01">Narrative architecture / 43 slides</FlowLabel>
+      <div className="hailong-slide-flight" aria-label="Hai Long presentation cover, certification and production slides">
+        {[0, 7, 22].map((index) => <figure key={index}><img src={hailongSlides[index]} alt={`Hai Long presentation slide ${String(index + 1).padStart(2, '0')}`}/></figure>)}
+      </div>
+      <ol>{[['Company','02–10'],['Services','11–16'],['Capability','17–25'],['Projects','26–39'],['HSE','40–42'],['Close','43']].map(([label, range], index) => <li key={label}><span>{String(index + 1).padStart(2, '0')}</span><strong>{label}</strong><small>{range}</small></li>)}</ol>
+    </div></section>
+
+    <section className="flow-section hailong-sequence-intro"><div className="flow-shell">
+      <FlowLabel number="02">Story rhythm</FlowLabel>
+      <div className="hailong-chapter-strip">{chapterSlides.map((index, order) => <figure key={index}><img src={hailongSlides[index]} alt={`Hai Long chapter slide ${String(index + 1).padStart(2, '0')}`} loading="lazy"/><figcaption><span>{String(order + 1).padStart(2, '0')}</span><strong>{['Leadership','Journey','Services','People','Map','Safety'][order]}</strong></figcaption></figure>)}</div>
+    </div></section>
+
+    <section className="flow-section hailong-system"><div className="flow-shell">
+      <FlowLabel number="03" tone="is-light">Colour + typography</FlowLabel>
+      <div className="hailong-system-board">
+        <div className="hailong-palette"><span style={{ '--swatch': '#074F9D' }}><b>Build blue</b><small>#074F9D</small></span><span style={{ '--swatch': '#1684DE' }}><b>Signal blue</b><small>#1684DE</small></span><span style={{ '--swatch': '#ED3B3F' }}><b>Safety red</b><small>#ED3B3F</small></span><span style={{ '--swatch': '#DCEBFA' }}><b>Ice blue</b><small>#DCEBFA</small></span><span style={{ '--swatch': '#F8FBFF' }}><b>Clear white</b><small>#F8FBFF</small></span></div>
+        <div className="hailong-type">
+          <span>Display / SFU Futura Bold</span><strong>BUILD TO LAST</strong>
+          <p>Inter 400 · 500 · 700</p><b>OSWALD 600 / 1,300 TONS</b>
+          <small>One condensed voice for scale, one neutral voice for evidence</small>
+        </div>
+      </div>
+    </div></section>
+
+    <section className="flow-section hailong-capability"><div className="flow-shell">
+      <FlowLabel number="04">Capability at scale</FlowLabel>
+      <div className="hailong-capability-grid">{capabilitySlides.map((index, order) => <Visual key={index} src={hailongSlides[index]} alt={`Hai Long capability slide ${String(index + 1).padStart(2, '0')}`} number={`04${String.fromCharCode(65 + order)}`} label={['Human resources','Factory volume','Smart production','Finishing system'][order]}/>)}</div>
+    </div></section>
+
+    <section id="live-demo" className="flow-section hailong-demo"><div className="flow-shell">
+      <FlowLabel number="05" tone="is-light">Presentation reader</FlowLabel>
+      <HailongReader/>
+    </div></section>
+
+    <section className="flow-section hailong-projects"><div className="flow-shell">
+      <FlowLabel number="06">Built project library</FlowLabel>
+      <div className="hailong-project-grid">{projectSlides.map((index) => <figure key={index}><img src={hailongSlides[index]} alt={`Hai Long completed project slide ${String(index + 1).padStart(2, '0')}`} loading="lazy"/><figcaption>{String(index + 1).padStart(2, '0')}</figcaption></figure>)}</div>
+    </div></section>
+
+    <section className="flow-section hailong-complete"><div className="flow-shell">
+      <FlowLabel number="07" tone="is-light">Complete presentation sequence</FlowLabel>
+      <div className="hailong-page-grid">{hailongSlides.map((slide, index) => <figure key={slide}><img src={slide} alt={`Hai Long presentation slide ${String(index + 1).padStart(2, '0')}`} loading="lazy"/><figcaption>{String(index + 1).padStart(2, '0')}</figcaption></figure>)}</div>
+    </div></section>
+
+    <section className="hailong-close"><img src={hailongSlides[42]} alt="Hai Long Construction closing presentation slide"/><div><span>43 slides / 16:9 / English</span><strong>HAI LONG</strong><small>Company · Capability · Production · Projects · HSE</small></div></section>
+  </article>;
+}
+
+const taiyoFormats = {
+  master: { label: 'Master artwork', image: taiyoArtboard01, note: 'Full envelope surface and hierarchy', code: '01' },
+  wide: { label: 'Wide format', image: taiyoArtboard02, note: 'Landscape travel-document format', code: '02' },
+  compact: { label: 'Compact format', image: taiyoArtboard03, note: 'Reduced counter handover format', code: '03' },
+};
+
+function TaiyoFormatPreview() {
+  const [format, setFormat] = useState('wide');
+  const active = taiyoFormats[format];
+  return <div className="taiyo-format-preview">
+    <nav aria-label="Taiyo Tourist envelope formats">{Object.entries(taiyoFormats).map(([key, item]) => <button type="button" key={key} aria-pressed={format === key} onClick={() => setFormat(key)}><span>{item.label}</span><small>{item.code}</small></button>)}</nav>
+    <div className={`taiyo-format-stage is-${format}`} aria-live="polite">
+      <figure><img src={active.image} alt={`${active.label}, ${active.note}`}/></figure>
+      <div><span>{active.code} / 03</span><strong>{active.note}</strong></div>
+    </div>
+  </div>;
+}
+
+function TaiyoFlightLoop() {
+  return <div className="taiyo-flight-loop" role="img" aria-label="Animated flight line connecting Taiyo Tourist envelope formats">
+    <svg viewBox="0 0 1440 310" aria-hidden="true">
+      <path className="taiyo-flight-path" d="M-40 246C212 250 228 66 466 83c207 15 211 149 455 123 187-20 221-139 559-119"/>
+      <path className="taiyo-flight-path is-secondary" d="M-30 270C238 286 286 117 502 126c219 9 220 154 458 122 191-26 229-117 520-102"/>
+      <g className="taiyo-flight-plane">
+        <path d="M0 12 43 1l9 5-30 17 27 10-6 5-36-8-17 10-5-3 9-14-12-8 5-4 13 1Z"/>
+      </g>
+      <circle cx="188" cy="150" r="5"/><circle cx="713" cy="171" r="5"/><circle cx="1160" cy="130" r="5"/>
+    </svg>
+    <div><span>01 / Artwork</span><span>02 / Print</span><span>03 / Handover</span></div>
+  </div>;
+}
+
+function TaiyoCaseStudy({ work }) {
+  const facts = [['Role','Packaging design · Artwork'],['Application','Travel document envelope'],['System','3 artwork formats'],['Output','CMYK print-ready PDF']];
+  const artboards = [taiyoArtboard01, taiyoArtboard02, taiyoArtboard03];
+  return <article className="flow-case case-taiyo">
+    <CaseHeader work={work} variant="taiyo" kicker="Brand application · Travel packaging · 2026" intro="A three-format envelope system for handing over itineraries, tickets and travel documents" facts={facts} image={taiyoCover} imageAlt="Taiyo Tourist branded envelope set arranged on an airport lounge concierge desk" action="Explore envelope formats" note="Final envelope artwork presented from the original Taiyo Tourist print PDF"/>
+
+    <section className="flow-section taiyo-artwork"><div className="flow-shell">
+      <FlowLabel number="01">Artwork system / 3 formats</FlowLabel>
+      <div className="taiyo-artboard-stack">{artboards.map((image, index) => <figure key={image}><img src={image} alt={`Taiyo Tourist envelope artwork format ${index + 1}`}/><figcaption>{String(index + 1).padStart(2, '0')} / 03</figcaption></figure>)}</div>
+    </div></section>
+
+    <section className="flow-section taiyo-identity"><div className="flow-shell">
+      <FlowLabel number="02" tone="is-light">Colour + type + graphic cues</FlowLabel>
+      <div className="taiyo-identity-board">
+        <div className="taiyo-palette"><span style={{ '--swatch': '#123B75' }}><b>Journey navy</b><small>#123B75</small></span><span style={{ '--swatch': '#155CAA' }}><b>Taiyo blue</b><small>#155CAA</small></span><span style={{ '--swatch': '#1DB4E6' }}><b>Sky cyan</b><small>#1DB4E6</small></span><span style={{ '--swatch': '#E51E2A' }}><b>Route red</b><small>#E51E2A</small></span><span style={{ '--swatch': '#FFD21A' }}><b>Sun yellow</b><small>#FFD21A</small></span></div>
+        <div className="taiyo-type"><span>Logo / custom outlined lettering</span><strong>TAIYO<span>TOURIST</span></strong><p>Geometric sans / contact system</p><small>Uppercase structure with a calligraphic travel accent</small></div>
+      </div>
+      <div className="taiyo-detail-strip"><figure><img src={taiyoPlaneDetail} alt="Taiyo Tourist aircraft and route-line graphic detail"/><figcaption>Aircraft / route motion</figcaption></figure><figure><img src={taiyoAddressDetail} alt="Taiyo Tourist recipient field graphic detail"/><figcaption>Recipient / writing field</figcaption></figure><figure><img src={taiyoWaveDetail} alt="Taiyo Tourist navy and cyan address wave detail"/><figcaption>Address / contact band</figcaption></figure></div>
+    </div></section>
+
+    <section className="taiyo-handover"><figure><img src={taiyoHandover} alt="Taiyo Tourist envelope used as a travel document handover kit at a service counter"/></figure><div><span>03</span><strong>Travel document handover</strong><small>Envelope / passport / itinerary / voucher</small></div></section>
+
+    <section id="live-demo" className="flow-section taiyo-format"><div className="flow-shell">
+      <FlowLabel number="04">Format preview</FlowLabel>
+      <TaiyoFormatPreview/>
+    </div></section>
+
+    <section className="flow-section taiyo-production"><div className="flow-shell">
+      <FlowLabel number="05" tone="is-light">Print construction</FlowLabel>
+      <div className="taiyo-production-board">
+        <div className="taiyo-envelope-plan">
+          <svg viewBox="0 0 760 460" role="img" aria-label="Envelope front, fold and flap construction diagram">
+            <path className="taiyo-plan-cut" d="M78 118h604v265H78z"/>
+            <path className="taiyo-plan-fold" d="M78 118 380 282l302-164M78 383l208-160M682 383 474 223"/>
+            <path className="taiyo-plan-flap" d="M78 118 185 40h390l107 78"/>
+            <circle cx="78" cy="118" r="5"/><circle cx="682" cy="118" r="5"/><circle cx="78" cy="383" r="5"/><circle cx="682" cy="383" r="5"/>
+          </svg>
+          <span>Cut line</span><span>Fold line</span><span>Glue flap</span>
+        </div>
+        <dl><div><dt>Colour</dt><dd>CMYK / process</dd></div><div><dt>Surface</dt><dd>Uncoated white stock</dd></div><div><dt>Finish</dt><dd>Scored / folded / glued</dd></div><div><dt>Artwork</dt><dd>Outlined vector PDF</dd></div></dl>
+      </div>
+    </div></section>
+
+    <section className="flow-section taiyo-originals"><div className="flow-shell">
+      <FlowLabel number="06">Original print artboards</FlowLabel>
+      <div className="taiyo-original-grid">{artboards.map((image, index) => <figure key={image}><img src={image} alt={`Original Taiyo Tourist print artboard ${index + 1}`} loading="lazy"/><figcaption><span>{String(index + 1).padStart(2, '0')}</span><strong>{['Master surface','Wide envelope','Compact envelope'][index]}</strong></figcaption></figure>)}</div>
+    </div></section>
+
+    <section className="taiyo-close"><TaiyoFlightLoop/><div className="flow-shell"><span>3 formats / print-ready / physical application</span><strong>TAIYO TOURIST</strong><small>Artwork · Packaging · Handover</small></div></section>
+  </article>;
+}
+
 export function ShowcaseCaseStudy({ work }) {
   if (work.caseKey === 'folded-matter') return <VunCaseStudy work={work}/>;
   if (work.caseKey === 'still-moving') return <HxsCaseStudy work={work}/>;
+  if (work.caseKey === 'hailong-presentation') return <HailongCaseStudy work={work}/>;
+  if (work.caseKey === 'taiyo-envelope') return <TaiyoCaseStudy work={work}/>;
   return null;
 }

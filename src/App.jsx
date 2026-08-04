@@ -25,6 +25,8 @@ import dauCover from './assets/case-studies/dau-cover.webp';
 import relayCover from './assets/case-studies/relay-cover.webp';
 import vunCover from './assets/case-studies/vun-cover.webp';
 import hxsCover from './assets/case-studies/hxs-home-cover.webp';
+import hailongCover from './assets/case-studies/hailong-cover.webp';
+import taiyoCover from './assets/case-studies/taiyo-cover.webp';
 import { notFoundSeo, seoByPath, siteIdentity } from './seo.js';
 import { withoutTrailingPeriod } from './text.js';
 
@@ -230,6 +232,8 @@ const works = [
   { slug: 'portfolio-2', caseKey: 'folded-matter', title: 'VỤN', type: 'Brand identity · Circular materials', year: '2026', role: 'Strategy · Identity · Art direction', description: 'Identity for a studio that turns construction offcuts into useful objects.', challenge: 'A material-led studio needed one recognisable system across samples, products, packaging, space and catalogue.', outcome: 'A fragment-based identity built from four colours, three material families and one modular V mark.', tags: ['Brand identity', 'Art direction'], image: vunCover, deep: true },
   { slug: 'portfolio-3', caseKey: 'still-moving', title: 'HUAXINSHENG', type: 'Company catalogue · Industrial materials', year: '2026', role: 'Catalogue design · Art direction', description: 'A 24-page Vietnamese sales catalogue for welded steel mesh, from company capability to technical application.', challenge: 'Company scale, product proof, engineering detail and real applications had to remain easy to scan in one compact document.', outcome: 'An A3 spread system built around a clear Inter hierarchy, industrial blue palette and evidence-led page sequence.', tags: ['Editorial design', 'Catalogue'], image: hxsCover, deep: true },
   { slug: 'portfolio-4', caseKey: 'kitepay', title: 'RELAY', type: 'Blockchain product · Event ticketing', year: '2026', role: 'Product strategy · UX/UI · Web3', description: 'Verified event tickets with simple transfer, capped resale and fraud-resistant entry.', challenge: 'Ticket ownership needed to stay trustworthy without exposing customers or gate staff to blockchain mechanics.', outcome: 'One access system across mobile tickets, resale, scanners, wristbands and organizer operations.', tags: ['Blockchain', 'Product design'], image: relayCover, deep: true },
+  { slug: 'portfolio-5', caseKey: 'hailong-presentation', title: 'HAI LONG', type: 'Corporate presentation · Construction', year: '2026', role: 'Presentation design · Art direction', description: 'A 43-slide company presentation turning construction capability, production scale and built projects into a clear business story.', challenge: 'A large volume of credentials, services, machinery and project evidence needed one confident presentation rhythm.', outcome: 'A 16:9 English deck connecting company trust, technical scale and completed work across 43 slides.', tags: ['Presentation design', 'Editorial system'], image: hailongCover, deep: true },
+  { slug: 'portfolio-6', caseKey: 'taiyo-envelope', title: 'TAIYO TOURIST', type: 'Brand application · Travel packaging', year: '2026', role: 'Packaging design · Artwork', description: 'A three-format envelope system for handing over itineraries, tickets and travel documents with a consistent Taiyo Group signature.', challenge: 'Logo, travel imagery, recipient space and contact details had to remain clear across multiple physical formats.', outcome: 'A print-ready application system connecting aircraft motion, address hierarchy and a recognisable blue-red travel palette.', tags: ['Packaging design', 'Brand application'], image: taiyoCover, deep: true },
 ];
 
 const legacyWorkRoutes = [
@@ -782,7 +786,7 @@ function Hero() {
 }
 
 function WorkCarousel() {
-  return <section id="portfolio" className="section-pad works-section"><div className="page-shell"><Reveal><div className="section-heading"><h2>Portfolio</h2></div></Reveal><div className="work-gallery">{works.map((work, index) => <Reveal className={`work-card work-card-${index + 1}`} key={work.slug} delay={index * .05}><Link to={`/work/${work.slug}`} className="work-card-link" aria-label={`View ${work.title} project`}><figure className="work-card-image"><img src={work.image} alt={`${work.title} project visual`} loading={index > 1 ? 'lazy' : 'eager'} decoding="async" /></figure><div className="work-card-kicker"><span>{String(index + 1).padStart(2, '0')} / 04</span><span>{work.deep ? 'Full case study' : 'Project study'}</span></div><div className="work-card-copy"><div><h3>{withoutTrailingPeriod(work.title)}</h3><p>{work.description}</p></div><div className="work-card-meta"><span>{work.type}</span><span>{work.year}</span></div></div></Link></Reveal>)}</div></div></section>;
+  return <section id="portfolio" className="section-pad works-section"><div className="page-shell"><Reveal><div className="section-heading"><h2>Portfolio</h2></div></Reveal><div className="work-gallery">{works.map((work, index) => <Reveal className={`work-card work-card-${index + 1}`} key={work.slug} delay={index * .05}><Link to={`/work/${work.slug}`} className="work-card-link" aria-label={`View ${work.title} project`}><figure className="work-card-image"><img src={work.image} alt={`${work.title} project visual`} loading={index > 1 ? 'lazy' : 'eager'} decoding="async" /></figure><div className="work-card-kicker"><span>{String(index + 1).padStart(2, '0')} / {String(works.length).padStart(2, '0')}</span><span>{work.deep ? 'Full case study' : 'Project study'}</span></div><div className="work-card-copy"><div><h3>{withoutTrailingPeriod(work.title)}</h3><p>{work.description}</p></div><div className="work-card-meta"><span>{work.type}</span><span>{work.year}</span></div></div></Link></Reveal>)}</div></div></section>;
 }
 
 function About() {
@@ -1265,7 +1269,7 @@ function Home() {
 function ProjectPage({ work }) {
   usePageMeta(seoByPath[`/work/${work.slug}`]);
   if (work.deep) {
-    const isShowcaseCase = work.caseKey === 'folded-matter' || work.caseKey === 'still-moving';
+    const isShowcaseCase = work.caseKey === 'folded-matter' || work.caseKey === 'still-moving' || work.caseKey === 'hailong-presentation' || work.caseKey === 'taiyo-envelope';
     return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className={`project-page-deep project-page-${work.caseKey}`}><Suspense fallback={<RouteLoading label={`Loading ${work.title}`} />}>{isShowcaseCase ? <ShowcaseCaseStudy work={work}/> : <DeepCaseStudy work={work} />}</Suspense><Contact /></main><Footer /></>;
   }
   return <><a className="skip-link" href="#main-content">Skip to content</a><Nav /><main id="main-content" className="project-page">
