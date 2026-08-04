@@ -19,7 +19,7 @@ export const seoRoutes = [
     '/',
     'HyyAnk - Designer and Developer',
     'HyyAnk (Dư Ngọc Minh Hoàng) is a multidisciplinary designer and developer creating clear, thoughtful digital work.',
-    'src/assets/case-studies/dau-cover.webp',
+    'public/og-about.jpg',
     'profile',
   ),
   route('/work/portfolio-1', 'HAI LONG Presentation - HyyAnk', 'A 43-slide English corporate construction presentation covering company credentials, production capability, completed projects and HSE.', 'src/assets/case-studies/hailong-cover.webp', 'article'),

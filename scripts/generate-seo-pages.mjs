@@ -45,6 +45,10 @@ function normalizeSiteUrl() {
 }
 
 function resolveOgImage(manifest, source, siteUrl) {
+  if (source.startsWith('public/')) {
+    return `${siteUrl}/${source.slice('public/'.length)}`;
+  }
+
   const entry = Object.values(manifest).find((item) => item.src === source);
   if (!entry?.file) {
     log('WARN', `Could not resolve ${source}; using the branded favicon as a fallback.`, { step: 'resolve-assets', style: 'warning' });
