@@ -6,9 +6,9 @@ import {
   Copy, EnvelopeSimple, GithubLogo, Moon, Sun, TelegramLogo, XLogo,
 } from '@phosphor-icons/react';
 import {
-  siBlender, siCss, siEthereum, siFigma, siGithubactions, siHtml5,
+  siCss, siEthereum, siFigma, siGithubactions, siHtml5,
   siJavascript, siOkx, siPython, siReact, siSelenium, siSolana,
-  siSolidity, siUnrealengine, siWalletconnect,
+  siSolidity, siWalletconnect,
 } from 'simple-icons';
 
 import uiImage from './assets/generated/work-ui.webp';
@@ -79,19 +79,15 @@ const contactLinks = [
 ];
 
 const skills = [
-  { slug: 'graphic-design', title: 'Graphic Design', short: 'Identity systems with a point of view', supportingTools: 'Photoshop · Illustrator', body: 'I build visual systems that make an idea legible before anyone reads the details', image: graphicImage, variant: 'graphic', tools: ['Art direction', 'Identity', 'Editorial'], details: ['Visual identity systems', 'Editorial layout direction', 'Typography and colour systems', 'Campaign art direction'] },
-  { slug: 'video-editor', title: 'Video Editor', short: 'Motion with an honest rhythm', body: 'I shape footage, sound and type into clear stories that know when to pause', image: videoImage, variant: 'video', tools: ['Editing', 'Title design', 'Sound'], details: ['Advanced transitions', 'Professional SFX design', 'Special effects and motion effects', 'Cinematic storytelling'] },
+  { slug: 'graphic-design', title: 'Graphic Design', short: 'Identity systems with a point of view', body: 'I build visual systems that make an idea legible before anyone reads the details', image: graphicImage, variant: 'graphic', tools: ['Art direction', 'Identity', 'Editorial'], details: ['Visual identity systems', 'Editorial layout direction', 'Typography and colour systems', 'Campaign art direction'] },
+  { slug: 'video-editor', title: 'Video Editor', short: 'Motion with an honest rhythm', supportingTools: 'After\u00A0Effect · CapCut', body: 'I shape footage, sound and type into clear stories that know when to pause', image: videoImage, variant: 'video', tools: ['Editing', 'Title design', 'Sound'], details: ['Advanced transitions', 'Professional SFX design', 'Special effects and motion effects', 'Cinematic storytelling'] },
   { slug: 'uiux-webdev', title: 'Web Design', short: 'Interfaces that feel considered', body: 'I design and code responsive experiences where the visual idea survives the interaction', image: uiImage, variant: 'ui', tools: ['Product design', 'React', 'Systems'], details: ['UX flows and product structure', 'Responsive design systems', 'React implementation', 'Interaction and interface motion'] },
   { slug: 'automation', title: 'Automation', short: 'The quiet work behind the work', supportingTools: 'Python · Node\u00A0JS', body: 'I connect the small steps that slow a team down and turn them into a dependable flow', image: automationImage, variant: 'automation', tools: ['Workflows', 'APIs', 'Operations'], details: ['Workflow architecture', 'API and webhook orchestration', 'Content and task automation', 'Operational clarity'] },
   { slug: 'blockchain', title: 'Blockchain Integration', short: 'Trust made tangible', supportingTools: 'EVM · Smart\u00A0Contract', body: 'I help teams use decentralised technology where it creates real ownership, not extra noise', image: blockchainImage, variant: 'blockchain', tools: ['Wallets', 'Onchain UX', 'Contracts'], details: ['Wallet and onboarding UX', 'Smart contract integration', 'Onchain transaction states', 'Trust and ownership design'] },
 ];
 
-const primarySkills = ['uiux-webdev', 'video-editor'].map((slug) => skills.find((skill) => skill.slug === slug));
-const supportingSkills = ['graphic-design', 'automation', 'blockchain'].map((slug) => skills.find((skill) => skill.slug === slug));
-
-const capCutIcon = {
-  path: 'M24.189 6.442V2.671l-4.535 2.383V4.91c.002-1.505-1.078-2.411-2.638-2.411H2.64C.993 2.5 0 3.407 0 4.91V8.72L6.354 12 0 15.316v3.8C0 20.595 1 21.5 2.64 21.5h14.373c1.56 0 2.639-.907 2.639-2.382v-.197l4.536 2.409v-3.828L13.64 12 24.19 6.443zM9.982 13.873l7.797 4.083H2.157l7.825-4.083zm7.741-7.828l-7.742 4.057-7.825-4.057h15.567z',
-};
+const primarySkills = ['graphic-design', 'uiux-webdev'].map((slug) => skills.find((skill) => skill.slug === slug));
+const supportingSkills = ['video-editor', 'automation', 'blockchain'].map((slug) => skills.find((skill) => skill.slug === slug));
 
 function FigmaToolLogo() {
   return <svg className="skill-tool-figma-logo" viewBox="0 0 38 57" focusable="false">
@@ -103,26 +99,24 @@ function FigmaToolLogo() {
   </svg>;
 }
 
+const powerpointIcon = {
+  path: 'M13.5 1.5q1.453 0 2.795.375 1.342.375 2.508 1.06 1.166.686 2.12 1.641.956.955 1.641 2.121.686 1.166 1.061 2.508Q24 10.547 24 12q0 1.453-.375 2.795-.375 1.342-1.06 2.508-.686 1.166-1.641 2.12-.955.956-2.121 1.641-1.166.686-2.508 1.061-1.342.375-2.795.375-1.29 0-2.52-.305-1.23-.304-2.337-.884-1.108-.58-2.063-1.418-.955-.838-1.693-1.893H.997q-.411 0-.704-.293T0 17.004V6.996q0-.41.293-.703T.996 6h3.89q.739-1.055 1.694-1.893.955-.837 2.063-1.418 1.107-.58 2.337-.884Q12.21 1.5 13.5 1.5zm.75 1.535v8.215h8.215q-.14-1.64-.826-3.076-.686-1.436-1.782-2.531-1.095-1.096-2.537-1.782-1.441-.685-3.07-.826zm-5.262 7.57q0-.68-.228-1.166-.229-.486-.627-.79-.399-.305-.938-.446-.539-.14-1.172-.14H2.848v7.863h1.84v-2.742H5.93q.574 0 1.119-.17t.978-.493q.434-.322.698-.802.263-.48.263-1.114zM13.5 21q1.172 0 2.262-.287t2.056-.82q.967-.534 1.776-1.278.808-.744 1.418-1.664.61-.92.984-1.986.375-1.067.469-2.227h-9.703V3.035q-1.735.14-3.27.908T6.797 6h4.207q.41 0 .703.293t.293.703v10.008q0 .41-.293.703t-.703.293H6.797q.644.715 1.412 1.271.768.557 1.623.944.855.387 1.781.586Q12.54 21 13.5 21zM5.812 9.598q.575 0 .915.228.34.229.34.838 0 .27-.124.44-.123.17-.31.275-.188.105-.422.146-.234.041-.445.041H4.687V9.598Z',
+};
+
+const canvaIcon = {
+  path: 'M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zM6.962 7.68c.754 0 1.337.549 1.405 1.2.069.583-.171 1.097-.822 1.406-.343.171-.48.172-.549.069-.034-.069 0-.137.069-.206.617-.514.617-.926.548-1.508-.034-.378-.308-.618-.583-.618-1.2 0-2.914 2.674-2.674 4.629.103.754.549 1.646 1.509 1.646.308 0 .65-.103.96-.24.5-.264.799-.47 1.097-.8-.073-.885.704-2.046 1.851-2.046.515 0 .926.205.96.583.068.514-.377.582-.514.582s-.378-.034-.378-.17c-.034-.138.309-.07.275-.378-.035-.206-.24-.274-.446-.274-.72 0-1.131.994-1.029 1.611.035.275.172.549.447.549.205 0 .514-.31.617-.755.068-.308.343-.514.583-.514.102 0 .17.034.205.171v.138c-.034.137-.137.548-.102.651 0 .069.034.171.17.171.092 0 .436-.18.777-.459.117-.59.253-1.298.253-1.357.034-.24.137-.48.617-.48.103 0 .171.034.205.171v.138l-.136.617c.445-.583 1.097-.994 1.508-.994.172 0 .309.102.309.274 0 .103 0 .274-.069.446-.137.377-.309.96-.412 1.474 0 .137.035.274.207.274.171 0 .685-.206 1.096-.754l.007-.004c-.002-.068-.007-.134-.007-.202 0-.411.035-.754.104-.994.068-.274.411-.514.617-.514.103 0 .205.069.205.171 0 .035 0 .103-.034.137-.137.446-.24.857-.24 1.269 0 .24.034.582.102.788 0 .034.035.069.07.069.068 0 .548-.445.89-1.028-.308-.206-.48-.549-.48-.96 0-.72.446-1.097.858-1.097.343 0 .617.24.617.72 0 .308-.103.65-.274.96h.102a.77.77 0 0 0 .584-.24.293.293 0 0 1 .134-.117c.335-.425.83-.74 1.41-.74.48 0 .924.205.959.582.068.515-.378.618-.515.618l-.002-.002c-.138 0-.377-.035-.377-.172 0-.137.309-.068.274-.376-.034-.206-.24-.275-.446-.275-.686 0-1.13.891-1.028 1.611.034.275.171.583.445.583.206 0 .515-.308.652-.754.068-.274.343-.514.583-.514.103 0 .17.034.205.171 0 .069 0 .206-.137.652-.17.308-.171.48-.137.617.034.274.171.48.309.583.034.034.068.102.068.102 0 .069-.034.138-.137.138-.034 0-.068 0-.103-.035-.514-.205-.72-.548-.789-.891-.205.24-.445.377-.72.377-.445 0-.89-.411-.96-.926a1.609 1.609 0 0 1 .075-.649c-.203.13-.422.203-.623.203h-.17c-.447.652-.927 1.098-1.27 1.303a.896.896 0 0 1-.377.104c-.068 0-.171-.035-.205-.104-.095-.152-.156-.392-.193-.667-.481.527-1.145.805-1.453.805-.343 0-.548-.206-.582-.55v-.376c.102-.754.377-1.2.377-1.337a.074.074 0 0 0-.069-.07c-.24 0-1.028.824-1.166 1.373l-.103.445c-.068.309-.377.515-.582.515-.103 0-.172-.035-.206-.172v-.137l.046-.233c-.435.31-.87.508-1.075.508-.308 0-.48-.172-.514-.412-.206.274-.445.412-.754.412-.352 0-.696-.24-.862-.593-.244.275-.523.553-.852.764-.48.309-1.028.549-1.68.549-.582 0-1.097-.309-1.371-.583-.412-.377-.651-.96-.686-1.509-.205-1.68.823-3.84 2.4-4.8.378-.205.755-.343 1.132-.343zm9.77 3.291c-.104 0-.172.172-.172.343 0 .274.137.583.309.755a1.74 1.74 0 0 0 .102-.583c0-.343-.137-.515-.24-.515z',
+};
+
 const skillToolsets = {
   'graphic-design': {
     motion: 'graphic',
-    label: 'Photoshop, Illustrator, InDesign and Figma',
+    label: 'Photoshop, Illustrator, PowerPoint, Canva and Premier Pro',
     tools: [
       { name: 'Adobe Photoshop', label: 'Photoshop', mark: 'Ps', color: '#31A8FF' },
       { name: 'Adobe Illustrator', label: 'Illustrator', mark: 'Ai', color: '#FF9A00' },
-      { name: 'Adobe InDesign', label: 'InDesign', mark: 'Id', color: '#FF3366' },
-      { name: 'Figma', icon: siFigma, color: '#F24E1E' },
-    ],
-  },
-  'video-editor': {
-    motion: 'video',
-    label: 'After Effects, Premiere Pro, CapCut, Blender and Unreal Engine',
-    tools: [
-      { name: 'Adobe After Effects', label: 'After Effects', mark: 'Ae', color: '#9999FF', markSize: '0.9rem' },
-      { name: 'Adobe Premiere Pro', label: 'Premiere Pro', mark: 'Pr', color: '#9999FF', markSize: '0.9rem' },
-      { name: 'CapCut', icon: capCutIcon, mono: true },
-      { name: 'Blender', icon: siBlender, color: `#${siBlender.hex}` },
-      { name: 'Unreal Engine', icon: siUnrealengine, mono: true, iconSize: 25, mobileIconSize: 23 },
+      { name: 'Microsoft PowerPoint', label: 'PowerPoint', icon: powerpointIcon, color: '#C43E1C', iconSize: 24, mobileIconSize: 22 },
+      { name: 'Canva', icon: canvaIcon, color: '#00C4CC', iconSize: 24, mobileIconSize: 22 },
+      { name: 'Adobe Premiere Pro', label: 'Premier Pro', mark: 'Pr', color: '#9999FF', markSize: '0.9rem' },
     ],
   },
   'uiux-webdev': {
@@ -161,16 +155,16 @@ const skillToolsets = {
 };
 
 const measuredToolTextWidths = {
+  Photoshop: 55,
+  Illustrator: 55,
+  PowerPoint: 62,
+  Canva: 36,
+  'Premier Pro': 64,
   Figma: 33,
   React: 32,
   JavaScript: 57,
   HTML5: 37,
   CSS: 24,
-  'After Effects': 68,
-  'Premiere Pro': 70,
-  CapCut: 42,
-  Blender: 42,
-  'Unreal Engine': 75,
 };
 
 function createRandomToolOrder(count) {
@@ -217,9 +211,7 @@ function SkillToolIcon({ tool, index, order }) {
 function SkillToolMotion({ skill }) {
   const toolset = skillToolsets[skill.slug];
   const [toolOrder] = useState(() => createRandomToolOrder(toolset.tools.length));
-  const [rowPhase] = useState(() => toolset.motion === 'video'
-    ? `${-(1.55 + Math.random() * 1.2).toFixed(2)}s`
-    : `${-(Math.random() * .35).toFixed(2)}s`);
+  const [rowPhase] = useState(() => `${-(Math.random() * .35).toFixed(2)}s`);
   return <span className={`skill-tool-motion skill-tool-motion-${toolset.motion}`} role="img" aria-label={toolset.label} style={{ '--tool-row-phase': rowPhase }}>
     <span className="skill-tool-track" aria-hidden="true">
       {toolset.tools.map((tool, index) => <SkillToolIcon key={tool.name} tool={tool} index={index} order={toolOrder[index]} />)}
@@ -834,7 +826,7 @@ function Hero() {
           <span className="hero-headline-prefix" aria-hidden="true">and <em>de</em></span>
           <em className="hero-headline-suffix" aria-hidden="true">liver</em>
         </h1>
-        <p className="hero-lede">I am a designer and developer shaping thoughtful digital work from first idea to final build.</p>
+        <p className="hero-lede">I am a graphic and web designer shaping clear visual systems and thoughtful digital experiences from first idea to final build.</p>
         <div className="hero-actions"><a className="button button-dark" href="#portfolio">View portfolio <ArrowDownRight size={18} /></a><ReadyProjectButton /></div>
       </Reveal>
       <Reveal className="hero-composition-shell" delay={.12}>

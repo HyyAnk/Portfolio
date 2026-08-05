@@ -67,7 +67,7 @@ function structuredData(route, canonical, image) {
       url: canonical,
       image,
       email: `mailto:${siteIdentity.email}`,
-      jobTitle: 'Designer and Developer',
+      jobTitle: 'Graphic and Web Designer',
       sameAs: [
         'https://github.com/HyyAnk',
         'https://x.com/0x_HyyAnk',

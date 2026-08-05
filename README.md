@@ -1,6 +1,6 @@
 # HyyAnk Portfolio
 
-The source for [HyyAnk's multidisciplinary portfolio](https://portfolio-navy-iota-86.vercel.app), featuring six visual case studies and focused showcases across graphic design, product design, video, automation, and blockchain.
+The source for [HyyAnk's portfolio](https://portfolio-navy-iota-86.vercel.app), centred on graphic and web design with supporting work in video editing, automation, and blockchain integration.
 
 ## Stack
 
