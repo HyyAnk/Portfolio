@@ -27,6 +27,13 @@ import vunCover from './assets/case-studies/vun-cover.webp';
 import hxsCover from './assets/case-studies/hxs-home-cover.webp';
 import hailongCover from './assets/case-studies/hailong-cover.webp';
 import taiyoCover from './assets/case-studies/taiyo-cover.webp';
+import haiLongClientLogo from './assets/clients/hai-long.webp';
+import hailiClientLogo from './assets/clients/haili.webp';
+import hhDreamClientLogo from './assets/clients/hh-dream.webp';
+import huaxinshengClientLogo from './assets/clients/huaxinsheng.webp';
+import taiyoGroupClientLogo from './assets/clients/taiyo-group.webp';
+import udeClientLogo from './assets/clients/ude.webp';
+import vietravelClientLogo from './assets/clients/vietravel.webp';
 import { notFoundSeo, seoByPath, siteIdentity } from './seo.js';
 import { withoutTrailingPeriod } from './text.js';
 
@@ -316,44 +323,17 @@ const configuredCarouselImages = Array.from({ length: 7 }, (_, index) => ({
 }));
 
 const clients = [
-  { key: 'hailong', name: 'Hải Long Construction' },
-  { key: 'taiyo', name: 'Taiyo Group' },
-  { key: 'huaxinsheng', name: 'Huaxinsheng' },
-  { key: 'viettravel', name: 'Vietravel' },
-  { key: 'mori', name: 'Mori Studio', placeholder: true },
-  { key: 'northline', name: 'Northline', placeholder: true },
+  { key: 'hai-long', name: 'Hải Long Construction', logo: haiLongClientLogo },
+  { key: 'taiyo-group', name: 'Taiyo Group', logo: taiyoGroupClientLogo },
+  { key: 'huaxinsheng', name: 'Huaxinsheng', logo: huaxinshengClientLogo },
+  { key: 'vietravel', name: 'Vietravel', logo: vietravelClientLogo },
+  { key: 'haili', name: 'HAILI', logo: hailiClientLogo },
+  { key: 'hh-dream', name: 'HH Dream', logo: hhDreamClientLogo },
+  { key: 'ude', name: 'UDE', logo: udeClientLogo },
 ];
 
 function ClientLogo({ client }) {
-  if (client.key === 'hailong') return <span className="client-logo client-logo-hailong" aria-hidden="true">
-    <span className="hailong-mark"><i /><i /><i /></span>
-    <span className="hailong-wordmark"><strong>HẢI LONG</strong><small>CONSTRUCTION</small></span>
-  </span>;
-
-  if (client.key === 'taiyo') return <span className="client-logo client-logo-taiyo" aria-hidden="true">
-    <span className="taiyo-mark"><i /></span>
-    <span className="taiyo-wordmark"><strong>TAIYO</strong><small>GROUP</small></span>
-  </span>;
-
-  if (client.key === 'huaxinsheng') return <span className="client-logo client-logo-huaxinsheng" aria-hidden="true">
-    <span className="huaxinsheng-mark"><i /><i /><i /></span>
-    <span className="huaxinsheng-wordmark"><strong>HXS</strong><small>HUAXINSHENG</small></span>
-  </span>;
-
-  if (client.key === 'viettravel') return <span className="client-logo client-logo-viettravel" aria-hidden="true">
-    <span className="viettravel-mark"><i /><i /></span>
-    <strong><span>Viet</span>ravel</strong>
-  </span>;
-
-  if (client.key === 'mori') return <span className="client-logo client-logo-mori" aria-hidden="true">
-    <span className="mori-mark"><i /><i /><i /></span>
-    <span><strong>MORI</strong><small>STUDIO</small></span>
-  </span>;
-
-  return <span className="client-logo client-logo-northline" aria-hidden="true">
-    <span className="northline-mark">N<span>/</span></span>
-    <strong>NORTHLINE</strong>
-  </span>;
+  return <img className="client-logo" src={client.logo} alt="" decoding="async" draggable="false" />;
 }
 
 function ClientConveyorTrack({ variant }) {

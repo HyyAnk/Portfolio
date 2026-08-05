@@ -153,7 +153,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .hero-profile-column { position: relative; z-index: 3; min-width: 0; }
 .hero-portrait { position: relative; height: min(68dvh, 610px); min-height: 500px; margin: 0; overflow: hidden; border-radius: var(--radius-card); background: var(--soft); box-shadow: 0 26px 60px -42px color-mix(in srgb, var(--ink) 52%, transparent); }
 .hero-portrait::after { position: absolute; inset: 0; content: ''; pointer-events: none; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--paper-elevated) 30%, transparent); }
-.hero-portrait img { object-position: 63% center; }
+.hero-portrait img { object-position: 50% center; }
 .hero-terminal-wrap { position: absolute; right: clamp(-72px, -5vw, -56px); bottom: 26px; z-index: 5; width: min(390px, calc(100% + 72px)); }
 .hero-copy { position: relative; z-index: 4; max-width: 410px; padding-left: clamp(24px, 3vw, 46px); }
 .identity-terminal { display: block; width: 100%; margin: 0; overflow: hidden; border: 1px solid rgba(151, 164, 151, .22); border-radius: 12px; background: #151815; color: #d7ddd7; box-shadow: 0 18px 42px -25px rgba(15, 24, 16, .76), inset 0 1px rgba(255,255,255,.045); font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; text-align: left; transition: border-color .24s ease, box-shadow .24s ease, transform .24s ease; }
@@ -253,69 +253,15 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .client-conveyor-track { width: max-content; display: flex; flex: none; will-change: transform; animation: client-conveyor-loop 30s linear infinite; }
 .client-conveyor-sequence { display: flex; flex: none; gap: 68px; padding-right: 68px; }
 .client-logo-card { width: 182px; height: 94px; flex: none; display: grid; place-items: center; padding: 0; overflow: visible; border: 0; background: transparent; }
-.client-logo { max-width: 100%; display: flex; align-items: center; justify-content: center; }
-.client-logo strong, .client-logo small { display: block; color: inherit; }
-
-.client-logo-hailong { gap: 13px; }
-.hailong-mark { width: 48px; aspect-ratio: 1; display: flex; align-items: flex-end; justify-content: center; gap: 7%; transform: skewY(-8deg); }
-.hailong-mark i { width: 27%; border-radius: 2px 2px 0 0; background: #e4744b; }
-.hailong-mark i:nth-child(1) { height: 54%; }
-.hailong-mark i:nth-child(2) { height: 100%; }
-.hailong-mark i:nth-child(3) { height: 72%; }
-.hailong-wordmark { display: grid; gap: 5px; }
-.hailong-wordmark strong { font-family: 'Space Grotesk Variable', sans-serif; font-size: 1.4rem; font-weight: 680; line-height: .82; letter-spacing: -.075em; }
-.hailong-wordmark small { color: #567267; font-size: .42rem; font-weight: 700; letter-spacing: .26em; }
-
-.client-logo-taiyo { gap: 14px; }
-.taiyo-mark { position: relative; width: 43px; aspect-ratio: 1; display: grid; place-items: center; border: 2px solid currentColor; border-radius: 50%; }
-.taiyo-mark::before, .taiyo-mark::after { position: absolute; width: 132%; height: 2px; content: ''; background: #d65345; transform: rotate(34deg); }
-.taiyo-mark::after { transform: rotate(-34deg); }
-.taiyo-mark i { width: 31%; aspect-ratio: 1; border-radius: 50%; background: #d65345; }
-.taiyo-wordmark { display: grid; gap: 4px; }
-.taiyo-wordmark strong { font-size: 1.45rem; font-weight: 760; line-height: .82; letter-spacing: -.06em; }
-.taiyo-wordmark small { color: #496277; font-size: .56rem; font-weight: 750; letter-spacing: .42em; }
-
-.client-logo-huaxinsheng { gap: 15px; }
-.huaxinsheng-mark { width: 43px; aspect-ratio: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8%; transform: rotate(45deg); }
-.huaxinsheng-mark i { border-radius: 3px; background: currentColor; }
-.huaxinsheng-mark i:nth-child(2) { transform: translateY(22%); background: #d65d43; }
-.huaxinsheng-mark i:nth-child(3) { transform: translateY(-22%); }
-.huaxinsheng-wordmark { display: grid; gap: 3px; }
-.huaxinsheng-wordmark strong { font-size: 1.55rem; font-weight: 790; line-height: .8; letter-spacing: -.08em; }
-.huaxinsheng-wordmark small { color: #4d6680; font-size: .43rem; font-weight: 700; letter-spacing: .2em; }
-
-.client-logo-viettravel { gap: 14px; }
-.viettravel-mark { position: relative; width: 34px; height: 44px; }
-.viettravel-mark i { position: absolute; inset-block: 0; width: 50%; background: #f4efe3; clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%); }
-.viettravel-mark i:first-child { left: 0; transform: rotate(-12deg); transform-origin: bottom right; }
-.viettravel-mark i:last-child { right: 0; background: #ef7d4e; transform: rotate(12deg); transform-origin: bottom left; }
-.client-logo-viettravel strong { font-family: 'Playfair Display Variable', Georgia, serif; font-size: 1.35rem; font-weight: 650; line-height: 1; letter-spacing: -.055em; }
-.client-logo-viettravel strong span { color: #e6774a; }
-
-.client-logo-mori { gap: 14px; }
-.mori-mark { width: 44px; aspect-ratio: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; transform: rotate(-8deg); }
-.mori-mark i { border: 2px solid currentColor; border-radius: 50% 50% 8% 50%; }
-.mori-mark i:nth-child(2) { border-radius: 50% 50% 50% 8%; }
-.mori-mark i:nth-child(3) { grid-column: 1 / -1; width: 46%; justify-self: center; border-radius: 8% 50% 50%; }
-.client-logo-mori > span:last-child { display: grid; gap: 4px; }
-.client-logo-mori strong { font-size: 1.45rem; font-weight: 760; line-height: .84; letter-spacing: .02em; }
-.client-logo-mori small { font-size: .52rem; font-weight: 750; letter-spacing: .42em; }
-
-.client-logo-northline { display: grid; justify-items: start; gap: 12px; }
-.northline-mark { font-size: 2.7rem; font-weight: 300; line-height: .7; letter-spacing: -.13em; }
-.northline-mark span { color: #e4744b; font-weight: 650; }
-.client-logo-northline strong { font-size: .68rem; font-weight: 650; letter-spacing: .22em; }
-
-.client-conveyor-layer-mono .client-logo-card { color: color-mix(in srgb, var(--ink) 48%, var(--paper)); }
-.client-conveyor-layer-mono .client-logo small, .client-conveyor-layer-mono .client-logo-viettravel strong span, .client-conveyor-layer-mono .northline-mark span { color: inherit; }
-.client-conveyor-layer-mono .hailong-mark i, .client-conveyor-layer-mono .taiyo-mark::before, .client-conveyor-layer-mono .taiyo-mark::after, .client-conveyor-layer-mono .taiyo-mark i, .client-conveyor-layer-mono .huaxinsheng-mark i, .client-conveyor-layer-mono .huaxinsheng-mark i:nth-child(2), .client-conveyor-layer-mono .viettravel-mark i { background: currentColor; }
-.client-conveyor-layer-color .client-logo-card-hailong { color: #173b31; }
-.client-conveyor-layer-color .client-logo-card-taiyo { color: #143752; }
-.client-conveyor-layer-color .client-logo-card-huaxinsheng { color: #173f64; }
-.client-conveyor-layer-color .client-logo-card-viettravel { color: #176c9c; }
-.client-conveyor-layer-color .client-logo-card-mori { color: #34322d; }
-.client-conveyor-layer-color .client-logo-card-northline { color: #242525; }
-.client-conveyor-layer-color .viettravel-mark i:first-child { background: #176c9c; }
+.client-logo { width: auto; height: auto; max-width: var(--logo-max-width, 100%); max-height: var(--logo-max-height, 82px); display: block; object-fit: contain; user-select: none; }
+.client-logo-card-hai-long { --logo-max-width: 170px; --logo-max-height: 80px; }
+.client-logo-card-taiyo-group { --logo-max-width: 184px; --logo-max-height: 58px; }
+.client-logo-card-huaxinsheng { --logo-max-width: 182px; --logo-max-height: 72px; }
+.client-logo-card-vietravel { --logo-max-width: 184px; --logo-max-height: 62px; }
+.client-logo-card-haili { --logo-max-width: 190px; --logo-max-height: 54px; }
+.client-logo-card-hh-dream { --logo-max-width: 84px; --logo-max-height: 82px; }
+.client-logo-card-ude { --logo-max-width: 82px; --logo-max-height: 84px; }
+.client-conveyor-layer-mono .client-logo { filter: grayscale(1) saturate(0) contrast(.72); opacity: .56; }
 
 .client-scanner { position: absolute; top: 8px; bottom: 20px; left: 50%; z-index: 5; width: var(--scanner-width); pointer-events: none; transform: translateX(-50%); }
 .client-scanner-head { position: absolute; top: 0; right: 0; left: 0; z-index: 3; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; border: 1px solid rgba(244,241,233,.1); border-radius: 8px 8px 4px 4px; background: #30312f; box-shadow: inset 0 1px 0 rgba(244,241,233,.08), 0 10px 16px -16px rgba(35,36,33,.72); }
@@ -862,6 +808,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .hero-identity-grid { grid-template-columns: 1fr; gap: 38px; }
   .hero-profile-column { display: grid; }
   .hero-portrait { height: min(92vw, 390px); min-height: 0; }
+  .hero-portrait img { object-position: 50% 16%; }
   .hero-terminal-wrap { position: relative; right: auto; bottom: auto; width: calc(100% - 22px); margin: -40px 11px 0; }
   .hero-copy { max-width: none; padding-left: 0; }
   .hero-name { margin-bottom: 18px; }
@@ -1002,6 +949,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 :root[data-theme="dark"] .works-section::before, :root[data-theme="dark"] .skill-blocks::before, :root[data-theme="dark"] .contact-section::before { filter: invert(1) grayscale(1); opacity: .42; }
 :root[data-theme="dark"] .clients-section::before { opacity: .58; }
 :root[data-theme="dark"] .client-conveyor::before { background: radial-gradient(ellipse at center, rgba(244,241,233,.48), rgba(244,241,233,.13) 52%, transparent 76%); }
+:root[data-theme="dark"] .client-conveyor-layer-mono .client-logo { filter: grayscale(1) invert(1) brightness(.88) contrast(.72); opacity: .62; }
 :root[data-theme="dark"] .contact-channel-x, :root[data-theme="dark"] .contact-channel-github { --brand-color: #fff; }
 :root[data-theme="dark"] .contact-section,
 :root[data-theme="dark"] .project-page-deep .contact-section {

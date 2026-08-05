@@ -29,3 +29,6 @@ Thumbs.db
 PDF/
 tmp/
 .codex-*.log
+
+# Local image references used for profile generation
+My picture/
