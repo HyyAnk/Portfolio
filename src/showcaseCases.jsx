@@ -259,7 +259,7 @@ function HailongCaseStudy({ work }) {
       <div className="hailong-slide-flight" aria-label="Hai Long presentation cover, certification and production slides">
         {[0, 7, 22].map((index) => <figure key={index}><img src={hailongSlides[index]} alt={`Hai Long presentation slide ${String(index + 1).padStart(2, '0')}`}/></figure>)}
       </div>
-      <ol>{[['Company','02–10'],['Services','11–16'],['Capability','17–25'],['Projects','26–39'],['HSE','40–42'],['Close','43']].map(([label, range], index) => <li key={label}><span>{String(index + 1).padStart(2, '0')}</span><strong>{label}</strong><small>{range}</small></li>)}</ol>
+      <ol>{[['Company','02-10'],['Services','11-16'],['Capability','17-25'],['Projects','26-39'],['HSE','40-42'],['Close','43']].map(([label, range], index) => <li key={label}><span>{String(index + 1).padStart(2, '0')}</span><strong>{label}</strong><small>{range}</small></li>)}</ol>
     </div></section>
 
     <section className="flow-section hailong-sequence-intro"><div className="flow-shell">

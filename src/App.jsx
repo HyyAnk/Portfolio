@@ -35,6 +35,7 @@ import taiyoGroupClientLogo from './assets/clients/taiyo-group.webp';
 import udeClientLogo from './assets/clients/ude.webp';
 import vietravelClientLogo from './assets/clients/vietravel.webp';
 import { notFoundSeo, seoByPath, siteIdentity } from './seo.js';
+import { languages, translateText, useLanguage } from './i18n.jsx';
 import { withoutTrailingPeriod } from './text.js';
 
 const DeepCaseStudy = lazy(() => import('./caseStudies.jsx').then((module) => ({ default: module.DeepCaseStudy })));
@@ -352,11 +353,14 @@ const reveal = { hidden: { opacity: 0, y: 22 }, visible: { opacity: 1, y: 0 } };
 const revealTransition = { duration: 0.65, ease: [0.16, 1, 0.3, 1] };
 
 function usePageMeta(metadata) {
+  const { language } = useLanguage();
   useEffect(() => {
     if (!metadata) return;
     const origin = window.location.origin;
     const canonicalUrl = `${origin}${metadata.path === '/' ? '/' : metadata.path}`;
-    document.title = metadata.title;
+    const localizedTitle = translateText(metadata.title, language);
+    const localizedDescription = translateText(metadata.description, language);
+    document.title = localizedTitle;
 
     const upsertMeta = (selector, attributes) => {
       let element = document.head.querySelector(selector);
@@ -375,16 +379,16 @@ function usePageMeta(metadata) {
       Object.entries(attributes).forEach(([name, value]) => element.setAttribute(name, value));
     };
 
-    upsertMeta('meta[name="description"]', { name: 'description', content: metadata.description });
-    upsertMeta('meta[property="og:title"]', { property: 'og:title', content: metadata.title });
-    upsertMeta('meta[property="og:description"]', { property: 'og:description', content: metadata.description });
+    upsertMeta('meta[name="description"]', { name: 'description', content: localizedDescription });
+    upsertMeta('meta[property="og:title"]', { property: 'og:title', content: localizedTitle });
+    upsertMeta('meta[property="og:description"]', { property: 'og:description', content: localizedDescription });
     upsertMeta('meta[property="og:type"]', { property: 'og:type', content: metadata.kind === 'article' ? 'article' : metadata.kind === 'profile' ? 'profile' : 'website' });
     upsertMeta('meta[property="og:url"]', { property: 'og:url', content: canonicalUrl });
-    upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: metadata.title });
-    upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: metadata.description });
+    upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: localizedTitle });
+    upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: localizedDescription });
     upsertMeta('meta[name="robots"]', { name: 'robots', content: metadata.noindex ? 'noindex, follow' : 'index, follow' });
     upsertLink('link[rel="canonical"]', { rel: 'canonical', href: canonicalUrl });
-  }, [metadata]);
+  }, [language, metadata]);
 }
 
 function RouteScrollManager() {
@@ -419,9 +423,66 @@ function useTheme() {
   return [theme, setTheme];
 }
 
+function FlagIcon({ language }) {
+  if (language === 'vi') return <svg className="language-flag" viewBox="0 0 28 20" aria-hidden="true" focusable="false">
+    <rect width="28" height="20" rx="2" fill="#da251d" />
+    <path d="m14 4.1 1.33 4.08h4.29l-3.47 2.52 1.33 4.08L14 12.26l-3.48 2.52 1.33-4.08-3.47-2.52h4.29L14 4.1Z" fill="#ffdf00" />
+  </svg>;
+  if (language === 'zh') return <svg className="language-flag" viewBox="0 0 28 20" aria-hidden="true" focusable="false">
+    <rect width="28" height="20" rx="2" fill="#de2910" />
+    <path d="m6.1 3 1 3.08h3.24L7.72 7.99l1 3.08-2.62-1.9-2.62 1.9 1-3.08-2.62-1.91H5.1L6.1 3Z" fill="#ffde00" />
+    <g fill="#ffde00"><circle cx="12.4" cy="3.3" r=".8"/><circle cx="14.5" cy="5.6" r=".8"/><circle cx="14.4" cy="8.6" r=".8"/><circle cx="12.1" cy="10.7" r=".8"/></g>
+  </svg>;
+  return <svg className="language-flag" viewBox="0 0 28 20" aria-hidden="true" focusable="false">
+    <rect width="28" height="20" rx="2" fill="#21468b" />
+    <path d="M0 2.2 24.9 20H28v-2.2L3.1 0H0v2.2Zm28 0L3.1 20H0v-2.2L24.9 0H28v2.2Z" fill="#fff" />
+    <path d="m0 0 10.7 7.65H7.6L0 2.22V0Zm28 0L17.3 7.65h3.1L28 2.22V0ZM0 20l10.7-7.65H7.6L0 17.78V20Zm28 0-10.7-7.65h3.1l7.6 5.43V20Z" fill="#cf142b" />
+    <path d="M11 0h6v20h-6zM0 7h28v6H0z" fill="#fff" />
+    <path d="M12.2 0h3.6v20h-3.6zM0 8.2h28v3.6H0z" fill="#cf142b" />
+  </svg>;
+}
+
+function LanguageSwitcher({ open, onToggle, onClose }) {
+  const { language, setLanguage, t } = useLanguage();
+  const activeLanguage = languages.find(({ code }) => code === language) || languages[1];
+  const selectLanguage = (code) => {
+    setLanguage(code);
+    onClose();
+  };
+
+  return <div className="nav-menu-wrap language-menu-wrap" translate="no">
+    <button
+      className="language-trigger"
+      type="button"
+      aria-label={`${t('Language')}: ${activeLanguage.name}. ${t('Choose language')}`}
+      aria-haspopup="menu"
+      aria-expanded={open}
+      onClick={onToggle}
+    >
+      <FlagIcon language={language} />
+    </button>
+    {open && <div className="dropdown language-dropdown" role="menu" aria-label={t('Choose language')}>
+      {languages.map((option) => <button
+        className={`language-option ${option.code === language ? 'is-active' : ''}`}
+        type="button"
+        role="menuitemradio"
+        aria-label={option.name}
+        aria-checked={option.code === language}
+        key={option.code}
+        onClick={() => selectLanguage(option.code)}
+      >
+        <FlagIcon language={option.code} />
+        <strong>{option.name}</strong>
+        <Check size={15} weight="bold" aria-hidden="true" />
+      </button>)}
+    </div>}
+  </div>;
+}
+
 function Nav() {
   const [skillsOpen, setSkillsOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useTheme();
   const location = useLocation();
@@ -436,7 +497,7 @@ function Nav() {
   useEffect(() => {
     const close = (event) => {
       if (event.key === 'Escape' || (event.type === 'pointerdown' && !navRef.current?.contains(event.target))) {
-        setSkillsOpen(false); setContactOpen(false);
+        setSkillsOpen(false); setContactOpen(false); setLanguageOpen(false);
       }
     };
     document.addEventListener('keydown', close);
@@ -445,12 +506,12 @@ function Nav() {
   }, []);
   return <header className={`site-nav ${scrolled ? 'is-scrolled' : ''}`} ref={navRef}>
     <div className="nav-inner">
-      <Link className="wordmark" to="/" aria-label={`${person} | ${fullName}, back to home`} onClick={() => { setSkillsOpen(false); setContactOpen(false); }}><span className="wordmark-mark" aria-hidden="true"><img className="brand-logo-light" src="/deer-logo.svg" alt="" /><img className="brand-logo-dark" src="/deer-logo-white.svg" alt="" /></span><span className="wordmark-copy"><strong className="wordmark-alias">{person}</strong><span className="wordmark-divider" aria-hidden="true">|</span><span className="wordmark-fullname">{fullName}</span></span></Link>
+      <Link className="wordmark" to="/" aria-label={`${person} | ${fullName}, back to home`} onClick={() => { setSkillsOpen(false); setContactOpen(false); setLanguageOpen(false); }}><span className="wordmark-mark" aria-hidden="true"><img className="brand-logo-light" src="/deer-logo.svg" alt="" /><img className="brand-logo-dark" src="/deer-logo-white.svg" alt="" /></span><span className="wordmark-copy"><strong className="wordmark-alias">{person}</strong><span className="wordmark-divider" aria-hidden="true">|</span><span className="wordmark-fullname">{fullName}</span></span></Link>
       <div className="nav-actions">
         <a className="nav-link nav-link-simple" href="/#portfolio">Portfolio</a>
         <a className="nav-link nav-link-simple" href="/#about">Clients</a>
         <div className="nav-menu-wrap">
-          <button className="nav-link" type="button" aria-expanded={skillsOpen} onClick={() => { setSkillsOpen((value) => !value); setContactOpen(false); }}>Skills <CaretDown size={15} weight="bold" /></button>
+          <button className="nav-link" type="button" aria-expanded={skillsOpen} onClick={() => { setSkillsOpen((value) => !value); setContactOpen(false); setLanguageOpen(false); }}>Skills <CaretDown size={15} weight="bold" /></button>
           {skillsOpen && <nav className="dropdown skills-dropdown" aria-label="Skills navigation">
             <div className="skills-dropdown-primary">
               {primarySkills.map((skill) => <Link className="skills-dropdown-primary-link" key={skill.slug} to={`/skills/${skill.slug}`} onClick={() => setSkillsOpen(false)}>
@@ -462,11 +523,12 @@ function Nav() {
             </div>
           </nav>}
         </div>
+        <LanguageSwitcher open={languageOpen} onToggle={() => { setLanguageOpen((value) => !value); setSkillsOpen(false); setContactOpen(false); }} onClose={() => setLanguageOpen(false)} />
         <button className={`theme-toggle ${theme === 'dark' ? 'is-dark' : ''}`} type="button" role="switch" aria-checked={theme === 'dark'} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} onClick={() => setTheme((value) => value === 'dark' ? 'light' : 'dark')}>
           <span className="theme-toggle-track" aria-hidden="true"><Sun size={12} weight="fill" /><Moon size={12} weight="fill" /><span className="theme-toggle-thumb">{theme === 'dark' ? <Moon size={11} weight="fill" /> : <Sun size={11} weight="fill" />}</span></span>
         </button>
         <div className="nav-menu-wrap">
-          <button className="contact-trigger" type="button" aria-label="Open contact links" aria-expanded={contactOpen} onClick={() => { setContactOpen((value) => !value); setSkillsOpen(false); }}>
+          <button className="contact-trigger" type="button" aria-label="Open contact links" aria-expanded={contactOpen} onClick={() => { setContactOpen((value) => !value); setSkillsOpen(false); setLanguageOpen(false); }}>
             <span className="contact-trigger-icons" aria-hidden="true">{contactLinks.map(({ key, icon: Icon }) => Icon ? <Icon key={key} size={14} weight="bold" /> : <span key={key} className="zalo-mark">Z</span>)}</span>
           </button>
           {contactOpen && <ContactDropdown />}
@@ -639,7 +701,7 @@ function ReadyProjectButton() {
     onFocusCapture={() => setEffectSource('focus', true)}
     onBlurCapture={() => setEffectSource('focus', false)}
   >
-    <a className="button ready-cta" href="#contact" aria-label="Ready to Deliver - go to contact options">
+    <a className="button ready-cta" href="#contact" aria-label="Ready to Deliver - go to contact options" translate="no">
       <span className="ready-cta-label">Ready to Deliver</span>
       <span className="ready-type" aria-hidden="true"><span>_</span><span>_</span><span>_</span></span>
     </a>
@@ -677,10 +739,12 @@ function TerminalHighlight({ text, target, highlight, className }) {
 
 function IdentityTerminal() {
   const reduceMotion = useReducedMotion();
+  const originalLineOne = identityTerminalCopy.original[0];
+  const originalLineTwo = identityTerminalCopy.original[1];
   const [replayKey, setReplayKey] = useState(0);
   const [variant, setVariant] = useState('original');
-  const [lineOne, setLineOne] = useState(identityTerminalCopy.original[0]);
-  const [lineTwo, setLineTwo] = useState(identityTerminalCopy.original[1]);
+  const [lineOne, setLineOne] = useState(originalLineOne);
+  const [lineTwo, setLineTwo] = useState(originalLineTwo);
   const [activeLine, setActiveLine] = useState(0);
 
   useEffect(() => {
@@ -719,14 +783,14 @@ function IdentityTerminal() {
 
     const runLoop = async () => {
       setVariant('original');
-      setLineOne(identityTerminalCopy.original[0]);
-      setLineTwo(identityTerminalCopy.original[1]);
+      setLineOne(originalLineOne);
+      setLineTwo(originalLineTwo);
       setActiveLine(0);
 
       while (!cancelled) {
         await pause(4000);
-        if (cancelled || !await eraseLine(identityTerminalCopy.original[1], setLineTwo, 2)) return;
-        if (!await eraseLine(identityTerminalCopy.original[0], setLineOne, 1)) return;
+        if (cancelled || !await eraseLine(originalLineTwo, setLineTwo, 2)) return;
+        if (!await eraseLine(originalLineOne, setLineOne, 1)) return;
 
         setVariant('install');
         if (!await typeLine(identityTerminalCopy.install[0], setLineOne, 1)) return;
@@ -743,15 +807,15 @@ function IdentityTerminal() {
         if (!await eraseLine(identityTerminalCopy.install[0], setLineOne, 1)) return;
 
         setVariant('original');
-        if (!await typeLine(identityTerminalCopy.original[0], setLineOne, 1)) return;
-        if (!await typeLine(identityTerminalCopy.original[1], setLineTwo, 2)) return;
+        if (!await typeLine(originalLineOne, setLineOne, 1)) return;
+        if (!await typeLine(originalLineTwo, setLineTwo, 2)) return;
       }
     };
 
     if (reduceMotion) {
       setVariant('original');
-      setLineOne(identityTerminalCopy.original[0]);
-      setLineTwo(identityTerminalCopy.original[1]);
+      setLineOne(originalLineOne);
+      setLineTwo(originalLineTwo);
       setActiveLine(0);
     } else {
       runLoop();
@@ -761,11 +825,12 @@ function IdentityTerminal() {
       cancelled = true;
       timers.forEach((timer) => window.clearTimeout(timer));
     };
-  }, [reduceMotion, replayKey]);
+  }, [originalLineOne, originalLineTwo, reduceMotion, replayKey]);
 
   return <button
     className={`identity-terminal is-${variant}`}
     type="button"
+    translate="no"
     onClick={() => setReplayKey((key) => key + 1)}
     aria-label="Animated identity terminal alternating between artist mode and the HyyAnk package installation. Click to restart the animation."
   >
@@ -782,7 +847,7 @@ function IdentityTerminal() {
       </span>
       <span className={`identity-terminal-line identity-terminal-line-two ${activeLine === 2 ? 'is-active' : ''} ${variant === 'install' ? 'is-progress' : ''}`}>
         {variant === 'original'
-          ? <TerminalHighlight text={lineTwo} target={identityTerminalCopy.original[1]} highlight="Dư Ngọc Minh Hoàng" className="identity-terminal-name" />
+          ? <TerminalHighlight text={lineTwo} target={originalLineTwo} highlight="Dư Ngọc Minh Hoàng" className="identity-terminal-name" />
           : lineTwo}
       </span>
     </span>
@@ -799,10 +864,10 @@ function Hero() {
       </Reveal>
       <Reveal className="hero-copy" delay={.06}>
         <p className="hero-name">{person} / {fullName}</p>
-        <h1 className="hero-headline" aria-label="Design, develop, and deliver">
+        <h1 className="hero-headline" aria-label="Design, develop and deliver">
           <span className="hero-headline-design" aria-hidden="true">Design,</span>
           <span className="hero-headline-prefix" aria-hidden="true">develo</span>
-          <span className="hero-headline-suffix" aria-hidden="true">p,</span>
+          <span className="hero-headline-suffix" aria-hidden="true">p</span>
           <span className="hero-headline-prefix" aria-hidden="true">and <em>de</em></span>
           <em className="hero-headline-suffix" aria-hidden="true">liver</em>
         </h1>
@@ -1265,6 +1330,7 @@ function Experiments() {
 }
 
 function Contact() {
+  const { language, t } = useLanguage();
   const [copied, setCopied] = useState(false);
   const orderedContacts = ['gmail', 'telegram', 'x', 'zalo', 'github'].map((key) => contactLinks.find((item) => item.key === key));
   const copyEmail = async () => {
@@ -1286,7 +1352,7 @@ function Contact() {
     <span className="contact-channel-copy"><strong>{label}</strong>{key === 'gmail' && <span>{copied ? 'Copied to clipboard' : value}</span>}</span>
   </>;
 
-  return <section id="contact" className="contact-section section-pad"><div className="page-shell contact-grid"><Reveal className="contact-intro"><span className="contact-kicker">Start a conversation</span><h2>Bring me the complicated part</h2><p className="large-copy"><span>Tell me what needs to become clearer.</span>{' '}<span>I usually reply within two working days.</span></p></Reveal><Reveal className="contact-side" delay={.08}><div className="contact-directory" role="group" aria-label="Contact HyyAnk">{orderedContacts.map((contact) => {
+  return <section id="contact" className="contact-section section-pad"><div className="page-shell contact-grid"><Reveal className="contact-intro"><span className="contact-kicker">Start a conversation</span><h2 translate="no">{language === 'vi' ? <><span className="contact-heading-line">Phần nào khó</span><span className="contact-heading-line">để tôi</span></> : t('Bring me the complicated part')}</h2><p className="large-copy"><span>Tell me what needs to become clearer.</span>{' '}<span>I usually reply within two working days.</span></p></Reveal><Reveal className="contact-side" delay={.08}><div className="contact-directory" role="group" aria-label="Contact HyyAnk">{orderedContacts.map((contact) => {
     if (contact.key === 'gmail') return <button className={`contact-channel contact-channel-${contact.key} contact-channel-primary ${copied ? 'is-copied' : ''}`} key={contact.key} type="button" onClick={copyEmail} aria-label={copied ? `Copied ${email} to clipboard` : `Copy ${email}`} aria-live="polite">{contactContent(contact)}</button>;
     return <a className={`contact-channel contact-channel-${contact.key}`} key={contact.key} href={contact.href} target="_blank" rel="noreferrer" aria-label={`Open ${contact.label}: ${contact.value}`}>{contactContent(contact)}</a>;
   })}</div></Reveal></div></section>;

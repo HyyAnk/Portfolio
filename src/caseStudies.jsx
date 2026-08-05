@@ -56,7 +56,7 @@ function VietravelCaseStudy() {
         <header className="vt-hero-copy">
           <span>Presentation design · 54 slides · 16:9</span>
           <h1>Vietravel</h1>
-          <p>Business report / 2022—2023</p>
+          <p>Business report / 2022-2023</p>
         </header>
         <aside className="vt-confidential" aria-label="Lưu ý bảo mật">
           <strong>Dummy data</strong>
@@ -74,7 +74,7 @@ function VietravelCaseStudy() {
             <span>Typography</span>
             <strong>Montserrat</strong>
             <em>ExtraBold / 800</em>
-            <b>Aa&nbsp; 01—54</b>
+            <b>Aa&nbsp; 01-54</b>
             <p>Segoe UI <small>Regular · Semibold · Bold</small></p>
           </div>
           <div className="vt-palette" aria-label="Vietravel presentation colour palette">

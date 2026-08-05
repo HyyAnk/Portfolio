@@ -106,6 +106,10 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .nav-menu-wrap { position: relative; }
 .nav-link { display: inline-flex; min-height: 37px; align-items: center; gap: 6px; padding: 0 12px; border-radius: 999px; font-size: .8rem; transition: background .2s ease, color .2s ease; }
 .nav-link:hover { background: var(--soft); color: var(--ink); }
+.language-trigger { display: inline-flex; width: 34px; min-height: 34px; align-items: center; justify-content: center; padding: 0; border: 1px solid transparent; border-radius: 999px; color: var(--ink); transition: border-color .2s ease, background .2s ease, transform .2s ease; }
+.language-trigger:hover, .language-trigger[aria-expanded="true"] { border-color: color-mix(in srgb, var(--ink) 10%, transparent); background: var(--soft); }
+.language-trigger:active { transform: scale(.98); }
+.language-flag { width: 19px; height: 14px; flex: none; border-radius: 2px; box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 14%, transparent); }
 .contact-trigger { display: inline-flex; width: auto; min-width: 94px; height: 36px; margin-left: 5px; align-items: center; justify-content: center; padding: 0 10px; border-radius: 999px; background: var(--ink); color: var(--paper); transition: background .2s ease, transform .2s ease, min-width .2s ease; }
 .contact-trigger:hover { background: var(--accent); transform: translateY(-1px) scale(1.02); }
 .theme-toggle { display: inline-flex; align-items: center; justify-content: center; margin-left: 3px; padding: 0; color: var(--muted); }
@@ -131,6 +135,12 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .contact-dropdown a, .contact-dropdown button { display: flex; align-items: center; gap: 9px; padding: 8px 5px; font-size: .84rem; }
 .contact-dropdown a:hover, .contact-dropdown button:hover { color: var(--accent); }
 .dropdown-label { padding: 0 5px 8px; font-size: .6rem; }
+.language-dropdown { min-width: 196px; padding: 8px; gap: 1px; }
+.language-option { display: grid; min-height: 40px; width: 100%; grid-template-columns: 22px minmax(0, 1fr) 18px; align-items: center; gap: 9px; padding: 6px 8px; border: 0; border-radius: 10px; background: transparent; color: var(--ink); font-family: Manrope, sans-serif; text-align: left; cursor: pointer; transition: background .2s ease, transform .2s ease; }
+.language-option:hover, .language-option:focus-visible { background: var(--soft); transform: translateX(2px); }
+.language-option strong { min-width: 0; font-size: .8rem; font-weight: 680; line-height: 1.2; }
+.language-option > svg:last-child { opacity: 0; color: var(--accent); }
+.language-option.is-active > svg:last-child { opacity: 1; }
 .contact-dropdown { min-width: 258px; padding: 12px; gap: 1px; }
 .contact-dropdown a, .contact-dropdown button { min-height: 34px; gap: 9px; padding: 5px; border-radius: 9px; transition: background .2s ease, color .2s ease, transform .2s ease; }
 .contact-dropdown button { width: 100%; border: 0; background: transparent; color: inherit; font-family: inherit; text-align: left; cursor: pointer; }
@@ -583,6 +593,7 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .contact-section .eyebrow { display: block; margin-bottom: 24px; color: var(--accent); }
 .contact-kicker { display: block; margin-bottom: 24px; color: var(--accent); font-size: .66rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 .contact-grid h2 { max-width: 800px; margin-bottom: 28px; color: var(--contact-ink); font-size: clamp(3.2rem, 5.7vw, 6rem); }
+.contact-heading-line { display: block; }
 .contact-grid .large-copy { max-width: none; color: var(--contact-muted); font-family: 'Playfair Display Variable', 'Playfair Display', Georgia, serif; font-size: clamp(1.3rem, 1.9vw, 2rem); }
 .contact-grid .large-copy span { display: block; white-space: nowrap; }
 .contact-side { width: 100%; max-width: 500px; justify-self: end; }
@@ -794,6 +805,17 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .wordmark-fullname { font-size: .61rem; letter-spacing: -.025em; }
   .nav-actions { gap: 1px; padding: 4px 5px; }
   .nav-link { min-height: 32px; padding-inline: 6px; font-size: .7rem; }
+  .nav-menu-wrap > .nav-link { width: 31px; justify-content: center; padding: 0; font-size: 0; }
+  .nav-menu-wrap > .nav-link svg { width: 14px; height: 14px; }
+  .language-trigger { width: 31px; min-height: 31px; }
+  .language-flag { width: 18px; height: 13px; }
+  .language-dropdown { right: -54px; width: 144px; min-width: 0; grid-template-columns: repeat(3, 40px); gap: 4px; padding: 8px; }
+  .language-dropdown .dropdown-label { display: none; }
+  .language-option { min-height: 40px; grid-template-columns: 1fr; place-items: center; gap: 0; padding: 0; }
+  .language-option:hover, .language-option:focus-visible { transform: none; }
+  .language-option > strong, .language-option > svg:last-child { display: none; }
+  .language-option.is-active { background: var(--soft); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 38%, transparent); }
+  .language-option .language-flag { width: 22px; height: 16px; }
   .theme-toggle-track { width: 31px; height: 31px; justify-content: center; padding: 0; }
   .theme-toggle-track > svg { display: none; }
   .theme-toggle-thumb { position: static; width: 31px; height: 31px; background: transparent; color: var(--ink); box-shadow: none; transform: none; }
@@ -900,6 +922,10 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
   .capability-item { min-height: 74px; padding-block: 20px; }
   .skill-gallery { grid-template-columns: 1fr; grid-template-rows: 300px 250px 250px; gap: 24px; }
   .gallery-1 { grid-row: auto; }
+}
+
+@media (max-width: 480px) {
+  .wordmark-divider, .wordmark-fullname { display: none; }
 }
 
 @media (max-width: 360px) {
