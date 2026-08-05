@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight } from '@phosphor-icons/react';
+import { ArrowLeft } from '@phosphor-icons/react';
 import './case-studies.css';
 
+import vietravelPortfolioCover from './assets/case-studies/vietravel-portfolio-cover.webp';
+import vietravelSpreadMockup from './assets/case-studies/vietravel-spread-mockup.webp';
 import vietravelCover from './assets/case-studies/vietravel-page-01.webp';
 import vietravelContents from './assets/case-studies/vietravel-page-02.webp';
 import vietravelPerformance from './assets/case-studies/vietravel-page-07.webp';
@@ -18,134 +20,149 @@ import vietravelGitPlan from './assets/case-studies/vietravel-page-37.webp';
 import vietravelGitChannels from './assets/case-studies/vietravel-page-41.webp';
 import vietravelChannelPrinciples from './assets/case-studies/vietravel-page-49.webp';
 import vietravelContentCalendar from './assets/case-studies/vietravel-page-53.webp';
-import { withoutTrailingPeriod } from './text.js';
 import { AttestCaseStudy } from './AttestCaseStudy.jsx';
 
-function ProductHero({ work, variant, label, summary, facts, image, imageAlt, action, actionHref = '#story-system', notice, disclosure }) {
-  return <section className={`product-hero product-hero-${variant}`}>
-    <div className="product-shell">
-      <Link className="product-back" to="/#portfolio"><ArrowLeft size={16}/> Portfolio</Link>
-      <header className="product-heading">
-        <span>{label}</span>
-        <h1>{withoutTrailingPeriod(work.title)}</h1>
-        <p>{summary}</p>
-        <a href={actionHref}>{action}<ArrowUpRight size={17}/></a>
-      </header>
-      {notice && <aside className="product-data-notice" aria-label={notice.title}>
-        <strong>{notice.title}</strong>
-        <p>{notice.copy}</p>
-      </aside>}
-      <figure className="product-cover"><img src={image} alt={imageAlt}/></figure>
-      <div className="product-meta">
-        <dl>{facts.map(([term, value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl>
-        <p>{disclosure}</p>
-      </div>
-    </div>
-  </section>;
-}
-
-function FlowHeading({ eyebrow, title, copy }) {
-  return <header className="product-section-heading">{eyebrow && <span>{eyebrow}</span>}<h2>{withoutTrailingPeriod(title)}</h2>{copy && <p>{copy}</p>}</header>;
-}
-
-function ProductVisual({ src, alt, caption, className = '' }) {
-  return <figure className={`product-visual ${className}`}><img src={src} alt={alt} width="1920" height="1080" loading="lazy"/>{caption && <figcaption>{caption}</figcaption>}</figure>;
-}
-
-const storySteps = [
-  ['01', 'Review', 'What changed, and where did performance concentrate?'],
-  ['02', 'Interpret', 'Which routes, customer groups and conditions matter next?'],
-  ['03', 'Decide', 'What does profitable, controlled growth mean for the branch?'],
-  ['04', 'Activate', 'Who does what, through which channel, and in which month?'],
+const selectedFrames = [
+  { src: vietravelCover, alt: 'Fictionalized Vietravel business report presentation cover' },
+  { src: vietravelContents, alt: 'Contents slide for the fictionalized Vietravel business report' },
+  { src: vietravelPerformance, alt: 'Fictionalized Vietravel performance comparison slide' },
+  { src: vietravelVerticals, alt: 'Fictionalized revenue-by-industry presentation slide' },
+  { src: vietravelGrowth, alt: 'Fictionalized industry growth presentation slide' },
+  { src: vietravelDirection, alt: 'Vietravel strategic direction presentation slide using dummy data' },
+  { src: vietravelGoals, alt: 'Vietravel goals presentation slide using dummy data' },
+  { src: vietravelMonthlyPlan, alt: 'Fictionalized monthly business plan presentation slide' },
+  { src: vietravelRoadmap, alt: 'Twelve-month fictionalized business roadmap slide' },
+  { src: vietravelProductPlan, alt: 'Fictionalized FIT product plan slide' },
+  { src: vietravelSalesModel, alt: 'FIT sales model presentation slide' },
+  { src: vietravelGitPlan, alt: 'Fictionalized GIT target industry presentation slide' },
+  { src: vietravelGitChannels, alt: 'GIT marketing channel presentation slide' },
+  { src: vietravelChannelPrinciples, alt: 'Communication channel principles presentation slide' },
+  { src: vietravelContentCalendar, alt: 'Fictionalized twelve-month content calendar slide' },
 ];
 
-function VietravelCaseStudy({ work }) {
-  const facts = [
-    ['Role', 'Information design, art direction'],
-    ['Format', '16:9 business presentation'],
-    ['Scope', '54 slides, 8 chapters'],
-    ['Data policy', 'Fictionalized for confidentiality'],
-  ];
+function VtSlide({ src, alt, className = '' }) {
+  return <figure className={`vt-slide ${className}`}><img src={src} alt={alt} width="1920" height="1080" loading="lazy"/></figure>;
+}
 
-  return <article className="product-case case-vietravel">
-    <ProductHero
-      work={work}
-      variant="vietravel"
-      label="Business report / presentation / dummy data"
-      summary="A dense annual review becomes a decision-ready story: evidence first, direction second, action last"
-      facts={facts}
-      image={vietravelCover}
-      imageAlt="Vietravel Hải Phòng business report cover for a fictionalized 2022 review and 2023 action plan"
-      action="See the story system"
-      notice={{
-        title: 'Lưu ý bảo mật · Dữ liệu giả định',
-        copy: 'Toàn bộ số liệu, KPI, mục tiêu và chi tiết vận hành trong bài thuyết trình được giả định nhằm mục đích bảo mật. Nội dung không phản ánh kết quả kinh doanh thực tế của Vietravel.',
-      }}
-      disclosure="Independent presentation-design case study. Vietravel is referenced only as the subject of the supplied dummy-data brief; no confidential company data is presented."
-    />
+function VtMarker({ number, label }) {
+  return <header className="vt-marker"><span>{number}</span><strong>{label}</strong></header>;
+}
 
-    <section id="story-system" className="product-section vietravel-story"><div className="product-shell">
-      <div className="vietravel-story-grid">
-        <div>
-          <FlowHeading eyebrow="Narrative architecture" title="From report inventory to decision sequence" copy="The deck moves from operating context to performance, interpretation, direction and a month-by-month plan. Each chapter answers one management question before the next begins."/>
-          <ol className="vietravel-story-index">{storySteps.map(([index, title, copy]) => <li key={index}><span>{index}</span><div><strong>{title}</strong><p>{copy}</p></div></li>)}</ol>
+function VietravelCaseStudy() {
+  return <article className="vt-case">
+    <section className="vt-hero">
+      <div className="vt-shell">
+        <Link className="vt-back" to="/#portfolio"><ArrowLeft size={16}/> Portfolio</Link>
+        <header className="vt-hero-copy">
+          <span>Presentation design · 54 slides · 16:9</span>
+          <h1>Vietravel</h1>
+          <p>Business report / 2022—2023</p>
+        </header>
+        <aside className="vt-confidential" aria-label="Lưu ý bảo mật">
+          <strong>Dummy data</strong>
+          <span>Toàn bộ số liệu được giả định nhằm mục đích bảo mật.</span>
+        </aside>
+        <figure className="vt-hero-visual"><img src={vietravelPortfolioCover} alt="Art-directed Vietravel presentation deck mockup for a design portfolio" width="1536" height="1024"/></figure>
+      </div>
+    </section>
+
+    <section className="vt-foundations">
+      <div className="vt-shell">
+        <VtMarker number="01" label="Visual system"/>
+        <div className="vt-foundation-grid">
+          <div className="vt-type-specimen">
+            <span>Typography</span>
+            <strong>Montserrat</strong>
+            <em>ExtraBold / 800</em>
+            <b>Aa&nbsp; 01—54</b>
+            <p>Segoe UI <small>Regular · Semibold · Bold</small></p>
+          </div>
+          <div className="vt-palette" aria-label="Vietravel presentation colour palette">
+            <span style={{ '--swatch': '#0038A0' }}><b>Cobalt</b><small>#0038A0</small></span>
+            <span style={{ '--swatch': '#E81828' }}><b>Signal red</b><small>#E81828</small></span>
+            <span style={{ '--swatch': '#204070' }}><b>Deep blue</b><small>#204070</small></span>
+            <span style={{ '--swatch': '#C0D0E0' }}><b>Mist</b><small>#C0D0E0</small></span>
+            <span style={{ '--swatch': '#F4F6F8' }}><b>Paper</b><small>#F4F6F8</small></span>
+          </div>
         </div>
-        <ProductVisual src={vietravelContents} alt="Eight-part contents slide organizing the fictionalized Vietravel business report" caption="Eight chapters · one controlled narrative"/>
       </div>
-    </div></section>
+    </section>
 
-    <section className="product-section vietravel-evidence"><div className="product-shell">
-      <FlowHeading eyebrow="01 / Review" title="Make the business question visible before the chart" copy="The performance chapter pairs a compact scorecard with a comparison view and a short interpretation, so the audience knows what to read and why it matters."/>
-      <ProductVisual src={vietravelPerformance} alt="Fictionalized Vietravel performance comparison slide with customer, revenue and gross-profit measures" caption="Dummy-data performance snapshot · not actual Vietravel results"/>
-      <aside className="vietravel-inline-disclaimer"><strong>Dummy data, clearly marked</strong><p>Every commercial figure shown in this case is illustrative. It exists to demonstrate information hierarchy and presentation design while protecting operational confidentiality.</p></aside>
-    </div></section>
-
-    <section className="product-section vietravel-analysis"><div className="product-shell">
-      <FlowHeading eyebrow="02 / Interpret" title="Keep dense tables comparable" copy="A shared header, fixed table logic and restrained colour coding let the audience compare category contribution with year-on-year movement without relearning the page."/>
-      <div className="product-pair vietravel-data-pair">
-        <ProductVisual src={vietravelVerticals} alt="Fictionalized revenue-by-industry slide with table and contribution chart" caption="Contribution by industry · dummy data"/>
-        <ProductVisual src={vietravelGrowth} alt="Fictionalized industry growth slide with aligned table and bar chart" caption="Growth by industry · dummy data"/>
+    <section className="vt-opening">
+      <div className="vt-shell">
+        <VtMarker number="02" label="Report language"/>
+        <div className="vt-opening-grid">
+          <VtSlide src={vietravelContents} alt="Contents slide for the fictionalized Vietravel business report" className="is-contents"/>
+          <VtSlide src={vietravelPerformance} alt="Fictionalized Vietravel performance comparison slide" className="is-performance"/>
+          <VtSlide src={vietravelVerticals} alt="Fictionalized revenue-by-industry presentation slide" className="is-verticals"/>
+          <VtSlide src={vietravelGrowth} alt="Fictionalized industry growth presentation slide" className="is-growth"/>
+        </div>
       </div>
-    </div></section>
+    </section>
 
-    <section className="product-section vietravel-strategy"><div className="product-shell">
-      <FlowHeading eyebrow="03 / Decide" title="Turn analysis into an operating stance" copy="The strategic transition reduces the visual density, gives the core principle room to land, then reconnects it to measurable goals and guardrails."/>
-      <div className="vietravel-strategy-grid">
-        <ProductVisual src={vietravelDirection} alt="Vietravel strategic direction slide focused on stable, efficient and sustainable fictionalized growth" caption="Strategic stance"/>
-        <ProductVisual src={vietravelGoals} alt="Vietravel goals slide organizing fictionalized commercial, financial and team objectives" caption="Goals and guardrails · dummy data"/>
+    <section className="vt-mockup-band">
+      <img src={vietravelSpreadMockup} alt="Three physical Vietravel presentation boards arranged as an editorial portfolio spread" width="1536" height="1024" loading="lazy"/>
+    </section>
+
+    <section className="vt-strategy">
+      <div className="vt-shell">
+        <VtMarker number="03" label="Direction / targets"/>
+        <div className="vt-strategy-stage">
+          <VtSlide src={vietravelDirection} alt="Vietravel strategic direction presentation slide using dummy data" className="is-direction"/>
+          <VtSlide src={vietravelGoals} alt="Vietravel goals presentation slide using dummy data" className="is-goals"/>
+          <span className="vt-stage-number">03</span>
+        </div>
       </div>
-    </div></section>
+    </section>
 
-    <section className="product-section vietravel-cadence"><div className="product-shell">
-      <FlowHeading eyebrow="04 / Activate" title="Connect the annual target to a working calendar" copy="Monthly seasonality and the quarterly roadmap share one left-to-right reading direction. Targets become moments for selling, review, training and financial control."/>
-      <ProductVisual src={vietravelMonthlyPlan} alt="Fictionalized monthly customer, revenue and gross-profit plan for the Vietravel presentation" caption="Monthly phasing · dummy data"/>
-      <ProductVisual src={vietravelRoadmap} alt="Twelve-month quarterly action roadmap for the fictionalized Vietravel business plan" caption="Quarterly operating cadence" className="vietravel-roadmap-visual"/>
-    </div></section>
-
-    <section className="product-section vietravel-streams"><div className="product-shell">
-      <FlowHeading eyebrow="FIT + GIT" title="Give each revenue stream its own logic" copy="FIT is framed around product seasonality and sales models; GIT is framed around industry concentration, account value and direct relationship channels."/>
-      <div className="vietravel-stream-grid">
-        <article><header><span>FIT</span><h3>Product-led selling</h3><p>Package the offer by trip type, season and buying behaviour.</p></header><ProductVisual src={vietravelProductPlan} alt="Fictionalized Vietravel FIT departure product plan" caption="Product architecture"/><ProductVisual src={vietravelSalesModel} alt="Three fictionalized FIT sales models for mass, seasonal and premium travel" caption="Sales model"/></article>
-        <article><header><span>GIT</span><h3>Account-led growth</h3><p>Prioritize sectors, protect margin and build trust through direct channels.</p></header><ProductVisual src={vietravelGitPlan} alt="Fictionalized Vietravel GIT target industries and revenue plan" caption="Priority account groups · dummy data"/><ProductVisual src={vietravelGitChannels} alt="Direct and supporting channels for the fictionalized Vietravel GIT plan" caption="Channel architecture"/></article>
+    <section className="vt-timeline">
+      <div className="vt-shell">
+        <VtMarker number="04" label="12-month cadence"/>
+        <div className="vt-timeline-stage">
+          <VtSlide src={vietravelMonthlyPlan} alt="Fictionalized monthly business plan presentation slide" className="is-monthly"/>
+          <VtSlide src={vietravelRoadmap} alt="Twelve-month fictionalized business roadmap slide" className="is-roadmap"/>
+          <VtSlide src={vietravelProductPlan} alt="Fictionalized FIT product plan slide" className="is-product"/>
+        </div>
       </div>
-    </div></section>
+    </section>
 
-    <section className="product-section vietravel-channels"><div className="product-shell">
-      <FlowHeading eyebrow="Communication system" title="Make marketing accountable to the plan" copy="Channel principles define the role of online and offline activity; the 12-month calendar then ties each message to a season, audience and selling moment."/>
-      <ProductVisual src={vietravelChannelPrinciples} alt="Vietravel communication channel principles based on fictionalized planning inputs" caption="Channel principles"/>
-      <ProductVisual src={vietravelContentCalendar} alt="Twelve-month fictionalized communication calendar for Vietravel Hải Phòng" caption="Content calendar · dummy planning data" className="vietravel-calendar-visual"/>
-    </div></section>
+    <section className="vt-sales">
+      <div className="vt-shell">
+        <VtMarker number="05" label="FIT / GIT"/>
+        <div className="vt-sales-wall">
+          <VtSlide src={vietravelSalesModel} alt="FIT sales model presentation slide" className="is-fit"/>
+          <VtSlide src={vietravelGitPlan} alt="Fictionalized GIT target industry presentation slide" className="is-git"/>
+          <VtSlide src={vietravelGitChannels} alt="GIT marketing channel presentation slide" className="is-channel"/>
+        </div>
+      </div>
+    </section>
 
-    <section className="vietravel-close"><div className="product-shell">
-      <div className="vietravel-close-heading"><span>Outcome</span><strong>54</strong><h2>slides shaped as one management conversation</h2></div>
-      <dl><div><dt>Structure</dt><dd>8 chapters from evidence to action</dd></div><div><dt>Business streams</dt><dd>FIT and GIT with distinct selling logic</dd></div><div><dt>Cadence</dt><dd>12 months connected to quarterly priorities</dd></div></dl>
-      <aside><strong>Lưu ý bảo mật</strong><p>Toàn bộ dữ liệu trong case study là dữ liệu giả định nhằm bảo mật và chỉ dùng để minh họa năng lực thiết kế thuyết trình. Không sử dụng các con số này như thông tin kinh doanh chính thức của Vietravel.</p></aside>
-    </div></section>
+    <section className="vt-communication">
+      <div className="vt-shell">
+        <VtMarker number="06" label="Communication"/>
+        <div className="vt-communication-grid">
+          <VtSlide src={vietravelChannelPrinciples} alt="Communication channel principles presentation slide"/>
+          <VtSlide src={vietravelContentCalendar} alt="Fictionalized twelve-month content calendar slide"/>
+        </div>
+      </div>
+    </section>
+
+    <section className="vt-contact-sheet" aria-label="Selected presentation frames">
+      <div className="vt-contact-track">{selectedFrames.map((frame, index) => <figure key={frame.src} style={{ '--frame-index': index }}><img src={frame.src} alt={frame.alt} width="1920" height="1080" loading="lazy"/></figure>)}</div>
+    </section>
+
+    <section className="vt-close">
+      <div className="vt-shell">
+        <span>Business report · Hải Phòng</span>
+        <div><strong>54</strong><h2>slides</h2></div>
+        <p>Dữ liệu giả định nhằm bảo mật · Không phản ánh kết quả kinh doanh thực tế của Vietravel.</p>
+      </div>
+    </section>
   </article>;
 }
 
 export function DeepCaseStudy({ work }) {
-  if (work.caseKey === 'vietravel-report') return <VietravelCaseStudy work={work}/>;
+  if (work.caseKey === 'vietravel-report') return <VietravelCaseStudy/>;
   if (work.caseKey === 'attest') return <AttestCaseStudy work={work}/>;
   return null;
 }
