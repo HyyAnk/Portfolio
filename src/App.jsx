@@ -21,7 +21,7 @@ import photoIdShowcase from './assets/experiments/photo-id-studio.webp';
 import pdfBusinessCardShowcase from './assets/experiments/pdf-business-card.webp';
 import aiMediaStudioShowcase from './assets/experiments/ai-media-studio.webp';
 import portraitImage from './assets/generated/portrait.webp';
-import dauCover from './assets/case-studies/dau-cover.webp';
+import vietravelCover from './assets/case-studies/vietravel-page-01.webp';
 import attestCover from './assets/case-studies/attest-cover.webp';
 import vunCover from './assets/case-studies/vun-cover.webp';
 import hxsCover from './assets/case-studies/hxs-home-cover.webp';
@@ -229,7 +229,7 @@ function SkillToolMotion({ skill }) {
 
 const works = [
   { slug: 'portfolio-1', caseKey: 'hailong-presentation', title: 'HAI LONG', type: 'Corporate presentation · Construction', role: 'Presentation design · Art direction', cardDescription: '43 slides. One clear story of scale and capability.', description: 'A 43-slide company presentation turning construction capability, production scale and built projects into a clear business story.', challenge: 'A large volume of credentials, services, machinery and project evidence needed one confident presentation rhythm.', outcome: 'A 16:9 English deck connecting company trust, technical scale and completed work across 43 slides.', tags: ['Presentation design', 'Editorial system'], image: hailongCover, deep: true },
-  { slug: 'portfolio-2', caseKey: 'mat', title: 'DẤU', type: 'Cultural archive · Web app', role: 'Product strategy · UX/UI', cardDescription: 'Scan Vietnamese motifs. Discover their makers and origins.', description: 'A visual archive for scanning Vietnamese craft motifs and finding the people, places and techniques behind them.', challenge: 'Cultural records are often detached from the object and difficult to explore during a real museum or workshop visit.', outcome: 'A responsive archive connecting recognition, artifact context, maker audio, collections and offline access.', tags: ['Product design', 'Cultural archive'], image: dauCover, deep: true },
+  { slug: 'portfolio-2', caseKey: 'vietravel-report', title: 'VIETRAVEL', type: 'Business report · Presentation design', role: 'Information design · Art direction', cardDescription: '54 slides. One business story from performance review to action plan.', description: 'A 54-slide business report that turns dense operating inputs into a clear review of 2022 and an actionable plan for 2023.', challenge: 'Performance tables, FIT and GIT priorities, monthly targets, staffing and channel plans needed one legible decision-making sequence.', outcome: 'A structured 16:9 deck connecting evidence, interpretation, strategic direction and a 12-month action plan. All business data is fictionalized for confidentiality.', tags: ['Presentation design', 'Information design'], image: vietravelCover, deep: true },
   { slug: 'portfolio-3', caseKey: 'folded-matter', title: 'VỤN', type: 'Brand identity · Circular materials', role: 'Strategy · Identity · Art direction', cardDescription: 'Construction offcuts, reshaped into useful objects.', description: 'Identity for a studio that turns construction offcuts into useful objects.', challenge: 'A material-led studio needed one recognisable system across samples, products, packaging, space and catalogue.', outcome: 'A fragment-based identity built from four colours, three material families and one modular V mark.', tags: ['Brand identity', 'Art direction'], image: vunCover, deep: true },
   { slug: 'portfolio-4', caseKey: 'still-moving', title: 'HUAXINSHENG', type: 'Company catalogue · Industrial materials', role: 'Catalogue design · Art direction', cardDescription: 'Steel mesh, explained in one compact sales catalogue.', description: 'A 24-page Vietnamese sales catalogue for welded steel mesh, from company capability to technical application.', challenge: 'Company scale, product proof, engineering detail and real applications had to remain easy to scan in one compact document.', outcome: 'An A3 spread system built around a clear Inter hierarchy, industrial blue palette and evidence-led page sequence.', tags: ['Editorial design', 'Catalogue'], image: hxsCover, deep: true },
   { slug: 'portfolio-5', caseKey: 'taiyo-envelope', title: 'TAIYO TOURIST', type: 'Brand application · Travel packaging', role: 'Packaging design · Artwork', cardDescription: 'Travel documents, organised in three branded envelope formats.', description: 'A three-format envelope system for handing over itineraries, tickets and travel documents with a consistent Taiyo Group signature.', challenge: 'Logo, travel imagery, recipient space and contact details had to remain clear across multiple physical formats.', outcome: 'A print-ready application system connecting aircraft motion, address hierarchy and a recognisable blue-red travel palette.', tags: ['Packaging design', 'Brand application'], image: taiyoCover, deep: true },
@@ -293,7 +293,7 @@ const experiments = [
 ];
 
 const heroCarouselImages = [
-  { image: dauCover, alt: 'DẤU Vietnamese craft archive across web and mobile' },
+  { image: vietravelCover, alt: 'Vietravel business report presentation cover using fictionalized data' },
   { image: vunCover, alt: 'VỤN circular-material studio identity system' },
   { image: hxsCover, alt: 'HUAXINSHENG industrial welded mesh company catalogue' },
   { image: attestCover, alt: 'ATTEST on-chain product passport for collectible design objects' },
@@ -327,7 +327,7 @@ const clients = [
   { key: 'hailong', name: 'Hải Long Construction' },
   { key: 'taiyo', name: 'Taiyo Group' },
   { key: 'huaxinsheng', name: 'Huaxinsheng' },
-  { key: 'viettravel', name: 'Viettravel' },
+  { key: 'viettravel', name: 'Vietravel' },
   { key: 'mori', name: 'Mori Studio', placeholder: true },
   { key: 'northline', name: 'Northline', placeholder: true },
 ];
@@ -350,7 +350,7 @@ function ClientLogo({ client }) {
 
   if (client.key === 'viettravel') return <span className="client-logo client-logo-viettravel" aria-hidden="true">
     <span className="viettravel-mark"><i /><i /></span>
-    <strong><span>Viet</span>travel</strong>
+    <strong><span>Viet</span>ravel</strong>
   </span>;
 
   if (client.key === 'mori') return <span className="client-logo client-logo-mori" aria-hidden="true">

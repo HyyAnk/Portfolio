@@ -23,7 +23,7 @@ export const seoRoutes = [
     'profile',
   ),
   route('/work/portfolio-1', 'HAI LONG Presentation - HyyAnk', 'A 43-slide English corporate construction presentation covering company credentials, production capability, completed projects and HSE.', 'src/assets/case-studies/hailong-cover.webp', 'article'),
-  route('/work/portfolio-2', 'DẤU - HyyAnk', 'A visual archive for scanning Vietnamese craft motifs and discovering artifact context, maker stories and regional techniques.', 'src/assets/case-studies/dau-cover.webp', 'article'),
+  route('/work/portfolio-2', 'Vietravel Business Report - HyyAnk', 'A 54-slide presentation design case study that structures fictionalized business data into a 2022 review and 2023 action plan.', 'src/assets/case-studies/vietravel-page-01.webp', 'article'),
   route('/work/portfolio-3', 'VỤN - HyyAnk', 'An original identity system for a circular-material studio, spanning samples, packaging, space and digital catalogue.', 'src/assets/case-studies/vun-cover.webp', 'article'),
   route('/work/portfolio-4', 'HUAXINSHENG - HyyAnk', 'A 24-page Vietnamese company catalogue for welded steel mesh, covering company capability, production, engineering standards, applications and projects.', 'src/assets/case-studies/hxs-home-cover.webp', 'article'),
   route('/work/portfolio-5', 'TAIYO TOURIST Envelope - HyyAnk', 'A three-format branded envelope and travel-document handover system for Taiyo Tourist, including artwork, print construction and physical mockups.', 'src/assets/case-studies/taiyo-cover.webp', 'article'),

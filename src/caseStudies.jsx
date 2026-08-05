@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  ArrowLeft, ArrowUpRight, BookmarkSimple,
-  Headphones, LinkSimple, MapPin, Scan,
-} from '@phosphor-icons/react';
+import { ArrowLeft, ArrowUpRight } from '@phosphor-icons/react';
 import './case-studies.css';
 
-import dauCover from './assets/case-studies/dau-cover.webp';
-import dauScreens from './assets/case-studies/dau-screens.webp';
-import dauScan from './assets/case-studies/dau-scan.webp';
-import dauDesktop from './assets/case-studies/dau-desktop.webp';
-import dauMuseum from './assets/case-studies/dau-museum.webp';
-import dauStates from './assets/case-studies/dau-states.webp';
+import vietravelCover from './assets/case-studies/vietravel-page-01.webp';
+import vietravelContents from './assets/case-studies/vietravel-page-02.webp';
+import vietravelPerformance from './assets/case-studies/vietravel-page-07.webp';
+import vietravelVerticals from './assets/case-studies/vietravel-page-10.webp';
+import vietravelGrowth from './assets/case-studies/vietravel-page-11.webp';
+import vietravelDirection from './assets/case-studies/vietravel-page-18.webp';
+import vietravelGoals from './assets/case-studies/vietravel-page-19.webp';
+import vietravelMonthlyPlan from './assets/case-studies/vietravel-page-22.webp';
+import vietravelRoadmap from './assets/case-studies/vietravel-page-24.webp';
+import vietravelProductPlan from './assets/case-studies/vietravel-page-28.webp';
+import vietravelSalesModel from './assets/case-studies/vietravel-page-32.webp';
+import vietravelGitPlan from './assets/case-studies/vietravel-page-37.webp';
+import vietravelGitChannels from './assets/case-studies/vietravel-page-41.webp';
+import vietravelChannelPrinciples from './assets/case-studies/vietravel-page-49.webp';
+import vietravelContentCalendar from './assets/case-studies/vietravel-page-53.webp';
 import { withoutTrailingPeriod } from './text.js';
 import { AttestCaseStudy } from './AttestCaseStudy.jsx';
 
-function ProductHero({ work, variant, label, summary, facts, image, imageAlt, action }) {
+function ProductHero({ work, variant, label, summary, facts, image, imageAlt, action, actionHref = '#story-system', notice, disclosure }) {
   return <section className={`product-hero product-hero-${variant}`}>
     <div className="product-shell">
       <Link className="product-back" to="/#portfolio"><ArrowLeft size={16}/> Portfolio</Link>
@@ -23,117 +29,123 @@ function ProductHero({ work, variant, label, summary, facts, image, imageAlt, ac
         <span>{label}</span>
         <h1>{withoutTrailingPeriod(work.title)}</h1>
         <p>{summary}</p>
-        <a href="#live-demo">{action}<ArrowUpRight size={17}/></a>
+        <a href={actionHref}>{action}<ArrowUpRight size={17}/></a>
       </header>
+      {notice && <aside className="product-data-notice" aria-label={notice.title}>
+        <strong>{notice.title}</strong>
+        <p>{notice.copy}</p>
+      </aside>}
       <figure className="product-cover"><img src={image} alt={imageAlt}/></figure>
       <div className="product-meta">
         <dl>{facts.map(([term, value]) => <div key={term}><dt>{term}</dt><dd>{value}</dd></div>)}</dl>
-        <p>Self-initiated fictional brief. Original product design, art direction and prototype.</p>
+        <p>{disclosure}</p>
       </div>
     </div>
   </section>;
 }
 
-function FlowHeading({ title, copy }) {
-  return <header className="product-section-heading"><h2>{withoutTrailingPeriod(title)}</h2>{copy && <p>{copy}</p>}</header>;
+function FlowHeading({ eyebrow, title, copy }) {
+  return <header className="product-section-heading">{eyebrow && <span>{eyebrow}</span>}<h2>{withoutTrailingPeriod(title)}</h2>{copy && <p>{copy}</p>}</header>;
 }
 
 function ProductVisual({ src, alt, caption, className = '' }) {
-  return <figure className={`product-visual ${className}`}><img src={src} alt={alt} width="1536" height="1024" loading="lazy"/>{caption && <figcaption>{caption}</figcaption>}</figure>;
+  return <figure className={`product-visual ${className}`}><img src={src} alt={alt} width="1920" height="1080" loading="lazy"/>{caption && <figcaption>{caption}</figcaption>}</figure>;
 }
 
-const archiveRecords = {
-  lacquer: {
-    label: 'Sơn mài', title: 'Khảm hoa mai', region: 'Miền Bắc', material: 'Sơn ta và xà cừ', note: 'Motif record with macro detail and maker audio', variant: 'lacquer', code: 'HV-014', period: 'Early 20th century',
-  },
-  ceramic: {
-    label: 'Gốm', title: 'Hoa lam', region: 'Đồng bằng Bắc Bộ', material: 'Đồ gốm tráng men', note: 'Object view with material and production context', variant: 'ceramic', code: 'GM-028', period: '15th century reference',
-  },
-  textile: {
-    label: 'Dệt', title: 'Hình trám chàm', region: 'Trung du phía Bắc', material: 'Sợi bông và chàm', note: 'Pattern record with regional and technique links', variant: 'textile', code: 'DT-041', period: 'Contemporary field record',
-  },
-};
+const storySteps = [
+  ['01', 'Review', 'What changed, and where did performance concentrate?'],
+  ['02', 'Interpret', 'Which routes, customer groups and conditions matter next?'],
+  ['03', 'Decide', 'What does profitable, controlled growth mean for the branch?'],
+  ['04', 'Activate', 'Who does what, through which channel, and in which month?'],
+];
 
-function DauArtifactVisual({ record, audioPlaying }) {
-  return <div className={`dau-artifact is-${record.variant} ${audioPlaying ? 'is-audio-playing' : ''}`}>
-    <svg viewBox="0 0 900 620" role="img" aria-label={`${record.title}, ${record.material}`}>
-      {record.variant === 'lacquer' && <>
-        <rect width="900" height="620" className="dau-artifact-ground"/>
-        <path className="dau-branch" d="M-30 520C150 410 218 352 338 247S590 124 930 80"/>
-        <path className="dau-branch is-thin" d="M228 350c-4-93 35-166 111-218M460 199c58 13 118 5 183-32M579 145c-5-58 15-101 63-134"/>
-        {[[170,410],[260,319],[342,245],[447,204],[558,157],[676,118],[335,137],[638,35]].map(([cx,cy], index) => <g className="dau-pearl-flower" transform={`translate(${cx} ${cy}) rotate(${index * 19})`} key={`${cx}-${cy}`}><ellipse cx="0" cy="-26" rx="13" ry="28"/><ellipse cx="25" cy="-5" rx="13" ry="28" transform="rotate(72)"/><ellipse cx="15" cy="23" rx="13" ry="28" transform="rotate(144)"/><ellipse cx="-15" cy="23" rx="13" ry="28" transform="rotate(216)"/><ellipse cx="-25" cy="-5" rx="13" ry="28" transform="rotate(288)"/><circle r="8"/></g>)}
-      </>}
-      {record.variant === 'ceramic' && <>
-        <rect width="900" height="620" className="dau-artifact-ground"/>
-        <circle cx="450" cy="310" r="248" className="dau-ceramic-rim"/>
-        <circle cx="450" cy="310" r="205" className="dau-ceramic-ring"/>
-        <g className="dau-ceramic-flower" transform="translate(450 310)">{Array.from({ length: 8 }, (_, index) => <ellipse key={index} cx="0" cy="-82" rx="29" ry="88" transform={`rotate(${index * 45})`}/>)}</g>
-        <circle cx="450" cy="310" r="38" className="dau-ceramic-core"/>
-        <g className="dau-ceramic-leaves">{Array.from({ length: 12 }, (_, index) => <path key={index} d="M450 96c29 36 34 71 4 101-31-28-33-63-4-101Z" transform={`rotate(${index * 30} 450 310)`}/>)}</g>
-      </>}
-      {record.variant === 'textile' && <>
-        <defs><pattern id="dau-weave" width="132" height="132" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="132" height="132" className="dau-artifact-ground"/><rect x="16" y="16" width="100" height="100" className="dau-textile-diamond"/><rect x="42" y="42" width="48" height="48" className="dau-textile-core"/><path d="M0 8h132M0 124h132M8 0v132M124 0v132" className="dau-textile-thread"/></pattern></defs>
-        <rect width="900" height="620" fill="url(#dau-weave)"/>
-        <path className="dau-textile-band" d="M0 220h900v180H0z"/>
-        <path className="dau-textile-stitch" d="M0 310h900M64 220l90 90-90 90m180-180 90 90-90 90m180-180 90 90-90 90m180-180 90 90-90 90m180-180 90 90-90 90"/>
-      </>}
-    </svg>
-    <div className="dau-artifact-index"><span>{record.code}</span><strong>{record.label}</strong><small>{record.period}</small></div>
-    <div className="dau-artifact-wave" aria-hidden="true">{Array.from({ length: 18 }, (_, index) => <i key={index}/>)}</div>
-  </div>;
-}
+function VietravelCaseStudy({ work }) {
+  const facts = [
+    ['Role', 'Information design, art direction'],
+    ['Format', '16:9 business presentation'],
+    ['Scope', '54 slides, 8 chapters'],
+    ['Data policy', 'Fictionalized for confidentiality'],
+  ];
 
-function DauArchiveDemo() {
-  const [recordKey, setRecordKey] = useState('lacquer');
-  const [saved, setSaved] = useState(false);
-  const [audioPlaying, setAudioPlaying] = useState(false);
-  const record = archiveRecords[recordKey];
-  const chooseRecord = (key) => { setRecordKey(key); setSaved(false); setAudioPlaying(false); };
-  return <div className="dau-demo">
-    <nav aria-label="Archive material sample">{Object.entries(archiveRecords).map(([key, item]) => <button key={key} type="button" aria-pressed={recordKey === key} onClick={() => chooseRecord(key)}>{item.label}</button>)}</nav>
-    <div className="dau-demo-stage">
-      <div className="dau-demo-art"><DauArtifactVisual record={record} audioPlaying={audioPlaying}/><span><Scan size={18}/> Recognition preview</span></div>
-      <aside aria-live="polite">
-        <span>Sample archive record</span>
-        <h3>{record.title}</h3>
-        <dl><div><dt><MapPin size={16}/> Region</dt><dd>{record.region}</dd></div><div><dt><LinkSimple size={16}/> Material</dt><dd>{record.material}</dd></div></dl>
-        <p>{record.note}</p>
-        <div className="dau-demo-actions"><button type="button" aria-pressed={audioPlaying} onClick={() => setAudioPlaying((value) => !value)}><Headphones size={17} weight={audioPlaying ? 'fill' : 'regular'}/>{audioPlaying ? 'Audio preview on' : 'Maker audio'}</button><button type="button" aria-pressed={saved} onClick={() => setSaved((value) => !value)}><BookmarkSimple size={17} weight={saved ? 'fill' : 'regular'}/>{saved ? 'Saved' : 'Save'}</button></div>
-      </aside>
-    </div>
-  </div>;
-}
+  return <article className="product-case case-vietravel">
+    <ProductHero
+      work={work}
+      variant="vietravel"
+      label="Business report / presentation / dummy data"
+      summary="A dense annual review becomes a decision-ready story: evidence first, direction second, action last"
+      facts={facts}
+      image={vietravelCover}
+      imageAlt="Vietravel Hải Phòng business report cover for a fictionalized 2022 review and 2023 action plan"
+      action="See the story system"
+      notice={{
+        title: 'Lưu ý bảo mật · Dữ liệu giả định',
+        copy: 'Toàn bộ số liệu, KPI, mục tiêu và chi tiết vận hành trong bài thuyết trình được giả định nhằm mục đích bảo mật. Nội dung không phản ánh kết quả kinh doanh thực tế của Vietravel.',
+      }}
+      disclosure="Independent presentation-design case study. Vietravel is referenced only as the subject of the supplied dummy-data brief; no confidential company data is presented."
+    />
 
-function DauIdentityBoard() {
-  return <div className="dau-identity-board" aria-label="DẤU color palette and typography">
-    <div className="dau-palette"><span style={{ '--swatch': '#2545C6' }}><b>Cobalt</b><small>#2545C6</small></span><span style={{ '--swatch': '#16191C' }}><b>Archive ink</b><small>#16191C</small></span><span style={{ '--swatch': '#E6E7E4' }}><b>Museum grey</b><small>#E6E7E4</small></span><span style={{ '--swatch': '#D7CA9F' }}><b>Artifact gold</b><small>#D7CA9F</small></span></div>
-    <div className="dau-type-specimen"><span>Playfair Display + Manrope</span><strong>Dấu tích</strong><p>Ă Â Ê Ô Ơ Ư Đ</p><small>Sơn mài · Gốm · Dệt</small></div>
-  </div>;
-}
+    <section id="story-system" className="product-section vietravel-story"><div className="product-shell">
+      <div className="vietravel-story-grid">
+        <div>
+          <FlowHeading eyebrow="Narrative architecture" title="From report inventory to decision sequence" copy="The deck moves from operating context to performance, interpretation, direction and a month-by-month plan. Each chapter answers one management question before the next begins."/>
+          <ol className="vietravel-story-index">{storySteps.map(([index, title, copy]) => <li key={index}><span>{index}</span><div><strong>{title}</strong><p>{copy}</p></div></li>)}</ol>
+        </div>
+        <ProductVisual src={vietravelContents} alt="Eight-part contents slide organizing the fictionalized Vietravel business report" caption="Eight chapters · one controlled narrative"/>
+      </div>
+    </div></section>
 
-function DauCaseStudy({ work }) {
-  const facts = [['Role','Product strategy, UX/UI'],['Platform','Responsive web and mobile'],['Core flows','Explore, scan, listen, save'],['Prototype','Interactive archive finder']];
-  return <article className="product-case case-dau">
-    <ProductHero work={work} variant="dau" label="Cultural archive / web app / 2026" summary="Scan a craft motif, find its context, and keep the maker's voice attached" facts={facts} image={dauCover} imageAlt="DẤU cultural archive across laptop and phone beside lacquer, textile and ceramic objects" action="Try archive finder"/>
+    <section className="product-section vietravel-evidence"><div className="product-shell">
+      <FlowHeading eyebrow="01 / Review" title="Make the business question visible before the chart" copy="The performance chapter pairs a compact scorecard with a comparison view and a short interpretation, so the audience knows what to read and why it matters."/>
+      <ProductVisual src={vietravelPerformance} alt="Fictionalized Vietravel performance comparison slide with customer, revenue and gross-profit measures" caption="Dummy-data performance snapshot · not actual Vietravel results"/>
+      <aside className="vietravel-inline-disclaimer"><strong>Dummy data, clearly marked</strong><p>Every commercial figure shown in this case is illustrative. It exists to demonstrate information hierarchy and presentation design while protecting operational confidentiality.</p></aside>
+    </div></section>
 
-    <section className="product-section dau-system"><div className="product-shell"><FlowHeading title="Colour + typography"/><DauIdentityBoard/></div></section>
+    <section className="product-section vietravel-analysis"><div className="product-shell">
+      <FlowHeading eyebrow="02 / Interpret" title="Keep dense tables comparable" copy="A shared header, fixed table logic and restrained colour coding let the audience compare category contribution with year-on-year movement without relearning the page."/>
+      <div className="product-pair vietravel-data-pair">
+        <ProductVisual src={vietravelVerticals} alt="Fictionalized revenue-by-industry slide with table and contribution chart" caption="Contribution by industry · dummy data"/>
+        <ProductVisual src={vietravelGrowth} alt="Fictionalized industry growth slide with aligned table and bar chart" caption="Growth by industry · dummy data"/>
+      </div>
+    </div></section>
 
-    <section className="product-section dau-screen-run"><div className="product-shell"><FlowHeading title="One archive across every visit" copy="Discovery, map, material filters, saved records and maker audio"/><ProductVisual src={dauScreens} alt="DẤU mobile and tablet screen family for discovery, map, filtering, collections, audio and artifact detail"/></div></section>
+    <section className="product-section vietravel-strategy"><div className="product-shell">
+      <FlowHeading eyebrow="03 / Decide" title="Turn analysis into an operating stance" copy="The strategic transition reduces the visual density, gives the core principle room to land, then reconnects it to measurable goals and guardrails."/>
+      <div className="vietravel-strategy-grid">
+        <ProductVisual src={vietravelDirection} alt="Vietravel strategic direction slide focused on stable, efficient and sustainable fictionalized growth" caption="Strategic stance"/>
+        <ProductVisual src={vietravelGoals} alt="Vietravel goals slide organizing fictionalized commercial, financial and team objectives" caption="Goals and guardrails · dummy data"/>
+      </div>
+    </div></section>
 
-    <section id="live-demo" className="product-section dau-live"><div className="product-shell"><FlowHeading title="Explore the sample archive" copy="Switch material families and save a record"/><DauArchiveDemo/></div></section>
+    <section className="product-section vietravel-cadence"><div className="product-shell">
+      <FlowHeading eyebrow="04 / Activate" title="Connect the annual target to a working calendar" copy="Monthly seasonality and the quarterly roadmap share one left-to-right reading direction. Targets become moments for selling, review, training and financial control."/>
+      <ProductVisual src={vietravelMonthlyPlan} alt="Fictionalized monthly customer, revenue and gross-profit plan for the Vietravel presentation" caption="Monthly phasing · dummy data"/>
+      <ProductVisual src={vietravelRoadmap} alt="Twelve-month quarterly action roadmap for the fictionalized Vietravel business plan" caption="Quarterly operating cadence" className="vietravel-roadmap-visual"/>
+    </div></section>
 
-    <section className="product-section dau-scan-flow"><div className="product-shell"><FlowHeading title="Recognition stays connected to context"/><ProductVisual src={dauScan} alt="DẤU motif recognition on a lacquer cabinet with object story and maker audio on tablet"/></div></section>
+    <section className="product-section vietravel-streams"><div className="product-shell">
+      <FlowHeading eyebrow="FIT + GIT" title="Give each revenue stream its own logic" copy="FIT is framed around product seasonality and sales models; GIT is framed around industry concentration, account value and direct relationship channels."/>
+      <div className="vietravel-stream-grid">
+        <article><header><span>FIT</span><h3>Product-led selling</h3><p>Package the offer by trip type, season and buying behaviour.</p></header><ProductVisual src={vietravelProductPlan} alt="Fictionalized Vietravel FIT departure product plan" caption="Product architecture"/><ProductVisual src={vietravelSalesModel} alt="Three fictionalized FIT sales models for mass, seasonal and premium travel" caption="Sales model"/></article>
+        <article><header><span>GIT</span><h3>Account-led growth</h3><p>Prioritize sectors, protect margin and build trust through direct channels.</p></header><ProductVisual src={vietravelGitPlan} alt="Fictionalized Vietravel GIT target industries and revenue plan" caption="Priority account groups · dummy data"/><ProductVisual src={vietravelGitChannels} alt="Direct and supporting channels for the fictionalized Vietravel GIT plan" caption="Channel architecture"/></article>
+      </div>
+    </div></section>
 
-    <section className="product-section dau-desktop-flow"><div className="product-shell"><FlowHeading title="Large collections remain visual"/><ProductVisual src={dauDesktop} alt="DẤU desktop archive grid and tablet artifact detail with zoom, provenance and audio"/></div></section>
+    <section className="product-section vietravel-channels"><div className="product-shell">
+      <FlowHeading eyebrow="Communication system" title="Make marketing accountable to the plan" copy="Channel principles define the role of online and offline activity; the 12-month calendar then ties each message to a season, audience and selling moment."/>
+      <ProductVisual src={vietravelChannelPrinciples} alt="Vietravel communication channel principles based on fictionalized planning inputs" caption="Channel principles"/>
+      <ProductVisual src={vietravelContentCalendar} alt="Twelve-month fictionalized communication calendar for Vietravel Hải Phòng" caption="Content calendar · dummy planning data" className="vietravel-calendar-visual"/>
+    </div></section>
 
-    <section className="product-section dau-use"><div className="product-shell"><FlowHeading title="Designed for the gallery floor"/><div className="product-pair"><ProductVisual src={dauMuseum} alt="Visitors using DẤU scan, audio and archive map inside a craft exhibition" caption="Museum mode"/><ProductVisual src={dauStates} alt="DẤU permission, no-match, offline and accessibility interface states" caption="Product states"/></div></div></section>
-
-    <section className="dau-close"><div className="product-shell"><strong>DẤU</strong><dl><div><dt>Discovery</dt><dd>Image archive, map and material filters</dd></div><div><dt>Visit</dt><dd>Motif scan, object context and maker audio</dd></div><div><dt>Access</dt><dd>Offline records, text scale and audio controls</dd></div></dl></div></section>
+    <section className="vietravel-close"><div className="product-shell">
+      <div className="vietravel-close-heading"><span>Outcome</span><strong>54</strong><h2>slides shaped as one management conversation</h2></div>
+      <dl><div><dt>Structure</dt><dd>8 chapters from evidence to action</dd></div><div><dt>Business streams</dt><dd>FIT and GIT with distinct selling logic</dd></div><div><dt>Cadence</dt><dd>12 months connected to quarterly priorities</dd></div></dl>
+      <aside><strong>Lưu ý bảo mật</strong><p>Toàn bộ dữ liệu trong case study là dữ liệu giả định nhằm bảo mật và chỉ dùng để minh họa năng lực thiết kế thuyết trình. Không sử dụng các con số này như thông tin kinh doanh chính thức của Vietravel.</p></aside>
+    </div></section>
   </article>;
 }
 
 export function DeepCaseStudy({ work }) {
-  if (work.caseKey === 'mat') return <DauCaseStudy work={work}/>;
+  if (work.caseKey === 'vietravel-report') return <VietravelCaseStudy work={work}/>;
   if (work.caseKey === 'attest') return <AttestCaseStudy work={work}/>;
   return null;
 }
