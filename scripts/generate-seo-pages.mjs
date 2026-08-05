@@ -110,6 +110,14 @@ function structuredData(route, canonical, image) {
 function createSeoBlock(route, siteUrl, image) {
   const canonical = `${siteUrl}${route.path === '/' ? '/' : route.path}`;
   const openGraphType = route.kind === 'article' ? 'article' : route.kind === 'profile' ? 'profile' : 'website';
+  const imageAlt = route.ogAlt || `${route.title} portfolio preview`;
+  const imageMetadata = [
+    `<meta property="og:image" content="${escapeHtml(image)}" />`,
+    route.ogMimeType ? `<meta property="og:image:type" content="${escapeHtml(route.ogMimeType)}" />` : '',
+    route.ogWidth ? `<meta property="og:image:width" content="${escapeHtml(route.ogWidth)}" />` : '',
+    route.ogHeight ? `<meta property="og:image:height" content="${escapeHtml(route.ogHeight)}" />` : '',
+    `<meta property="og:image:alt" content="${escapeHtml(imageAlt)}" />`,
+  ].filter(Boolean).join('\n    ');
   const jsonLd = JSON.stringify(structuredData(route, canonical, image)).replaceAll('<', '\\u003c');
   return `<!-- SEO:START -->
     <meta name="description" content="${escapeHtml(route.description)}" />
@@ -118,14 +126,14 @@ function createSeoBlock(route, siteUrl, image) {
     <meta property="og:description" content="${escapeHtml(route.description)}" />
     <meta property="og:type" content="${openGraphType}" />
     <meta property="og:url" content="${escapeHtml(canonical)}" />
-    <meta property="og:image" content="${escapeHtml(image)}" />
-    <meta property="og:image:alt" content="${escapeHtml(`${route.title} portfolio preview`)}" />
+    ${imageMetadata}
     <meta property="og:locale" content="${siteIdentity.locale}" />
     <meta property="og:site_name" content="${siteIdentity.name}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(route.title)}" />
     <meta name="twitter:description" content="${escapeHtml(route.description)}" />
     <meta name="twitter:image" content="${escapeHtml(image)}" />
+    <meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}" />
     <script type="application/ld+json">${jsonLd}</script>
     <!-- SEO:END -->`;
 }

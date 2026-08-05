@@ -6,12 +6,13 @@ export const siteIdentity = {
   locale: 'en_US',
 };
 
-const route = (path, title, description, ogSource, kind = 'website') => ({
+const route = (path, title, description, ogSource, kind = 'website', ogImage = {}) => ({
   path,
   title,
   description,
   ogSource,
   kind,
+  ...ogImage,
 });
 
 export const seoRoutes = [
@@ -19,8 +20,14 @@ export const seoRoutes = [
     '/',
     'HyyAnk - Graphic and Web Designer',
     'Graphic and web design by HyyAnk (Dư Ngọc Minh Hoàng), supported by video editing, automation and blockchain integration.',
-    'public/og-about.jpg',
+    'public/og-about.jpg?v=homepage-20260805',
     'profile',
+    {
+      ogAlt: 'Screenshot of the HyyAnk portfolio homepage',
+      ogWidth: 1200,
+      ogHeight: 630,
+      ogMimeType: 'image/jpeg',
+    },
   ),
   route('/work/portfolio-1', 'HAI LONG Presentation - HyyAnk', 'A 43-slide English corporate construction presentation covering company credentials, production capability, completed projects and HSE.', 'src/assets/case-studies/hailong-cover.webp', 'article'),
   route('/work/portfolio-2', 'Vietravel Business Report - HyyAnk', 'A visual-first 54-slide presentation design case study built with fictionalized business data for confidentiality.', 'src/assets/case-studies/vietravel-portfolio-cover.webp', 'article'),
