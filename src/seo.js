@@ -20,7 +20,7 @@ const baseSeoRoutes = [
     '/',
     'HyyAnk - Graphic and Web Designer',
     'Graphic and web design by HyyAnk (Dư Ngọc Minh Hoàng), supported by video editing, automation and blockchain integration.',
-    'public/og-home-20260805.png',
+    'public/og-home-20260806.png',
     'profile',
     {
       ogAlt: 'Screenshot of the HyyAnk portfolio homepage',
