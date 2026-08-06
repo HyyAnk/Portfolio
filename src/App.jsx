@@ -20,7 +20,7 @@ import mergeboardShowcase from './assets/experiments/mergeboard.webp';
 import photoIdShowcase from './assets/experiments/photo-id-studio.webp';
 import pdfBusinessCardShowcase from './assets/experiments/pdf-business-card.webp';
 import aiMediaStudioShowcase from './assets/experiments/ai-media-studio.webp';
-import portraitImage from './assets/generated/portrait-corporate-originals-v4.webp';
+import portraitImage from './assets/generated/portrait-cinematic-originals-v5.webp';
 import vietravelCover from './assets/case-studies/vietravel-portfolio-cover.webp';
 import attestCover from './assets/case-studies/attest-cover.webp';
 import vunCover from './assets/case-studies/vun-cover.webp';
