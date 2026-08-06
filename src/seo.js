@@ -15,7 +15,7 @@ const route = (path, title, description, ogSource, kind = 'website', ogImage = {
   ...ogImage,
 });
 
-export const seoRoutes = [
+const baseSeoRoutes = [
   route(
     '/',
     'HyyAnk - Graphic and Web Designer',
@@ -41,6 +41,118 @@ export const seoRoutes = [
   route('/skills/automation', 'Automation - HyyAnk', 'Dependable workflow, API and operations automation that removes repetitive work without hiding the system.', 'src/assets/generated/work-automation.webp'),
   route('/skills/blockchain', 'Blockchain Integration - HyyAnk', 'Wallet, smart-contract and on-chain product experiences that make trust and transaction state understandable.', 'src/assets/generated/work-blockchain.webp'),
 ];
+
+const localizedSeoCopy = {
+  vi: {
+    '/': {
+      title: 'HyyAnk - Thiết kế đồ họa và web',
+      description: 'Portfolio thiết kế đồ họa và web của HyyAnk (Dư Ngọc Minh Hoàng), kết hợp video editing, automation và tích hợp blockchain.',
+    },
+    '/work/portfolio-1': {
+      title: 'HAI LONG Presentation - HyyAnk',
+      description: 'Bộ presentation doanh nghiệp 43 trang bằng tiếng Anh cho HAI LONG, giới thiệu năng lực, sản xuất, dự án đã hoàn thành và HSE.',
+    },
+    '/work/portfolio-2': {
+      title: 'Vietravel Business Report - HyyAnk',
+      description: 'Case study thiết kế báo cáo kinh doanh 54 trang cho Vietravel, ưu tiên visual và sử dụng dữ liệu mô phỏng để bảo mật thông tin.',
+    },
+    '/work/portfolio-3': {
+      title: 'VỤN - HyyAnk',
+      description: 'Bộ nhận diện nguyên bản cho studio vật liệu tuần hoàn VỤN, trải dài từ mẫu vật liệu, bao bì và không gian đến catalogue số.',
+    },
+    '/work/portfolio-4': {
+      title: 'HUAXINSHENG - HyyAnk',
+      description: 'Catalogue doanh nghiệp 24 trang bằng tiếng Việt cho HUAXINSHENG, trình bày năng lực sản xuất lưới thép hàn, tiêu chuẩn kỹ thuật, ứng dụng và dự án.',
+    },
+    '/work/portfolio-5': {
+      title: 'TAIYO TOURIST Envelope - HyyAnk',
+      description: 'Hệ thống phong bì ba định dạng cho TAIYO TOURIST, từ thiết kế artwork và quy cách in đến mockup thành phẩm.',
+    },
+    '/work/portfolio-6': {
+      title: 'ATTEST Product Passport - HyyAnk',
+      description: 'Product passport on-chain cho các vật phẩm thiết kế sưu tầm, kết nối NFC, chữ ký định kiểu, quyền sở hữu ERC-721, metadata IPFS và lịch sử giao dịch.',
+    },
+    '/skills/graphic-design': {
+      title: 'Graphic Design - HyyAnk',
+      description: 'Thiết kế identity, editorial và campaign giúp ý tưởng trở nên rõ ràng ngay cả trước khi người xem đọc phần chi tiết.',
+    },
+    '/skills/uiux-webdev': {
+      title: 'Web Design - HyyAnk',
+      description: 'Thiết kế sản phẩm responsive và phát triển bằng React, giữ trọn tinh thần visual trong từng tương tác.',
+    },
+    '/skills/video-editor': {
+      title: 'Video Editor - HyyAnk',
+      description: 'Dựng phim, motion, âm thanh và title design thành câu chuyện rõ ràng, có nhịp điệu tự nhiên.',
+    },
+    '/skills/automation': {
+      title: 'Automation - HyyAnk',
+      description: 'Xây dựng workflow, API và automation vận hành ổn định, giảm việc lặp lại mà vẫn giữ hệ thống minh bạch, dễ kiểm soát.',
+    },
+    '/skills/blockchain': {
+      title: 'Blockchain Integration - HyyAnk',
+      description: 'Thiết kế trải nghiệm wallet, smart contract và sản phẩm on-chain để người dùng dễ hiểu trạng thái giao dịch và yếu tố xác thực.',
+    },
+  },
+  zh: {
+    '/': {
+      title: 'HyyAnk - 平面与网页设计师',
+      description: 'HyyAnk（Dư Ngọc Minh Hoàng）的平面与网页设计 Portfolio，涵盖视频剪辑、自动化与区块链整合。',
+    },
+    '/work/portfolio-1': {
+      title: 'HAI LONG Presentation - HyyAnk',
+      description: '为 HAI LONG 设计的 43 页英文企业 presentation，清晰呈现公司资历、生产能力、完工项目与 HSE。',
+    },
+    '/work/portfolio-2': {
+      title: 'Vietravel Business Report - HyyAnk',
+      description: '为 Vietravel 打造的 54 页商业报告设计 case study，以 visual 为核心，并用模拟数据保护商业信息。',
+    },
+    '/work/portfolio-3': {
+      title: 'VỤN - HyyAnk',
+      description: '为循环材料工作室 VỤN 打造的原创品牌识别，覆盖材料样本、包装、空间与数字 catalogue。',
+    },
+    '/work/portfolio-4': {
+      title: 'HUAXINSHENG - HyyAnk',
+      description: '为 HUAXINSHENG 设计的 24 页越南语企业 catalogue，介绍焊接钢网的生产实力、工程标准、应用与项目。',
+    },
+    '/work/portfolio-5': {
+      title: 'TAIYO TOURIST Envelope - HyyAnk',
+      description: '为 TAIYO TOURIST 设计的三种规格品牌信封系统，涵盖 artwork、印刷结构与实物 mockup。',
+    },
+    '/work/portfolio-6': {
+      title: 'ATTEST Product Passport - HyyAnk',
+      description: '为收藏级设计物件打造的链上 Product Passport，串联 NFC、类型化签名、ERC-721 所有权、IPFS metadata 与交易记录。',
+    },
+    '/skills/graphic-design': {
+      title: 'Graphic Design - HyyAnk',
+      description: '以 identity、editorial 与 campaign 设计，让创意在细节被阅读之前就清楚成立。',
+    },
+    '/skills/uiux-webdev': {
+      title: 'Web Design - HyyAnk',
+      description: '从 responsive 产品设计到 React 开发，让 visual 概念完整延续到每一次互动。',
+    },
+    '/skills/video-editor': {
+      title: 'Video Editor - HyyAnk',
+      description: '把剪辑、motion、声音与 title design 整合成节奏自然、表达清楚的故事。',
+    },
+    '/skills/automation': {
+      title: 'Automation - HyyAnk',
+      description: '打造稳定的 workflow、API 与运营自动化，减少重复工作，同时让系统保持透明、可控。',
+    },
+    '/skills/blockchain': {
+      title: 'Blockchain Integration - HyyAnk',
+      description: '设计 wallet、smart contract 与链上产品体验，让用户更容易理解验证方式与交易状态。',
+    },
+  },
+};
+
+export const seoRoutes = baseSeoRoutes.map((entry) => ({
+  ...entry,
+  locales: {
+    en: { title: entry.title, description: entry.description },
+    vi: localizedSeoCopy.vi[entry.path],
+    zh: localizedSeoCopy.zh[entry.path],
+  },
+}));
 
 export const seoByPath = Object.fromEntries(seoRoutes.map((entry) => [entry.path, entry]));
 

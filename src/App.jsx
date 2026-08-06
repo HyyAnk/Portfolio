@@ -20,7 +20,7 @@ import mergeboardShowcase from './assets/experiments/mergeboard.webp';
 import photoIdShowcase from './assets/experiments/photo-id-studio.webp';
 import pdfBusinessCardShowcase from './assets/experiments/pdf-business-card.webp';
 import aiMediaStudioShowcase from './assets/experiments/ai-media-studio.webp';
-import portraitImage from './assets/generated/portrait-originals-chain-v4.webp';
+import portraitImage from './assets/generated/portrait-corporate-originals-v4.webp';
 import vietravelCover from './assets/case-studies/vietravel-portfolio-cover.webp';
 import attestCover from './assets/case-studies/attest-cover.webp';
 import vunCover from './assets/case-studies/vun-cover.webp';
@@ -36,6 +36,7 @@ import udeClientLogo from './assets/clients/ude.webp';
 import vietravelClientLogo from './assets/clients/vietravel.webp';
 import { notFoundSeo, seoByPath, siteIdentity } from './seo.js';
 import { languages, translateText, useLanguage } from './i18n.jsx';
+import { localizePath, seoLanguages } from './languageRouting.js';
 import { withoutTrailingPeriod } from './text.js';
 
 const DeepCaseStudy = lazy(() => import('./caseStudies.jsx').then((module) => ({ default: module.DeepCaseStudy })));
@@ -364,9 +365,10 @@ function usePageMeta(metadata) {
   useEffect(() => {
     if (!metadata) return;
     const origin = window.location.origin;
-    const canonicalUrl = `${origin}${metadata.path === '/' ? '/' : metadata.path}`;
-    const localizedTitle = translateText(metadata.title, language);
-    const localizedDescription = translateText(metadata.description, language);
+    const canonicalUrl = `${origin}${localizePath(metadata.path, language)}`;
+    const localizedCopy = metadata.locales?.[language];
+    const localizedTitle = localizedCopy?.title || translateText(metadata.title, language);
+    const localizedDescription = localizedCopy?.description || translateText(metadata.description, language);
     document.title = localizedTitle;
 
     const upsertMeta = (selector, attributes) => {
@@ -391,10 +393,19 @@ function usePageMeta(metadata) {
     upsertMeta('meta[property="og:description"]', { property: 'og:description', content: localizedDescription });
     upsertMeta('meta[property="og:type"]', { property: 'og:type', content: metadata.kind === 'article' ? 'article' : metadata.kind === 'profile' ? 'profile' : 'website' });
     upsertMeta('meta[property="og:url"]', { property: 'og:url', content: canonicalUrl });
+    upsertMeta('meta[property="og:locale"]', { property: 'og:locale', content: seoLanguages.find(({ code }) => code === language)?.ogLocale || 'en_US' });
     upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: localizedTitle });
     upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: localizedDescription });
     upsertMeta('meta[name="robots"]', { name: 'robots', content: metadata.noindex ? 'noindex, follow' : 'index, follow' });
     upsertLink('link[rel="canonical"]', { rel: 'canonical', href: canonicalUrl });
+    seoLanguages.forEach((option) => {
+      upsertLink(`link[rel="alternate"][hreflang="${option.hreflang}"]`, {
+        rel: 'alternate', hreflang: option.hreflang, href: `${origin}${localizePath(metadata.path, option.code)}`,
+      });
+    });
+    upsertLink('link[rel="alternate"][hreflang="x-default"]', {
+      rel: 'alternate', hreflang: 'x-default', href: `${origin}${localizePath(metadata.path, 'en')}`,
+    });
   }, [language, metadata]);
 }
 
@@ -453,8 +464,14 @@ function LanguageSwitcher({ open, onToggle, onClose }) {
   const { language, setLanguage, t } = useLanguage();
   const activeLanguage = languages.find(({ code }) => code === language) || languages[1];
   const selectLanguage = (code) => {
-    setLanguage(code);
+    try { window.localStorage.setItem('portfolio-language', code); } catch { /* Continue without persistence. */ }
+    const nextPath = localizePath(window.location.pathname, code);
     onClose();
+    if (nextPath !== window.location.pathname) {
+      window.location.assign(`${nextPath}${window.location.search}${window.location.hash}`);
+      return;
+    }
+    setLanguage(code);
   };
 
   return <div className="nav-menu-wrap language-menu-wrap" translate="no">
@@ -515,8 +532,8 @@ function Nav() {
     <div className="nav-inner">
       <Link className="wordmark" to="/" aria-label={`${person} | ${fullName}, back to home`} onClick={() => { setSkillsOpen(false); setContactOpen(false); setLanguageOpen(false); }}><span className="wordmark-mark" aria-hidden="true"><img className="brand-logo-light" src="/deer-logo.svg" alt="" /><img className="brand-logo-dark" src="/deer-logo-white.svg" alt="" /></span><span className="wordmark-copy"><strong className="wordmark-alias">{person}</strong><span className="wordmark-divider" aria-hidden="true">|</span><span className="wordmark-fullname">{fullName}</span></span></Link>
       <div className="nav-actions">
-        <a className="nav-link nav-link-simple" href="/#portfolio">Portfolio</a>
-        <a className="nav-link nav-link-simple" href="/#about">Clients</a>
+        <Link className="nav-link nav-link-simple" to="/#portfolio">Portfolio</Link>
+        <Link className="nav-link nav-link-simple" to="/#about">Clients</Link>
         <div className="nav-menu-wrap">
           <button className="nav-link" type="button" aria-expanded={skillsOpen} onClick={() => { setSkillsOpen((value) => !value); setContactOpen(false); setLanguageOpen(false); }}>Skills <CaretDown size={15} weight="bold" /></button>
           {skillsOpen && <nav className="dropdown skills-dropdown" aria-label="Skills navigation">

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
 import {
   ArrowUpRight, Browser, CheckCircle,
@@ -66,11 +67,11 @@ function GraphicHeroV2({ Reveal }) {
 }
 
 function GraphicSystemV2({ Reveal }) {
-  return <section id="identity-evidence" className="gd-section gd-system-section"><div className="page-shell"><Reveal className="gd-heading"><h2>VỤN across three formats</h2><p>One fragment system for product, space and catalogue</p></Reveal><div className="gd-evidence-grid">{graphicIdentityEvidenceV2.map((item, index) => <Reveal className={`gd-evidence-card ${item.className || ''}`} key={item.context} delay={index * .05}><a href="/work/portfolio-3" aria-label={`View VỤN case study from ${item.context}`}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><span>{item.context}</span><strong>{item.outcome}</strong><ArrowUpRight size={17} aria-hidden="true" /></figcaption></figure></a></Reveal>)}</div></div></section>;
+  return <section id="identity-evidence" className="gd-section gd-system-section"><div className="page-shell"><Reveal className="gd-heading"><h2>VỤN across three formats</h2><p>One fragment system for product, space and catalogue</p></Reveal><div className="gd-evidence-grid">{graphicIdentityEvidenceV2.map((item, index) => <Reveal className={`gd-evidence-card ${item.className || ''}`} key={item.context} delay={index * .05}><Link to="/work/portfolio-3" aria-label={`View VỤN case study from ${item.context}`}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><span>{item.context}</span><strong>{item.outcome}</strong><ArrowUpRight size={17} aria-hidden="true" /></figcaption></figure></Link></Reveal>)}</div></div></section>;
 }
 
 function GraphicInformationV2({ Reveal }) {
-  return <section className="gd-section gd-information-section"><div className="page-shell"><Reveal className="gd-heading"><h2>HUAXINSHENG catalogue</h2><p>Company, production, engineering and application across 24 pages</p></Reveal><div className="gd-information-layout"><Reveal className="gd-information-main"><figure><img src={hxsContents} alt="HUAXINSHENG contents and product ecosystem spread" loading="lazy" /><figcaption>Contents + product ecosystem</figcaption></figure></Reveal><div className="gd-information-side"><Reveal><figure><img src={hxsProduct} alt="HUAXINSHENG production and product construction spread" loading="lazy" /><figcaption>Production + product proof</figcaption></figure></Reveal><Reveal delay={0.06}><figure><img src={hxsProjects} alt="HUAXINSHENG featured project spread" loading="lazy" /><figcaption>Application + project evidence</figcaption></figure></Reveal></div></div><Reveal className="gd-information-link"><a href="/work/portfolio-4">View the complete catalogue <ArrowUpRight size={17} /></a></Reveal></div></section>;
+  return <section className="gd-section gd-information-section"><div className="page-shell"><Reveal className="gd-heading"><h2>HUAXINSHENG catalogue</h2><p>Company, production, engineering and application across 24 pages</p></Reveal><div className="gd-information-layout"><Reveal className="gd-information-main"><figure><img src={hxsContents} alt="HUAXINSHENG contents and product ecosystem spread" loading="lazy" /><figcaption>Contents + product ecosystem</figcaption></figure></Reveal><div className="gd-information-side"><Reveal><figure><img src={hxsProduct} alt="HUAXINSHENG production and product construction spread" loading="lazy" /><figcaption>Production + product proof</figcaption></figure></Reveal><Reveal delay={0.06}><figure><img src={hxsProjects} alt="HUAXINSHENG featured project spread" loading="lazy" /><figcaption>Application + project evidence</figcaption></figure></Reveal></div></div><Reveal className="gd-information-link"><Link to="/work/portfolio-4">View the complete catalogue <ArrowUpRight size={17} /></Link></Reveal></div></section>;
 }
 
 function GraphicTypeLabV2({ Reveal }) {
@@ -82,7 +83,7 @@ function GraphicTypeLabV2({ Reveal }) {
 }
 
 function GraphicProductionV2({ Reveal }) {
-  return <section className="gd-section gd-production-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Production proof</h2><p>Product, engineering and project pages shown at final density</p></Reveal><div className="gd-production-grid">{graphicProductionEvidenceV2.map((item, index) => <Reveal className={`gd-production-card is-${index + 1}`} key={item.title} delay={index * .05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><strong>{item.title}</strong></figcaption></figure></Reveal>)}</div><Reveal className="gd-project-links"><a href="/work/portfolio-3"><img src={vunPackaging} alt="VỤN packaging and recovered-material products" loading="lazy" /><span>VỤN identity <ArrowUpRight size={17} /></span></a><a href="/work/portfolio-4"><img src={hxsProjects} alt="HUAXINSHENG industrial project catalogue spread" loading="lazy" /><span>HUAXINSHENG catalogue <ArrowUpRight size={17} /></span></a></Reveal></div></section>;
+  return <section className="gd-section gd-production-section"><div className="page-shell"><Reveal className="gd-heading"><h2>Production proof</h2><p>Product, engineering and project pages shown at final density</p></Reveal><div className="gd-production-grid">{graphicProductionEvidenceV2.map((item, index) => <Reveal className={`gd-production-card is-${index + 1}`} key={item.title} delay={index * .05}><figure><img src={item.image} alt={item.alt} loading="lazy" /><figcaption><strong>{item.title}</strong></figcaption></figure></Reveal>)}</div><Reveal className="gd-project-links"><Link to="/work/portfolio-3"><img src={vunPackaging} alt="VỤN packaging and recovered-material products" loading="lazy" /><span>VỤN identity <ArrowUpRight size={17} /></span></Link><Link to="/work/portfolio-4"><img src={hxsProjects} alt="HUAXINSHENG industrial project catalogue spread" loading="lazy" /><span>HUAXINSHENG catalogue <ArrowUpRight size={17} /></span></Link></Reveal></div></section>;
 }
 
 function GraphicDesignShowcase({ Reveal }) {
@@ -778,7 +779,7 @@ function BlockchainReceipt({ Reveal }) {
           <header><span>ATTEST explorer</span><strong><CheckCircle size={16} weight="fill" />Verified</strong></header>
           <div className="bc4-proof-object"><span>ARC-01</span><strong>Lounge object</strong><small>On-chain product passport</small></div>
           <div className="bc4-proof-path"><article><Fingerprint size={20} /><span>NFC</span><strong>04:A7:91:2C</strong></article><i /><article><Cube size={20} /><span>ERC-721</span><strong>Token #204</strong></article><i /><article><LinkSimple size={20} /><span>IPFS</span><strong>bafy...r7m</strong></article></div>
-          <a href="/work/portfolio-6">Open the ATTEST case study <ArrowUpRight size={18} /></a>
+          <Link to="/work/portfolio-6">Open the ATTEST case study <ArrowUpRight size={18} /></Link>
         </Reveal>
       </div>
     </div>
@@ -787,7 +788,7 @@ function BlockchainReceipt({ Reveal }) {
 
 function BlockchainCaseLink({ Reveal }) {
   return <section className="bc4-case-link">
-    <Reveal className="bc4-case-visual"><figure><img src={attestKit} alt="Complete ATTEST physical authentication kit and mobile passport" loading="lazy" /><figcaption><span>Portfolio 06</span><h2>ATTEST</h2><a href="/work/portfolio-6">View the complete project <ArrowUpRight size={20} /></a></figcaption></figure></Reveal>
+    <Reveal className="bc4-case-visual"><figure><img src={attestKit} alt="Complete ATTEST physical authentication kit and mobile passport" loading="lazy" /><figcaption><span>Portfolio 06</span><h2>ATTEST</h2><Link to="/work/portfolio-6">View the complete project <ArrowUpRight size={20} /></Link></figcaption></figure></Reveal>
   </section>;
 }
 

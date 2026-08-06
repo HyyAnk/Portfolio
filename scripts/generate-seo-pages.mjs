@@ -4,6 +4,7 @@ import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
 import { seoRoutes, siteIdentity } from '../src/seo.js';
+import { localizePath, seoLanguages } from '../src/languageRouting.js';
 
 const startedAt = Date.now();
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -107,10 +108,20 @@ function structuredData(route, canonical, image) {
   };
 }
 
-function createSeoBlock(route, siteUrl, image) {
-  const canonical = `${siteUrl}${route.path === '/' ? '/' : route.path}`;
+function createSeoBlock(route, language, siteUrl, image) {
+  const languageOption = seoLanguages.find(({ code }) => code === language) || seoLanguages[0];
+  const localizedRoute = { ...route, ...route.locales[language] };
+  const canonical = `${siteUrl}${localizePath(route.path, language)}`;
   const openGraphType = route.kind === 'article' ? 'article' : route.kind === 'profile' ? 'profile' : 'website';
-  const imageAlt = route.ogAlt || `${route.title} portfolio preview`;
+  const imageAlt = route.ogAlt || `${localizedRoute.title} portfolio preview`;
+  const alternateLinks = [
+    ...seoLanguages.map((option) => `<link rel="alternate" hreflang="${option.hreflang}" href="${escapeHtml(`${siteUrl}${localizePath(route.path, option.code)}`)}" />`),
+    `<link rel="alternate" hreflang="x-default" href="${escapeHtml(`${siteUrl}${localizePath(route.path, 'en')}`)}" />`,
+  ].join('\n    ');
+  const alternateLocales = seoLanguages
+    .filter(({ code }) => code !== language)
+    .map(({ ogLocale }) => `<meta property="og:locale:alternate" content="${ogLocale}" />`)
+    .join('\n    ');
   const imageMetadata = [
     `<meta property="og:image" content="${escapeHtml(image)}" />`,
     route.ogMimeType ? `<meta property="og:image:type" content="${escapeHtml(route.ogMimeType)}" />` : '',
@@ -118,30 +129,34 @@ function createSeoBlock(route, siteUrl, image) {
     route.ogHeight ? `<meta property="og:image:height" content="${escapeHtml(route.ogHeight)}" />` : '',
     `<meta property="og:image:alt" content="${escapeHtml(imageAlt)}" />`,
   ].filter(Boolean).join('\n    ');
-  const jsonLd = JSON.stringify(structuredData(route, canonical, image)).replaceAll('<', '\\u003c');
+  const jsonLd = JSON.stringify(structuredData(localizedRoute, canonical, image)).replaceAll('<', '\\u003c');
   return `<!-- SEO:START -->
-    <meta name="description" content="${escapeHtml(route.description)}" />
+    <meta name="description" content="${escapeHtml(localizedRoute.description)}" />
     <link rel="canonical" href="${escapeHtml(canonical)}" />
-    <meta property="og:title" content="${escapeHtml(route.title)}" />
-    <meta property="og:description" content="${escapeHtml(route.description)}" />
+    ${alternateLinks}
+    <meta property="og:title" content="${escapeHtml(localizedRoute.title)}" />
+    <meta property="og:description" content="${escapeHtml(localizedRoute.description)}" />
     <meta property="og:type" content="${openGraphType}" />
     <meta property="og:url" content="${escapeHtml(canonical)}" />
     ${imageMetadata}
-    <meta property="og:locale" content="${siteIdentity.locale}" />
+    <meta property="og:locale" content="${languageOption.ogLocale}" />
+    ${alternateLocales}
     <meta property="og:site_name" content="${siteIdentity.name}" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${escapeHtml(route.title)}" />
-    <meta name="twitter:description" content="${escapeHtml(route.description)}" />
+    <meta name="twitter:title" content="${escapeHtml(localizedRoute.title)}" />
+    <meta name="twitter:description" content="${escapeHtml(localizedRoute.description)}" />
     <meta name="twitter:image" content="${escapeHtml(image)}" />
     <meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}" />
     <script type="application/ld+json">${jsonLd}</script>
     <!-- SEO:END -->`;
 }
 
-function renderRouteHtml(baseHtml, route, siteUrl, image) {
-  const title = `<title>${escapeHtml(route.title)}</title>`;
-  const withTitle = baseHtml.replace(/<title>.*?<\/title>/s, title);
-  return withTitle.replace(/<!-- SEO:START -->[\s\S]*?<!-- SEO:END -->/, createSeoBlock(route, siteUrl, image));
+function renderRouteHtml(baseHtml, route, language, siteUrl, image) {
+  const languageOption = seoLanguages.find(({ code }) => code === language) || seoLanguages[0];
+  const title = `<title>${escapeHtml(route.locales[language].title)}</title>`;
+  const withLanguage = baseHtml.replace(/<html lang="[^"]*">/u, `<html lang="${languageOption.htmlLang}">`);
+  const withTitle = withLanguage.replace(/<title>.*?<\/title>/s, title);
+  return withTitle.replace(/<!-- SEO:START -->[\s\S]*?<!-- SEO:END -->/, createSeoBlock(route, language, siteUrl, image));
 }
 
 function renderNotFoundHtml(siteUrl) {
@@ -164,15 +179,17 @@ function renderNotFoundHtml(siteUrl) {
 </html>`;
 }
 
-async function writeRouteFile(route, html) {
-  const target = route.path === '/' ? path.join(dist, 'index.html') : path.join(dist, `${route.path.slice(1)}.html`);
+async function writeRouteFile(route, language, html) {
+  const outputPath = localizePath(route.path, language);
+  const target = outputPath === '/' ? path.join(dist, 'index.html') : path.join(dist, `${outputPath.slice(1)}.html`);
   await mkdir(path.dirname(target), { recursive: true });
   await writeFile(target, html, 'utf8');
 }
 
 async function main() {
   const siteUrl = normalizeSiteUrl();
-  log('INFO', `Config: site=${siteUrl}, routes=${seoRoutes.length}, mode=static-shell, concurrency=1, automation=Node filesystem API`, { step: 'startup' });
+  const pageCount = seoRoutes.length * seoLanguages.length;
+  log('INFO', `Config: site=${siteUrl}, routes=${seoRoutes.length}, languages=${seoLanguages.length}, pages=${pageCount}, mode=localized-static-shell, concurrency=1, automation=Node filesystem API`, { step: 'startup' });
 
   const [baseHtml, manifestRaw] = await Promise.all([
     readFile(path.join(dist, 'index.html'), 'utf8'),
@@ -183,19 +200,26 @@ async function main() {
   let failed = 0;
 
   for (const route of seoRoutes) {
-    try {
-      const image = resolveOgImage(manifest, route.ogSource, siteUrl);
-      await writeRouteFile(route, renderRouteHtml(baseHtml, route, siteUrl, image));
-      success += 1;
-      log('OK', `Generated ${route.path}`, { step: 'render-route', style: 'success' });
-    } catch (error) {
-      failed += 1;
-      log('ERROR', `Failed ${route.path}: ${error.message}. Check the route metadata and Vite manifest entry.`, { step: 'render-route', style: 'error' });
+    const image = resolveOgImage(manifest, route.ogSource, siteUrl);
+    for (const language of seoLanguages.map(({ code }) => code)) {
+      try {
+        await writeRouteFile(route, language, renderRouteHtml(baseHtml, route, language, siteUrl, image));
+        success += 1;
+        log('OK', `Generated ${localizePath(route.path, language)} [${language}] (${success}/${pageCount})`, { step: 'render-route', style: 'success' });
+      } catch (error) {
+        failed += 1;
+        log('ERROR', `Failed ${localizePath(route.path, language)} [${language}]: ${error.message}. Check the localized route metadata and Vite manifest entry.`, { step: 'render-route', style: 'error' });
+      }
     }
   }
 
   const today = new Date().toISOString().slice(0, 10);
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${seoRoutes.map((route) => `  <url><loc>${siteUrl}${route.path === '/' ? '/' : route.path}</loc><lastmod>${today}</lastmod><changefreq>${route.path === '/' ? 'weekly' : 'monthly'}</changefreq><priority>${route.path === '/' ? '1.0' : route.kind === 'article' ? '0.9' : '0.7'}</priority></url>`).join('\n')}\n</urlset>\n`;
+  const sitemapEntries = seoRoutes.flatMap((route) => seoLanguages.map((language) => {
+    const alternates = seoLanguages.map((alternate) => `    <xhtml:link rel="alternate" hreflang="${alternate.hreflang}" href="${siteUrl}${localizePath(route.path, alternate.code)}" />`).join('\n');
+    const xDefault = `    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}${localizePath(route.path, 'en')}" />`;
+    return `  <url>\n    <loc>${siteUrl}${localizePath(route.path, language.code)}</loc>\n${alternates}\n${xDefault}\n    <lastmod>${today}</lastmod>\n    <changefreq>${route.path === '/' ? 'weekly' : 'monthly'}</changefreq>\n    <priority>${route.path === '/' ? '1.0' : route.kind === 'article' ? '0.9' : '0.7'}</priority>\n  </url>`;
+  }));
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${sitemapEntries.join('\n')}\n</urlset>\n`;
   const robots = `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`;
 
   await Promise.all([
@@ -206,7 +230,7 @@ async function main() {
   log('OK', 'Generated sitemap.xml, robots.txt and branded 404.html', { step: 'site-files', style: 'success' });
 
   const elapsed = ((Date.now() - startedAt) / 1000).toFixed(2);
-  log(failed ? 'WARN' : 'DONE', `Summary: total=${seoRoutes.length}, success=${success}, failed=${failed}, skipped=0, retries=0, elapsed=${elapsed}s`, { step: 'summary', style: failed ? 'warning' : 'success' });
+  log(failed ? 'WARN' : 'DONE', `Summary: total=${pageCount}, success=${success}, failed=${failed}, skipped=0, retries=0, elapsed=${elapsed}s`, { step: 'summary', style: failed ? 'warning' : 'success' });
   if (failed) process.exitCode = 1;
 }
 

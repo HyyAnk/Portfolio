@@ -1212,11 +1212,15 @@ function detectInitialLanguage() {
   if (typeof window === 'undefined') return 'en';
   const saved = window.localStorage.getItem('portfolio-language');
   if (languages.some(({ code }) => code === saved)) return saved;
-  return 'en';
+  const browserLanguages = navigator.languages?.length ? navigator.languages : [navigator.language];
+  const preferred = browserLanguages
+    .map((value) => String(value || '').toLowerCase().split(/[-_]/u)[0])
+    .find((code) => languages.some((option) => option.code === code));
+  return preferred || 'en';
 }
 
-export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState(detectInitialLanguage);
+export function LanguageProvider({ children, initialLanguage }) {
+  const [language, setLanguage] = useState(() => initialLanguage || detectInitialLanguage());
 
   useLayoutEffect(() => {
     const option = languages.find(({ code }) => code === language) || languages[1];
