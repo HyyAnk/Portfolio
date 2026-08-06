@@ -20,7 +20,7 @@ import mergeboardShowcase from './assets/experiments/mergeboard.webp';
 import photoIdShowcase from './assets/experiments/photo-id-studio.webp';
 import pdfBusinessCardShowcase from './assets/experiments/pdf-business-card.webp';
 import aiMediaStudioShowcase from './assets/experiments/ai-media-studio.webp';
-import portraitImage from './assets/generated/portrait-studio-v2.webp';
+import portraitImage from './assets/generated/portrait-original-form-v4.webp';
 import vietravelCover from './assets/case-studies/vietravel-portfolio-cover.webp';
 import attestCover from './assets/case-studies/attest-cover.webp';
 import vunCover from './assets/case-studies/vun-cover.webp';
@@ -87,11 +87,11 @@ const contactLinks = [
 ];
 
 const skills = [
-  { slug: 'graphic-design', title: 'Graphic Design', short: 'Identity systems with a point of view', body: 'I build visual systems that make an idea legible before anyone reads the details', image: graphicImage, variant: 'graphic', tools: ['Art direction', 'Identity', 'Editorial'], details: ['Visual identity systems', 'Editorial layout direction', 'Typography and colour systems', 'Campaign art direction'] },
-  { slug: 'video-editor', title: 'Video Editor', short: 'Motion with an honest rhythm', supportingTools: 'After\u00A0Effect · CapCut', body: 'I shape footage, sound and type into clear stories that know when to pause', image: videoImage, variant: 'video', tools: ['Editing', 'Title design', 'Sound'], details: ['Advanced transitions', 'Professional SFX design', 'Special effects and motion effects', 'Cinematic storytelling'] },
-  { slug: 'uiux-webdev', title: 'Web Design', short: 'Interfaces that feel considered', body: 'I design and code responsive experiences where the visual idea survives the interaction', image: uiImage, variant: 'ui', tools: ['Product design', 'React', 'Systems'], details: ['UX flows and product structure', 'Responsive design systems', 'React implementation', 'Interaction and interface motion'] },
-  { slug: 'automation', title: 'Automation', short: 'The quiet work behind the work', supportingTools: 'Python · Node\u00A0JS', body: 'I connect the small steps that slow a team down and turn them into a dependable flow', image: automationImage, variant: 'automation', tools: ['Workflows', 'APIs', 'Operations'], details: ['Workflow architecture', 'API and webhook orchestration', 'Content and task automation', 'Operational clarity'] },
-  { slug: 'blockchain', title: 'Blockchain Integration', short: 'Trust made tangible', supportingTools: 'EVM · Smart\u00A0Contract', body: 'I help teams use decentralised technology where it creates real ownership, not extra noise', image: blockchainImage, variant: 'blockchain', tools: ['Wallets', 'Onchain UX', 'Contracts'], details: ['Wallet and onboarding UX', 'Smart contract integration', 'Onchain transaction states', 'Trust and ownership design'] },
+  { slug: 'graphic-design', title: 'Graphic Design', short: 'Identity systems with a point of view', experienceYears: 5, body: 'I build visual systems that make an idea legible before anyone reads the details', image: graphicImage, variant: 'graphic', tools: ['Art direction', 'Identity', 'Editorial'], details: ['Visual identity systems', 'Editorial layout direction', 'Typography and colour systems', 'Campaign art direction'] },
+  { slug: 'video-editor', title: 'Video Editor', short: 'Motion with an honest rhythm', experienceYears: 5, supportingTools: 'After\u00A0Effect · CapCut', body: 'I shape footage, sound and type into clear stories that know when to pause', image: videoImage, variant: 'video', tools: ['Editing', 'Title design', 'Sound'], details: ['Advanced transitions', 'Professional SFX design', 'Special effects and motion effects', 'Cinematic storytelling'] },
+  { slug: 'uiux-webdev', title: 'Web Design', short: 'Interfaces that feel considered', experienceYears: 2, body: 'I design and code responsive experiences where the visual idea survives the interaction', image: uiImage, variant: 'ui', tools: ['Product design', 'React', 'Systems'], details: ['UX flows and product structure', 'Responsive design systems', 'React implementation', 'Interaction and interface motion'] },
+  { slug: 'automation', title: 'Automation', short: 'The quiet work behind the work', experienceYears: 2, supportingTools: 'Python · Node\u00A0JS', body: 'I connect the small steps that slow a team down and turn them into a dependable flow', image: automationImage, variant: 'automation', tools: ['Workflows', 'APIs', 'Operations'], details: ['Workflow architecture', 'API and webhook orchestration', 'Content and task automation', 'Operational clarity'] },
+  { slug: 'blockchain', title: 'Blockchain Integration', short: 'Trust made tangible', experienceYears: 2, supportingTools: 'EVM · Smart\u00A0Contract', body: 'I help teams use decentralised technology where it creates real ownership, not extra noise', image: blockchainImage, variant: 'blockchain', tools: ['Wallets', 'Onchain UX', 'Contracts'], details: ['Wallet and onboarding UX', 'Smart contract integration', 'Onchain transaction states', 'Trust and ownership design'] },
 ];
 
 const primarySkills = ['graphic-design', 'uiux-webdev'].map((slug) => skills.find((skill) => skill.slug === slug));
@@ -224,6 +224,13 @@ function SkillToolMotion({ skill }) {
     <span className="skill-tool-track" aria-hidden="true">
       {toolset.tools.map((tool, index) => <SkillToolIcon key={tool.name} tool={tool} index={index} order={toolOrder[index]} />)}
     </span>
+  </span>;
+}
+
+function SkillExperience({ years, compact = false }) {
+  return <span className={`skill-compact-experience ${compact ? 'is-compact' : ''}`} aria-label={`${years} years of experience`}>
+    <span aria-hidden="true">Experience</span>
+    <strong aria-hidden="true">{years} years</strong>
   </span>;
 }
 
@@ -1268,9 +1275,8 @@ function SkillBlocks() {
       <section className="skills-compact-board" aria-label="Skills">
         <div className="skills-compact-core">{primarySkills.map((skill) =>
           <Link className="skill-compact-core-link" key={skill.slug} to={`/skills/${skill.slug}`}>
-            <div className="skill-compact-core-copy"><h4>{withoutTrailingPeriod(skill.title)}</h4><p>{skill.short}</p></div>
+            <div className="skill-compact-core-copy"><h4>{withoutTrailingPeriod(skill.title)}</h4><p>{skill.short}</p><SkillExperience years={skill.experienceYears} /></div>
             <SkillToolMotion skill={skill} />
-            <ArrowUpRight className="skill-compact-arrow" size={20} />
           </Link>
         )}</div>
         <div className="skills-compact-supporting">
@@ -1278,8 +1284,10 @@ function SkillBlocks() {
           <div className="skills-compact-support-list">{supportingSkills.map((skill) =>
             <Link className="skill-compact-support-link" key={skill.slug} to={`/skills/${skill.slug}`}>
               <h4>{withoutTrailingPeriod(skill.title)}</h4>
-              <span className="skill-compact-support-meta">{skill.supportingTools}</span>
-              <ArrowUpRight className="skill-compact-arrow" size={17} />
+              <span className="skill-compact-support-details">
+                <SkillExperience years={skill.experienceYears} compact />
+                <span className="skill-compact-support-meta">{skill.supportingTools}</span>
+              </span>
             </Link>
           )}</div>
         </div>
