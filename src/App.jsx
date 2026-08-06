@@ -20,7 +20,7 @@ import mergeboardShowcase from './assets/experiments/mergeboard.webp';
 import photoIdShowcase from './assets/experiments/photo-id-studio.webp';
 import pdfBusinessCardShowcase from './assets/experiments/pdf-business-card.webp';
 import aiMediaStudioShowcase from './assets/experiments/ai-media-studio.webp';
-import portraitImage from './assets/generated/portrait-original-form-v4.webp';
+import portraitImage from './assets/generated/portrait-originals-chain-v4.webp';
 import vietravelCover from './assets/case-studies/vietravel-portfolio-cover.webp';
 import attestCover from './assets/case-studies/attest-cover.webp';
 import vunCover from './assets/case-studies/vun-cover.webp';
@@ -1275,7 +1275,7 @@ function SkillBlocks() {
       <section className="skills-compact-board" aria-label="Skills">
         <div className="skills-compact-core">{primarySkills.map((skill) =>
           <Link className="skill-compact-core-link" key={skill.slug} to={`/skills/${skill.slug}`}>
-            <div className="skill-compact-core-copy"><h4>{withoutTrailingPeriod(skill.title)}</h4><p>{skill.short}</p><SkillExperience years={skill.experienceYears} /></div>
+            <div className="skill-compact-core-copy"><h4>{withoutTrailingPeriod(skill.title)}</h4><SkillExperience years={skill.experienceYears} /></div>
             <SkillToolMotion skill={skill} />
           </Link>
         )}</div>
@@ -1285,8 +1285,8 @@ function SkillBlocks() {
             <Link className="skill-compact-support-link" key={skill.slug} to={`/skills/${skill.slug}`}>
               <h4>{withoutTrailingPeriod(skill.title)}</h4>
               <span className="skill-compact-support-details">
-                <SkillExperience years={skill.experienceYears} compact />
                 <span className="skill-compact-support-meta">{skill.supportingTools}</span>
+                <SkillExperience years={skill.experienceYears} compact />
               </span>
             </Link>
           )}</div>
