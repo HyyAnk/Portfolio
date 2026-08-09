@@ -164,16 +164,16 @@ const skillToolsets = {
 };
 
 const measuredToolTextWidths = {
-  Photoshop: 55,
-  Illustrator: 55,
-  PowerPoint: 62,
+  Photoshop: 62,
+  Illustrator: 56,
+  PowerPoint: 67,
   Canva: 36,
-  'Premier Pro': 64,
-  Figma: 33,
-  React: 32,
-  JavaScript: 57,
-  HTML5: 37,
-  CSS: 24,
+  'Premier Pro': 65,
+  Figma: 35,
+  React: 35,
+  JavaScript: 59,
+  HTML5: 39,
+  CSS: 26,
 };
 
 function createRandomToolOrder(count) {

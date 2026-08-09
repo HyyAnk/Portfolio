@@ -113,7 +113,7 @@
 .hxs-spread-stack { min-height: clamp(480px,64vw,890px); padding: 5vw 6vw; display: grid; grid-template-columns: 1fr 1fr; align-items: start; overflow: hidden; background: #c8d4de; }
 .hxs-spread-stack figure { margin: 0; box-shadow: 0 34px 74px -46px rgba(0,36,70,.7); transform: rotate(-3deg); }
 .hxs-spread-stack figure:last-child { margin: 12vw 0 0 -7vw; transform: rotate(2.2deg); }
-.hxs-spread-stack img { width: 100%; display: block; }
+.hxs-spread-stack img { width: 100%; height: auto; display: block; object-fit: contain; }
 .hxs-architecture ol { margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--flow-line); border-left: 1px solid var(--flow-line); list-style: none; }
 .hxs-architecture li { min-height: 108px; padding: 14px; display: grid; grid-template-columns: auto 1fr; align-content: space-between; gap: 10px; border-right: 1px solid var(--flow-line); border-bottom: 1px solid var(--flow-line); }
 .hxs-architecture li span { color: #006db6; font-size: .57rem; }
@@ -143,7 +143,7 @@
 .hxs-reader nav button:focus-visible { outline: 2px solid #f4f7f9; outline-offset: -4px; }
 .hxs-reader nav small { font-size: .54rem; opacity: .64; }
 .hxs-reader-stage { position: relative; overflow: hidden; background: #dce6ee; }
-.hxs-reader-stage > img { width: 100%; display: block; }
+.hxs-reader-stage > img { width: 100%; height: auto; display: block; object-fit: contain; }
 .hxs-reader-stage > div { position: absolute; right: 0; bottom: 0; min-width: 280px; padding: 14px 17px; display: grid; gap: 5px; background: #003a78; color: #fff; }
 .hxs-reader-stage span { color: #7bd8f2; font-size: .55rem; }
 .hxs-reader-stage strong { font-size: .62rem; }
@@ -159,7 +159,7 @@
 .hxs-sequence .flow-label { border-color: rgba(255,255,255,.22); }
 .hxs-page-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px 12px; }
 .hxs-page-grid figure { margin: 0; }
-.hxs-page-grid img { width: 100%; display: block; }
+.hxs-page-grid img { width: 100%; height: auto; display: block; object-fit: contain; }
 .hxs-page-grid figcaption { padding-top: 7px; color: #7bd8f2; font-size: .54rem; }
 .hxs-close { background: #006db6; color: #f4f7f9; }
 .hxs-close .flow-shell { min-height: 430px; padding-block: 48px; display: flex; flex-direction: column; justify-content: space-between; }
@@ -182,7 +182,7 @@
 .hailong-slide-flight figure:nth-child(1) { top: 8%; left: 5%; transform: rotate(-5deg); }
 .hailong-slide-flight figure:nth-child(2) { top: 25%; right: 5%; transform: rotate(4deg); }
 .hailong-slide-flight figure:nth-child(3) { bottom: 7%; left: 15%; transform: rotate(-1.5deg); }
-.hailong-slide-flight img { width: 100%; display: block; }
+.hailong-slide-flight img { width: 100%; height: auto; display: block; object-fit: contain; }
 .hailong-architecture ol { margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(6,1fr); border-top: 1px solid var(--flow-line); border-left: 1px solid var(--flow-line); list-style: none; }
 .hailong-architecture li { min-height: 104px; padding: 14px; display: grid; grid-template-columns: auto 1fr; align-content: space-between; gap: 10px; border-right: 1px solid var(--flow-line); border-bottom: 1px solid var(--flow-line); }
 .hailong-architecture li span { color: #ed3b3f; font-size: .56rem; font-weight: 730; }
@@ -197,7 +197,7 @@
 .hailong-chapter-strip figure:nth-child(4) { grid-column: 6 / 13; margin-top: 4vw; }
 .hailong-chapter-strip figure:nth-child(5) { grid-column: 2 / 9; margin-top: 2vw; }
 .hailong-chapter-strip figure:nth-child(6) { grid-column: 9 / 13; margin-top: 12vw; }
-.hailong-chapter-strip img { width: 100%; display: block; box-shadow: 0 24px 52px -42px rgba(8,47,89,.65); }
+.hailong-chapter-strip img { width: 100%; height: auto; display: block; object-fit: contain; box-shadow: 0 24px 52px -42px rgba(8,47,89,.65); }
 .hailong-chapter-strip figcaption { padding: 9px 2px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--flow-line); color: #074f9d; font-size: .56rem; text-transform: uppercase; }
 .hailong-chapter-strip figcaption span { opacity: .52; }
 .hailong-system { padding-block: 74px 88px; background: #063c76; color: #f7fbff; }
@@ -230,24 +230,24 @@
 .hailong-reader nav button:focus-visible { outline: 2px solid #ed3b3f; outline-offset: -4px; }
 .hailong-reader nav small { font-size: .54rem; opacity: .58; }
 .hailong-reader-stage { position: relative; background: #dce9f5; }
-.hailong-reader-stage > img { width: 100%; display: block; }
+.hailong-reader-stage > img { width: 100%; height: auto; display: block; object-fit: contain; }
 .hailong-reader-stage > div { position: absolute; right: 0; bottom: 0; min-width: 310px; padding: 14px 18px; display: grid; gap: 5px; background: #ed3b3f; color: #fff; }
 .hailong-reader-stage span { font-size: .54rem; opacity: .7; }
 .hailong-reader-stage strong { font-size: .63rem; }
 .hailong-projects { background: #f7fbff; }
-.hailong-project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.hailong-project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
 .hailong-project-grid figure { margin: 0; }
 .hailong-project-grid figure:nth-child(even) { margin-top: 5vw; }
-.hailong-project-grid img { width: 100%; display: block; }
+.hailong-project-grid img { width: 100%; height: auto; display: block; aspect-ratio: 16 / 9; object-fit: contain; }
 .hailong-project-grid figcaption { padding-top: 7px; color: #ed3b3f; font-size: .54rem; }
 .hailong-complete { background: #041f3d; color: #f7fbff; }
 .hailong-complete .flow-label { border-color: rgba(255,255,255,.2); }
 .hailong-page-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px 12px; }
 .hailong-page-grid figure { margin: 0; }
-.hailong-page-grid img { width: 100%; display: block; }
+.hailong-page-grid img { width: 100%; height: auto; display: block; aspect-ratio: 16 / 9; object-fit: contain; }
 .hailong-page-grid figcaption { padding-top: 6px; color: #65b7ff; font-size: .52rem; }
 .hailong-close { position: relative; background: #f7fbff; }
-.hailong-close > img { width: 100%; display: block; }
+.hailong-close > img { width: 100%; height: auto; display: block; object-fit: contain; }
 .hailong-close > div { min-height: 230px; padding: 38px 4vw 44px; display: grid; grid-template-columns: 1fr auto; align-items: end; background: #ed3b3f; color: #fff; }
 .hailong-close span,.hailong-close small { font-size: .56rem; letter-spacing: .09em; text-transform: uppercase; }
 .hailong-close strong { grid-row: 1 / 3; grid-column: 2; font-family: 'Space Grotesk Variable',sans-serif; font-size: clamp(4rem,13vw,12rem); line-height: .65; letter-spacing: -.1em; }
@@ -268,7 +268,7 @@
 .taiyo-artboard-stack figure:nth-child(1) { top: 6%; left: 5%; transform: rotate(-4.5deg); }
 .taiyo-artboard-stack figure:nth-child(2) { top: 27%; right: 4%; transform: rotate(3deg); }
 .taiyo-artboard-stack figure:nth-child(3) { bottom: 7%; left: 12%; transform: rotate(-1deg); }
-.taiyo-artboard-stack img { width: 100%; display: block; }
+.taiyo-artboard-stack img { width: 100%; height: auto; display: block; object-fit: contain; }
 .taiyo-artboard-stack figcaption { position: absolute; right: 0; bottom: 0; padding: 9px 12px; background: #123b75; color: #fff; font-size: .52rem; }
 .taiyo-identity { padding-block: 74px 86px; background: #0b376c; color: #f9fbfd; }
 .taiyo-identity .flow-label { border-color: rgba(255,255,255,.22); }
@@ -289,17 +289,17 @@
 .taiyo-detail-strip figure.is-recipient { grid-column: 8 / 13; align-self: end; }
 .taiyo-detail-strip figure.is-contact { grid-column: 1 / 13; }
 .taiyo-detail-media { position: relative; min-height: 0; overflow: hidden; background: #fff; }
-.taiyo-detail-media img { display: block; max-width: none; }
+.taiyo-detail-media img { width: 100%; height: auto; display: block; max-width: 100%; object-fit: contain; transform: none; }
 .taiyo-detail-strip .is-aircraft .taiyo-detail-media { aspect-ratio: 2; }
-.taiyo-detail-strip .is-aircraft img { width: 138%; height: auto; transform: translate(-4.5%,-13%); }
+.taiyo-detail-strip .is-aircraft img { width: 100%; height: auto; }
 .taiyo-detail-strip .is-recipient .taiyo-detail-media { aspect-ratio: 2.25; }
-.taiyo-detail-strip .is-recipient img { width: 120%; height: auto; transform: translate(-4.6%,-27%); }
+.taiyo-detail-strip .is-recipient img { width: 100%; height: auto; }
 .taiyo-detail-strip .is-contact .taiyo-detail-media { aspect-ratio: 6.18; }
-.taiyo-detail-strip .is-contact img { width: 100%; height: 100%; object-fit: contain; }
+.taiyo-detail-strip .is-contact img { width: 100%; height: auto; object-fit: contain; }
 .taiyo-detail-strip figcaption { padding: 12px 14px; background: #f9fbfd; color: #123b75; font-size: .55rem; font-weight: 700; letter-spacing: .025em; text-transform: uppercase; }
 .taiyo-handover { position: relative; background: #d8e8f6; }
 .taiyo-handover figure { margin: 0; }
-.taiyo-handover img { width: 100%; display: block; }
+.taiyo-handover img { width: 100%; height: auto; display: block; object-fit: contain; }
 .taiyo-handover > div { position: absolute; right: 3vw; bottom: 3vw; min-width: 310px; padding: 18px 20px; display: grid; grid-template-columns: auto 1fr; gap: 5px 16px; background: #e51e2a; color: #fff; }
 .taiyo-handover > div span { grid-row: 1 / 3; font-size: .58rem; opacity: .7; }
 .taiyo-handover > div strong { font-size: .78rem; }
@@ -318,7 +318,7 @@
 .taiyo-format-stage figure { position: relative; z-index: 1; width: 80%; margin: 0; transform: rotate(-2deg); box-shadow: 0 42px 80px -46px rgba(7,31,68,.82); transition: width .25s ease,transform .25s ease; }
 .taiyo-format-stage.is-master figure { width: 64%; transform: rotate(-2deg); }
 .taiyo-format-stage.is-compact figure { width: 72%; transform: rotate(2deg); }
-.taiyo-format-stage img { width: 100%; display: block; }
+.taiyo-format-stage img { width: 100%; height: auto; display: block; object-fit: contain; }
 .taiyo-format-stage > div { position: absolute; z-index: 2; right: 0; bottom: 0; min-width: 300px; padding: 14px 18px; display: grid; gap: 5px; background: #e51e2a; color: #fff; }
 .taiyo-format-stage > div span { font-size: .54rem; opacity: .72; }
 .taiyo-format-stage > div strong { font-size: .63rem; }
@@ -344,7 +344,7 @@
 .taiyo-original-grid figure:nth-child(1) { grid-column: 1 / 8; }
 .taiyo-original-grid figure:nth-child(2) { grid-column: 8 / 13; margin-top: 8vw; }
 .taiyo-original-grid figure:nth-child(3) { grid-column: 3 / 12; margin-top: 2vw; }
-.taiyo-original-grid img { width: 100%; display: block; box-shadow: 0 26px 60px -48px rgba(7,31,68,.7); }
+.taiyo-original-grid img { width: 100%; height: auto; display: block; object-fit: contain; box-shadow: 0 26px 60px -48px rgba(7,31,68,.7); }
 .taiyo-original-grid figcaption { padding: 9px 2px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--flow-line); color: #155caa; font-size: .55rem; text-transform: uppercase; }
 .taiyo-original-grid figcaption span { opacity: .54; }
 .taiyo-close { background: #155caa; color: #fff; }

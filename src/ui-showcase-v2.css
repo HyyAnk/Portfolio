@@ -34,24 +34,24 @@
 .ui3-hero-copy p { max-width: 31ch; margin-bottom: 29px; color: var(--ink); font-size: clamp(1rem, 1.35vw, 1.2rem); }
 .ui3-hero-visual { min-width: 0; }
 .ui3-hero-visual figure { width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 5px; background: #16191c; box-shadow: 34px 42px 72px -48px rgba(16, 20, 24, .72); }
-.ui3-hero-visual img { object-position: center; transition: transform 1s cubic-bezier(.16, 1, .3, 1); }
-.ui3-hero-visual:hover img { transform: scale(1.012); }
+.ui3-hero-visual img { height: 100%; object-fit: contain; object-position: center; transition: filter .35s ease; }
+.ui3-hero-visual:hover img { filter: saturate(1.035) contrast(1.01); }
 
 .ui3-journey { background: color-mix(in srgb, var(--paper) 93%, var(--ink) 7%); }
 .ui3-journey-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .ui3-journey-card { grid-column: 8 / 13; min-width: 0; }
 .ui3-journey-card.is-primary { grid-column: 1 / 8; grid-row: 1 / 3; }
-.ui3-journey-card figure { height: 100%; overflow: hidden; display: grid; grid-template-rows: minmax(260px, 1fr) auto; border-radius: 5px; background: var(--paper-elevated); box-shadow: inset 0 0 0 1px var(--line); }
-.ui3-journey-card.is-primary figure { grid-template-rows: minmax(620px, 50vw) auto; }
-.ui3-journey-card:not(.is-primary) figure { grid-template-rows: minmax(292px, 24vw) auto; }
-.ui3-journey-card img { transition: transform .8s cubic-bezier(.16, 1, .3, 1); }
-.ui3-journey-card:hover img { transform: scale(1.016); }
+.ui3-journey-card figure { height: 100%; overflow: hidden; display: grid; grid-template-rows: auto auto; align-content: start; border-radius: 5px; background: var(--paper-elevated); box-shadow: inset 0 0 0 1px var(--line); }
+.ui3-journey-card.is-primary figure, .ui3-journey-card:not(.is-primary) figure { grid-template-rows: auto auto; }
+.ui3-journey-card img { height: auto; aspect-ratio: 3 / 2; object-fit: contain; transition: filter .35s ease; }
+.ui3-journey-card:hover img { filter: saturate(1.035) contrast(1.01); }
 .ui3-journey-card figcaption { min-height: 72px; padding: 15px 18px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
 .ui3-journey-card figcaption span { color: var(--accent); font-size: .6rem; font-weight: 760; letter-spacing: .08em; text-transform: uppercase; }
 .ui3-journey-card figcaption strong { color: var(--ink); font-size: .79rem; text-align: right; }
 
 .ui3-system { background: #121518; border-color: #2b3032; }
 .ui3-screen-wall figure { overflow: hidden; aspect-ratio: 3 / 2; border: 1px solid #303638; border-radius: 5px; background: #e6e7e4; }
+.ui3-screen-wall img { height: 100%; object-fit: contain; }
 .ui3-identity-board { margin-top: 14px; display: grid; grid-template-columns: 1.15fr .85fr; border: 1px solid #303638; border-radius: 5px; overflow: hidden; }
 .ui3-palette { display: grid; grid-template-columns: repeat(4, 1fr); }
 .ui3-palette span { min-height: 230px; padding: 15px; display: flex; flex-direction: column; justify-content: flex-end; border-right: 1px solid rgba(22, 25, 28, .25); background: var(--swatch); color: #16191c; }
@@ -75,16 +75,16 @@
 .ui3-mode-controls button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .ui3-prototype-stage { min-width: 0; }
 .ui3-prototype-stage figure { overflow: hidden; display: grid; grid-template-rows: minmax(0, 1fr) auto; border-radius: 5px; background: var(--paper-elevated); box-shadow: inset 0 0 0 1px var(--line); }
-.ui3-prototype-stage img { width: 100%; aspect-ratio: 3 / 2; }
+.ui3-prototype-stage img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; }
 .ui3-prototype-stage figcaption { min-height: 72px; padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
 .ui3-prototype-stage figcaption strong { color: var(--ink); font-size: .8rem; }
 .ui3-prototype-stage figcaption span { color: var(--muted); font-size: .64rem; text-align: right; }
 
 .ui3-field { background: #16191c; border-color: #303638; }
-.ui3-field-visual figure { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border-radius: 5px; background: #0f1113; }
-.ui3-field-visual img { transition: transform .9s cubic-bezier(.16, 1, .3, 1); }
-.ui3-field-visual:hover img { transform: scale(1.012); }
-.ui3-field-visual figcaption { position: absolute; right: 16px; bottom: 16px; left: 16px; min-height: 66px; padding: 0 17px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border: 1px solid rgba(255, 255, 255, .15); border-radius: 4px; background: rgba(17, 20, 23, .88); color: #f1f1ec; backdrop-filter: blur(15px); }
+.ui3-field-visual figure { position: relative; overflow: hidden; display: grid; grid-template-rows: auto auto; border-radius: 5px; background: #0f1113; }
+.ui3-field-visual img { height: auto; aspect-ratio: 3 / 2; object-fit: contain; transition: filter .35s ease; }
+.ui3-field-visual:hover img { filter: saturate(1.035) contrast(1.01); }
+.ui3-field-visual figcaption { position: static; min-height: 66px; padding: 14px 17px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid rgba(255, 255, 255, .15); background: #111417; color: #f1f1ec; }
 .ui3-field-visual figcaption > span { color: #a9adaa; font-size: .61rem; font-weight: 730; letter-spacing: .08em; text-transform: uppercase; }
 .ui3-field-visual figcaption a { display: inline-flex; align-items: center; gap: 8px; color: #f1f1ec; font-size: .74rem; font-weight: 730; }
 .ui3-field-visual figcaption a:hover { color: #8ea0f7; }
@@ -93,8 +93,7 @@
   .ui3-hero { min-height: auto; padding-top: 128px; }
   .ui3-hero-layout { grid-template-columns: .64fr 1.36fr; gap: 36px; }
   .ui3-hero-copy h1 { font-size: clamp(3.3rem, 5.7vw, 4.7rem); }
-  .ui3-journey-card.is-primary figure { grid-template-rows: minmax(520px, 54vw) auto; }
-  .ui3-journey-card:not(.is-primary) figure { grid-template-rows: minmax(240px, 25vw) auto; }
+  .ui3-journey-card.is-primary figure, .ui3-journey-card:not(.is-primary) figure { grid-template-rows: auto auto; }
   .ui3-prototype-layout { grid-template-columns: .7fr 1.3fr; gap: 42px; }
 }
 
@@ -112,21 +111,20 @@
   .ui3-hero-copy h1 { max-width: 8.7ch; font-size: clamp(3.35rem, 15.5vw, 5rem); }
   .ui3-journey-grid { display: grid; grid-template-columns: 1fr; grid-template-rows: none; gap: 26px; }
   .ui3-journey-card, .ui3-journey-card.is-primary { grid-column: auto; grid-row: auto; }
-  .ui3-journey-card.is-primary figure, .ui3-journey-card:not(.is-primary) figure { grid-template-rows: minmax(0, 70vw) auto; }
+  .ui3-journey-card.is-primary figure, .ui3-journey-card:not(.is-primary) figure { grid-template-rows: auto auto; }
   .ui3-journey-card figcaption { min-height: 68px; }
   .ui3-palette { grid-template-columns: 1fr 1fr; }
   .ui3-palette span { min-height: 150px; border-bottom: 1px solid rgba(22, 25, 28, .25); }
   .ui3-type-specimen { min-height: 270px; }
   .ui3-prototype-stage figcaption { align-items: flex-start; flex-direction: column; gap: 5px; }
   .ui3-prototype-stage figcaption span { text-align: left; }
-  .ui3-field-visual figure { aspect-ratio: 4 / 5; }
-  .ui3-field-visual img { object-position: 46% center; }
-  .ui3-field-visual figcaption { right: 10px; bottom: 10px; left: 10px; min-height: 108px; padding: 14px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 10px; }
+  .ui3-field-visual img { object-position: center; }
+  .ui3-field-visual figcaption { min-height: 108px; padding: 14px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 10px; }
 }
 
 @media (max-width: 420px) {
   .ui3-mode-controls button { flex: 1 1 auto; }
-  .ui3-screen-wall figure, .ui3-prototype-stage img { aspect-ratio: 4 / 3; }
+  .ui3-screen-wall figure, .ui3-prototype-stage img { aspect-ratio: 3 / 2; }
   .ui3-screen-wall img, .ui3-prototype-stage img { object-position: center; }
 }
 
