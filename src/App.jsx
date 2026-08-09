@@ -22,7 +22,7 @@ import pdfBusinessCardShowcase from './assets/experiments/pdf-business-card.webp
 import aiMediaStudioShowcase from './assets/experiments/ai-media-studio.webp';
 import portraitImage from './assets/generated/portrait-cinematic-originals-v5.webp';
 import vietravelCover from './assets/case-studies/vietravel-portfolio-cover.webp';
-import mendHero from './assets/case-studies/mend-hero.webp';
+import echoHero from './assets/case-studies/echo-hero.webp';
 import vunCover from './assets/case-studies/vun-cover.webp';
 import hxsCover from './assets/case-studies/hxs-home-cover.webp';
 import hailongCover from './assets/case-studies/hailong-cover.webp';
@@ -241,7 +241,7 @@ const works = [
   { slug: 'portfolio-3', caseKey: 'folded-matter', title: 'VỤN', type: 'Brand identity · Circular materials', role: 'Strategy · Identity · Art direction', cardDescription: 'Construction offcuts, reshaped into useful objects.', description: 'Identity for a studio that turns construction offcuts into useful objects.', challenge: 'A material-led studio needed one recognisable system across samples, products, packaging, space and catalogue.', outcome: 'A fragment-based identity built from four colours, three material families and one modular V mark.', tags: ['Brand identity', 'Art direction'], image: vunCover, deep: true },
   { slug: 'portfolio-4', caseKey: 'still-moving', title: 'HUAXINSHENG', type: 'Company catalogue · Industrial materials', role: 'Catalogue design · Art direction', cardDescription: 'Steel mesh, explained in one compact sales catalogue.', description: 'A 24-page Vietnamese sales catalogue for welded steel mesh, from company capability to technical application.', challenge: 'Company scale, product proof, engineering detail and real applications had to remain easy to scan in one compact document.', outcome: 'An A3 spread system built around a clear Inter hierarchy, industrial blue palette and evidence-led page sequence.', tags: ['Editorial design', 'Catalogue'], image: hxsCover, deep: true },
   { slug: 'portfolio-5', caseKey: 'taiyo-envelope', title: 'TAIYO TOURIST', type: 'Brand application · Travel packaging', role: 'Packaging design · Artwork', cardDescription: 'Travel documents, organised in three branded envelope formats.', description: 'A three-format envelope system for handing over itineraries, tickets and travel documents with a consistent Taiyo Group signature.', challenge: 'Logo, travel imagery, recipient space and contact details had to remain clear across multiple physical formats.', outcome: 'A print-ready application system connecting aircraft motion, address hierarchy and a recognisable blue-red travel palette.', tags: ['Packaging design', 'Brand application'], image: taiyoCover, deep: true },
-  { slug: 'portfolio-6', caseKey: 'mend', title: 'MEND', type: 'Brand identity · Service design', year: '2026', role: 'Brand strategy · Identity · Product design', cardDescription: 'A garment repair journey, joined by one visible thread.', description: 'A brand and service concept that makes garment repair clear from first booking to return.', challenge: 'Clothing repair feels fragmented and uncertain across booking, intake, progress and return.', outcome: 'One visual and digital system connecting four service stages, twelve interface states and nine brand touchpoints.', tags: ['Brand identity', 'Service design'], image: mendHero, deep: true },
+  { slug: 'portfolio-6', caseKey: 'echo', title: 'ECHO', type: 'Brand identity / Blockchain ticketing', year: '2026', role: 'Product strategy / Identity / UX/UI', cardDescription: 'One smart ticket from transfer rules to venue entry.', description: 'A blockchain ticketing and culture-pass concept for independent venues.', challenge: 'Ticket ownership, transfer limits and gate status often feel fragmented or opaque.', outcome: 'One visual and product system connecting issue, receive, transfer, entry and post-event attendance.', tags: ['Blockchain UX', 'Brand identity'], image: echoHero, deep: true },
 ];
 
 const legacyWorkRoutes = [
@@ -304,7 +304,7 @@ const heroCarouselImages = [
   { image: vietravelCover, alt: 'Vietravel business report presentation cover using fictionalized data' },
   { image: vunCover, alt: 'VỤN circular-material studio identity system' },
   { image: hxsCover, alt: 'HUAXINSHENG industrial welded mesh company catalogue' },
-  { image: mendHero, alt: 'MEND garment repair identity and service design concept' },
+  { image: echoHero, alt: 'ECHO blockchain ticketing identity and product concept' },
   { image: uiImage, alt: 'Responsive interface design study' },
   { image: graphicImage, alt: 'Graphic identity system study' },
   { image: videoImage, alt: 'Video editing and title design study' },

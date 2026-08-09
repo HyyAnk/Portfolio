@@ -34,7 +34,7 @@ const baseSeoRoutes = [
   route('/work/portfolio-3', 'VỤN - HyyAnk', 'An original identity system for a circular-material studio, spanning samples, packaging, space and digital catalogue.', 'src/assets/case-studies/vun-cover.webp', 'article'),
   route('/work/portfolio-4', 'HUAXINSHENG - HyyAnk', 'A 24-page Vietnamese company catalogue for welded steel mesh, covering company capability, production, engineering standards, applications and projects.', 'src/assets/case-studies/hxs-home-cover.webp', 'article'),
   route('/work/portfolio-5', 'TAIYO TOURIST Envelope - HyyAnk', 'A three-format branded envelope and travel-document handover system for Taiyo Tourist, including artwork, print construction and physical mockups.', 'src/assets/case-studies/taiyo-cover.webp', 'article'),
-  route('/work/portfolio-6', 'MEND Brand and Service Design - HyyAnk', 'A visual-first garment repair identity and service concept spanning naming, logo design, physical touchpoints, product UI and campaign art direction.', 'src/assets/case-studies/mend-hero.webp', 'article'),
+  route('/work/portfolio-6', 'ECHO Blockchain Ticketing - HyyAnk', 'A visual-first blockchain ticketing case study spanning naming, identity, ticket transfer, venue check-in and attendance records.', 'src/assets/case-studies/echo-hero.webp', 'article'),
   route('/skills/graphic-design', 'Graphic Design - HyyAnk', 'Identity, editorial and campaign systems that make an idea legible before anyone reads the details.', 'src/assets/generated/work-graphic.webp'),
   route('/skills/uiux-webdev', 'Web Design - HyyAnk', 'Responsive product design and React implementation where the visual idea survives the interaction.', 'src/assets/generated/work-ui.webp'),
   route('/skills/video-editor', 'Video Editor - HyyAnk', 'Editing, motion, sound and title design shaped into clear stories with an honest rhythm.', 'src/assets/generated/work-video.webp'),
@@ -69,8 +69,8 @@ const localizedSeoCopy = {
       description: 'Hệ thống phong bì ba định dạng cho TAIYO TOURIST, từ thiết kế artwork và quy cách in đến mockup thành phẩm.',
     },
     '/work/portfolio-6': {
-      title: 'MEND - Thiết kế thương hiệu và dịch vụ - HyyAnk',
-      description: 'Case study visual-first cho dịch vụ sửa chữa trang phục MEND, từ naming, logo và điểm chạm vật lý đến product UI và art direction chiến dịch.',
+      title: 'ECHO - Thiết kế sản phẩm vé blockchain - HyyAnk',
+      description: 'Dự án ECHO ưu tiên hình ảnh, từ đặt tên và nhận diện đến chuyển vé, kiểm vé tại cổng và dấu tham dự.',
     },
     '/skills/graphic-design': {
       title: 'Graphic Design - HyyAnk',
@@ -119,8 +119,8 @@ const localizedSeoCopy = {
       description: '为 TAIYO TOURIST 设计的三种规格品牌信封系统，涵盖 artwork、印刷结构与实物 mockup。',
     },
     '/work/portfolio-6': {
-      title: 'MEND 品牌与服务设计 - HyyAnk',
-      description: '以视觉为核心的服装修补服务案例，涵盖命名、标志、实体触点、产品界面与活动视觉指导。',
+      title: 'ECHO 区块链票务产品设计 - HyyAnk',
+      description: '以视觉为主线的 ECHO 区块链票务案例，涵盖命名、品牌识别、转票、入口验票与到场记录。',
     },
     '/skills/graphic-design': {
       title: 'Graphic Design - HyyAnk',

@@ -20,7 +20,7 @@ import vietravelGitPlan from './assets/case-studies/vietravel-page-37.webp';
 import vietravelGitChannels from './assets/case-studies/vietravel-page-41.webp';
 import vietravelChannelPrinciples from './assets/case-studies/vietravel-page-49.webp';
 import vietravelContentCalendar from './assets/case-studies/vietravel-page-53.webp';
-import { MendCaseStudy } from './MendCaseStudy.jsx';
+import { EchoCaseStudy } from './EchoCaseStudy.jsx';
 
 const selectedFrames = [
   { src: vietravelCover, alt: 'Fictionalized Vietravel business report presentation cover' },
@@ -163,6 +163,6 @@ function VietravelCaseStudy() {
 
 export function DeepCaseStudy({ work }) {
   if (work.caseKey === 'vietravel-report') return <VietravelCaseStudy/>;
-  if (work.caseKey === 'mend') return <MendCaseStudy work={work}/>;
+  if (work.caseKey === 'echo') return <EchoCaseStudy work={work}/>;
   return null;
 }

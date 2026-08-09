@@ -636,6 +636,9 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .route-loading-inner { display: grid; gap: 18px; }
 .route-loading-line { display: block; width: min(620px, 78vw); height: 12px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 12%, transparent); animation: route-loading-pulse 1.35s ease-in-out infinite; }
 .route-loading-line-short { width: min(390px, 54vw); animation-delay: .12s; }
+.project-page-echo { background: #151513; }
+.project-page-echo .route-loading { min-height: 100dvh; background: #151513; color: #eee9de; }
+.project-page-echo .route-loading-line { background: rgba(238, 233, 222, .14); }
 .not-found-page { min-height: calc(100dvh - 76px); }
 .not-found { min-height: 100dvh; display: grid; align-items: center; padding-top: 128px; }
 .not-found-grid { display: grid; grid-template-columns: minmax(0, .7fr) minmax(320px, 1fr); gap: clamp(48px, 8vw, 132px); align-items: end; }
