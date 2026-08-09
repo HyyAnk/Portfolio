@@ -34,7 +34,7 @@ const baseSeoRoutes = [
   route('/work/portfolio-3', 'VỤN - HyyAnk', 'An original identity system for a circular-material studio, spanning samples, packaging, space and digital catalogue.', 'src/assets/case-studies/vun-cover.webp', 'article'),
   route('/work/portfolio-4', 'HUAXINSHENG - HyyAnk', 'A 24-page Vietnamese company catalogue for welded steel mesh, covering company capability, production, engineering standards, applications and projects.', 'src/assets/case-studies/hxs-home-cover.webp', 'article'),
   route('/work/portfolio-5', 'TAIYO TOURIST Envelope - HyyAnk', 'A three-format branded envelope and travel-document handover system for Taiyo Tourist, including artwork, print construction and physical mockups.', 'src/assets/case-studies/taiyo-cover.webp', 'article'),
-  route('/work/portfolio-6', 'ATTEST Product Passport - HyyAnk', 'An on-chain product passport for collectible design objects, connecting NFC anchors, typed signatures, ERC-721 ownership, IPFS metadata and transaction receipts.', 'src/assets/case-studies/attest-cover.webp', 'article'),
+  route('/work/portfolio-6', 'MEND Brand and Service Design - HyyAnk', 'A visual-first garment repair identity and service concept spanning naming, logo design, physical touchpoints, product UI and campaign art direction.', 'src/assets/case-studies/mend-hero.webp', 'article'),
   route('/skills/graphic-design', 'Graphic Design - HyyAnk', 'Identity, editorial and campaign systems that make an idea legible before anyone reads the details.', 'src/assets/generated/work-graphic.webp'),
   route('/skills/uiux-webdev', 'Web Design - HyyAnk', 'Responsive product design and React implementation where the visual idea survives the interaction.', 'src/assets/generated/work-ui.webp'),
   route('/skills/video-editor', 'Video Editor - HyyAnk', 'Editing, motion, sound and title design shaped into clear stories with an honest rhythm.', 'src/assets/generated/work-video.webp'),
@@ -69,8 +69,8 @@ const localizedSeoCopy = {
       description: 'Hệ thống phong bì ba định dạng cho TAIYO TOURIST, từ thiết kế artwork và quy cách in đến mockup thành phẩm.',
     },
     '/work/portfolio-6': {
-      title: 'ATTEST Product Passport - HyyAnk',
-      description: 'Product passport on-chain cho các vật phẩm thiết kế sưu tầm, kết nối NFC, chữ ký định kiểu, quyền sở hữu ERC-721, metadata IPFS và lịch sử giao dịch.',
+      title: 'MEND - Thiết kế thương hiệu và dịch vụ - HyyAnk',
+      description: 'Case study visual-first cho dịch vụ sửa chữa trang phục MEND, từ naming, logo và điểm chạm vật lý đến product UI và art direction chiến dịch.',
     },
     '/skills/graphic-design': {
       title: 'Graphic Design - HyyAnk',
@@ -119,8 +119,8 @@ const localizedSeoCopy = {
       description: '为 TAIYO TOURIST 设计的三种规格品牌信封系统，涵盖 artwork、印刷结构与实物 mockup。',
     },
     '/work/portfolio-6': {
-      title: 'ATTEST Product Passport - HyyAnk',
-      description: '为收藏级设计物件打造的链上 Product Passport，串联 NFC、类型化签名、ERC-721 所有权、IPFS metadata 与交易记录。',
+      title: 'MEND 品牌与服务设计 - HyyAnk',
+      description: '以视觉为核心的服装修补服务案例，涵盖命名、标志、实体触点、产品界面与活动视觉指导。',
     },
     '/skills/graphic-design': {
       title: 'Graphic Design - HyyAnk',

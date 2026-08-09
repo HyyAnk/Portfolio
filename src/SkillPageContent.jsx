@@ -779,7 +779,7 @@ function BlockchainReceipt({ Reveal }) {
           <header><span>ATTEST explorer</span><strong><CheckCircle size={16} weight="fill" />Verified</strong></header>
           <div className="bc4-proof-object"><span>ARC-01</span><strong>Lounge object</strong><small>On-chain product passport</small></div>
           <div className="bc4-proof-path"><article><Fingerprint size={20} /><span>NFC</span><strong>04:A7:91:2C</strong></article><i /><article><Cube size={20} /><span>ERC-721</span><strong>Token #204</strong></article><i /><article><LinkSimple size={20} /><span>IPFS</span><strong>bafy...r7m</strong></article></div>
-          <Link to="/work/portfolio-6">Open the ATTEST case study <ArrowUpRight size={18} /></Link>
+          <a href="#contact">Plan an integration <ArrowUpRight size={18} /></a>
         </Reveal>
       </div>
     </div>
@@ -788,7 +788,7 @@ function BlockchainReceipt({ Reveal }) {
 
 function BlockchainCaseLink({ Reveal }) {
   return <section className="bc4-case-link">
-    <Reveal className="bc4-case-visual"><figure><img src={attestKit} alt="Complete ATTEST physical authentication kit and mobile passport" loading="lazy" /><figcaption><span>Portfolio 06</span><h2>ATTEST</h2><Link to="/work/portfolio-6">View the complete project <ArrowUpRight size={20} /></Link></figcaption></figure></Reveal>
+    <Reveal className="bc4-case-visual"><figure><img src={attestKit} alt="Complete ATTEST physical authentication kit and mobile passport" loading="lazy" /><figcaption><span>Integration prototype</span><h2>ATTEST</h2><a href="#bc4-lab">Replay the integration <ArrowUpRight size={20} /></a></figcaption></figure></Reveal>
   </section>;
 }
 
