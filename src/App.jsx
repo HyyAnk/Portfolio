@@ -22,7 +22,7 @@ import pdfBusinessCardShowcase from './assets/experiments/pdf-business-card.webp
 import aiMediaStudioShowcase from './assets/experiments/ai-media-studio.webp';
 import portraitImage from './assets/generated/portrait-cinematic-originals-v5.webp';
 import vietravelCover from './assets/case-studies/vietravel-portfolio-cover.webp';
-import echoHero from './assets/case-studies/echo-hero.webp';
+import echoHero from './assets/case-studies/echo-vn-hero.webp';
 import vunCover from './assets/case-studies/vun-cover.webp';
 import hxsCover from './assets/case-studies/hxs-home-cover.webp';
 import hailongCover from './assets/case-studies/hailong-cover.webp';

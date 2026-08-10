@@ -23,14 +23,19 @@ import {
 } from '@phosphor-icons/react';
 
 import { useLanguage } from './i18n.jsx';
-import echoHero from './assets/case-studies/echo-hero.webp';
-import echoSystem from './assets/case-studies/echo-system.webp';
-import echoVenue from './assets/case-studies/echo-venue.webp';
-import echoTransfer from './assets/case-studies/echo-transfer.webp';
-import echoLive from './assets/case-studies/echo-live.webp';
-import echoScan from './assets/case-studies/echo-scan.webp';
-import echoReceipt from './assets/case-studies/echo-receipt.webp';
-import echoAfter from './assets/case-studies/echo-after.webp';
+import echoHero from './assets/case-studies/echo-vn-hero.webp';
+import echoHeroMobile from './assets/case-studies/echo-vn-hero-mobile.webp';
+import echoSystem from './assets/case-studies/echo-vn-system.webp';
+import echoVenue from './assets/case-studies/echo-vn-venue.webp';
+import echoVenueMobile from './assets/case-studies/echo-vn-venue-mobile.webp';
+import echoTransfer from './assets/case-studies/echo-vn-transfer.webp';
+import echoLive from './assets/case-studies/echo-vn-live.webp';
+import echoLiveMobile from './assets/case-studies/echo-vn-live-mobile.webp';
+import echoScan from './assets/case-studies/echo-vn-scan.webp';
+import echoScanMobile from './assets/case-studies/echo-vn-scan-mobile.webp';
+import echoReceipt from './assets/case-studies/echo-vn-receipt.webp';
+import echoAfter from './assets/case-studies/echo-vn-after.webp';
+import echoAfterMobile from './assets/case-studies/echo-vn-after-mobile.webp';
 import './echo-case.css';
 
 const ECHO_COPY = {
@@ -63,7 +68,7 @@ const ECHO_COPY = {
     },
     contribution: {
       title: 'I made four actions clear',
-      body: 'Blockchain rules became one language across naming, interaction and state',
+      body: 'I turned blockchain rules into one clear language across naming, interactions and states',
       scope: 'Product strategy / naming / identity / UX/UI / prototyping / art direction',
       items: [
         { verb: 'Named', title: 'One human promise', copy: 'A ticket people can follow from issue to entry' },
@@ -95,20 +100,20 @@ const ECHO_COPY = {
           id: 'transfer',
           label: 'Transfer',
           title: 'A transfer is reviewed first',
-          copy: 'A custom transfer contract enforces the venue limit; EIP-712 signs the review with a nonce and deadline',
+          copy: 'A custom transfer contract enforces the venue’s price cap; the guest signs an EIP-712 review containing a nonce and deadline',
           facts: [['Signature', 'EIP-712 + nonce'], ['Execution', 'Transfer contract']],
         },
         {
           id: 'enter',
           label: 'Enter',
           title: 'The gate checks a fresh challenge',
-          copy: 'A signed, changing code checks the ticket without putting direct identity data on-chain',
+          copy: 'A fresh signed code verifies the ticket without putting identifying data on-chain',
           facts: [['Gate', 'One check-in'], ['After', 'Attendance record']],
         },
       ],
     },
     product: {
-      title: 'Three screens, one calm pass',
+      title: 'Three screens, one clear ticket journey',
       body: 'The product speaks in ticket language, not protocol language',
       screenLabels: ['Ticket', 'Transfer', 'Attendance'],
       tonight: 'Tonight',
@@ -146,12 +151,12 @@ const ECHO_COPY = {
         ready: { title: 'Ready to scan', copy: 'Hold the pass near the reader' },
         checking: { title: 'Checking ticket', copy: 'Holder, validity and check-in state' },
         entered: { title: 'Entry confirmed', copy: 'The ticket is valid and an attendance record is ready' },
-        used: { title: 'Ticket already used', copy: 'This ticket checked in at 19:42' },
+        used: { title: 'Ticket already used', copy: 'This ticket was used at 19:42' },
       },
     },
     chain: {
       title: 'The chain stays backstage',
-      body: 'Only the proof needed to enforce the ticket is recorded',
+      body: 'Only the proof needed to enforce the ticket rules is recorded',
       receiptTitle: 'Transfer review',
       receiptRows: [
         ['Recipient', '0x41F2...7A2F'],
@@ -160,7 +165,7 @@ const ECHO_COPY = {
         ['Execution', 'Transfer contract'],
       ],
       txStatesLabel: 'Transaction status',
-      txStates: ['Submitted', 'Confirmed', 'Reverted'],
+      txStates: ['Submitted', 'Confirmed', 'Failed'],
       onchain: 'Recorded on-chain',
       onchainItems: ['Current holder', 'Transfer rule', 'Check-in state'],
       offchain: 'Kept off-chain',
@@ -169,8 +174,8 @@ const ECHO_COPY = {
       note: 'Prototype data / local EVM simulation / no live deployment claim',
     },
     impact: {
-      title: 'My impact lives in the handoffs',
-      body: 'Each design decision removes one place where the ticket could feel uncertain',
+      title: 'I made every ticket handoff clearer',
+      body: 'Each design decision removes a point of uncertainty from the ticket journey',
       before: 'Before',
       after: 'After',
       pairs: [
@@ -185,14 +190,14 @@ const ECHO_COPY = {
       note: 'Self-initiated product concept / simulated ticket and transaction data',
     },
     alt: {
-      hero: 'Attendee presenting an ECHO pass at the entrance to an independent music venue',
-      system: 'ECHO ticket, wristband, NFC card and venue map arranged on black and brushed-silver surfaces',
-      venue: 'Black-brick independent venue carrying the ECHO identity across sign, poster, gate and entry kiosk',
-      transfer: 'Two friends reviewing an ECHO ticket transfer together on their phones',
-      live: 'Audience watching a live band inside the intimate ECHO venue',
-      scan: 'Attendee tapping an ECHO wristband on a brushed-metal venue reader',
-      receipt: 'ECHO ticket transfer objects arranged as an overhead transaction still life',
-      after: 'Attendee leaving the ECHO venue after the show with an attendance wristband',
+      hero: 'Vietnamese attendee presenting an ECHO pass at a narrow independent music venue in Ho Chi Minh City',
+      system: 'ECHO ticket, wristband, NFC pass and narrow shophouse venue plan arranged on terrazzo and brushed stainless steel',
+      venue: 'Renovated Ho Chi Minh City shophouse venue carrying the ECHO identity across its sign, entrance and ticket reader',
+      transfer: 'Two Vietnamese friends reviewing an ECHO ticket transfer together on their phones',
+      live: 'Vietnamese audience watching an indie band inside the intimate ECHO venue',
+      scan: 'Vietnamese attendee tapping an ECHO wristband on a brushed-stainless venue reader',
+      receipt: 'Vietnamese hands reviewing an ECHO transfer with a phone, ticket and NFC pass on terrazzo',
+      after: 'Vietnamese attendee leaving the rain-wet ECHO venue after the show while checking her wristband',
     },
   },
   vi: {
@@ -206,11 +211,11 @@ const ECHO_COPY = {
       scopeLabel: 'Phạm vi',
       scope: 'Ý tưởng cá nhân / dữ liệu mô phỏng',
       focusLabel: 'Vai trò của blockchain',
-      focus: 'Quyền sở hữu vé / giới hạn giá bán lại / dấu tham dự',
+      focus: 'Quyền sở hữu vé / giới hạn giá bán lại / xác nhận tham dự',
     },
     logo: {
       title: 'Một nhịp quét tạo nên tín hiệu',
-      body: 'Bốn vòng tín hiệu giữ logo dễ nhận diện, từ biểu tượng ứng dụng đến cổng sự kiện',
+      body: 'Bốn vòng tín hiệu giúp logo luôn dễ nhận ra, từ biểu tượng ứng dụng đến cổng sự kiện',
       construction: 'Cấu trúc tín hiệu',
       primary: 'Logo chính',
       compact: 'Logo thu gọn',
@@ -218,13 +223,13 @@ const ECHO_COPY = {
       markTitle: 'Biểu tượng tín hiệu ECHO',
       measurement: '04 vòng / 01 tín hiệu mở',
       firstMove: 'Bước đầu tiên của tôi',
-      firstMoveCopy: 'Tôi đặt tên ECHO, phát triển biểu tượng, các phiên bản logo, chuyển động và ứng dụng thực tế trước khi thiết kế giao diện',
+      firstMoveCopy: 'Tôi đặt tên ECHO rồi xây dựng biểu tượng, hệ logo, chuyển động và các điểm chạm vật lý trước khi thiết kế giao diện',
       applications: 'Vé / vòng tay / thẻ NFC',
       colors: ['Đen sân khấu', 'Kem giấy vé', 'Bạc xước', 'Đỏ san hô'],
     },
     contribution: {
       title: 'Tôi làm rõ bốn hành động',
-      body: 'Tôi biến các quy tắc blockchain thành một ngôn ngữ thống nhất cho tên gọi, thao tác và trạng thái',
+      body: 'Tôi chuyển các quy tắc blockchain thành một hệ ngôn ngữ rõ ràng, xuyên suốt từ tên gọi, thao tác đến trạng thái',
       scope: 'Chiến lược sản phẩm / đặt tên / nhận diện / UX/UI / nguyên mẫu / định hướng hình ảnh',
       items: [
         { verb: 'Đặt tên', title: 'Một lời hứa dễ hiểu', copy: 'Tấm vé rõ ràng từ lúc phát hành đến khi vào cổng' },
@@ -256,7 +261,7 @@ const ECHO_COPY = {
           id: 'transfer',
           label: 'Chuyển vé',
           title: 'Xem rõ trước khi chuyển vé',
-          copy: 'Hợp đồng chuyển vé thực thi giới hạn của ban tổ chức; EIP-712 ký phần xác nhận kèm nonce và thời hạn',
+          copy: 'Hợp đồng chuyển vé áp dụng mức giá trần do ban tổ chức đặt; người dùng ký xác nhận theo chuẩn EIP-712, kèm nonce và thời hạn',
           facts: [['Chữ ký', 'EIP-712 + nonce'], ['Thực thi', 'Hợp đồng chuyển vé']],
         },
         {
@@ -264,14 +269,14 @@ const ECHO_COPY = {
           label: 'Vào cổng',
           title: 'Mỗi lượt quét dùng một mã mới',
           copy: 'Mã xác thực được ký và thay đổi theo từng lượt quét, giúp kiểm tra vé mà không đưa dữ liệu định danh trực tiếp lên blockchain',
-          facts: [['Tại cổng', 'Chỉ vào cổng một lần'], ['Sau đó', 'Có dấu tham dự']],
+          facts: [['Tại cổng', 'Chỉ vào cổng một lần'], ['Sau đó', 'Có xác nhận tham dự']],
         },
       ],
     },
     product: {
-      title: 'Ba màn hình, một tấm vé rõ ràng',
+      title: 'Ba màn hình, một hành trình vé dễ hiểu',
       body: 'Sản phẩm nói bằng ngôn ngữ người dùng, không bắt họ hiểu giao thức',
-      screenLabels: ['Vé', 'Chuyển vé', 'Dấu tham dự'],
+      screenLabels: ['Vé', 'Chuyển vé', 'Xác nhận tham dự'],
       tonight: 'Vé tối nay',
       event: 'Minor Echoes',
       venue: 'Echo Room / mở cửa 19:00',
@@ -291,14 +296,14 @@ const ECHO_COPY = {
       afterEntry: 'Sau khi vào cổng',
       youWereHere: 'Bạn đã có mặt',
       checkedIn: 'Đã vào cổng lúc 19:42',
-      attendance: 'Dấu tham dự',
+      attendance: 'Xác nhận tham dự',
       attendanceValue: 'Vé #0312 / đã vào cổng',
-      viewRecord: 'Xem dấu tham dự',
+      viewRecord: 'Xem xác nhận',
       chooseScreen: 'Chọn màn hình',
     },
     gate: {
-      title: 'Xác thực vé, giữ dữ liệu cá nhân ngoài chuỗi',
-      body: 'Mã xác thực có chữ ký thay đổi theo từng lượt quét, giúp vào cổng nhanh và hạn chế dùng lại ảnh chụp màn hình',
+      title: 'Xác thực vé mà không đưa dữ liệu cá nhân lên blockchain',
+      body: 'Mỗi lượt quét dùng một mã xác thực mới có chữ ký, giúp vào cổng nhanh và hạn chế dùng lại ảnh chụp màn hình',
       panelLabel: 'Mô phỏng kiểm tra vé',
       run: 'Bắt đầu kiểm tra',
       reset: 'Thử lại',
@@ -306,12 +311,12 @@ const ECHO_COPY = {
       states: {
         ready: { title: 'Sẵn sàng quét vé', copy: 'Đưa vé lại gần đầu đọc' },
         checking: { title: 'Đang kiểm tra vé', copy: 'Quyền sở hữu, hiệu lực và trạng thái vào cổng' },
-        entered: { title: 'Vé hợp lệ', copy: 'Đã xác nhận vào cổng và tạo dấu tham dự' },
+        entered: { title: 'Vé hợp lệ', copy: 'Đã xác nhận vào cổng và tạo xác nhận tham dự' },
         used: { title: 'Vé đã được dùng', copy: 'Vé này đã được dùng để vào cổng lúc 19:42' },
       },
     },
     chain: {
-      title: 'Blockchain chỉ nằm ở hậu trường',
+      title: 'Blockchain hoạt động ở hậu trường',
       body: 'Chỉ dữ liệu cần thiết để thực thi quy định của vé được ghi lại',
       receiptTitle: 'Kiểm tra trước khi chuyển',
       receiptRows: [
@@ -321,7 +326,7 @@ const ECHO_COPY = {
         ['Thực thi', 'Hợp đồng chuyển vé'],
       ],
       txStatesLabel: 'Trạng thái giao dịch',
-      txStates: ['Đã gửi', 'Đã xác nhận', 'Đã hoàn tác'],
+      txStates: ['Đã gửi', 'Đã xác nhận', 'Không thành công'],
       onchain: 'Được ghi nhận trên blockchain',
       onchainItems: ['Ví đang giữ vé', 'Quy định chuyển vé', 'Trạng thái vào cổng'],
       offchain: 'Không đưa lên blockchain',
@@ -330,15 +335,15 @@ const ECHO_COPY = {
       note: 'Dữ liệu thử nghiệm / mô phỏng EVM cục bộ / chưa triển khai thực tế',
     },
     impact: {
-      title: 'Tôi làm rõ từng bước chuyển của tấm vé',
-      body: 'Mỗi quyết định thiết kế loại bỏ một điểm dễ gây bối rối cho người dùng',
+      title: 'Tôi làm rõ từng chặng của hành trình vé',
+      body: 'Mỗi quyết định thiết kế đều loại bỏ một điểm có thể khiến người dùng bối rối',
       before: 'Trước',
       after: 'Sau',
       pairs: [
         ['Thuật ngữ hợp đồng khó hiểu', 'Bốn hành động dễ hiểu'],
         ['Chuyển vé mơ hồ', 'Rõ người nhận, giá và kết quả'],
         ['Mã vào cổng cố định', 'Mã xác thực thay đổi theo lượt quét'],
-        ['Vé biến mất sau sự kiện', 'Dấu tham dự vẫn còn'],
+        ['Vé biến mất sau sự kiện', 'Xác nhận tham dự vẫn còn'],
       ],
       built: 'Tôi trực tiếp thực hiện',
       scope: 'Chiến lược / nhận diện / sản phẩm / nguyên mẫu / định hướng hình ảnh',
@@ -346,14 +351,14 @@ const ECHO_COPY = {
       note: 'Ý tưởng sản phẩm cá nhân / dữ liệu vé và giao dịch được mô phỏng',
     },
     alt: {
-      hero: 'Người tham dự xuất trình vé ECHO tại lối vào một không gian âm nhạc độc lập',
-      system: 'Vé, vòng tay, thẻ NFC và sơ đồ không gian ECHO trên bề mặt đen và bạc xước',
-      venue: 'Không gian gạch đen ứng dụng nhận diện ECHO trên biển hiệu, poster, cổng và kiosk',
-      transfer: 'Hai người bạn cùng xem lại thông tin chuyển vé ECHO trên điện thoại',
-      live: 'Khán giả xem một ban nhạc biểu diễn trong không gian ECHO',
-      scan: 'Người tham dự chạm vòng tay ECHO vào đầu đọc bằng kim loại xước',
-      receipt: 'Vé và thiết bị ECHO được sắp đặt từ trên cao để minh họa bước xác nhận chuyển vé',
-      after: 'Người tham dự rời ECHO sau buổi diễn với vòng tay lưu dấu tham dự',
+      hero: 'Người tham dự Việt Nam xuất trình vé ECHO tại lối vào một không gian âm nhạc trong nhà phố Sài Gòn',
+      system: 'Vé, vòng tay, thẻ NFC và mặt bằng nhà phố ECHO trên bề mặt terrazzo và inox xước',
+      venue: 'Nhà phố cải tạo tại Sài Gòn ứng dụng nhận diện ECHO trên biển hiệu, lối vào và đầu đọc vé',
+      transfer: 'Hai người bạn Việt Nam cùng xem lại thông tin chuyển vé ECHO trên điện thoại',
+      live: 'Khán giả Việt Nam xem một ban nhạc indie biểu diễn trong không gian ECHO',
+      scan: 'Người tham dự Việt Nam chạm vòng tay ECHO vào đầu đọc bằng inox xước',
+      receipt: 'Đôi tay người Việt xem lại giao dịch ECHO cùng điện thoại, vé và thẻ NFC trên mặt terrazzo',
+      after: 'Người tham dự Việt Nam rời ECHO sau buổi diễn trong con hẻm Sài Gòn vừa mưa',
     },
   },
   zh: {
@@ -371,13 +376,13 @@ const ECHO_COPY = {
     },
     logo: {
       title: '一扫，信号就此成形',
-      body: '四道信号环从应用图标延伸到场馆入口，始终清晰可辨',
+      body: '四道信号环让标志从应用图标到场馆入口都清晰可辨',
       construction: '信号构成',
       primary: '主标志组合',
       compact: '紧凑版标志',
       motion: '动态规则',
       markTitle: 'ECHO 信号标志',
-      measurement: '04 重回响 / 01 个开放信号',
+      measurement: '04 道圆环 / 01 处开口',
       firstMove: '我的第一步',
       firstMoveCopy: '我先完成 ECHO 的命名、标志、动态规则与线下应用，再着手设计产品界面',
       applications: '票券 / 手环 / NFC 通行卡',
@@ -390,7 +395,7 @@ const ECHO_COPY = {
       items: [
         { verb: '命名', title: '一句容易理解的承诺', copy: '从出票到入场，信息始终清楚' },
         { verb: '梳理', title: '四个主要动作', copy: '出票、领票、转票和入场' },
-        { verb: '设计', title: '确认前先看清楚', copy: '收票人、价格上限和结果一目了然' },
+        { verb: '设计', title: '确认前先看清楚', copy: '接收人、价格上限和结果一目了然' },
         { verb: '统筹', title: '一套连贯的系统', copy: '从手环和应用延伸到场馆入口' },
       ],
     },
@@ -409,7 +414,7 @@ const ECHO_COPY = {
         {
           id: 'receive',
           label: '领票',
-          title: '观众领取通行票',
+          title: '观众收到门票',
           copy: '票券进入钱包，界面不要求用户理解代币术语',
           facts: [['用户看到', '票券已就绪'], ['验证内容', '当前持有者地址']],
         },
@@ -417,7 +422,7 @@ const ECHO_COPY = {
           id: 'transfer',
           label: '转票',
           title: '转票前先完成确认',
-          copy: '自定义转票合约执行主办方设定的价格上限；EIP-712 签名带有 nonce 和截止时间',
+          copy: '转票合约执行主办方设定的价格上限；用户通过 EIP-712 签名确认，并附带 nonce 和截止时间',
           facts: [['签名', 'EIP-712 + nonce'], ['执行', '转票合约']],
         },
         {
@@ -430,7 +435,7 @@ const ECHO_COPY = {
       ],
     },
     product: {
-      title: '三个界面，一张清楚的票',
+      title: '三个界面，让票务流程一目了然',
       body: '界面只讲票务，不要求用户理解底层协议',
       screenLabels: ['票券', '转票', '到场记录'],
       tonight: '今晚的票',
@@ -442,12 +447,12 @@ const ECHO_COPY = {
       openPass: '打开入场码',
       transfer: '转票',
       review: '确认前先看清楚',
-      recipient: '收票人',
+      recipient: '接收人',
       recipientValue: '0x41F2...7A2F',
       maxPrice: '最高转售价',
       maxPriceValue: '票面价的 110%',
       afterTransfer: '确认后',
-      afterTransferValue: '票券会转入收票人钱包',
+      afterTransferValue: '票券会转入接收人钱包',
       confirmTransfer: '确认信息并签名',
       afterEntry: '入场之后',
       youWereHere: '你来过这里',
@@ -460,7 +465,7 @@ const ECHO_COPY = {
     gate: {
       title: '只验票，身份信息不上链',
       body: '动态签名码让入场更快，也减少截图被重复使用的风险',
-      panelLabel: '入口原型',
+      panelLabel: '现场验票原型',
       run: '开始验票',
       reset: '重置演示',
       used: '测试已用票',
@@ -468,7 +473,7 @@ const ECHO_COPY = {
         ready: { title: '可以验票', copy: '将票券靠近读卡器' },
         checking: { title: '正在验票', copy: '检查票券归属、有效期和入场记录' },
         entered: { title: '验票成功', copy: '票券有效，到场记录已生成' },
-        used: { title: '票券已使用', copy: '这张票已于 19:42 入场' },
+        used: { title: '票券已使用', copy: '这张票已于 19:42 验票入场' },
       },
     },
     chain: {
@@ -476,13 +481,13 @@ const ECHO_COPY = {
       body: '只有执行票券规则所需的证明会被记录',
       receiptTitle: '转票确认',
       receiptRows: [
-        ['收票人', '0x41F2...7A2F'],
+        ['接收人', '0x41F2...7A2F'],
         ['价格规则', '不高于票面价的 110%'],
         ['签名', 'EIP-712 / nonce / 截止时间'],
         ['执行', '转票合约'],
       ],
       txStatesLabel: '交易状态',
-      txStates: ['已提交', '已确认', '已回滚'],
+      txStates: ['已提交', '已确认', '交易失败'],
       onchain: '记录在链上',
       onchainItems: ['当前持有者地址', '转票规则', '入场状态'],
       offchain: '不上链',
@@ -492,12 +497,12 @@ const ECHO_COPY = {
     },
     impact: {
       title: '我的贡献贯穿每个关键节点',
-      body: '每个设计决定，都让一个容易困惑的环节更清楚',
+      body: '每个设计决定，都让票务流程少一处不确定',
       before: '之前',
       after: '现在',
       pairs: [
         ['复杂的合约术语', '四个清楚的动作'],
-        ['转票结果不明确', '先看收票人、价格和结果'],
+        ['转票结果不明确', '先看接收人、价格和结果'],
         ['固定入场码', '动态签名码'],
         ['票券用完就消失', '保留到场记录'],
       ],
@@ -507,14 +512,14 @@ const ECHO_COPY = {
       note: '个人产品概念 / 票券与交易数据均为模拟',
     },
     alt: {
-      hero: '观众在独立音乐场馆入口出示 ECHO 通行票',
-      system: 'ECHO 票券、手环、NFC 卡和场馆地图陈列在黑色与拉丝银表面上',
-      venue: '黑砖独立场馆将 ECHO 识别应用于招牌、海报、入口和验票机',
-      transfer: '两位朋友在手机上一起确认 ECHO 转票信息',
-      live: '观众在 ECHO 小型场馆内观看乐队演出',
-      scan: '观众将 ECHO 手环靠近拉丝金属读卡器',
-      receipt: 'ECHO 票券与设备组成俯拍的转票确认画面',
-      after: '观众在演出结束后带着到场手环离开 ECHO 场馆',
+      hero: '越南观众在胡志明市一间狭长音乐空间入口出示 ECHO 通行票',
+      system: 'ECHO 票券、手环、NFC 通行卡和狭长店屋平面图陈列在水磨石与拉丝不锈钢表面上',
+      venue: '胡志明市一栋改造店屋将 ECHO 识别应用于招牌、入口和验票设备',
+      transfer: '两位越南朋友在手机上一起确认 ECHO 转票信息',
+      live: '越南观众在小型 ECHO 场地内观看独立乐队演出',
+      scan: '越南观众将 ECHO 手环靠近拉丝不锈钢读卡器',
+      receipt: '越南观众的双手在水磨石台面上查看 ECHO 转票记录、票券与 NFC 通行卡',
+      after: '越南观众在雨后的胡志明市小巷中离开 ECHO 场地并查看手环',
     },
   },
 };
@@ -551,10 +556,19 @@ function EchoWordmark({ compact = false, light = false }) {
   );
 }
 
+function EchoCoverImage({ src, mobileSrc, alt, loading = 'lazy', fetchPriority }) {
+  return (
+    <picture className="echo-cover-media">
+      {mobileSrc && <source media="(max-width: 640px), (max-width: 900px) and (orientation: portrait)" srcSet={mobileSrc} />}
+      <img src={src} alt={alt} width="1536" height="1024" loading={loading} fetchPriority={fetchPriority} />
+    </picture>
+  );
+}
+
 function EchoHero({ work, copy }) {
   return (
     <section className="echo-hero" aria-labelledby="echo-title">
-      <img src={echoHero} alt={copy.alt.hero} width="1536" height="1024" loading="eager" fetchPriority="high" />
+      <EchoCoverImage src={echoHero} mobileSrc={echoHeroMobile} alt={copy.alt.hero} loading="eager" fetchPriority="high" />
       <div className="echo-hero-shade" aria-hidden="true" />
       <div className="echo-shell echo-hero-inner">
         <Link className="echo-back" to="/#portfolio"><ArrowLeft size={17} /> {copy.back}</Link>
@@ -616,7 +630,7 @@ function EchoContributionSection({ copy }) {
     <section className="echo-section echo-contribution-section" aria-labelledby="echo-contribution-title">
       <div className="echo-shell">
         <figure className="echo-contribution-visual">
-          <img src={echoVenue} alt={copy.alt.venue} width="1536" height="1024" loading="lazy" />
+          <EchoCoverImage src={echoVenue} mobileSrc={echoVenueMobile} alt={copy.alt.venue} />
           <div className="echo-photo-shade" aria-hidden="true" />
           <figcaption>
             <h2 id="echo-contribution-title">{cleanTitle(copy.contribution.title)}</h2>
@@ -732,7 +746,7 @@ function EchoProductSection({ copy }) {
   return (
     <section className="echo-section echo-product-section" aria-labelledby="echo-product-title">
       <figure className="echo-live-visual">
-        <img src={echoLive} alt={copy.alt.live} width="1536" height="1024" loading="lazy" />
+        <EchoCoverImage src={echoLive} mobileSrc={echoLiveMobile} alt={copy.alt.live} />
         <div className="echo-photo-shade" aria-hidden="true" />
         <figcaption><h2 id="echo-product-title">{cleanTitle(copy.product.title)}</h2><p>{copy.product.body}</p></figcaption>
       </figure>
@@ -770,7 +784,7 @@ function EchoGateSection({ copy }) {
   const StateIcon = gateState === 'entered' ? CheckCircle : gateState === 'used' ? LockKeyOpen : gateState === 'checking' ? Clock : Radio;
   return (
     <section className="echo-gate-section" aria-labelledby="echo-gate-title">
-      <img src={echoScan} alt={copy.alt.scan} width="1536" height="1024" loading="lazy" />
+      <EchoCoverImage src={echoScan} mobileSrc={echoScanMobile} alt={copy.alt.scan} />
       <div className="echo-gate-shade" aria-hidden="true" />
       <div className="echo-shell echo-gate-layout">
         <header><h2 id="echo-gate-title">{cleanTitle(copy.gate.title)}</h2><p>{copy.gate.body}</p></header>
@@ -835,7 +849,7 @@ function EchoImpactSection({ copy }) {
   const icons = [Waveform, ArrowsLeftRight, Scan, UserCheck];
   return (
     <section className="echo-impact-section" aria-labelledby="echo-impact-title">
-      <img src={echoAfter} alt={copy.alt.after} width="1536" height="1024" loading="lazy" />
+      <EchoCoverImage src={echoAfter} mobileSrc={echoAfterMobile} alt={copy.alt.after} />
       <div className="echo-impact-shade" aria-hidden="true" />
       <div className="echo-shell echo-impact-layout">
         <header><h2 id="echo-impact-title">{cleanTitle(copy.impact.title)}</h2><p>{copy.impact.body}</p></header>
