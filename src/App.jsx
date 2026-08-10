@@ -1315,30 +1315,29 @@ function SkillBlocks() {
 
 function Experiments() {
   const [activeExperiment, setActiveExperiment] = useState(0);
-  const [autoPaused, setAutoPaused] = useState(false);
   const reduceMotion = useReducedMotion();
   const activeProject = experiments[activeExperiment];
 
   useEffect(() => {
-    if (reduceMotion || autoPaused) return undefined;
+    if (reduceMotion) return undefined;
     const timer = window.setTimeout(() => {
       setActiveExperiment((current) => (current + 1) % experiments.length);
     }, 6800);
     return () => window.clearTimeout(timer);
-  }, [activeExperiment, autoPaused, reduceMotion]);
+  }, [activeExperiment, reduceMotion]);
 
   return <section id="experiments" className="section-pad experiments-section"><div className="page-shell">
     <Reveal><header className="experiments-heading"><div><h2>Experiments</h2><p>Small tools, tested in real workflows.</p></div><a className="experiments-github" href="https://github.com/HyyAnk" target="_blank" rel="noreferrer">View GitHub</a></header></Reveal>
-    <div className={`experiments-stage ${autoPaused ? 'is-paused' : ''}`}>
+    <div className="experiments-stage">
       <div className="experiments-grid" role="list" aria-label="Experiment projects">{experiments.map((project, index) => <Reveal className="experiment-card" key={project.slug} delay={index * .045}>
-        <button className={`experiment-selector ${activeExperiment === index ? 'is-active' : ''}`} type="button" aria-pressed={activeExperiment === index} onClick={() => setActiveExperiment(index)} onMouseEnter={() => setAutoPaused(true)} onMouseLeave={() => setAutoPaused(false)} onFocus={() => { setActiveExperiment(index); setAutoPaused(true); }} onBlur={() => setAutoPaused(false)}>
+        <button className={`experiment-selector ${activeExperiment === index ? 'is-active' : ''}`} type="button" aria-pressed={activeExperiment === index} onClick={() => setActiveExperiment(index)}>
           <span className="experiment-card-head"><ExperimentMark /><span className="experiment-card-label">{project.label}</span></span>
           <h3>{withoutTrailingPeriod(project.title)}</h3>
           <p>{project.description}</p>
         </button>
       </Reveal>)}</div>
       <Reveal className="experiments-preview-wrap" delay={.1}>
-        <a className="experiments-preview" href={activeProject.live || activeProject.repo} target="_blank" rel="noreferrer" aria-label={`Open ${activeProject.title} ${activeProject.live ? 'live demo' : 'source code'}`} onMouseEnter={() => setAutoPaused(true)} onMouseLeave={() => setAutoPaused(false)} onFocus={() => setAutoPaused(true)} onBlur={() => setAutoPaused(false)}>
+        <a className="experiments-preview" href={activeProject.live || activeProject.repo} target="_blank" rel="noreferrer" aria-label={`Open ${activeProject.title} ${activeProject.live ? 'live demo' : 'source code'}`}>
           <div className="experiments-stack" aria-hidden="true">{experiments.map((project, index) => {
             const position = (index - activeExperiment + experiments.length) % experiments.length;
             return <figure className={`experiment-preview-frame is-position-${position}`} key={project.slug}><img className="experiment-preview-image" src={project.image} alt="" /></figure>;

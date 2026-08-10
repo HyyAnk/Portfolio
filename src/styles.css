@@ -361,7 +361,6 @@ h3 { font-size: clamp(1.9rem, 3vw, 3.2rem); font-weight: 600; line-height: .98; 
 .experiments-preview-caption small { color: var(--muted); font-size: .62rem; opacity: 0; animation: experiment-caption-subtitle .35s ease 1.15s forwards; }
 .experiments-preview-percent { --experiment-percent: 0; min-width: 4.2ch; color: color-mix(in srgb, var(--ink) 78%, var(--muted)); font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size: .69rem; font-variant-numeric: tabular-nums; font-weight: 700; letter-spacing: -.03em; text-align: right; counter-reset: experiment-count var(--experiment-percent); animation: experiment-percent 6.8s linear forwards; }
 .experiments-preview-percent::after { content: counter(experiment-count) '%'; }
-.experiments-stage.is-paused .experiments-preview-progress, .experiments-stage.is-paused .experiments-preview-percent { animation-play-state: paused; }
 .skills-directory { display: block; }
 .skills-compact-board { display: grid; gap: 10px; }
 .skills-compact-board h4 { margin: 0; }
